@@ -1,2 +1,2 @@
 # AcknowledgementsTracker
-A ASP.NET Web Forms application that keeps track of users acknowledgements
+An ASP.NET Web Forms application that keeps track of users acknowledgements
