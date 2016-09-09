@@ -2,7 +2,7 @@ namespace AcknowledgementsTracker.DataAccess.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class Initial : DbMigration
     {
         public override void Up()
@@ -19,7 +19,7 @@ namespace AcknowledgementsTracker.DataAccess.Migrations
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.ProxiadEmployees", t => t.ProxiadEmployeeId, cascadeDelete: true)
                 .Index(t => t.ProxiadEmployeeId);
-            
+
             CreateTable(
                 "dbo.ProxiadEmployees",
                 c => new
@@ -29,7 +29,7 @@ namespace AcknowledgementsTracker.DataAccess.Migrations
                         Email = c.String(),
                     })
                 .PrimaryKey(t => t.Id);
-            
+
             CreateTable(
                 "dbo.Tags",
                 c => new
@@ -38,7 +38,7 @@ namespace AcknowledgementsTracker.DataAccess.Migrations
                         Title = c.String(),
                     })
                 .PrimaryKey(t => t.Id);
-            
+
             CreateTable(
                 "dbo.TagAcknowledgements",
                 c => new
@@ -51,9 +51,9 @@ namespace AcknowledgementsTracker.DataAccess.Migrations
                 .ForeignKey("dbo.Acknowledgements", t => t.Acknowledgement_Id, cascadeDelete: true)
                 .Index(t => t.Tag_Id)
                 .Index(t => t.Acknowledgement_Id);
-            
+
         }
-        
+
         public override void Down()
         {
             DropForeignKey("dbo.TagAcknowledgements", "Acknowledgement_Id", "dbo.Acknowledgements");

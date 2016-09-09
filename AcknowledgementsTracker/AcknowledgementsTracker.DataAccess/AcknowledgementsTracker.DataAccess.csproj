@@ -50,6 +50,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AcknowledgementsTrackerContext.cs" />
+    <Compile Include="Migrations\201609091516183_Initial.cs" />
+    <Compile Include="Migrations\201609091516183_Initial.Designer.cs">
+      <DependentUpon>201609091516183_Initial.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -62,6 +66,11 @@
       <Project>{9A4EB5C6-E503-482C-9446-86E19B52D17F}</Project>
       <Name>AcknowledgementsTracker.Model</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201609091516183_Initial.resx">
+      <DependentUpon>201609091516183_Initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
