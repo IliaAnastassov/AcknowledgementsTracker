@@ -42,7 +42,7 @@ Results:
 "Thanks for helping me understand Asp.Net WebForms ViewState!" to Peter  
 \#net, \#aspnet, \#webforms
 
-* View top tags - tags mostly used in acknowledgements
+* View top tags: tags mostly used in acknowledgements
 
 **People**
 
