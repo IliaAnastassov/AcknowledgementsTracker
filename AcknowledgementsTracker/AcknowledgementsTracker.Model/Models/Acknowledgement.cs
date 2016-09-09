@@ -14,6 +14,7 @@ namespace AcknowledgementsTracker.Model.Models
     {
         private int id;
         private string text;
+        private ProxiadEmployee proxiadEmployee;
         private int proxiadEmployeeId;
         private DateTime dateCreated;
         private List<Tag> tags;
@@ -28,6 +29,12 @@ namespace AcknowledgementsTracker.Model.Models
         {
             get { return text; }
             set { text = value; }
+        }
+
+        public ProxiadEmployee ProxiadEmployee
+        {
+            get { return proxiadEmployee; }
+            set { proxiadEmployee = value; }
         }
 
         public int ProxiadEmployeeId

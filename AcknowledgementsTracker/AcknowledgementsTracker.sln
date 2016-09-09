@@ -7,6 +7,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AcknowledgementsTracker.Cor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcknowledgementsTracker.Model", "AcknowledgementsTracker.Model\AcknowledgementsTracker.Model.csproj", "{9A4EB5C6-E503-482C-9446-86E19B52D17F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcknowledgementsTracker.DataAccess", "AcknowledgementsTracker.DataAccess\AcknowledgementsTracker.DataAccess.csproj", "{EE711C4F-DC1C-477E-839B-FEA5CC422283}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,11 +19,16 @@ Global
 		{9A4EB5C6-E503-482C-9446-86E19B52D17F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9A4EB5C6-E503-482C-9446-86E19B52D17F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9A4EB5C6-E503-482C-9446-86E19B52D17F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE711C4F-DC1C-477E-839B-FEA5CC422283}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE711C4F-DC1C-477E-839B-FEA5CC422283}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE711C4F-DC1C-477E-839B-FEA5CC422283}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE711C4F-DC1C-477E-839B-FEA5CC422283}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{9A4EB5C6-E503-482C-9446-86E19B52D17F} = {839C1105-1A5A-4C96-992D-8B90DDE3E42B}
+		{EE711C4F-DC1C-477E-839B-FEA5CC422283} = {839C1105-1A5A-4C96-992D-8B90DDE3E42B}
 	EndGlobalSection
 EndGlobal

@@ -16,6 +16,8 @@ namespace AcknowledgementsTracker.Model.Contracts
 
         string Text { get; set; }
 
+        ProxiadEmployee ProxiadEmployee { get; set; }
+
         DateTime DateCreated { get; set; }
 
         int ProxiadEmployeeId { get; set; }
