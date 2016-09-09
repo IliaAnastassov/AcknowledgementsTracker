@@ -8,13 +8,21 @@ namespace AcknowledgementsTracker.Model.Models
 {
     using System;
     using Contracts;
+    using System.Collections.Generic;
 
     public class Acknowledgement : IAcknowledgement
     {
+        private int id;
         private string text;
-        // FK to ProxiadEmployee
         private int proxiadEmployeeId;
         private DateTime dateCreated;
+        private List<Tag> tags;
+
+        public int Id
+        {
+            get { return id; }
+            set { id = value; }
+        }
 
         public string Text
         {
@@ -32,6 +40,12 @@ namespace AcknowledgementsTracker.Model.Models
         {
             get { return dateCreated; }
             set { dateCreated = value; }
+        }
+
+        public List<Tag> Tags
+        {
+            get { return tags; }
+            set { tags = value; }
         }
     }
 }

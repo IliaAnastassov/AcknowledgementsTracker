@@ -12,9 +12,16 @@ namespace AcknowledgementsTracker.Model.Models
 
     public class ProxiadEmployee : IProxiadEmployee
     {
+        private int id;
         private string userName;
         private string email;
         private List<Acknowledgement> acknowledgements;
+
+        public int Id
+        {
+            get { return id; }
+            set { id = value; }
+        }
 
         public string UserName
         {

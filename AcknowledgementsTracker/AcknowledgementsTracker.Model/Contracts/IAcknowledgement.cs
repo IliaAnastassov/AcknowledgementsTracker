@@ -7,13 +7,19 @@
 namespace AcknowledgementsTracker.Model.Contracts
 {
     using System;
+    using System.Collections.Generic;
+    using Models;
 
     public interface IAcknowledgement
     {
+        int Id { get; set; }
+
         string Text { get; set; }
+
+        DateTime DateCreated { get; set; }
 
         int ProxiadEmployeeId { get; set; }
 
-        DateTime DateCreated { get; set; }
+        List<Tag> Tags { get; set; }
     }
 }

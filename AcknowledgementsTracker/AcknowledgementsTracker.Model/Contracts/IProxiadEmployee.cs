@@ -11,6 +11,8 @@ namespace AcknowledgementsTracker.Model.Contracts
 
     public interface IProxiadEmployee
     {
+        int Id { get; set; }
+
         string UserName { get; set; }
 
         string Email { get; set; }
