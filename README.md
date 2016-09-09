@@ -3,7 +3,8 @@
 ##An Asp.Net Web Forms application which gives the users the ability to write acknowledgements for other people.
 
 **General Features:**
-· Acknowledge:
+
+*Acknowledge:
   - A form for creating an acknowledgement
   - Capability to search people by name
   - Autocomplete for people name
