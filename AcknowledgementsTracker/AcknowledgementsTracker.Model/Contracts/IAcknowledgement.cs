@@ -6,9 +6,14 @@
 //-----------------------------------------------------------------------
 namespace AcknowledgementsTracker.Model.Contracts
 {
+    using System;
+
     public interface IAcknowledgement
     {
         string Text { get; set; }
+
         int ProxiadEmployeeId { get; set; }
+
+        DateTime DateCreated { get; set; }
     }
 }

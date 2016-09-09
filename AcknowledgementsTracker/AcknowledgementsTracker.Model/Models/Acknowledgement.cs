@@ -14,6 +14,7 @@ namespace AcknowledgementsTracker.Model.Models
         private string text;
         // FK to ProxiadEmployee
         private int proxiadEmployeeId;
+        private DateTime dateCreated;
 
         public string Text
         {
@@ -27,5 +28,10 @@ namespace AcknowledgementsTracker.Model.Models
             set { proxiadEmployeeId = value; }
         }
 
+        public DateTime DateCreated
+        {
+            get { return dateCreated; }
+            set { dateCreated = value; }
+        }
     }
 }

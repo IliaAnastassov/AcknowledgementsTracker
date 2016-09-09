@@ -7,12 +7,14 @@
 namespace AcknowledgementsTracker.Model.Contracts
 {
     using System.Collections.Generic;
-    using AcknowledgementsTracker.Model.Models;
+    using Models;
 
     public interface IProxiadEmployee
     {
         string UserName { get; set; }
+
         string Email { get; set; }
+
         List<Acknowledgement> Acknowledgements { get; set; }
     }
 }
