@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AcknowledgementsTracker.Core", "AcknowledgementsTracker.Core", "{839C1105-1A5A-4C96-992D-8B90DDE3E42B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcknowledgementsTracker.Classes", "AcknowledgementsTracker.Classes\AcknowledgementsTracker.Classes.csproj", "{EF13EE9B-F6F4-4DFC-868A-22D328518511}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcknowledgementsTracker.Model", "AcknowledgementsTracker.Model\AcknowledgementsTracker.Model.csproj", "{9A4EB5C6-E503-482C-9446-86E19B52D17F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,15 +13,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{EF13EE9B-F6F4-4DFC-868A-22D328518511}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EF13EE9B-F6F4-4DFC-868A-22D328518511}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EF13EE9B-F6F4-4DFC-868A-22D328518511}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EF13EE9B-F6F4-4DFC-868A-22D328518511}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A4EB5C6-E503-482C-9446-86E19B52D17F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A4EB5C6-E503-482C-9446-86E19B52D17F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A4EB5C6-E503-482C-9446-86E19B52D17F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A4EB5C6-E503-482C-9446-86E19B52D17F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{EF13EE9B-F6F4-4DFC-868A-22D328518511} = {839C1105-1A5A-4C96-992D-8B90DDE3E42B}
+		{9A4EB5C6-E503-482C-9446-86E19B52D17F} = {839C1105-1A5A-4C96-992D-8B90DDE3E42B}
 	EndGlobalSection
 EndGlobal
