@@ -4,19 +4,21 @@
     using Contracts;
     using DataAccess;
     using Model.Models;
+    using System.Collections.Generic;
 
     public class ModelManager : IModelManager
     {
-        public void CreateAcknowledgement(string text, int employeeId)
+        public void CreateAcknowledgement(string text, int employeeId, List<int> tagIds)
         {
             var acknowledgement = new Acknowledgement()
             {
                 Text = text,
                 DateCreated = DateTime.Now,
-                ProxiadEmployeeId = employeeId
+                ProxiadEmployeeId = employeeId,
+                TagIds = tagIds
             };
 
-            using (var context= new AcknowledgementsTrackerContext())
+            using (var context = new AcknowledgementsTrackerContext())
             {
                 context.Database.Log = Console.WriteLine;
                 context.Acknowledgements.Add(acknowledgement);

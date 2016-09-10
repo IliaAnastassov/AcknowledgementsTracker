@@ -1,8 +1,10 @@
 ﻿namespace AcknowledgementsTracker.Buisiness.Contracts
 {
+    using System.Collections.Generic;
+
     public interface IModelManager
     {
-        void CreateAcknowledgement(string text, int id);
+        void CreateAcknowledgement(string text, int employeeId, List<int> tagIds);
 
         void CreateProxiadEmployee(string userName, string email);
 
