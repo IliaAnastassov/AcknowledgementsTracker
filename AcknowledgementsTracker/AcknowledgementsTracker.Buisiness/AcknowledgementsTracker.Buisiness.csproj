@@ -49,13 +49,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Contracts\IAcknowledgementManager.cs" />
-    <Compile Include="Models\AcknowledgementManager.cs" />
+    <Compile Include="Contracts\IModelManager.cs" />
+    <Compile Include="Models\ModelManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AcknowledgementsTracker.DataAccess\AcknowledgementsTracker.DataAccess.csproj">
+      <Project>{ee711c4f-dc1c-477e-839b-fea5cc422283}</Project>
+      <Name>AcknowledgementsTracker.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AcknowledgementsTracker.Model\AcknowledgementsTracker.Model.csproj">
+      <Project>{9a4eb5c6-e503-482c-9446-86e19b52d17f}</Project>
+      <Name>AcknowledgementsTracker.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
