@@ -4,17 +4,17 @@
 
 **General Features**
 
-*Acknowledge:*
+*Acknowledge*
 
   * A form for creating an acknowledgement
   * Capability to search people by name
-  * Autocomplete for people name
+  * Autocomplete for names
   * Autocomplete for tags
 
-Example: "Thanks for helping me understand how Atlas works!" to Maria
+Example: "Thanks for helping me understand how Atlas works!" to Maria   
 \#net, \#atlas, \#architecture
 
-Example: "Thanks for helping me understand Asp.Net WebForms ViewState!" to Peter 
+Example: "Thanks for helping me understand Asp.Net WebForms ViewState!" to Peter   
 \#net, \#aspnet, \#webforms
 
 *Dashboard*
