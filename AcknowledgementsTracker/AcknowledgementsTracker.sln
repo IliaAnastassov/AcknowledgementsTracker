@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcknowledgementsTracker.Mod
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcknowledgementsTracker.DataAccess", "AcknowledgementsTracker.DataAccess\AcknowledgementsTracker.DataAccess.csproj", "{EE711C4F-DC1C-477E-839B-FEA5CC422283}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcknowledgementsTracker.Buisiness", "AcknowledgementsTracker.Buisiness\AcknowledgementsTracker.Buisiness.csproj", "{20387EA5-8301-4F02-A853-1719916D1487}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +25,10 @@ Global
 		{EE711C4F-DC1C-477E-839B-FEA5CC422283}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EE711C4F-DC1C-477E-839B-FEA5CC422283}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EE711C4F-DC1C-477E-839B-FEA5CC422283}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20387EA5-8301-4F02-A853-1719916D1487}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20387EA5-8301-4F02-A853-1719916D1487}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20387EA5-8301-4F02-A853-1719916D1487}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20387EA5-8301-4F02-A853-1719916D1487}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -30,5 +36,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{9A4EB5C6-E503-482C-9446-86E19B52D17F} = {839C1105-1A5A-4C96-992D-8B90DDE3E42B}
 		{EE711C4F-DC1C-477E-839B-FEA5CC422283} = {839C1105-1A5A-4C96-992D-8B90DDE3E42B}
+		{20387EA5-8301-4F02-A853-1719916D1487} = {839C1105-1A5A-4C96-992D-8B90DDE3E42B}
 	EndGlobalSection
 EndGlobal
