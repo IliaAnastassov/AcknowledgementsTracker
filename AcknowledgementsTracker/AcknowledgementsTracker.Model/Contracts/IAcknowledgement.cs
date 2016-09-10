@@ -23,5 +23,7 @@ namespace AcknowledgementsTracker.Model.Contracts
         int ProxiadEmployeeId { get; set; }
 
         List<Tag> Tags { get; set; }
+
+        List<int> TagIds { get; set; }
     }
 }

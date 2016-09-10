@@ -18,6 +18,13 @@ namespace AcknowledgementsTracker.Model.Models
         private int proxiadEmployeeId;
         private DateTime dateCreated;
         private List<Tag> tags;
+        private List<int> tagIds;
+
+        public Acknowledgement()
+        {
+            tags = new List<Tag>();
+            tagIds = new List<int>();
+        }
 
         public int Id
         {
@@ -53,6 +60,12 @@ namespace AcknowledgementsTracker.Model.Models
         {
             get { return tags; }
             set { tags = value; }
+        }
+
+        public List<int> TagIds
+        {
+            get { return tagIds; }
+            set { tagIds = value; }
         }
     }
 }

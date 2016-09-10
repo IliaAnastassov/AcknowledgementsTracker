@@ -16,6 +16,13 @@ namespace AcknowledgementsTracker.Model.Models
         private string userName;
         private string email;
         private List<Acknowledgement> acknowledgements;
+        private List<int> acknowledgementIds;
+
+        public ProxiadEmployee()
+        {
+            acknowledgements = new List<Acknowledgement>();
+            acknowledgementIds = new List<int>();
+        }
 
         public int Id
         {
@@ -39,6 +46,12 @@ namespace AcknowledgementsTracker.Model.Models
         {
             get { return acknowledgements; }
             set { acknowledgements = value; }
+        }
+
+        public List<int> AcknowledgementIds
+        {
+            get { return acknowledgementIds; }
+            set { acknowledgementIds = value; }
         }
     }
 }

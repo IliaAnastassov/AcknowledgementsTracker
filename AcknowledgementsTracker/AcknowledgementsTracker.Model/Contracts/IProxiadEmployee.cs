@@ -18,5 +18,7 @@ namespace AcknowledgementsTracker.Model.Contracts
         string Email { get; set; }
 
         List<Acknowledgement> Acknowledgements { get; set; }
+
+        List<int> AcknowledgementIds { get; set; }
     }
 }

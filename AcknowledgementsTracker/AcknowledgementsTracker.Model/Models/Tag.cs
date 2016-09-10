@@ -13,6 +13,13 @@ namespace AcknowledgementsTracker.Model.Models
         private int id;
         private string title;
         private List<Acknowledgement> acknowledgements;
+        private List<int> acknowledgementIds;
+
+        public Tag()
+        {
+            acknowledgements = new List<Acknowledgement>();
+            acknowledgementIds = new List<int>();
+        }
 
         public int Id
         {
@@ -30,6 +37,12 @@ namespace AcknowledgementsTracker.Model.Models
         {
             get { return acknowledgements; }
             set { acknowledgements = value; }
+        }
+
+        public List<int> AcknowledgementIds
+        {
+            get { return acknowledgementIds; }
+            set { acknowledgementIds = value; }
         }
     }
 }
