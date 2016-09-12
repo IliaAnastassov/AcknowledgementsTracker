@@ -65,6 +65,29 @@
                 return context.Acknowledgements.AsNoTracking().OrderBy(a => a.DateCreated).Take(10).ToList();
             }
         }
+
+        public ProxiadEmployee GetMostAcknowledgedPersonAllTime()
+        {
+            using (var context = new AcknowledgementsTrackerContext())
+            {
+                context.Database.Log = message => Debug.WriteLine(message);
+                return context.ProxiadEmployees.AsNoTracking().OrderByDescending(e => e.Acknowledgements.Count).FirstOrDefault();
+            }
+        }
+
+        public ProxiadEmployee GetMostAcknowledgedPersonOfMonth()
+        {
+            using (var context = new AcknowledgementsTrackerContext())
+            {
+                context.Database.Log = message => Debug.WriteLine(message);
+                return context.ProxiadEmployees.AsNoTracking()
+                                               .OrderByDescending(
+                                                    e => e.Acknowledgements
+                                                    .Where(a => a.DateCreated.Year == DateTime.Now.Year && a.DateCreated.Month == DateTime.Now.Month)
+                                                )
+                                                .FirstOrDefault();
+            }
+        }
         #endregion
 
         public void SaveAcknowledgement(string text, int employeeId, List<int> tagIds)
