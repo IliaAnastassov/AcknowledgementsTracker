@@ -9,11 +9,19 @@
 
     public class TagsRepository
     {
+        public List<Tag> GetTags()
+        {
+            using (var context = new AcknowledgementsTrackerContext())
+            {
+                context.Database.Log = message => Debug.WriteLine(message);
+                return context.Tags.ToList();
+            }
+        }
+
         public void SaveTag(string title)
         {
             var tag = new Tag()
             {
-                // Possible change
                 Title = $"#{title}"
             };
 
@@ -25,14 +33,24 @@
             }
         }
 
-        public void EditTag()
+        public void EditTag(Tag tag)
         {
-            // TODO:
+            using (var context = new AcknowledgementsTrackerContext())
+            {
+                context.Database.Log = message => Debug.WriteLine(message);
+                context.Entry(tag).State = EntityState.Modified;
+                context.SaveChanges();
+            }
         }
 
-        public void DeleteTag()
+        public void DeleteTag(int id)
         {
-            // TODO:
+            using (var context = new AcknowledgementsTrackerContext())
+            {
+                context.Database.Log = message => Debug.WriteLine(message);
+                context.Entry(context.Tags.Find(id)).State = EntityState.Deleted;
+                context.SaveChanges();
+            }
         }
     }
 }

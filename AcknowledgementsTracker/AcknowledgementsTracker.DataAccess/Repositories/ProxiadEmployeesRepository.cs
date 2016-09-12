@@ -32,12 +32,7 @@
             using (var context = new AcknowledgementsTrackerContext())
             {
                 context.Database.Log = message => Debug.WriteLine(message);
-                return context.ProxiadEmployees.AsNoTracking()
-                                               .OrderByDescending(
-                                                    e => e.Acknowledgements
-                                                    .Where(a => a.DateCreated.Year == DateTime.Now.Year && a.DateCreated.Month == DateTime.Now.Month)
-                                                )
-                                                .FirstOrDefault();
+                return context.ProxiadEmployees.AsNoTracking().OrderByDescending(e => e.Acknowledgements.Where(a => a.DateCreated.Year == DateTime.Now.Year && a.DateCreated.Month == DateTime.Now.Month)).FirstOrDefault();
             }
         }
 
@@ -57,14 +52,24 @@
             }
         }
 
-        public void EditProxiadEmployee()
+        public void EditProxiadEmployee(ProxiadEmployee employee)
         {
-            // TODO:
+            using (var context = new AcknowledgementsTrackerContext())
+            {
+                context.Database.Log = message => Debug.WriteLine(message);
+                context.Entry(employee).State = EntityState.Modified;
+                context.SaveChanges();
+            }
         }
 
-        public void DeleteProxiadEmployee()
+        public void DeleteProxiadEmployee(int id)
         {
-            // TODO:
+            using (var context = new AcknowledgementsTrackerContext())
+            {
+                context.Database.Log = message => Debug.WriteLine(message);
+                context.Entry(context.ProxiadEmployees.Find(id)).State = EntityState.Deleted;
+                context.SaveChanges();
+            }
         }
     }
 }

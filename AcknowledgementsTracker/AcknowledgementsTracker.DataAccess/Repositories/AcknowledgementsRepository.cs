@@ -66,22 +66,22 @@
             }
         }
 
-        public void DeleteAcknowledgement(int id)
-        {
-            using (var context = new AcknowledgementsTrackerContext())
-            {
-                context.Database.Log = message => Debug.WriteLine(message);
-                context.Entry(context.Acknowledgements.Find(id)).State = EntityState.Deleted;
-                context.SaveChanges();
-            }
-        }
-
         public void EditAcknowledgement(Acknowledgement acknowledgement)
         {
             using (var context = new AcknowledgementsTrackerContext())
             {
                 context.Database.Log = message => Debug.WriteLine(message);
                 context.Entry(acknowledgement).State = EntityState.Modified;
+                context.SaveChanges();
+            }
+        }
+
+        public void DeleteAcknowledgement(int id)
+        {
+            using (var context = new AcknowledgementsTrackerContext())
+            {
+                context.Database.Log = message => Debug.WriteLine(message);
+                context.Entry(context.Acknowledgements.Find(id)).State = EntityState.Deleted;
                 context.SaveChanges();
             }
         }
