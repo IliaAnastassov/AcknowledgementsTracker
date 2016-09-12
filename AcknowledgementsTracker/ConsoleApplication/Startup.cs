@@ -8,6 +8,7 @@
 
     class Startup
     {
+        // TODO: Implement Repository Pattern
         // TODO: Make the many to many relationship work (Acknowledgement - Tag)
         static void Main(string[] args)
         {
