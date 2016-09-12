@@ -56,32 +56,34 @@
             }
         }
 
-        public void SaveAcknowledgement(string text, int employeeId, List<int> tagIds)
+        public void SaveAcknowledgement(Acknowledgement acknowledgement)
         {
-            var acknowledgement = new Acknowledgement()
-            {
-                Text = text,
-                DateCreated = DateTime.Now,
-                ProxiadEmployeeId = employeeId,
-                TagIds = tagIds
-            };
-
             using (var context = new AcknowledgementsTrackerContext())
             {
-                context.Database.Log = Console.WriteLine;
+                context.Database.Log = message => Debug.WriteLine(message);
                 context.Acknowledgements.Add(acknowledgement);
                 context.SaveChanges();
             }
         }
 
-        public void DeleteAcknowledgement()
+        public void DeleteAcknowledgement(int id)
         {
-            // TODO:
+            using (var context = new AcknowledgementsTrackerContext())
+            {
+                context.Database.Log = message => Debug.WriteLine(message);
+                context.Entry(context.Acknowledgements.Find(id)).State = EntityState.Deleted;
+                context.SaveChanges();
+            }
         }
 
-        public void EditAcknowledgement()
+        public void EditAcknowledgement(Acknowledgement acknowledgement)
         {
-            // TODO:
+            using (var context = new AcknowledgementsTrackerContext())
+            {
+                context.Database.Log = message => Debug.WriteLine(message);
+                context.Entry(acknowledgement).State = EntityState.Modified;
+                context.SaveChanges();
+            }
         }
     }
 }
