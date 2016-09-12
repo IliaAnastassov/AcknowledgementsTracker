@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AcknowledgementsTrackerContext.cs" />
+    <Compile Include="AcknowledgementsTrackerRepository.cs" />
     <Compile Include="Migrations\201609091516183_Initial.cs" />
     <Compile Include="Migrations\201609091516183_Initial.Designer.cs">
       <DependentUpon>201609091516183_Initial.cs</DependentUpon>
