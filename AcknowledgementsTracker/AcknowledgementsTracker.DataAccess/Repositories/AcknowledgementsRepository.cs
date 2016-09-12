@@ -1,13 +1,13 @@
-﻿namespace AcknowledgementsTracker.DataAccess
+﻿namespace AcknowledgementsTracker.DataAccess.Repositories
 {
     using System;
     using System.Collections.Generic;
+    using System.Data.Entity;
+    using System.Diagnostics;
     using System.Linq;
     using Model.Models;
-    using System.Diagnostics;
-    using System.Data.Entity;
 
-    public class AcknowledgementsTrackerRepository
+    public class AcknowledgementsRepository
     {
         public List<Acknowledgement> GetAcknowledgements(int proxiadEmployeeId)
         {
@@ -20,16 +20,6 @@
             }
         }
 
-        public ProxiadEmployee GetProxiadEmployee(string name)
-        {
-            using (var context = new AcknowledgementsTrackerContext())
-            {
-                context.Database.Log = Console.WriteLine;
-                return context.ProxiadEmployees.Find(name);
-            }
-        }
-
-        #region Dashboard
         public List<Acknowledgement> GetTodaysAcknowledgements()
         {
             using (var context = new AcknowledgementsTrackerContext())
@@ -66,30 +56,6 @@
             }
         }
 
-        public ProxiadEmployee GetMostAcknowledgedPersonAllTime()
-        {
-            using (var context = new AcknowledgementsTrackerContext())
-            {
-                context.Database.Log = message => Debug.WriteLine(message);
-                return context.ProxiadEmployees.AsNoTracking().OrderByDescending(e => e.Acknowledgements.Count).FirstOrDefault();
-            }
-        }
-
-        public ProxiadEmployee GetMostAcknowledgedPersonOfMonth()
-        {
-            using (var context = new AcknowledgementsTrackerContext())
-            {
-                context.Database.Log = message => Debug.WriteLine(message);
-                return context.ProxiadEmployees.AsNoTracking()
-                                               .OrderByDescending(
-                                                    e => e.Acknowledgements
-                                                    .Where(a => a.DateCreated.Year == DateTime.Now.Year && a.DateCreated.Month == DateTime.Now.Month)
-                                                )
-                                                .FirstOrDefault();
-            }
-        }
-        #endregion
-
         public void SaveAcknowledgement(string text, int employeeId, List<int> tagIds)
         {
             var acknowledgement = new Acknowledgement()
@@ -108,64 +74,12 @@
             }
         }
 
-        public void SaveProxiadEmployee(string userName, string email)
-        {
-            var employee = new ProxiadEmployee()
-            {
-                UserName = userName,
-                Email = email
-            };
-
-            using (var context = new AcknowledgementsTrackerContext())
-            {
-                context.Database.Log = Console.WriteLine;
-                context.ProxiadEmployees.Add(employee);
-                context.SaveChanges();
-            }
-        }
-
-        public void SaveTag(string title)
-        {
-            var tag = new Tag()
-            {
-                // Possible change
-                Title = $"#{title}"
-            };
-
-            using (var context = new AcknowledgementsTrackerContext())
-            {
-                context.Database.Log = Console.WriteLine;
-                context.Tags.Add(tag);
-                context.SaveChanges();
-            }
-        }
-
         public void DeleteAcknowledgement()
         {
             // TODO:
         }
 
-        public void DeleteProxiadEmployee()
-        {
-            // TODO:
-        }
-
-        public void DeleteTag()
-        {
-            // TODO:
-        }
-
         public void EditAcknowledgement()
-        {
-            // TODO:
-        }
-
-        public void EditProxiadEmployee()
-        {
-            // TODO:
-        }
-
-        public void EditTag()
         {
             // TODO:
         }

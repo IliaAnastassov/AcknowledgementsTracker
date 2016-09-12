@@ -11,9 +11,6 @@
         static void Main(string[] args)
         {
             Database.SetInitializer(new NullDatabaseInitializer<AcknowledgementsTrackerContext>());
-
-            var repo = new AcknowledgementsTrackerRepository();
-            repo.GetAcknowledgements(1);
         }
     }
 }
