@@ -14,14 +14,12 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
 
     public class AcknowledgementsRepository
     {
-        public List<Acknowledgement> GetAcknowledgements(int proxiadEmployeeId)
+        public List<Acknowledgement> GetAcknowledgements(int employeeId)
         {
             using (var context = new AcknowledgementsTrackerContext())
             {
-                ////context.Database.Log = message => Debug.WriteLine(message);
-                context.Database.Log = Console.WriteLine;
-
-                return context.Acknowledgements.AsNoTracking().Include(a => a.Tags).Where(a => a.ProxiadEmployeeId == proxiadEmployeeId).ToList();
+                context.Database.Log = message => Debug.WriteLine(message);
+                return context.Acknowledgements.AsNoTracking().Include(a => a.Tags).Where(a => a.BeneficiaryId == employeeId).ToList();
             }
         }
 
@@ -29,7 +27,7 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
         {
             using (var context = new AcknowledgementsTrackerContext())
             {
-                context.Database.Log = Console.WriteLine;
+                context.Database.Log = message => Debug.WriteLine(message);
                 return context.Acknowledgements.AsNoTracking().Where(a => a.DateCreated == DateTime.Today).ToList();
             }
         }
