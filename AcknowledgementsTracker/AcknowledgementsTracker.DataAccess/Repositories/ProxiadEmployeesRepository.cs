@@ -1,4 +1,9 @@
-﻿namespace AcknowledgementsTracker.DataAccess.Repositories
+﻿// <copyright file="ProxiadEmployeesRepository.cs" company="Proxiad Bulgaria">
+//     Copyright (c) Proxiad Bulgaria. All rights reserved.
+// </copyright>
+// <author>Ilia Anastassov</author>
+//-----------------------------------------------------------------------
+namespace AcknowledgementsTracker.DataAccess.Repositories
 {
     using System;
     using System.Collections.Generic;
