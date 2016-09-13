@@ -41,9 +41,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Contracts\IAcknowledgement.cs" />
-    <Compile Include="Contracts\IProxiadEmployee.cs" />
-    <Compile Include="Contracts\ITag.cs" />
     <Compile Include="Models\Acknowledgement.cs" />
     <Compile Include="Models\ProxiadEmployee.cs" />
     <Compile Include="Models\Tag.cs" />

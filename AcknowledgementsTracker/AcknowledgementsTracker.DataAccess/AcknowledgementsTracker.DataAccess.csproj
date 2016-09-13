@@ -49,6 +49,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataInitializer.cs" />
+    <Compile Include="Migrations\201609131541219_AddGivenReceivedSplit.cs" />
+    <Compile Include="Migrations\201609131541219_AddGivenReceivedSplit.Designer.cs">
+      <DependentUpon>201609131541219_AddGivenReceivedSplit.cs</DependentUpon>
+    </Compile>
     <Compile Include="Repositories\AcknowledgementsRepository.cs" />
     <Compile Include="AcknowledgementsTrackerContext.cs" />
     <Compile Include="Migrations\201609091516183_Initial.cs" />
@@ -87,6 +92,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201609101418119_AddFKs.resx">
       <DependentUpon>201609101418119_AddFKs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609131541219_AddGivenReceivedSplit.resx">
+      <DependentUpon>201609131541219_AddGivenReceivedSplit.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
