@@ -1,3 +1,8 @@
+// <copyright file="Configuration.cs" company="Proxiad Bulgaria">
+//     Copyright (c) Proxiad Bulgaria. All rights reserved.
+// </copyright>
+// <author>Ilia Anastassov</author>
+//-----------------------------------------------------------------------
 namespace AcknowledgementsTracker.DataAccess.Migrations
 {
     using System.Data.Entity.Migrations;
@@ -11,18 +16,7 @@ namespace AcknowledgementsTracker.DataAccess.Migrations
 
         protected override void Seed(AcknowledgementsTrackerContext context)
         {
-            //  This method will be called after migrating to the latest version.
-
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method
-            //  to avoid creating duplicate seed data. E.g.
-            //
-            //    context.People.AddOrUpdate(
-            //      p => p.FullName,
-            //      new Person { FullName = "Andrew Peters" },
-            //      new Person { FullName = "Brice Lambson" },
-            //      new Person { FullName = "Rowan Miller" }
-            //    );
-            //
+            // TODO: Add seed method
         }
     }
 }
