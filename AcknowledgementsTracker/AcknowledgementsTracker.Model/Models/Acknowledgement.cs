@@ -26,9 +26,14 @@ namespace AcknowledgementsTracker.Model.Models
         public string Text { get; set; }
 
         [Required]
-        public ProxiadEmployee ProxiadEmployee { get; set; }
+        public ProxiadEmployee Author { get; set; }
 
-        public int ProxiadEmployeeId { get; set; }
+        public int AuthorId { get; set; }
+
+        [Required]
+        public ProxiadEmployee Beneficiary { get; set; }
+
+        public ProxiadEmployee BeneficiaryId { get; set; }
 
         public DateTime DateCreated { get; set; }
 
