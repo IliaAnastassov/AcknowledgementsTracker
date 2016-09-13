@@ -25,14 +25,14 @@ namespace AcknowledgementsTracker.Model.Models
         [MaxLength(1500)]
         public string Text { get; set; }
 
-        [ForeignKey("AuthorId")]
         [Required]
-        public virtual ProxiadEmployee Author { get; set; }
+        [ForeignKey("AuthorId")]
+        public ProxiadEmployee Author { get; set; }
 
         public int AuthorId { get; set; }
 
-        [ForeignKey("BeneficiaryId")]
         [Required]
+        [ForeignKey("BeneficiaryId")]
         public ProxiadEmployee Beneficiary { get; set; }
 
         public int BeneficiaryId { get; set; }
