@@ -8,50 +8,28 @@ namespace AcknowledgementsTracker.Model.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using Contracts;
 
     public class ProxiadEmployee : IProxiadEmployee
     {
-        private int id;
-        private string userName;
-        private string email;
-        private List<Acknowledgement> acknowledgements;
-        private List<int> acknowledgementIds;
-
         public ProxiadEmployee()
         {
-            acknowledgements = new List<Acknowledgement>();
-            acknowledgementIds = new List<int>();
+            Acknowledgements = new List<Acknowledgement>();
+            AcknowledgementIds = new List<int>();
         }
 
-        public int Id
-        {
-            get { return id; }
-            set { id = value; }
-        }
+        [Key]
+        public int Id { get; set; }
 
-        public string UserName
-        {
-            get { return userName; }
-            set { userName = value; }
-        }
+        [Required, MaxLength(50)]
+        public string UserName { get; set; }
 
-        public string Email
-        {
-            get { return email; }
-            set { email = value; }
-        }
+        [Required, MaxLength(50)]
+        public string Email { get; set; }
 
-        public List<Acknowledgement> Acknowledgements
-        {
-            get { return acknowledgements; }
-            set { acknowledgements = value; }
-        }
+        public virtual List<Acknowledgement> Acknowledgements { get; set; }
 
-        public List<int> AcknowledgementIds
-        {
-            get { return acknowledgementIds; }
-            set { acknowledgementIds = value; }
-        }
+        public virtual List<int> AcknowledgementIds { get; set; }
     }
 }

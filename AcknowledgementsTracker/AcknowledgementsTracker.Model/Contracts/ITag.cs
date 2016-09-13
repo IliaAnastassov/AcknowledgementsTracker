@@ -3,11 +3,11 @@
 // </copyright>
 // <author>Ilia Anastassov</author>
 //-----------------------------------------------------------------------
-using System.Collections.Generic;
-using AcknowledgementsTracker.Model.Models;
-
 namespace AcknowledgementsTracker.Model.Contracts
 {
+    using System.Collections.Generic;
+    using Models;
+
     public interface ITag
     {
         int Id { get; set; }

@@ -6,43 +6,25 @@
 namespace AcknowledgementsTracker.Model.Models
 {
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using Contracts;
 
     public class Tag : ITag
     {
-        private int id;
-        private string title;
-        private List<Acknowledgement> acknowledgements;
-        private List<int> acknowledgementIds;
-
         public Tag()
         {
-            acknowledgements = new List<Acknowledgement>();
-            acknowledgementIds = new List<int>();
+            Acknowledgements = new List<Acknowledgement>();
+            AcknowledgementIds = new List<int>();
         }
 
-        public int Id
-        {
-            get { return id; }
-            set { id = value; }
-        }
+        [Key]
+        public int Id { get; set; }
 
-        public string Title
-        {
-            get { return title; }
-            set { title = value; }
-        }
+        [Required, MaxLength(100)]
+        public string Title { get; set; }
 
-        public List<Acknowledgement> Acknowledgements
-        {
-            get { return acknowledgements; }
-            set { acknowledgements = value; }
-        }
+        public virtual List<Acknowledgement> Acknowledgements { get; set; }
 
-        public List<int> AcknowledgementIds
-        {
-            get { return acknowledgementIds; }
-            set { acknowledgementIds = value; }
-        }
+        public virtual List<int> AcknowledgementIds { get; set; }
     }
 }

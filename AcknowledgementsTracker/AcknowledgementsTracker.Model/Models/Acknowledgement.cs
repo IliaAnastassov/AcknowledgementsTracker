@@ -7,65 +7,33 @@
 namespace AcknowledgementsTracker.Model.Models
 {
     using System;
-    using Contracts;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using Contracts;
 
     public class Acknowledgement : IAcknowledgement
     {
-        private int id;
-        private string text;
-        private ProxiadEmployee proxiadEmployee;
-        private int proxiadEmployeeId;
-        private DateTime dateCreated;
-        private List<Tag> tags;
-        private List<int> tagIds;
-
         public Acknowledgement()
         {
-            tags = new List<Tag>();
-            tagIds = new List<int>();
+            Tags = new List<Tag>();
+            TagIds = new List<int>();
         }
 
-        public int Id
-        {
-            get { return id; }
-            set { id = value; }
-        }
+        [Key]
+        public int Id { get; set; }
 
-        public string Text
-        {
-            get { return text; }
-            set { text = value; }
-        }
+        [Required, MaxLength(1500)]
+        public string Text { get; set; }
 
-        public ProxiadEmployee ProxiadEmployee
-        {
-            get { return proxiadEmployee; }
-            set { proxiadEmployee = value; }
-        }
+        [Required]
+        public ProxiadEmployee ProxiadEmployee { get; set; }
 
-        public int ProxiadEmployeeId
-        {
-            get { return proxiadEmployeeId; }
-            set { proxiadEmployeeId = value; }
-        }
+        public int ProxiadEmployeeId { get; set; }
 
-        public DateTime DateCreated
-        {
-            get { return dateCreated; }
-            set { dateCreated = value; }
-        }
+        public DateTime DateCreated { get; set; }
 
-        public List<Tag> Tags
-        {
-            get { return tags; }
-            set { tags = value; }
-        }
+        public virtual List<Tag> Tags { get; set; }
 
-        public List<int> TagIds
-        {
-            get { return tagIds; }
-            set { tagIds = value; }
-        }
+        public virtual List<int> TagIds { get; set; }
     }
 }
