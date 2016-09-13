@@ -16,14 +16,13 @@ namespace AcknowledgementsTracker.Model.Models
             AcknowledgementIds = new List<int>();
         }
 
-        [Key]
         public int Id { get; set; }
 
-        [Required, MaxLength(100)]
+        [MaxLength(100)]
         public string Title { get; set; }
 
-        public virtual List<Acknowledgement> Acknowledgements { get; set; }
+        public List<Acknowledgement> Acknowledgements { get; set; }
 
-        public virtual List<int> AcknowledgementIds { get; set; }
+        public List<int> AcknowledgementIds { get; set; }
     }
 }
