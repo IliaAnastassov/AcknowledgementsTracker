@@ -7,9 +7,8 @@ namespace AcknowledgementsTracker.Model.Models
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using Contracts;
 
-    public class Tag : ITag
+    public class Tag
     {
         public Tag()
         {
