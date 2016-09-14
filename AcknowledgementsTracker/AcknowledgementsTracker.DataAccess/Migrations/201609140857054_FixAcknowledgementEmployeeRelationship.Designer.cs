@@ -7,13 +7,13 @@ namespace AcknowledgementsTracker.DataAccess.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class AddGivenReceivedSplit : IMigrationMetadata
+    public sealed partial class FixAcknowledgementEmployeeRelationship : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddGivenReceivedSplit));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(FixAcknowledgementEmployeeRelationship));
         
         string IMigrationMetadata.Id
         {
-            get { return "201609131541219_AddGivenReceivedSplit"; }
+            get { return "201609140857054_FixAcknowledgementEmployeeRelationship"; }
         }
         
         string IMigrationMetadata.Source
