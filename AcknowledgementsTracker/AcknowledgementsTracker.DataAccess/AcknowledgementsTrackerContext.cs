@@ -22,8 +22,14 @@ namespace AcknowledgementsTracker.DataAccess
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<ProxiadEmployee>()
-                        .HasMany<Acknowledgement>(p => p.AcknowledgementsGiven)
-                        .WithRequired(a => a.Author);
+                .HasMany(p => p.AcknowledgementsGiven)
+                .WithRequired(a => a.Author)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<ProxiadEmployee>()
+                .HasMany(p => p.AcknowledgementsReceived)
+                .WithRequired(a => a.Beneficiary)
+                .WillCascadeOnDelete(false);
         }
     }
 }

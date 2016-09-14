@@ -50,9 +50,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataInitializer.cs" />
-    <Compile Include="Migrations\201609131541219_AddGivenReceivedSplit.cs" />
-    <Compile Include="Migrations\201609131541219_AddGivenReceivedSplit.Designer.cs">
-      <DependentUpon>201609131541219_AddGivenReceivedSplit.cs</DependentUpon>
+    <Compile Include="Migrations\201609140857054_FixAcknowledgementEmployeeRelationship.cs" />
+    <Compile Include="Migrations\201609140857054_FixAcknowledgementEmployeeRelationship.Designer.cs">
+      <DependentUpon>201609140857054_FixAcknowledgementEmployeeRelationship.cs</DependentUpon>
     </Compile>
     <Compile Include="Repositories\AcknowledgementsRepository.cs" />
     <Compile Include="AcknowledgementsTrackerContext.cs" />
@@ -93,8 +93,8 @@
     <EmbeddedResource Include="Migrations\201609101418119_AddFKs.resx">
       <DependentUpon>201609101418119_AddFKs.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201609131541219_AddGivenReceivedSplit.resx">
-      <DependentUpon>201609131541219_AddGivenReceivedSplit.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201609140857054_FixAcknowledgementEmployeeRelationship.resx">
+      <DependentUpon>201609140857054_FixAcknowledgementEmployeeRelationship.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
