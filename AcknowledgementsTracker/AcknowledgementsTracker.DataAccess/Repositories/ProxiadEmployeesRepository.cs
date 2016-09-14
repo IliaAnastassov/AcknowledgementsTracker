@@ -6,7 +6,6 @@
 namespace AcknowledgementsTracker.DataAccess.Repositories
 {
     using System;
-    using System.Collections.Generic;
     using System.Data.Entity;
     using System.Diagnostics;
     using System.Linq;
@@ -14,12 +13,12 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
 
     public class ProxiadEmployeesRepository
     {
-        public ProxiadEmployee GetProxiadEmployee(string name)
+        public ProxiadEmployee GetProxiadEmployee(int id)
         {
             using (var context = new AcknowledgementsTrackerContext())
             {
-                context.Database.Log = Console.WriteLine;
-                return context.ProxiadEmployees.Find(name);
+                context.Database.Log = message => Debug.WriteLine(message);
+                return context.ProxiadEmployees.Find(id);
             }
         }
 

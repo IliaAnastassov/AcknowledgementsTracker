@@ -11,15 +11,16 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
     using System.Diagnostics;
     using System.Linq;
     using Model.Models;
+    using Interfaces;
 
-    public class AcknowledgementsRepository
+    public class AcknowledgementsRepository : IAcknowledgementsRepository
     {
         public List<Acknowledgement> GetAcknowledgements(int employeeId)
         {
             using (var context = new AcknowledgementsTrackerContext())
             {
                 context.Database.Log = message => Debug.WriteLine(message);
-                return context.Acknowledgements.AsNoTracking().Include(a => a.Tags).Where(a => a.BeneficiaryId == employeeId).ToList();
+                return context.Acknowledgements.AsNoTracking().Include(a => a.Tags).Include(a => a.Author).Where(a => a.BeneficiaryId == employeeId).ToList();
             }
         }
 
@@ -28,7 +29,10 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
             using (var context = new AcknowledgementsTrackerContext())
             {
                 context.Database.Log = message => Debug.WriteLine(message);
-                return context.Acknowledgements.AsNoTracking().Where(a => a.DateCreated == DateTime.Today).ToList();
+                return context.Acknowledgements.AsNoTracking().Include(a => a.Tags).Include(a => a.Author).Include(a => a.Beneficiary)
+                    .Where(a => a.DateCreated.Year == DateTime.Today.Year &&
+                                a.DateCreated.Month == DateTime.Today.Month &&
+                                a.DateCreated.Day == DateTime.Today.Day).ToList();
             }
         }
 
@@ -37,7 +41,9 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
             using (var context = new AcknowledgementsTrackerContext())
             {
                 context.Database.Log = message => Debug.WriteLine(message);
-                return context.Acknowledgements.AsNoTracking().Where(a => a.DateCreated >= DateTime.Now.AddDays(-7)).ToList();
+                var lastWeek = DateTime.Today.AddDays(-7);
+                return context.Acknowledgements.AsNoTracking().Include(a => a.Tags).Include(a => a.Author).Include(a => a.Beneficiary)
+                    .Where(a => a.DateCreated >= lastWeek).ToList();
             }
         }
 
@@ -46,7 +52,9 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
             using (var context = new AcknowledgementsTrackerContext())
             {
                 context.Database.Log = message => Debug.WriteLine(message);
-                return context.Acknowledgements.AsNoTracking().Where(a => a.DateCreated.Month == DateTime.Now.Month).ToList();
+                return context.Acknowledgements.AsNoTracking().Include(a => a.Tags).Include(a => a.Author).Include(a => a.Beneficiary)
+                    .Where(a => a.DateCreated.Year == DateTime.Today.Year &&
+                                a.DateCreated.Month == DateTime.Today.Month).ToList();
             }
         }
 
@@ -55,7 +63,8 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
             using (var context = new AcknowledgementsTrackerContext())
             {
                 context.Database.Log = message => Debug.WriteLine(message);
-                return context.Acknowledgements.AsNoTracking().OrderBy(a => a.DateCreated).Take(10).ToList();
+                return context.Acknowledgements.AsNoTracking().Include(a => a.Tags).Include(a => a.Author).Include(a => a.Beneficiary)
+                    .OrderBy(a => a.DateCreated).Take(10).ToList();
             }
         }
 
