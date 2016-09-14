@@ -19,7 +19,7 @@ namespace ConsoleApplication
         // TODO: Review multiple Include statements in Repositories
 
         /// <summary>
-        /// Uncomment any bundle of code in order to test a repository method
+        /// Uncomment any bundle of code in order to test the corresponding repository method
         /// </summary>
         public static void Main()
         {

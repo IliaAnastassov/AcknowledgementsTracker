@@ -1,8 +1,8 @@
 ﻿namespace AcknowledgementsTracker.Business
 {
-    using Model.Models;
     using System;
     using System.Collections.Generic;
+    using Model.Models;
 
     public class Printer
     {

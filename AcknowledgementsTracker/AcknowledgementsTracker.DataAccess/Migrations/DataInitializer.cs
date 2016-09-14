@@ -90,7 +90,7 @@ namespace AcknowledgementsTracker.DataAccess.Migrations
 
                 var acknowledgementTwo = new Acknowledgement()
                 {
-                    Text = "Thanks for being such an asshole and stealing my bike. If you don't give it back to me in one peace I'll kick your butt!",
+                    Text = "Thanks for being such an asshole and stealing my bike. If you don't give it back to me in one peace I'll kick your magnetic ass!",
                     Author = wolverine,
                     Beneficiary = magneto,
                     Tags = new List<Tag> { theftTag, fightTag }
