@@ -9,30 +9,26 @@ namespace AcknowledgementsTracker.Model.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
 
     public class Acknowledgement
     {
         public Acknowledgement()
         {
-            Tags = new List<Tag>();
-            TagIds = new List<int>();
+            Tags = new HashSet<Tag>();
             DateCreated = DateTime.Now;
         }
 
         public int Id { get; set; }
 
-        [MaxLength(1500)]
+        [Required, MaxLength(1500)]
         public string Text { get; set; }
 
         [Required]
-        [ForeignKey("AuthorId")]
         public ProxiadEmployee Author { get; set; }
 
         public int AuthorId { get; set; }
 
         [Required]
-        [ForeignKey("BeneficiaryId")]
         public ProxiadEmployee Beneficiary { get; set; }
 
         public int BeneficiaryId { get; set; }
@@ -40,8 +36,6 @@ namespace AcknowledgementsTracker.Model.Models
         public DateTime DateCreated { get; set; }
 
         [Required]
-        public List<Tag> Tags { get; set; }
-
-        public List<int> TagIds { get; set; }
+        public ICollection<Tag> Tags { get; set; }
     }
 }

@@ -12,17 +12,14 @@ namespace AcknowledgementsTracker.Model.Models
     {
         public Tag()
         {
-            Acknowledgements = new List<Acknowledgement>();
-            AcknowledgementIds = new List<int>();
+            Acknowledgements = new HashSet<Acknowledgement>();
         }
 
         public int Id { get; set; }
 
-        [MaxLength(100)]
+        [Required, MaxLength(100)]
         public string Title { get; set; }
 
-        public List<Acknowledgement> Acknowledgements { get; set; }
-
-        public List<int> AcknowledgementIds { get; set; }
+        public ICollection<Acknowledgement> Acknowledgements { get; set; }
     }
 }

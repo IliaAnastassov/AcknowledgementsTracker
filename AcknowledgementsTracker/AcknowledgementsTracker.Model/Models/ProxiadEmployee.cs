@@ -14,27 +14,20 @@ namespace AcknowledgementsTracker.Model.Models
     {
         public ProxiadEmployee()
         {
-            AcknowledgementsReceived = new List<Acknowledgement>();
-            AcknowledgementsReceivedIds = new List<int>();
-            AcknowledgementsGiven = new List<Acknowledgement>();
-            AcknowledgementsGivenIds = new List<int>();
+            AcknowledgementsReceived = new HashSet<Acknowledgement>();
+            AcknowledgementsGiven = new HashSet<Acknowledgement>();
         }
 
         public int Id { get; set; }
 
-        [MaxLength(50)]
+        [Required, MaxLength(50)]
         public string UserName { get; set; }
 
-        [MaxLength(50)]
+        [Required, MaxLength(50)]
         public string Email { get; set; }
 
+        public ICollection<Acknowledgement> AcknowledgementsReceived { get; set; }
 
-        public List<Acknowledgement> AcknowledgementsReceived { get; set; }
-
-        public List<int> AcknowledgementsReceivedIds { get; set; }
-
-        public List<Acknowledgement> AcknowledgementsGiven { get; set; }
-
-        public List<int> AcknowledgementsGivenIds { get; set; }
+        public ICollection<Acknowledgement> AcknowledgementsGiven { get; set; }
     }
 }

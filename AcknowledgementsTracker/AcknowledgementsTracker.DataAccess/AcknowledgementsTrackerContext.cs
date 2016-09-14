@@ -17,13 +17,13 @@ namespace AcknowledgementsTracker.DataAccess
 
         public DbSet<Tag> Tags { get; set; }
 
-        ////protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        ////{
-        ////    base.OnModelCreating(modelBuilder);
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
 
-        ////    modelBuilder.Entity<ProxiadEmployee>()
-        ////                .HasMany<Acknowledgement>(p => p.AcknowledgementsGiven)
-        ////                .WithRequired(a => a.Author);
-        ////}
+            modelBuilder.Entity<ProxiadEmployee>()
+                        .HasMany<Acknowledgement>(p => p.AcknowledgementsGiven)
+                        .WithRequired(a => a.Author);
+        }
     }
 }
