@@ -60,6 +60,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AcknowledgementsTracker.Business\AcknowledgementsTracker.Business.csproj">
+      <Project>{B7CBB0B4-2F0E-486E-85AB-1303D055B016}</Project>
+      <Name>AcknowledgementsTracker.Business</Name>
+    </ProjectReference>
     <ProjectReference Include="..\AcknowledgementsTracker.DataAccess\AcknowledgementsTracker.DataAccess.csproj">
       <Project>{EE711C4F-DC1C-477E-839B-FEA5CC422283}</Project>
       <Name>AcknowledgementsTracker.DataAccess</Name>
