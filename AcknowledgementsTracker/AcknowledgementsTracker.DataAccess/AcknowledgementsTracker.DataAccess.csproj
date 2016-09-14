@@ -49,7 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataInitializer.cs" />
+    <Compile Include="Migrations\DataInitializer.cs" />
     <Compile Include="Migrations\201609140857054_FixAcknowledgementEmployeeRelationship.cs" />
     <Compile Include="Migrations\201609140857054_FixAcknowledgementEmployeeRelationship.Designer.cs">
       <DependentUpon>201609140857054_FixAcknowledgementEmployeeRelationship.cs</DependentUpon>

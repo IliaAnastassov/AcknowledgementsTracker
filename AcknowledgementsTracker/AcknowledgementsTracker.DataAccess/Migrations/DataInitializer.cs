@@ -3,13 +3,14 @@
 // </copyright>
 // <author>Ilia Anastassov</author>
 //-----------------------------------------------------------------------
-namespace AcknowledgementsTracker.DataAccess
+namespace AcknowledgementsTracker.DataAccess.Migrations
 {
     using System;
     using System.Data.Entity;
     using System.Linq;
     using Model.Models;
     using System.Collections.Generic;
+    using System.Data.Entity.Migrations;
 
     public class DataInitializer
     {
@@ -43,6 +44,8 @@ namespace AcknowledgementsTracker.DataAccess
                     Title = "fight"
                 };
 
+                context.Tags.AddOrUpdate(weatherTag, theftTag, drinkingTag, fightTag);
+
                 // EMPLOYEES
                 var wolverine = new ProxiadEmployee()
                 {
@@ -73,6 +76,8 @@ namespace AcknowledgementsTracker.DataAccess
                     UserName = "professorX",
                     Email = "professorX@xmen.com"
                 };
+
+                context.ProxiadEmployees.AddOrUpdate(wolverine, magneto, storm, mystique, profesorX);
 
                 // ACKNOWLEDGEMENTS
                 var acknowledgementOne = new Acknowledgement()
@@ -106,6 +111,10 @@ namespace AcknowledgementsTracker.DataAccess
                     Beneficiary = mystique,
                     Tags = new List<Tag> { weatherTag, theftTag }
                 };
+
+                context.Acknowledgements.AddOrUpdate(acknowledgementOne, acknowledgementTwo, acknowledgementThree, acknowledgementFour);
+
+                context.SaveChanges();
             }
         }
     }
