@@ -40,8 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AcknowledgementManager.cs" />
-    <Compile Include="Printer.cs" />
+    <Compile Include="Logic\ModelManager.cs" />
+    <Compile Include="Logic\Printer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -53,6 +53,10 @@
       <Project>{9A4EB5C6-E503-482C-9446-86E19B52D17F}</Project>
       <Name>AcknowledgementsTracker.Model</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Entities\" />
+    <Folder Include="Workflow\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

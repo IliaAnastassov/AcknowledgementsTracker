@@ -7,7 +7,7 @@ namespace ConsoleApplication
 {
     using System;
     using System.Data.Entity;
-    using AcknowledgementsTracker.Business;
+    using AcknowledgementsTracker.Business.Logic;
     using AcknowledgementsTracker.DataAccess;
     using AcknowledgementsTracker.DataAccess.Repositories;
 
