@@ -11,8 +11,9 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
     using System.Diagnostics;
     using System.Linq;
     using Model.Models;
+    using Interfaces;
 
-    public class TagsRepository
+    public class TagsRepository : ITagsRepository
     {
         public List<Tag> GetTags()
         {
@@ -20,6 +21,15 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
             {
                 context.Database.Log = message => Debug.WriteLine(message);
                 return context.Tags.ToList();
+            }
+        }
+
+        public Tag GetTag(int id)
+        {
+            using (var context = new AcknowledgementsTrackerContext())
+            {
+                context.Database.Log = message => Debug.WriteLine(message);
+                return context.Tags.Find(id);
             }
         }
 

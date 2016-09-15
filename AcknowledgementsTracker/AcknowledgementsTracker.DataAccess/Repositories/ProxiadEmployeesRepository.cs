@@ -10,8 +10,9 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
     using System.Diagnostics;
     using System.Linq;
     using Model.Models;
+    using Interfaces;
 
-    public class ProxiadEmployeesRepository
+    public class ProxiadEmployeesRepository : IProxiadEmployeesRepository
     {
         public ProxiadEmployee GetProxiadEmployee(int id)
         {
