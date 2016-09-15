@@ -1,12 +1,16 @@
-﻿namespace AcknowledgementsTracker.Business
+﻿namespace AcknowledgementsTracker.Business.Logic
 {
     using System.Collections.Generic;
     using Model.Models;
     using DataAccess.Interfaces;
     using DataAccess.Repositories;
 
-    public class AcknowledgementManager
+    public class ModelManager
     {
+        IAcknowledgementsRepository acknowledgementsRepo = new AcknowledgementsRepository();
+        IProxiadEmployeesRepository employeesRepo = new ProxiadEmployeesRepository();
+        ITagsRepository tagsRepo = new TagsRepository();
+
         public void CreateAcknowledgement(string text, int authorId, int beneficiaryId, ICollection<Tag> tags)
         {
             var acknowledgement = new Acknowledgement
@@ -17,7 +21,6 @@
                 Tags = tags
             };
 
-            IAcknowledgementsRepository acknowledgementsRepo = new AcknowledgementsRepository();
             acknowledgementsRepo.SaveAcknowledgement(acknowledgement);
         }
     }

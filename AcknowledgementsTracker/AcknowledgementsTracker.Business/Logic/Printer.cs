@@ -1,4 +1,4 @@
-﻿namespace AcknowledgementsTracker.Business
+﻿namespace AcknowledgementsTracker.Business.Logic
 {
     using System;
     using System.Collections.Generic;
