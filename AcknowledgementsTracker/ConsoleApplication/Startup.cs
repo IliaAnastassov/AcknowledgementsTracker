@@ -17,6 +17,7 @@ namespace ConsoleApplication
     public class Startup
     {
         // TODO: Review multiple Include statements in Repositories
+        // TODO: Test Create(), Edit() and Delete() methods in AcknowledgementsRepository
 
         /// <summary>
         /// Uncomment any bundle of code in order to test the corresponding repository method
@@ -29,9 +30,9 @@ namespace ConsoleApplication
             var employeesRepo = new ProxiadEmployeesRepository();
             var tagsRepo = new TagsRepository();
             var printer = new Printer();
+            int employeeId = 5;
 
             // Wolverine's acknowledgements
-            ////int employeeId = 5;
             ////var acknowledgements = acknowledgementsRepo.GetAcknowledgements(employeeId);
             ////var employee = employeesRepo.GetProxiadEmployee(employeeId);
             ////Console.WriteLine($"{employee.UserName}'s acknowledgements:\n");
@@ -56,6 +57,18 @@ namespace ConsoleApplication
             ////var lastAcknowledgements = acknowledgementsRepo.GetLastAcknowledgements();
             ////Console.WriteLine("Last acknowledgements:\n");
             ////printer.PrintAcknowledgements(lastAcknowledgements);
+
+            // Get Proxiad Employee
+            ////var employeeById = employeesRepo.GetProxiadEmployee(employeeId);
+            ////Console.WriteLine($"Employee with id {employeeId} is {employee.UserName}");
+
+            // Get most acknowledged employee all time
+            ////var bestEmployee = employeesRepo.GetMostAcknowledgedPersonAllTime();
+            ////Console.WriteLine($"Most acknowledged employee all time: {bestEmployee.UserName}");
+
+            // Get most acknowledged employee of the month
+            var monthsEmployee = employeesRepo.GetMostAcknowledgedPersonOfMonth();
+            Console.WriteLine($"Most acknowledged employee this month: {monthsEmployee.UserName}");
 
             Console.WriteLine();
             Console.ReadKey();
