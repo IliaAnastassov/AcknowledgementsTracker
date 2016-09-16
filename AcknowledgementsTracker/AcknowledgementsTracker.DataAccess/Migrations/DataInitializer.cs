@@ -5,12 +5,11 @@
 //-----------------------------------------------------------------------
 namespace AcknowledgementsTracker.DataAccess.Migrations
 {
-    using System;
-    using System.Data.Entity;
     using System.Linq;
     using Model.Models;
     using System.Collections.Generic;
     using System.Data.Entity.Migrations;
+    using Context;
 
     public class DataInitializer
     {

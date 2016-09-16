@@ -8,7 +8,7 @@ namespace ConsoleApplication
     using System;
     using System.Data.Entity;
     using AcknowledgementsTracker.Business.Logic;
-    using AcknowledgementsTracker.DataAccess;
+    using AcknowledgementsTracker.DataAccess.Context;
     using AcknowledgementsTracker.DataAccess.Repositories;
 
     /// <summary>
@@ -32,7 +32,7 @@ namespace ConsoleApplication
             var employeesRepo = new ProxiadEmployeesRepository();
             var tagsRepo = new TagsRepository();
             var printer = new Printer();
-            int employeeId = 5;
+            ////int employeeId = 5;
 
             // Wolverine's acknowledgements
             ////var acknowledgements = acknowledgementsRepo.GetAcknowledgements(employeeId);

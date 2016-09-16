@@ -12,6 +12,7 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
     using System.Linq;
     using Model.Models;
     using Interfaces;
+    using Context;
 
     public class AcknowledgementsRepository : IAcknowledgementsRepository
     {

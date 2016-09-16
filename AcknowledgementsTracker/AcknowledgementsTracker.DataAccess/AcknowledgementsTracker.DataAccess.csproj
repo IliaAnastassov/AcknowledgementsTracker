@@ -52,13 +52,14 @@
     <Compile Include="Interfaces\IAcknowledgementsRepository.cs" />
     <Compile Include="Interfaces\IProxiadEmployeesRepository.cs" />
     <Compile Include="Interfaces\ITagsRepository.cs" />
+    <Compile Include="Mappers\Assembler.cs" />
     <Compile Include="Migrations\DataInitializer.cs" />
     <Compile Include="Migrations\201609140857054_FixAcknowledgementEmployeeRelationship.cs" />
     <Compile Include="Migrations\201609140857054_FixAcknowledgementEmployeeRelationship.Designer.cs">
       <DependentUpon>201609140857054_FixAcknowledgementEmployeeRelationship.cs</DependentUpon>
     </Compile>
     <Compile Include="Repositories\AcknowledgementsRepository.cs" />
-    <Compile Include="AcknowledgementsTrackerContext.cs" />
+    <Compile Include="Context\AcknowledgementsTrackerContext.cs" />
     <Compile Include="Migrations\201609091516183_Initial.cs" />
     <Compile Include="Migrations\201609091516183_Initial.Designer.cs">
       <DependentUpon>201609091516183_Initial.cs</DependentUpon>
@@ -100,6 +101,7 @@
       <DependentUpon>201609140857054_FixAcknowledgementEmployeeRelationship.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

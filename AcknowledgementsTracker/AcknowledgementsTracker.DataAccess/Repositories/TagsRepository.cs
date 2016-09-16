@@ -10,8 +10,9 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
     using System.Data.Entity;
     using System.Diagnostics;
     using System.Linq;
-    using Model.Models;
+    using Context;
     using Interfaces;
+    using Model.Models;
 
     public class TagsRepository : ITagsRepository
     {
