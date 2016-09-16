@@ -81,8 +81,6 @@ namespace ConsoleApplication
             ////var tag = tagsRepo.GetTag(6);
             ////Console.WriteLine(tag.Title);
 
-
-
             Console.WriteLine();
             Console.ReadKey();
         }
