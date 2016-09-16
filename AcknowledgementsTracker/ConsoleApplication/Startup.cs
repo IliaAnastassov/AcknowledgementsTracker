@@ -17,7 +17,9 @@ namespace ConsoleApplication
     public class Startup
     {
         // TODO: Review multiple Include statements in Repositories
-        // TODO: Test Create(), Edit() and Delete() methods in AcknowledgementsRepository
+        // TODO: Test Save(), Edit() and Delete() methods in AcknowledgementsRepository
+        // TODO: Test Save(), Edit() and Delete() methods in ProxiadEmployeesRepository
+        // TODO: Test Save(), Edit() and Delete() methods in TagsRepository
 
         /// <summary>
         /// Uncomment any bundle of code in order to test the corresponding repository method
@@ -67,8 +69,19 @@ namespace ConsoleApplication
             ////Console.WriteLine($"Most acknowledged employee all time: {bestEmployee.UserName}");
 
             // Get most acknowledged employee of the month
-            var monthsEmployee = employeesRepo.GetMostAcknowledgedPersonOfMonth();
-            Console.WriteLine($"Most acknowledged employee this month: {monthsEmployee.UserName}");
+            ////var monthsEmployee = employeesRepo.GetMostAcknowledgedPersonOfMonth();
+            ////Console.WriteLine($"Most acknowledged employee this month: {monthsEmployee.UserName}");
+
+            // Get the existing tags
+            ////var tags = tagsRepo.GetTags();
+            ////Console.WriteLine("Existing tags:\n");
+            ////tags.ForEach(t => Console.WriteLine(t.Title));
+
+            // Get specific tag
+            ////var tag = tagsRepo.GetTag(6);
+            ////Console.WriteLine(tag.Title);
+
+
 
             Console.WriteLine();
             Console.ReadKey();
