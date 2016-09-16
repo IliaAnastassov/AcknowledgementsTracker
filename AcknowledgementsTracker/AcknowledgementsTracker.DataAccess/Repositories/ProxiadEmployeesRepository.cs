@@ -37,7 +37,10 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
             using (var context = new AcknowledgementsTrackerContext())
             {
                 context.Database.Log = message => Debug.WriteLine(message);
-                return context.ProxiadEmployees.AsNoTracking().OrderByDescending(e => e.AcknowledgementsReceived.Where(a => a.DateCreated.Year == DateTime.Now.Year && a.DateCreated.Month == DateTime.Now.Month)).FirstOrDefault();
+                return context.ProxiadEmployees.AsNoTracking()
+                    .OrderByDescending(e => e.AcknowledgementsReceived
+                    .Where(a => a.DateCreated.Year == DateTime.Now.Year && a.DateCreated.Month == DateTime.Now.Month).Count())
+                    .FirstOrDefault();
             }
         }
 
