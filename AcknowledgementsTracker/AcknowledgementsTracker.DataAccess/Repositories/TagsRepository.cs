@@ -12,7 +12,7 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
     using System.Linq;
     using Context;
     using Interfaces;
-    using Model.Models;
+    using Model;
 
     public class TagsRepository : ITagsRepository
     {

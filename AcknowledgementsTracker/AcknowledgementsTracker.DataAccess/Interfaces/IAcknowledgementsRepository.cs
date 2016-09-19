@@ -2,10 +2,11 @@
 {
     using System.Collections.Generic;
     using Model;
+    using DTO;
 
     public interface IAcknowledgementsRepository
     {
-        void SaveAcknowledgement(Acknowledgement acknowledgement);
+        void SaveAcknowledgement(AcknowledgementDTO acknowledgementDto);
 
         void EditAcknowledgement(Acknowledgement acknowledgement);
 

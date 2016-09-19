@@ -9,7 +9,7 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
     using System.Data.Entity;
     using System.Diagnostics;
     using System.Linq;
-    using Model.Models;
+    using Model;
     using Interfaces;
     using Context;
 

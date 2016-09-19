@@ -11,8 +11,10 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
     using System.Diagnostics;
     using System.Linq;
     using Model;
-    using Interfaces;
     using Context;
+    using Interfaces;
+    using DTO;
+    using Assembler;
 
     public class AcknowledgementsRepository : IAcknowledgementsRepository
     {
@@ -69,8 +71,12 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
             }
         }
 
-        public void SaveAcknowledgement(Acknowledgement acknowledgement)
+        public void SaveAcknowledgement(AcknowledgementDTO acknowledgementDto)
         {
+            var assembler = new AcknowledgementDtoAssembler();
+
+            var acknowledgement = assembler.Disassemble(acknowledgementDto);
+
             using (var context = new AcknowledgementsTrackerContext())
             {
                 context.Database.Log = message => Debug.WriteLine(message);
