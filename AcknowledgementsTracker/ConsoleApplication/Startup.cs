@@ -16,8 +16,6 @@ namespace ConsoleApplication
     /// </summary>
     public class Startup
     {
-        // TODO: Move the Assembler in a separate project
-        // TODO: Implement the Assembler in order to transform DTOs to Model objects and vice versa
         // TODO: Review multiple Include statements in Repositories
         // TODO: Test Save(), Edit() and Delete() methods in AcknowledgementsRepository
         // TODO: Test Save(), Edit() and Delete() methods in ProxiadEmployeesRepository
