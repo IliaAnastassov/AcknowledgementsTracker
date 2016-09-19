@@ -1,4 +1,10 @@
-﻿namespace AcknowledgementsTracker.DTO
+﻿//-----------------------------------------------------------------------
+// <copyright file="AcknowledgementDTO.cs" company="Proxiad Bulgaria">
+//     Copyright (c) Proxiad Bulgaria. All rights reserved.
+// </copyright>
+// <author>Ilia Anastassov</author>
+//-----------------------------------------------------------------------
+namespace AcknowledgementsTracker.DTO
 {
     using System;
     using System.Collections.Generic;
