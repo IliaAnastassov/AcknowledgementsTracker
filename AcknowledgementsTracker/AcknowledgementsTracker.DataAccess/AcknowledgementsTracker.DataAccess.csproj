@@ -81,6 +81,14 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AcknowledgementsTracker.Assembler\AcknowledgementsTracker.Assembler.csproj">
+      <Project>{F51A9ADA-75E3-4251-A77B-B6A1F82B3436}</Project>
+      <Name>AcknowledgementsTracker.Assembler</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AcknowledgementsTracker.DTO\AcknowledgementsTracker.DTO.csproj">
+      <Project>{8658766D-DE69-44E2-8F29-C31F9EA9B4A0}</Project>
+      <Name>AcknowledgementsTracker.DTO</Name>
+    </ProjectReference>
     <ProjectReference Include="..\AcknowledgementsTracker.Model\AcknowledgementsTracker.Model.csproj">
       <Project>{9A4EB5C6-E503-482C-9446-86E19B52D17F}</Project>
       <Name>AcknowledgementsTracker.Model</Name>

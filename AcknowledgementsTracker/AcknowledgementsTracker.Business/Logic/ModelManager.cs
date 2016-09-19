@@ -1,27 +1,34 @@
 ﻿namespace AcknowledgementsTracker.Business.Logic
 {
+    using System;
     using System.Collections.Generic;
-    using Model;
     using DataAccess.Interfaces;
     using DataAccess.Repositories;
+    using DTO;
 
     public class ModelManager
     {
-        IAcknowledgementsRepository acknowledgementsRepo = new AcknowledgementsRepository();
-        IProxiadEmployeesRepository employeesRepo = new ProxiadEmployeesRepository();
-        ITagsRepository tagsRepo = new TagsRepository();
+        private IAcknowledgementsRepository acknowledgementsRepo = new AcknowledgementsRepository();
+        private IProxiadEmployeesRepository employeesRepo = new ProxiadEmployeesRepository();
+        private ITagsRepository tagsRepo = new TagsRepository();
 
-        public void CreateAcknowledgement(string text, int authorId, int beneficiaryId, ICollection<Tag> tags)
+        public void CreateAcknowledgement(
+            int id,
+            string text,
+            int authorId,
+            int beneficiaryId,
+            DateTime dateCreated)
         {
-            var acknowledgement = new Acknowledgement
+            var acknowledgementDto = new AcknowledgementDTO()
             {
+                Id = id,
                 Text = text,
                 AuthorId = authorId,
                 BeneficiaryId = beneficiaryId,
-                Tags = tags
+                DateCreated = dateCreated,
             };
 
-            acknowledgementsRepo.SaveAcknowledgement(acknowledgement);
+            acknowledgementsRepo.SaveAcknowledgement(acknowledgementDto);
         }
     }
 }
