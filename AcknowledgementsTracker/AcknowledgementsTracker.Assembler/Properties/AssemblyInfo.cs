@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("AcknowledgementsTracker.Mapping")]
+[assembly: AssemblyTitle("AcknowledgementsTracker.Assembler")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("AcknowledgementsTracker.Mapping")]
+[assembly: AssemblyProduct("AcknowledgementsTracker.Assembler")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("961f3c79-3187-441f-a7d8-fdc62629f525")]
+[assembly: Guid("f51a9ada-75e3-4251-a77b-b6a1f82b3436")]
 
 // Version information for an assembly consists of the following four values:
 //
