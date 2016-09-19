@@ -7,7 +7,7 @@ namespace AcknowledgementsTracker.DataAccess.Context
 {
     using System;
     using System.Data.Entity;
-    using Model.Models;
+    using Model;
 
     public class AcknowledgementsTrackerContext : DbContext
     {

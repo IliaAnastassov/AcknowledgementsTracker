@@ -21,7 +21,8 @@ namespace AcknowledgementsTracker.DataAccess.Mappers
             ////    context.Acknowledgements.Find(id);
             ////}
 
-            SqlConnection myConntection = new SqlConnection(@"server=.\SQLEXPRESS;database=AcknowledgementsTracker.DataAccess.AcknowledgementsTrackerContext;Trusted_Connection=yes;");
+            SqlConnection myConntection = new SqlConnection(@"server=
+                .\SQLEXPRESS;database=AcknowledgementsTracker.DataAccess.AcknowledgementsTrackerContext;Trusted_Connection=yes;");
 
             string selectAcknowledgement = $"select * from Acknowledgements where id = {id}";
             var acknowledgementsAdapter = new SqlDataAdapter(selectAcknowledgement, myConntection);

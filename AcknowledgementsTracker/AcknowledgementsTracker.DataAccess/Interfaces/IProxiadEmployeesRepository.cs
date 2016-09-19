@@ -1,6 +1,6 @@
 ﻿namespace AcknowledgementsTracker.DataAccess.Interfaces
 {
-    using Model.Models;
+    using Model;
 
     public interface IProxiadEmployeesRepository
     {

@@ -2,7 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
-    using Model.Models;
+    using Model;
 
     public class Printer
     {

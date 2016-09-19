@@ -6,7 +6,7 @@
 namespace AcknowledgementsTracker.DataAccess.Migrations
 {
     using System.Linq;
-    using Model.Models;
+    using Model;
     using System.Collections.Generic;
     using System.Data.Entity.Migrations;
     using Context;

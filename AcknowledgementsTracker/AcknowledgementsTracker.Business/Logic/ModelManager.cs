@@ -1,7 +1,7 @@
 ﻿namespace AcknowledgementsTracker.Business.Logic
 {
     using System.Collections.Generic;
-    using Model.Models;
+    using Model;
     using DataAccess.Interfaces;
     using DataAccess.Repositories;
 

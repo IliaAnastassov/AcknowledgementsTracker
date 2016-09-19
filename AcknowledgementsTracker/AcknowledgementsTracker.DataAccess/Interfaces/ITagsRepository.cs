@@ -1,7 +1,7 @@
 ﻿namespace AcknowledgementsTracker.DataAccess.Interfaces
 {
     using System.Collections.Generic;
-    using Model.Models;
+    using Model;
 
     public interface ITagsRepository
     {

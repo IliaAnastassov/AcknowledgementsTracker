@@ -6,6 +6,7 @@
 namespace AcknowledgementsTracker.DataAccess.Migrations
 {
     using System.Data.Entity.Migrations;
+    using Context;
 
     internal sealed class Configuration : DbMigrationsConfiguration<AcknowledgementsTrackerContext>
     {

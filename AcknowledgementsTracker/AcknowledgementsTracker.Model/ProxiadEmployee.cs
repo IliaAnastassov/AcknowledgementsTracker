@@ -4,7 +4,7 @@
 // </copyright>
 // <author>Ilia Anastassov</author>
 //-----------------------------------------------------------------------
-namespace AcknowledgementsTracker.Model.Models
+namespace AcknowledgementsTracker.Model
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
