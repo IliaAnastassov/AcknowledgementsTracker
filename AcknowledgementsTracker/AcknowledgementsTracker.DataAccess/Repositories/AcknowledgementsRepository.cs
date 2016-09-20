@@ -120,7 +120,7 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
             return assembler.AssembleCollection(acknowledgements);
         }
 
-        public void Save(IDto acknowledgementDto)
+        public void Add(IDto acknowledgementDto)
         {
             var acknowledgement = assembler.Disassemble((AcknowledgementDTO)acknowledgementDto);
 
@@ -144,7 +144,7 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
             }
         }
 
-        public void Delete(int id)
+        public void Remove(int id)
         {
             using (var context = new AcknowledgementsTrackerContext())
             {

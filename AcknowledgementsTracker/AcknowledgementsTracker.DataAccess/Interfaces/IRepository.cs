@@ -8,10 +8,10 @@
 
         IEnumerable<T> GetAll();
 
-        void Save(T model);
+        void Add(T model);
 
         void Edit(T model);
 
-        void Delete(int id);
+        void Remove(int id);
     }
 }

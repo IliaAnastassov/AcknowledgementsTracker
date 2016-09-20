@@ -47,7 +47,7 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
             return assembler.AssembleCollection(tags);
         }
 
-        public void Save(IDto tagDto)
+        public void Add(IDto tagDto)
         {
             var tag = assembler.Disassemble((TagDTO)tagDto);
 
@@ -71,7 +71,7 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
             }
         }
 
-        public void Delete(int id)
+        public void Remove(int id)
         {
             using (var context = new AcknowledgementsTrackerContext())
             {

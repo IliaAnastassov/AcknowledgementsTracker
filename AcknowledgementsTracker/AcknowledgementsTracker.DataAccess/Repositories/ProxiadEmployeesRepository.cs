@@ -76,7 +76,7 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
             return assembler.Assemble(employee);
         }
 
-        public void Save(IDto employeeDto)
+        public void Add(IDto employeeDto)
         {
             var employee = assembler.Disassemble((ProxiadEmployeeDTO)employeeDto);
 
@@ -100,7 +100,7 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
             }
         }
 
-        public void Delete(int id)
+        public void Remove(int id)
         {
             using (var context = new AcknowledgementsTrackerContext())
             {
