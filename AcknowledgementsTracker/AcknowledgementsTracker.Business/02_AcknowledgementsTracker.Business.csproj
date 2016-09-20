@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F51A9ADA-75E3-4251-A77B-B6A1F82B3436}</ProjectGuid>
+    <ProjectGuid>{B7CBB0B4-2F0E-486E-85AB-1303D055B016}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AcknowledgementsTracker.Assembler</RootNamespace>
-    <AssemblyName>AcknowledgementsTracker.Assembler</AssemblyName>
+    <RootNamespace>AcknowledgementsTracker.Business</RootNamespace>
+    <AssemblyName>AcknowledgementsTracker.Business</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -40,21 +40,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AcknowledgementDtoAssembler.cs" />
-    <Compile Include="BaseAssembler.cs" />
+    <Compile Include="Interfaces\IDtoFactory.cs" />
+    <Compile Include="Logic\ModelService.cs" />
+    <Compile Include="Logic\Printer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ProxiadEmployeeDtoAssembler.cs" />
-    <Compile Include="TagDtoAssembler.cs" />
+    <Compile Include="Workflow\DtoFactory.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AcknowledgementsTracker.DTO\AcknowledgementsTracker.DTO.csproj">
-      <Project>{8658766d-de69-44e2-8f29-c31f9ea9b4a0}</Project>
-      <Name>AcknowledgementsTracker.DTO</Name>
+    <ProjectReference Include="..\AcknowledgementsTracker.DataAccess\03_AcknowledgementsTracker.DataAccess.csproj">
+      <Project>{EE711C4F-DC1C-477E-839B-FEA5CC422283}</Project>
+      <Name>03_AcknowledgementsTracker.DataAccess</Name>
     </ProjectReference>
-    <ProjectReference Include="..\AcknowledgementsTracker.Model\AcknowledgementsTracker.Model.csproj">
-      <Project>{9a4eb5c6-e503-482c-9446-86e19b52d17f}</Project>
-      <Name>AcknowledgementsTracker.Model</Name>
+    <ProjectReference Include="..\AcknowledgementsTracker.DTO\05_AcknowledgementsTracker.DTO.csproj">
+      <Project>{8658766D-DE69-44E2-8F29-C31F9EA9B4A0}</Project>
+      <Name>05_AcknowledgementsTracker.DTO</Name>
     </ProjectReference>
+    <ProjectReference Include="..\AcknowledgementsTracker.Model\06_AcknowledgementsTracker.Model.csproj">
+      <Project>{9A4EB5C6-E503-482C-9446-86E19B52D17F}</Project>
+      <Name>06_AcknowledgementsTracker.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Entities\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

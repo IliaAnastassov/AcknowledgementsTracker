@@ -47,9 +47,9 @@
     <Compile Include="TagDTO.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AcknowledgementsTracker.Model\AcknowledgementsTracker.Model.csproj">
+    <ProjectReference Include="..\AcknowledgementsTracker.Model\06_AcknowledgementsTracker.Model.csproj">
       <Project>{9A4EB5C6-E503-482C-9446-86E19B52D17F}</Project>
-      <Name>AcknowledgementsTracker.Model</Name>
+      <Name>06_AcknowledgementsTracker.Model</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

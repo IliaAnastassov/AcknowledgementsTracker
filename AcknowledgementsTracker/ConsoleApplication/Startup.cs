@@ -16,6 +16,7 @@ namespace ConsoleApplication
     /// </summary>
     public class Startup
     {
+        // TODO: Develop Presentation Layer
         // TODO: Research Delete() method
         // TODO: Add methods to ModelService
         // TODO: Use a single Dto parameter inside ModelService methods
