@@ -40,14 +40,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Logic\ModelManager.cs" />
+    <Compile Include="Interfaces\IDtoFactory.cs" />
+    <Compile Include="Logic\ModelService.cs" />
     <Compile Include="Logic\Printer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Workflow\DtoFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AcknowledgementsTracker.DataAccess\AcknowledgementsTracker.DataAccess.csproj">
       <Project>{EE711C4F-DC1C-477E-839B-FEA5CC422283}</Project>
       <Name>AcknowledgementsTracker.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AcknowledgementsTracker.DTO\AcknowledgementsTracker.DTO.csproj">
+      <Project>{8658766D-DE69-44E2-8F29-C31F9EA9B4A0}</Project>
+      <Name>AcknowledgementsTracker.DTO</Name>
     </ProjectReference>
     <ProjectReference Include="..\AcknowledgementsTracker.Model\AcknowledgementsTracker.Model.csproj">
       <Project>{9A4EB5C6-E503-482C-9446-86E19B52D17F}</Project>
@@ -56,7 +62,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Entities\" />
-    <Folder Include="Workflow\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
