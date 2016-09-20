@@ -10,12 +10,12 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
     using System.Data.Entity;
     using System.Diagnostics;
     using System.Linq;
+    using Assembler;
     using Context;
     using DTO;
+    using DTO.Interfaces;
     using Interfaces;
     using Model;
-    using DTO.Interfaces;
-    using Assembler;
 
     public class TagsRepository : IRepository<IDto>
     {
@@ -71,14 +71,12 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
             }
         }
 
-        public void Delete(IDto tagDto)
+        public void Delete(int id)
         {
-            var tag = assembler.Disassemble((TagDTO)tagDto);
-
             using (var context = new AcknowledgementsTrackerContext())
             {
                 context.Database.Log = message => Debug.WriteLine(message);
-                context.Entry(tag).State = EntityState.Deleted;
+                context.Entry(context.Tags.Find(id)).State = EntityState.Deleted;
                 context.SaveChanges();
             }
         }

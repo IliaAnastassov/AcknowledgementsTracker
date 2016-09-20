@@ -12,6 +12,6 @@
 
         void Edit(T model);
 
-        void Delete(T model);
+        void Delete(int id);
     }
 }

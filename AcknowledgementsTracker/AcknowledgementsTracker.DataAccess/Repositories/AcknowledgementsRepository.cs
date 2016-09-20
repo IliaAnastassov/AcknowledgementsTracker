@@ -144,14 +144,12 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
             }
         }
 
-        public void Delete(IDto acknowledgementDto)
+        public void Delete(int id)
         {
-            var acknowledgement = assembler.Disassemble((AcknowledgementDTO)acknowledgementDto);
-
             using (var context = new AcknowledgementsTrackerContext())
             {
                 context.Database.Log = message => Debug.WriteLine(message);
-                context.Entry(acknowledgement).State = EntityState.Deleted;
+                context.Entry(context.Acknowledgements.Find(id)).State = EntityState.Deleted;
                 context.SaveChanges();
             }
         }

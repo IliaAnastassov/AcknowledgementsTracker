@@ -100,14 +100,12 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
             }
         }
 
-        public void Delete(IDto employeeDto)
+        public void Delete(int id)
         {
-            var employee = assembler.Disassemble((ProxiadEmployeeDTO)employeeDto);
-
             using (var context = new AcknowledgementsTrackerContext())
             {
                 context.Database.Log = message => Debug.WriteLine(message);
-                context.Entry(employee).State = EntityState.Deleted;
+                context.Entry(context.ProxiadEmployees.Find(id)).State = EntityState.Deleted;
                 context.SaveChanges();
             }
         }
