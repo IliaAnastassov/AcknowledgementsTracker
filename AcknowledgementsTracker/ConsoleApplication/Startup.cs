@@ -16,11 +16,12 @@ namespace ConsoleApplication
     /// </summary>
     public class Startup
     {
+        // TODO: Update Delete() method in IRepository
+        // TODO: Rename ModelManager to ModelService
+        // TODO: Use a single Dto parameter inside ModelService methods
         // TODO: Review Models: add FK to collection properties?
         // TODO: Review multiple Include statements in Repositories
-        // TODO: Test Save(), Edit() and Delete() methods in AcknowledgementsRepository
-        // TODO: Test Save(), Edit() and Delete() methods in ProxiadEmployeesRepository
-        // TODO: Test Save(), Edit() and Delete() methods in TagsRepository
+        // TODO: Test Save(), Edit() and Delete() methods in the Repositories
 
         /// <summary>
         /// Uncomment any bundle of code in order to test the corresponding repository method
