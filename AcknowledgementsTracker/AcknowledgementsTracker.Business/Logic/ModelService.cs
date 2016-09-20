@@ -10,12 +10,24 @@
 
     public class ModelService
     {
-        DtoFactory factory = new DtoFactory();
+        private DtoFactory factory = new DtoFactory();
 
         public void Create(IDto dto)
         {
             var repository = factory.GetRepository(dto.GetType());
-            repository.Save(dto);
+            repository.Add(dto);
+        }
+
+        public void Update(IDto dto)
+        {
+            var repository = factory.GetRepository(dto.GetType());
+            repository.Edit(dto);
+        }
+
+        public void Delete(IDto dto)
+        {
+            var repository = factory.GetRepository(dto.GetType());
+            repository.Remove(dto.Id);
         }
     }
 }

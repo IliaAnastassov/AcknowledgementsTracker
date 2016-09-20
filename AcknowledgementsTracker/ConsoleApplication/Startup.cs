@@ -16,8 +16,8 @@ namespace ConsoleApplication
     /// </summary>
     public class Startup
     {
-        // TODO: Update Delete() method in IRepository
-        // TODO: Rename ModelManager to ModelService
+        // TODO: Research Delete() method
+        // TODO: Add methods to ModelService
         // TODO: Use a single Dto parameter inside ModelService methods
         // TODO: Review Models: add FK to collection properties?
         // TODO: Review multiple Include statements in Repositories
