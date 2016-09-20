@@ -11,35 +11,45 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
     using System.Diagnostics;
     using System.Linq;
     using Context;
+    using DTO;
     using Interfaces;
     using Model;
+    using DTO.Interfaces;
+    using Assembler;
 
-    public class TagsRepository : ITagsRepository
+    public class TagsRepository : IRepository<IDto>
     {
-        public List<Tag> GetTags()
+        private TagDtoAssembler assembler = new TagDtoAssembler();
+
+        public IDto Get(int id)
         {
+            Tag tag;
+
             using (var context = new AcknowledgementsTrackerContext())
             {
                 context.Database.Log = message => Debug.WriteLine(message);
-                return context.Tags.ToList();
+                tag = context.Tags.Find(id);
             }
+
+            return assembler.Assemble(tag);
         }
 
-        public Tag GetTag(int id)
+        public IEnumerable<IDto> GetAll()
         {
+            IEnumerable<Tag> tags;
+
             using (var context = new AcknowledgementsTrackerContext())
             {
                 context.Database.Log = message => Debug.WriteLine(message);
-                return context.Tags.Find(id);
+                tags = context.Tags.ToList();
             }
+
+            return assembler.AssembleCollection(tags);
         }
 
-        public void SaveTag(string title)
+        public void Save(IDto tagDto)
         {
-            var tag = new Tag()
-            {
-                Title = $"#{title}"
-            };
+            var tag = assembler.Disassemble((TagDTO)tagDto);
 
             using (var context = new AcknowledgementsTrackerContext())
             {
@@ -49,8 +59,10 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
             }
         }
 
-        public void EditTag(Tag tag)
+        public void Edit(IDto tagDto)
         {
+            var tag = assembler.Disassemble((TagDTO)tagDto);
+
             using (var context = new AcknowledgementsTrackerContext())
             {
                 context.Database.Log = message => Debug.WriteLine(message);
@@ -59,12 +71,14 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
             }
         }
 
-        public void DeleteTag(int id)
+        public void Delete(IDto tagDto)
         {
+            var tag = assembler.Disassemble((TagDTO)tagDto);
+
             using (var context = new AcknowledgementsTrackerContext())
             {
                 context.Database.Log = message => Debug.WriteLine(message);
-                context.Entry(context.Tags.Find(id)).State = EntityState.Deleted;
+                context.Entry(tag).State = EntityState.Deleted;
                 context.SaveChanges();
             }
         }

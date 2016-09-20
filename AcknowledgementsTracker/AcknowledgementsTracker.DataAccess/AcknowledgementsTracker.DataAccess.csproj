@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="Interfaces\IAcknowledgementsRepository.cs" />
     <Compile Include="Interfaces\IProxiadEmployeesRepository.cs" />
+    <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Interfaces\ITagsRepository.cs" />
     <Compile Include="Migrations\DataInitializer.cs" />
     <Compile Include="Migrations\201609140857054_FixAcknowledgementEmployeeRelationship.cs" />

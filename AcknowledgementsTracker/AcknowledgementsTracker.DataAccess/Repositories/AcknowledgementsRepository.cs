@@ -10,72 +10,119 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
     using System.Data.Entity;
     using System.Diagnostics;
     using System.Linq;
-    using Model;
-    using Context;
-    using Interfaces;
-    using DTO;
     using Assembler;
+    using Context;
+    using DTO;
+    using DTO.Interfaces;
+    using Interfaces;
+    using Model;
 
-    public class AcknowledgementsRepository : IAcknowledgementsRepository
+    public class AcknowledgementsRepository : IRepository<IDto>
     {
-        public List<Acknowledgement> GetAcknowledgements(int employeeId)
+        private AcknowledgementDtoAssembler assembler = new AcknowledgementDtoAssembler();
+
+        public IDto Get(int id)
         {
+            Acknowledgement acknowledgement;
+
             using (var context = new AcknowledgementsTrackerContext())
             {
                 context.Database.Log = message => Debug.WriteLine(message);
-                return context.Acknowledgements.AsNoTracking().Include(a => a.Tags).Include(a => a.Author).Where(a => a.BeneficiaryId == employeeId).ToList();
+                acknowledgement = context.Acknowledgements.Find(id);
             }
+
+            return assembler.Assemble(acknowledgement);
         }
 
-        public List<Acknowledgement> GetTodaysAcknowledgements()
+        public IEnumerable<IDto> GetAll()
         {
+            IEnumerable<Acknowledgement> acknowledgements;
+
             using (var context = new AcknowledgementsTrackerContext())
             {
                 context.Database.Log = message => Debug.WriteLine(message);
-                return context.Acknowledgements.AsNoTracking().Include(a => a.Tags).Include(a => a.Author).Include(a => a.Beneficiary)
+                acknowledgements = context.Acknowledgements.ToList();
+            }
+
+            return assembler.AssembleCollection(acknowledgements);
+        }
+
+        public IEnumerable<IDto> GetAcknowledgements(int employeeId)
+        {
+            IEnumerable<Acknowledgement> acknowledgements;
+
+            using (var context = new AcknowledgementsTrackerContext())
+            {
+                context.Database.Log = message => Debug.WriteLine(message);
+                acknowledgements = context.Acknowledgements.AsNoTracking().Include(a => a.Tags).Include(a => a.Author).Where(a => a.BeneficiaryId == employeeId).ToList();
+            }
+
+            return assembler.AssembleCollection(acknowledgements);
+        }
+
+        public IEnumerable<IDto> GetTodaysAcknowledgements()
+        {
+            IEnumerable<Acknowledgement> acknowledgements;
+
+            using (var context = new AcknowledgementsTrackerContext())
+            {
+                context.Database.Log = message => Debug.WriteLine(message);
+                acknowledgements = context.Acknowledgements.AsNoTracking().Include(a => a.Tags).Include(a => a.Author).Include(a => a.Beneficiary)
                     .Where(a => a.DateCreated.Year == DateTime.Today.Year &&
                                 a.DateCreated.Month == DateTime.Today.Month &&
                                 a.DateCreated.Day == DateTime.Today.Day).ToList();
             }
+
+            return assembler.AssembleCollection(acknowledgements);
         }
 
-        public List<Acknowledgement> GetThisWeekAcknowledgements()
+        public IEnumerable<IDto> GetThisWeekAcknowledgements()
         {
+            IEnumerable<Acknowledgement> acknowledgements;
+
             using (var context = new AcknowledgementsTrackerContext())
             {
                 context.Database.Log = message => Debug.WriteLine(message);
                 var lastWeek = DateTime.Today.AddDays(-7);
-                return context.Acknowledgements.AsNoTracking().Include(a => a.Tags).Include(a => a.Author).Include(a => a.Beneficiary)
+                acknowledgements = context.Acknowledgements.AsNoTracking().Include(a => a.Tags).Include(a => a.Author).Include(a => a.Beneficiary)
                     .Where(a => a.DateCreated >= lastWeek).ToList();
             }
+
+            return assembler.AssembleCollection(acknowledgements);
         }
 
-        public List<Acknowledgement> GetThisMonthAcknowledgements()
+        public IEnumerable<IDto> GetThisMonthAcknowledgements()
         {
+            IEnumerable<Acknowledgement> acknowledgements;
+
             using (var context = new AcknowledgementsTrackerContext())
             {
                 context.Database.Log = message => Debug.WriteLine(message);
-                return context.Acknowledgements.AsNoTracking().Include(a => a.Tags).Include(a => a.Author).Include(a => a.Beneficiary)
+                acknowledgements = context.Acknowledgements.AsNoTracking().Include(a => a.Tags).Include(a => a.Author).Include(a => a.Beneficiary)
                     .Where(a => a.DateCreated.Year == DateTime.Today.Year &&
                                 a.DateCreated.Month == DateTime.Today.Month).ToList();
             }
+
+            return assembler.AssembleCollection(acknowledgements);
         }
 
-        public List<Acknowledgement> GetLastAcknowledgements()
+        public IEnumerable<IDto> GetLastAcknowledgements()
         {
+            IEnumerable<Acknowledgement> acknowledgements;
+
             using (var context = new AcknowledgementsTrackerContext())
             {
                 context.Database.Log = message => Debug.WriteLine(message);
-                return context.Acknowledgements.AsNoTracking().Include(a => a.Tags).Include(a => a.Author).Include(a => a.Beneficiary)
+                acknowledgements = context.Acknowledgements.AsNoTracking().Include(a => a.Tags).Include(a => a.Author).Include(a => a.Beneficiary)
                     .OrderBy(a => a.DateCreated).Take(10).ToList();
             }
+
+            return assembler.AssembleCollection(acknowledgements);
         }
 
-        public void SaveAcknowledgement(AcknowledgementDTO acknowledgementDto)
+        public void Save(IDto acknowledgementDto)
         {
-            var assembler = new AcknowledgementDtoAssembler();
-
-            var acknowledgement = assembler.Disassemble(acknowledgementDto);
+            var acknowledgement = assembler.Disassemble((AcknowledgementDTO)acknowledgementDto);
 
             using (var context = new AcknowledgementsTrackerContext())
             {
@@ -85,8 +132,10 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
             }
         }
 
-        public void EditAcknowledgement(Acknowledgement acknowledgement)
+        public void Edit(IDto acknowledgementDto)
         {
+            var acknowledgement = assembler.Disassemble((AcknowledgementDTO)acknowledgementDto);
+
             using (var context = new AcknowledgementsTrackerContext())
             {
                 context.Database.Log = message => Debug.WriteLine(message);
@@ -95,12 +144,14 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
             }
         }
 
-        public void DeleteAcknowledgement(int id)
+        public void Delete(IDto acknowledgementDto)
         {
+            var acknowledgement = assembler.Disassemble((AcknowledgementDTO)acknowledgementDto);
+
             using (var context = new AcknowledgementsTrackerContext())
             {
                 context.Database.Log = message => Debug.WriteLine(message);
-                context.Entry(context.Acknowledgements.Find(id)).State = EntityState.Deleted;
+                context.Entry(acknowledgement).State = EntityState.Deleted;
                 context.SaveChanges();
             }
         }
