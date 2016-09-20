@@ -8,8 +8,9 @@ namespace AcknowledgementsTracker.DTO
     using System;
     using System.Collections.Generic;
     using Model;
+    using Interfaces;
 
-    public class TagDTO
+    public class TagDTO : IDto
     {
         public TagDTO()
         {

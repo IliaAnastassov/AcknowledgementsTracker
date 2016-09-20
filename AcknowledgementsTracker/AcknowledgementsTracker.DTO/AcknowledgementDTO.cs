@@ -9,8 +9,9 @@ namespace AcknowledgementsTracker.DTO
     using System;
     using System.Collections.Generic;
     using Model;
+    using Interfaces;
 
-    public class AcknowledgementDTO
+    public class AcknowledgementDTO : IDto
     {
         public AcknowledgementDTO()
         {
