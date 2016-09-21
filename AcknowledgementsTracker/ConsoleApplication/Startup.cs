@@ -10,12 +10,16 @@ namespace ConsoleApplication
     using AcknowledgementsTracker.Business.Logic;
     using AcknowledgementsTracker.DataAccess.Context;
     using AcknowledgementsTracker.DataAccess.Repositories;
+    using AcknowledgementsTracker.DTO;
 
     /// <summary>
     /// This is a testing application
     /// </summary>
     public class Startup
     {
+        // TODO: Create Service for each model
+        // TODO: Study Factory implementation of Georgi
+        // TODO: Use factory as container of singleton repositories
         // TODO: Develop Presentation Layer
         // TODO: Research Delete() method
         // TODO: Add methods to ModelService
@@ -35,13 +39,14 @@ namespace ConsoleApplication
             var employeesRepo = new EmployeesRepository();
             var tagsRepo = new TagsRepository();
             var printer = new Printer();
-            ////int employeeId = 5;
+
+            int employeeId = 5;
 
             // Wolverine's acknowledgements
-            ////var acknowledgements = acknowledgementsRepo.GetAcknowledgements(employeeId);
-            ////var employee = employeesRepo.GetProxiadEmployee(employeeId);
-            ////Console.WriteLine($"{employee.UserName}'s acknowledgements:\n");
-            ////printer.PrintAcknowledgements(acknowledgements);
+            var acknowledgements = acknowledgementsRepo.GetAcknowledgements(employeeId);
+            var employee = employeesRepo.Get(employeeId);
+            Console.WriteLine($"{employee.UserName}'s acknowledgements:\n");
+            printer.PrintAcknowledgements(acknowledgements);
 
             // Today's acknowledgements
             ////var todaysAcknowledgements = acknowledgementsRepo.GetTodaysAcknowledgements();
