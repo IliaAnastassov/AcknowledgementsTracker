@@ -17,18 +17,18 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
     using Interfaces;
     using Model;
 
-    public class ProxiadEmployeesRepository : IRepository<IDto>
+    public class EmployeesRepository : IRepository<IDto>
     {
-        private ProxiadEmployeeDtoAssembler assembler = new ProxiadEmployeeDtoAssembler();
+        private EmployeeDtoAssembler assembler = new EmployeeDtoAssembler();
 
         public IDto Get(int id)
         {
-            ProxiadEmployee employee;
+            Employee employee;
 
             using (var context = new AcknowledgementsTrackerContext())
             {
                 context.Database.Log = message => Debug.WriteLine(message);
-                employee = context.ProxiadEmployees.Find(id);
+                employee = context.Employees.Find(id);
             }
 
             return assembler.Assemble(employee);
@@ -36,12 +36,12 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
 
         public IEnumerable<IDto> GetAll()
         {
-            IEnumerable<ProxiadEmployee> employees;
+            IEnumerable<Employee> employees;
 
             using (var context = new AcknowledgementsTrackerContext())
             {
                 context.Database.Log = message => Debug.WriteLine(message);
-                employees = context.ProxiadEmployees.ToList();
+                employees = context.Employees.ToList();
             }
 
             return assembler.AssembleCollection(employees);
@@ -49,12 +49,12 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
 
         public IDto GetMostAcknowledgedPersonAllTime()
         {
-            ProxiadEmployee employee;
+            Employee employee;
 
             using (var context = new AcknowledgementsTrackerContext())
             {
                 context.Database.Log = message => Debug.WriteLine(message);
-                employee = context.ProxiadEmployees.AsNoTracking().OrderByDescending(e => e.AcknowledgementsReceived.Count).FirstOrDefault();
+                employee = context.Employees.AsNoTracking().OrderByDescending(e => e.AcknowledgementsReceived.Count).FirstOrDefault();
             }
 
             return assembler.Assemble(employee);
@@ -62,12 +62,12 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
 
         public IDto GetMostAcknowledgedPersonOfMonth()
         {
-            ProxiadEmployee employee;
+            Employee employee;
 
             using (var context = new AcknowledgementsTrackerContext())
             {
                 context.Database.Log = message => Debug.WriteLine(message);
-                employee = context.ProxiadEmployees.AsNoTracking()
+                employee = context.Employees.AsNoTracking()
                     .OrderByDescending(e => e.AcknowledgementsReceived
                     .Where(a => a.DateCreated.Year == DateTime.Now.Year && a.DateCreated.Month == DateTime.Now.Month).Count())
                     .FirstOrDefault();
@@ -78,19 +78,19 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
 
         public void Add(IDto employeeDto)
         {
-            var employee = assembler.Disassemble((ProxiadEmployeeDTO)employeeDto);
+            var employee = assembler.Disassemble((EmployeeDTO)employeeDto);
 
             using (var context = new AcknowledgementsTrackerContext())
             {
                 context.Database.Log = Console.WriteLine;
-                context.ProxiadEmployees.Add(employee);
+                context.Employees.Add(employee);
                 context.SaveChanges();
             }
         }
 
         public void Edit(IDto employeeDto)
         {
-            var employee = assembler.Disassemble((ProxiadEmployeeDTO)employeeDto);
+            var employee = assembler.Disassemble((EmployeeDTO)employeeDto);
 
             using (var context = new AcknowledgementsTrackerContext())
             {
@@ -105,7 +105,7 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
             using (var context = new AcknowledgementsTrackerContext())
             {
                 context.Database.Log = message => Debug.WriteLine(message);
-                context.Entry(context.ProxiadEmployees.Find(id)).State = EntityState.Deleted;
+                context.Entry(context.Employees.Find(id)).State = EntityState.Deleted;
                 context.SaveChanges();
             }
         }

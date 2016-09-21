@@ -4,18 +4,18 @@
     using DTO;
     using Model;
 
-    public class ProxiadEmployeeDtoAssembler : BaseAssembler<ProxiadEmployee, ProxiadEmployeeDTO>
+    public class EmployeeDtoAssembler : BaseAssembler<Employee, EmployeeDTO>
     {
-        public override ProxiadEmployeeDTO Assemble(ProxiadEmployee entity)
+        public override EmployeeDTO Assemble(Employee entity)
         {
             if (entity == null)
             {
                 return null;
             }
 
-            var dto = new ProxiadEmployeeDTO();
+            var dto = new EmployeeDTO();
 
-            dto.Id = entity.Id;
+            dto.Id = entity.EmployeeId;
             dto.AcknowledgementsGiven = entity.AcknowledgementsGiven;
             dto.AcknowledgementsReceived = entity.AcknowledgementsReceived;
             dto.Email = entity.Email;
@@ -24,16 +24,16 @@
             return dto;
         }
 
-        public override ProxiadEmployee Disassemble(ProxiadEmployeeDTO entity)
+        public override Employee Disassemble(EmployeeDTO entity)
         {
             if (entity == null)
             {
                 return null;
             }
 
-            var proxiadEmployee = new ProxiadEmployee();
+            var proxiadEmployee = new Employee();
 
-            proxiadEmployee.Id = entity.Id;
+            proxiadEmployee.EmployeeId = entity.Id;
             proxiadEmployee.AcknowledgementsGiven = entity.AcknowledgementsGiven;
             proxiadEmployee.AcknowledgementsReceived = entity.AcknowledgementsReceived;
             proxiadEmployee.Email = entity.Email;

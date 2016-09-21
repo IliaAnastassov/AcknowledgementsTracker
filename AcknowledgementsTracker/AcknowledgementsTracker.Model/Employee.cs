@@ -10,15 +10,15 @@ namespace AcknowledgementsTracker.Model
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
-    public class ProxiadEmployee
+    public class Employee
     {
-        public ProxiadEmployee()
+        public Employee()
         {
             AcknowledgementsReceived = new HashSet<Acknowledgement>();
             AcknowledgementsGiven = new HashSet<Acknowledgement>();
         }
 
-        public int Id { get; set; }
+        public int EmployeeId { get; set; }
 
         [Required, MaxLength(50)]
         public string UserName { get; set; }
@@ -26,8 +26,9 @@ namespace AcknowledgementsTracker.Model
         [Required, MaxLength(50)]
         public string Email { get; set; }
 
-        public ICollection<Acknowledgement> AcknowledgementsReceived { get; set; }
+        // Navigation Properties
+        public virtual ICollection<Acknowledgement> AcknowledgementsReceived { get; set; }
 
-        public ICollection<Acknowledgement> AcknowledgementsGiven { get; set; }
+        public virtual ICollection<Acknowledgement> AcknowledgementsGiven { get; set; }
     }
 }

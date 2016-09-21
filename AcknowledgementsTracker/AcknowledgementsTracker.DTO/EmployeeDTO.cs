@@ -11,9 +11,9 @@ namespace AcknowledgementsTracker.DTO
     using Model;
     using Interfaces;
 
-    public class ProxiadEmployeeDTO : IDto
+    public class EmployeeDTO : IDto
     {
-        public ProxiadEmployeeDTO()
+        public EmployeeDTO()
         {
             AcknowledgementsReceived = new HashSet<Acknowledgement>();
             AcknowledgementsGiven = new HashSet<Acknowledgement>();
@@ -25,8 +25,8 @@ namespace AcknowledgementsTracker.DTO
 
         public string Email { get; set; }
 
-        public ICollection<Acknowledgement> AcknowledgementsReceived { get; set; }
+        public virtual ICollection<Acknowledgement> AcknowledgementsReceived { get; set; }
 
-        public ICollection<Acknowledgement> AcknowledgementsGiven { get; set; }
+        public virtual ICollection<Acknowledgement> AcknowledgementsGiven { get; set; }
     }
 }
