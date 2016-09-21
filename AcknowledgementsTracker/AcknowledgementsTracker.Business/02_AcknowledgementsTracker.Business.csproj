@@ -41,8 +41,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interfaces\IDtoFactory.cs" />
-    <Compile Include="Logic\ModelService.cs" />
+    <Compile Include="Logic\AcknowledgementDtoService.cs" />
+    <Compile Include="Logic\EmployeeDtoService.cs" />
     <Compile Include="Logic\Printer.cs" />
+    <Compile Include="Logic\TagDtoService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Workflow\DtoFactory.cs" />
   </ItemGroup>
