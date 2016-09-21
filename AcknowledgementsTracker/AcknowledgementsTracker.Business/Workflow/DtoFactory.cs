@@ -13,7 +13,7 @@
         private Dictionary<Type, IRepository<IDto>> repositories = new Dictionary<Type, IRepository<IDto>>
         {
             { typeof(AcknowledgementDTO), new AcknowledgementsRepository() },
-            { typeof(ProxiadEmployeeDTO), new ProxiadEmployeesRepository() },
+            { typeof(EmployeeDTO), new EmployeesRepository() },
             { typeof(TagDTO), new TagsRepository() }
         };
 

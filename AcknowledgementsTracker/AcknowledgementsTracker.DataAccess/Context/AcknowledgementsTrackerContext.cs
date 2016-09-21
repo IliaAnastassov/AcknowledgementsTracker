@@ -13,7 +13,7 @@ namespace AcknowledgementsTracker.DataAccess.Context
     {
         public DbSet<Acknowledgement> Acknowledgements { get; set; }
 
-        public DbSet<ProxiadEmployee> ProxiadEmployees { get; set; }
+        public DbSet<Employee> Employees { get; set; }
 
         public DbSet<Tag> Tags { get; set; }
 
@@ -21,14 +21,16 @@ namespace AcknowledgementsTracker.DataAccess.Context
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<ProxiadEmployee>()
-                .HasMany(p => p.AcknowledgementsGiven)
+            modelBuilder.Entity<Employee>()
+                .HasMany<Acknowledgement>(p => p.AcknowledgementsGiven)
                 .WithRequired(a => a.Author)
+                .HasForeignKey(a => a.AuthorId)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<ProxiadEmployee>()
-                .HasMany(p => p.AcknowledgementsReceived)
+            modelBuilder.Entity<Employee>()
+                .HasMany<Acknowledgement>(p => p.AcknowledgementsReceived)
                 .WithRequired(a => a.Beneficiary)
+                .HasForeignKey(a => a.BeneficiaryId)
                 .WillCascadeOnDelete(false);
         }
     }

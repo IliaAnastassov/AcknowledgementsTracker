@@ -43,7 +43,7 @@
     <Compile Include="AcknowledgementDtoAssembler.cs" />
     <Compile Include="BaseAssembler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ProxiadEmployeeDtoAssembler.cs" />
+    <Compile Include="EmployeeDtoAssembler.cs" />
     <Compile Include="TagDtoAssembler.cs" />
   </ItemGroup>
   <ItemGroup>

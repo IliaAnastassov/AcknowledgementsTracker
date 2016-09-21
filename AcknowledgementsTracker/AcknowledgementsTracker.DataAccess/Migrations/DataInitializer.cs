@@ -17,7 +17,7 @@ namespace AcknowledgementsTracker.DataAccess.Migrations
         {
             using (var context = new AcknowledgementsTrackerContext())
             {
-                if (context.Acknowledgements.Any() || context.Tags.Any() || context.ProxiadEmployees.Any())
+                if (context.Acknowledgements.Any() || context.Tags.Any() || context.Employees.Any())
                 {
                     return;
                 }
@@ -46,37 +46,37 @@ namespace AcknowledgementsTracker.DataAccess.Migrations
                 context.Tags.AddOrUpdate(weatherTag, theftTag, drinkingTag, fightTag);
 
                 // EMPLOYEES
-                var wolverine = new ProxiadEmployee()
+                var wolverine = new Employee()
                 {
                     UserName = "wolverine",
                     Email = "wolverine@xmen.com"
                 };
 
-                var magneto = new ProxiadEmployee()
+                var magneto = new Employee()
                 {
                     UserName = "Magneto",
                     Email = "magneto@xmen.com"
                 };
 
-                var storm = new ProxiadEmployee()
+                var storm = new Employee()
                 {
                     UserName = "storm",
                     Email = "storm@xmen.com"
                 };
 
-                var mystique = new ProxiadEmployee()
+                var mystique = new Employee()
                 {
                     UserName = "mystique",
                     Email = "mystique@xmen.com"
                 };
 
-                var profesorX = new ProxiadEmployee()
+                var profesorX = new Employee()
                 {
                     UserName = "professorX",
                     Email = "professorX@xmen.com"
                 };
 
-                context.ProxiadEmployees.AddOrUpdate(wolverine, magneto, storm, mystique, profesorX);
+                context.Employees.AddOrUpdate(wolverine, magneto, storm, mystique, profesorX);
 
                 // ACKNOWLEDGEMENTS
                 var acknowledgementOne = new Acknowledgement()

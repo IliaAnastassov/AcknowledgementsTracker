@@ -15,7 +15,7 @@
 
             var dto = new TagDTO();
 
-            dto.Id = entity.Id;
+            dto.Id = entity.TagId;
             dto.Acknowledgements = entity.Acknowledgements;
             dto.Title = entity.Title;
 
@@ -31,7 +31,7 @@
 
             var tag = new Tag();
 
-            tag.Id = entity.Id;
+            tag.TagId = entity.Id;
             tag.Acknowledgements = entity.Acknowledgements;
             tag.Title = entity.Title;
 

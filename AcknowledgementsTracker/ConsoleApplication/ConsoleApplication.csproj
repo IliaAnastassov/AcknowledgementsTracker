@@ -68,6 +68,10 @@
       <Project>{EE711C4F-DC1C-477E-839B-FEA5CC422283}</Project>
       <Name>03_AcknowledgementsTracker.DataAccess</Name>
     </ProjectReference>
+    <ProjectReference Include="..\AcknowledgementsTracker.DTO\05_AcknowledgementsTracker.DTO.csproj">
+      <Project>{8658766D-DE69-44E2-8F29-C31F9EA9B4A0}</Project>
+      <Name>05_AcknowledgementsTracker.DTO</Name>
+    </ProjectReference>
     <ProjectReference Include="..\AcknowledgementsTracker.Model\06_AcknowledgementsTracker.Model.csproj">
       <Project>{9a4eb5c6-e503-482c-9446-86e19b52d17f}</Project>
       <Name>06_AcknowledgementsTracker.Model</Name>

@@ -2,11 +2,11 @@
 {
     using System;
     using System.Collections.Generic;
-    using Model;
+    using DTO;
 
     public class Printer
     {
-        public void PrintAcknowledgements(ICollection<Acknowledgement> acknowledgements)
+        public void PrintAcknowledgements(IEnumerable<AcknowledgementDTO> acknowledgements)
         {
             foreach (var acknowledgement in acknowledgements)
             {

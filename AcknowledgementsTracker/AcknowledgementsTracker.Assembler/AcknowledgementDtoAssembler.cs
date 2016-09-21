@@ -19,7 +19,7 @@
 
             var dto = new AcknowledgementDTO();
 
-            dto.Id = entity.Id;
+            dto.Id = entity.AcknowledgementId;
             dto.Author = entity.Author;
             dto.AuthorId = entity.AuthorId;
             dto.Beneficiary = entity.Beneficiary;
@@ -39,7 +39,7 @@
 
             var acknowledgement = new Acknowledgement();
 
-            acknowledgement.Id = entity.Id;
+            acknowledgement.AcknowledgementId = entity.Id;
             acknowledgement.Author = entity.Author;
             acknowledgement.AuthorId = entity.AuthorId;
             acknowledgement.Beneficiary = entity.Beneficiary;
