@@ -54,7 +54,8 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
             using (var context = new AcknowledgementsTrackerContext())
             {
                 context.Database.Log = message => Debug.WriteLine(message);
-                acknowledgements = context.Acknowledgements.AsNoTracking().Include(a => a.Tags).Include(a => a.Author).Where(a => a.BeneficiaryId == employeeId).ToList();
+                acknowledgements = context.Acknowledgements.AsNoTracking().Include(a => a.Tags).Include(a => a.Author)
+                    .Where(a => a.BeneficiaryId == employeeId).ToList();
             }
 
             return assembler.AssembleCollection(acknowledgements);
