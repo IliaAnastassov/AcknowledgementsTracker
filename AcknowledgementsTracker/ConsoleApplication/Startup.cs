@@ -32,7 +32,7 @@ namespace ConsoleApplication
             Database.SetInitializer(new NullDatabaseInitializer<AcknowledgementsTrackerContext>());
 
             var acknowledgementsRepo = new AcknowledgementsRepository();
-            var employeesRepo = new ProxiadEmployeesRepository();
+            var employeesRepo = new EmployeesRepository();
             var tagsRepo = new TagsRepository();
             var printer = new Printer();
             ////int employeeId = 5;

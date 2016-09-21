@@ -2,7 +2,7 @@ namespace AcknowledgementsTracker.DataAccess.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class FixAcknowledgementEmployeeRelationship : DbMigration
     {
         public override void Up()
@@ -19,7 +19,7 @@ namespace AcknowledgementsTracker.DataAccess.Migrations
             AddForeignKey("dbo.Acknowledgements", "BeneficiaryId", "dbo.ProxiadEmployees", "Id");
             AddForeignKey("dbo.Acknowledgements", "AuthorId", "dbo.ProxiadEmployees", "Id");
         }
-        
+
         public override void Down()
         {
             DropForeignKey("dbo.Acknowledgements", "AuthorId", "dbo.ProxiadEmployees");
