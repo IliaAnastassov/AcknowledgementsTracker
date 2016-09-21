@@ -10,16 +10,36 @@
 
     public class DtoFactory : IDtoFactory
     {
-        private Dictionary<Type, IRepository<IDto>> repositories = new Dictionary<Type, IRepository<IDto>>
+        private Dictionary<Type, object> repositories = new Dictionary<Type, object>
         {
             { typeof(AcknowledgementDTO), new AcknowledgementsRepository() },
             { typeof(EmployeeDTO), new EmployeesRepository() },
             { typeof(TagDTO), new TagsRepository() }
         };
 
-        public IRepository<IDto> GetRepository(Type type)
+        public object GetRepository(Type keyType)
         {
-            return repositories[type];
+            try
+            {
+                return repositories[keyType];
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public IRepository<T> GetRepository<T>() where T : IDto
+        {
+            Type keyType = typeof(T);
+            try
+            {
+                return (IRepository<T>)repositories[keyType];
+            }
+            catch
+            {
+                return null;
+            }
         }
     }
 }

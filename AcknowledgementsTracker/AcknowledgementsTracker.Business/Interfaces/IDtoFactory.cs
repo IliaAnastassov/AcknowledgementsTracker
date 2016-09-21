@@ -6,6 +6,7 @@
 
     public interface IDtoFactory
     {
-        IRepository<IDto> GetRepository(Type type);
+        IRepository<T> GetRepository<T>() where T : IDto;
+        object GetRepository(Type t);
     }
 }
