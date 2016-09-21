@@ -17,11 +17,11 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
     using Interfaces;
     using Model;
 
-    public class AcknowledgementsRepository : IRepository<IDto>
+    public class AcknowledgementsRepository : IRepository<AcknowledgementDTO>
     {
         private AcknowledgementDtoAssembler assembler = new AcknowledgementDtoAssembler();
 
-        public IDto Get(int id)
+        public AcknowledgementDTO Get(int id)
         {
             Acknowledgement acknowledgement;
 
@@ -34,7 +34,7 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
             return assembler.Assemble(acknowledgement);
         }
 
-        public IEnumerable<IDto> GetAll()
+        public IEnumerable<AcknowledgementDTO> GetAll()
         {
             IEnumerable<Acknowledgement> acknowledgements;
 
@@ -47,7 +47,7 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
             return assembler.AssembleCollection(acknowledgements);
         }
 
-        public IEnumerable<IDto> GetAcknowledgements(int employeeId)
+        public IEnumerable<AcknowledgementDTO> GetAcknowledgements(int employeeId)
         {
             IEnumerable<Acknowledgement> acknowledgements;
 
@@ -61,7 +61,7 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
             return assembler.AssembleCollection(acknowledgements);
         }
 
-        public IEnumerable<IDto> GetTodaysAcknowledgements()
+        public IEnumerable<AcknowledgementDTO> GetTodaysAcknowledgements()
         {
             IEnumerable<Acknowledgement> acknowledgements;
 
@@ -77,7 +77,7 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
             return assembler.AssembleCollection(acknowledgements);
         }
 
-        public IEnumerable<IDto> GetThisWeekAcknowledgements()
+        public IEnumerable<AcknowledgementDTO> GetThisWeekAcknowledgements()
         {
             IEnumerable<Acknowledgement> acknowledgements;
 
@@ -92,7 +92,7 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
             return assembler.AssembleCollection(acknowledgements);
         }
 
-        public IEnumerable<IDto> GetThisMonthAcknowledgements()
+        public IEnumerable<AcknowledgementDTO> GetThisMonthAcknowledgements()
         {
             IEnumerable<Acknowledgement> acknowledgements;
 
@@ -107,7 +107,7 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
             return assembler.AssembleCollection(acknowledgements);
         }
 
-        public IEnumerable<IDto> GetLastAcknowledgements()
+        public IEnumerable<AcknowledgementDTO> GetLastAcknowledgements()
         {
             IEnumerable<Acknowledgement> acknowledgements;
 
@@ -121,7 +121,7 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
             return assembler.AssembleCollection(acknowledgements);
         }
 
-        public void Add(IDto acknowledgementDto)
+        public void Add(AcknowledgementDTO acknowledgementDto)
         {
             var acknowledgement = assembler.Disassemble((AcknowledgementDTO)acknowledgementDto);
 
@@ -133,7 +133,7 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
             }
         }
 
-        public void Edit(IDto acknowledgementDto)
+        public void Edit(AcknowledgementDTO acknowledgementDto)
         {
             var acknowledgement = assembler.Disassemble((AcknowledgementDTO)acknowledgementDto);
 

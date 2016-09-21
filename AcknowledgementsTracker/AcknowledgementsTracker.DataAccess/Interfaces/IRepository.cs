@@ -1,8 +1,10 @@
 ﻿namespace AcknowledgementsTracker.DataAccess.Interfaces
 {
+    using DTO.Interfaces;
     using System.Collections.Generic;
 
     public interface IRepository<T>
+        where T : IDto
     {
         T Get(int id);
 

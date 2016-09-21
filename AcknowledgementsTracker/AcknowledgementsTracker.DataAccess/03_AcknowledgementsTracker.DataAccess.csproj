@@ -50,6 +50,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interfaces\IRepository.cs" />
+    <Compile Include="Migrations\201609211254578_FixRelations.cs" />
+    <Compile Include="Migrations\201609211254578_FixRelations.Designer.cs">
+      <DependentUpon>201609211254578_FixRelations.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\DataInitializer.cs" />
     <Compile Include="Migrations\201609140857054_FixAcknowledgementEmployeeRelationship.cs" />
     <Compile Include="Migrations\201609140857054_FixAcknowledgementEmployeeRelationship.Designer.cs">
@@ -104,6 +108,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201609140857054_FixAcknowledgementEmployeeRelationship.resx">
       <DependentUpon>201609140857054_FixAcknowledgementEmployeeRelationship.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609211254578_FixRelations.resx">
+      <DependentUpon>201609211254578_FixRelations.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

@@ -13,6 +13,7 @@ namespace AcknowledgementsTracker.DataAccess.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
+            AutomaticMigrationDataLossAllowed = true;
         }
 
         protected override void Seed(AcknowledgementsTrackerContext context)

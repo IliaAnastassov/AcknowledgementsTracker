@@ -17,11 +17,11 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
     using Interfaces;
     using Model;
 
-    public class EmployeesRepository : IRepository<IDto>
+    public class EmployeesRepository : IRepository<EmployeeDTO>
     {
         private EmployeeDtoAssembler assembler = new EmployeeDtoAssembler();
 
-        public IDto Get(int id)
+        public EmployeeDTO Get(int id)
         {
             Employee employee;
 
@@ -34,7 +34,7 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
             return assembler.Assemble(employee);
         }
 
-        public IEnumerable<IDto> GetAll()
+        public IEnumerable<EmployeeDTO> GetAll()
         {
             IEnumerable<Employee> employees;
 
@@ -47,7 +47,7 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
             return assembler.AssembleCollection(employees);
         }
 
-        public IDto GetMostAcknowledgedPersonAllTime()
+        public EmployeeDTO GetMostAcknowledgedPersonAllTime()
         {
             Employee employee;
 
@@ -60,7 +60,7 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
             return assembler.Assemble(employee);
         }
 
-        public IDto GetMostAcknowledgedPersonOfMonth()
+        public EmployeeDTO GetMostAcknowledgedPersonOfMonth()
         {
             Employee employee;
 
@@ -76,7 +76,7 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
             return assembler.Assemble(employee);
         }
 
-        public void Add(IDto employeeDto)
+        public void Add(EmployeeDTO employeeDto)
         {
             var employee = assembler.Disassemble((EmployeeDTO)employeeDto);
 
@@ -88,7 +88,7 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
             }
         }
 
-        public void Edit(IDto employeeDto)
+        public void Edit(EmployeeDTO employeeDto)
         {
             var employee = assembler.Disassemble((EmployeeDTO)employeeDto);
 

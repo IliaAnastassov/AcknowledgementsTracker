@@ -17,11 +17,11 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
     using Interfaces;
     using Model;
 
-    public class TagsRepository : IRepository<IDto>
+    public class TagsRepository : IRepository<TagDTO>
     {
         private TagDtoAssembler assembler = new TagDtoAssembler();
 
-        public IDto Get(int id)
+        public TagDTO Get(int id)
         {
             Tag tag;
 
@@ -34,7 +34,7 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
             return assembler.Assemble(tag);
         }
 
-        public IEnumerable<IDto> GetAll()
+        public IEnumerable<TagDTO> GetAll()
         {
             IEnumerable<Tag> tags;
 
@@ -47,7 +47,7 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
             return assembler.AssembleCollection(tags);
         }
 
-        public void Add(IDto tagDto)
+        public void Add(TagDTO tagDto)
         {
             var tag = assembler.Disassemble((TagDTO)tagDto);
 
@@ -59,7 +59,7 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
             }
         }
 
-        public void Edit(IDto tagDto)
+        public void Edit(TagDTO tagDto)
         {
             var tag = assembler.Disassemble((TagDTO)tagDto);
 
