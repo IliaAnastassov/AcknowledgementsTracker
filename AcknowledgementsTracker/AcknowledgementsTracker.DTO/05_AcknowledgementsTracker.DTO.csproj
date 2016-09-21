@@ -43,7 +43,7 @@
     <Compile Include="AcknowledgementDTO.cs" />
     <Compile Include="Interfaces\IDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ProxiadEmployeeDTO.cs" />
+    <Compile Include="EmployeeDTO.cs" />
     <Compile Include="TagDTO.cs" />
   </ItemGroup>
   <ItemGroup>

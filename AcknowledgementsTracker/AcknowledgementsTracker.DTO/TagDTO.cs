@@ -21,6 +21,6 @@ namespace AcknowledgementsTracker.DTO
 
         public string Title { get; set; }
 
-        public ICollection<Acknowledgement> Acknowledgements { get; set; }
+        public virtual ICollection<Acknowledgement> Acknowledgements { get; set; }
     }
 }

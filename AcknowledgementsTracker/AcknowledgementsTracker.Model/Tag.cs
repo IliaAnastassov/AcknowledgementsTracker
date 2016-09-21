@@ -15,11 +15,12 @@ namespace AcknowledgementsTracker.Model
             Acknowledgements = new HashSet<Acknowledgement>();
         }
 
-        public int Id { get; set; }
+        public int TagId { get; set; }
 
         [Required, MaxLength(100)]
         public string Title { get; set; }
 
-        public ICollection<Acknowledgement> Acknowledgements { get; set; }
+        // Navigation Properties
+        public virtual ICollection<Acknowledgement> Acknowledgements { get; set; }
     }
 }

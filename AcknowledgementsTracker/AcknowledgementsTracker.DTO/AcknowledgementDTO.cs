@@ -23,16 +23,16 @@ namespace AcknowledgementsTracker.DTO
 
         public string Text { get; set; }
 
-        public ProxiadEmployee Author { get; set; }
-
         public int AuthorId { get; set; }
-
-        public ProxiadEmployee Beneficiary { get; set; }
 
         public int BeneficiaryId { get; set; }
 
         public DateTime DateCreated { get; set; }
 
-        public ICollection<Tag> Tags { get; set; }
+        public virtual Employee Author { get; set; }
+
+        public virtual Employee Beneficiary { get; set; }
+
+        public virtual ICollection<Tag> Tags { get; set; }
     }
 }

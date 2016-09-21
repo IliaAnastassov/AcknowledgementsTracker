@@ -18,24 +18,22 @@ namespace AcknowledgementsTracker.Model
             DateCreated = DateTime.Now;
         }
 
-        public int Id { get; set; }
+        public int AcknowledgementId { get; set; }
 
         [Required, MaxLength(1500)]
         public string Text { get; set; }
 
-        [Required]
-        public ProxiadEmployee Author { get; set; }
-
         public int AuthorId { get; set; }
-
-        [Required]
-        public ProxiadEmployee Beneficiary { get; set; }
 
         public int BeneficiaryId { get; set; }
 
         public DateTime DateCreated { get; set; }
 
-        [Required]
-        public ICollection<Tag> Tags { get; set; }
+        // Navigation properties
+        public virtual Employee Author { get; set; }
+
+        public virtual Employee Beneficiary { get; set; }
+
+        public virtual ICollection<Tag> Tags { get; set; }
     }
 }
