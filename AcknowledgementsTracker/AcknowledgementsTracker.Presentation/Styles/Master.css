@@ -1,0 +1,38 @@
+﻿body {
+    font-family: Verdana;
+    padding: 0;
+    margin: 0;
+}
+
+#MasterHeader {
+    background-color: lightgrey;
+    height: 120px;
+}
+
+#MasterFooter {
+    background-color: #00234C;
+    color: lightgrey;
+}
+
+#Logo {
+    float: left;
+    padding: 30px 90px;
+}
+
+#Title {
+    float: right;
+    padding: 30px 90px;
+    color: #00234C;
+    font-weight: bold;
+    font-size: x-large;
+    text-align: right;
+}
+
+h2 {
+    color: #00234C;
+    padding: 10px 40px;
+}
+
+p {
+    padding: 10px 40px;
+}

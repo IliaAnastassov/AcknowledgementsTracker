@@ -1,19 +1,35 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="AcknowledgementsTracker.master.cs" Inherits="AcknowledgementsTracker.Presentation.AcknowledgementsTracker" %>
 
-<!DOCTYPE html>
+<!DOCTYPE HTML5>
 
-<html>
+<html lang="en-us">
 <head runat="server">
-    <title></title>
-    <asp:ContentPlaceHolder ID="head" runat="server">
-    </asp:ContentPlaceHolder>
+    <title>Acknowledgements Tracker</title>
+    <link href="~/Styles/Master.css" rel="stylesheet" type="text/css" />
+    <asp:ContentPlaceHolder ID="head" runat="server" />
 </head>
 <body>
+    <%--Header--%>
+    <div id="MasterHeader">
+        <div id="Logo">
+            <img src="./Resources/Proxiad_Logo_big.png" alt="" height="60" />
+        </div>
+        <div id="Title">
+            Acknowledgements<br />Tracker
+        </div>
+    </div>
+    <br />
+
+    <%--Content--%>
     <form id="form1" runat="server">
         <div>
-            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-            </asp:ContentPlaceHolder>
+            <asp:ContentPlaceHolder ID="cphMain" runat="server" />
         </div>
     </form>
+
+    <%--Footer--%>
+    <div id="MasterFooter">
+        &copy Proxiad Bulgaria
+    </div>
 </body>
 </html>
