@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace AcknowledgementsTracker.Presentation
 {
-    public partial class _Default : Page
+    public partial class AcknowledgementsTracker : System.Web.UI.MasterPage
     {
         protected void Page_Load(object sender, EventArgs e)
         {
