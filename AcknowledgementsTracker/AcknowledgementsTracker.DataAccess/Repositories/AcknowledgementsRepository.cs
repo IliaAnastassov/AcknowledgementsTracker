@@ -13,7 +13,6 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
     using Assembler;
     using Context;
     using DTO;
-    using DTO.Interfaces;
     using Interfaces;
     using Model;
 
