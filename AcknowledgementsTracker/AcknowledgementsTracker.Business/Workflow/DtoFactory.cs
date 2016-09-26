@@ -17,11 +17,13 @@
             { typeof(TagDTO), new TagsRepository() }
         };
 
-        public object GetRepository(Type keyType)
+        public IRepository<T> GetRepository<T>() where T : IDto
         {
+            Type keyType = typeof(T);
+
             try
             {
-                return repositories[keyType];
+                return (IRepository<T>)repositories[keyType];
             }
             catch
             {
@@ -29,12 +31,11 @@
             }
         }
 
-        public IRepository<T> GetRepository<T>() where T : IDto
+        public object GetRepository(Type keyType)
         {
-            Type keyType = typeof(T);
             try
             {
-                return (IRepository<T>)repositories[keyType];
+                return repositories[keyType];
             }
             catch
             {
