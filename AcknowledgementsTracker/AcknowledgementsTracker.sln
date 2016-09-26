@@ -19,7 +19,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "05_AcknowledgementsTracker.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "04_AcknowledgementsTracker.Assembler", "AcknowledgementsTracker.Assembler\04_AcknowledgementsTracker.Assembler.csproj", "{F51A9ADA-75E3-4251-A77B-B6A1F82B3436}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "01_AcknowledgementsTracker.Presentation", "AcknowledgementsTracker.Presentation\01_AcknowledgementsTracker.Presentation.csproj", "{F9B4477A-1228-43A9-8DE5-5AD7281865FD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "01_AcknowledgementsTracker.Presentation", "AcknowledgementsTracker.Presentation\01_AcknowledgementsTracker.Presentation.csproj", "{BFD1ACD9-2ACB-4669-A0B0-AD63664DA3E2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,10 +51,10 @@ Global
 		{F51A9ADA-75E3-4251-A77B-B6A1F82B3436}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F51A9ADA-75E3-4251-A77B-B6A1F82B3436}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F51A9ADA-75E3-4251-A77B-B6A1F82B3436}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F9B4477A-1228-43A9-8DE5-5AD7281865FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F9B4477A-1228-43A9-8DE5-5AD7281865FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F9B4477A-1228-43A9-8DE5-5AD7281865FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F9B4477A-1228-43A9-8DE5-5AD7281865FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BFD1ACD9-2ACB-4669-A0B0-AD63664DA3E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFD1ACD9-2ACB-4669-A0B0-AD63664DA3E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFD1ACD9-2ACB-4669-A0B0-AD63664DA3E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFD1ACD9-2ACB-4669-A0B0-AD63664DA3E2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -66,6 +66,6 @@ Global
 		{B7CBB0B4-2F0E-486E-85AB-1303D055B016} = {839C1105-1A5A-4C96-992D-8B90DDE3E42B}
 		{8658766D-DE69-44E2-8F29-C31F9EA9B4A0} = {839C1105-1A5A-4C96-992D-8B90DDE3E42B}
 		{F51A9ADA-75E3-4251-A77B-B6A1F82B3436} = {839C1105-1A5A-4C96-992D-8B90DDE3E42B}
-		{F9B4477A-1228-43A9-8DE5-5AD7281865FD} = {839C1105-1A5A-4C96-992D-8B90DDE3E42B}
+		{BFD1ACD9-2ACB-4669-A0B0-AD63664DA3E2} = {839C1105-1A5A-4C96-992D-8B90DDE3E42B}
 	EndGlobalSection
 EndGlobal

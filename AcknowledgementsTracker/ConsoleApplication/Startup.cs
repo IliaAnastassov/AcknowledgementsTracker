@@ -10,21 +10,16 @@ namespace ConsoleApplication
     using AcknowledgementsTracker.Business.Logic;
     using AcknowledgementsTracker.DataAccess.Context;
     using AcknowledgementsTracker.DataAccess.Repositories;
-    using AcknowledgementsTracker.DTO;
 
     /// <summary>
     /// This is a testing application
     /// </summary>
     public class Startup
     {
-        // TODO: Create Service for each model
-        // TODO: Study Factory implementation of Georgi
-        // TODO: Use factory as container of singleton repositories
         // TODO: Develop Presentation Layer
+        // TODO: Use a single Dto parameter inside Service methods
+        // TODO: Use factory as container of singleton repositories
         // TODO: Research Delete() method
-        // TODO: Add methods to ModelService
-        // TODO: Use a single Dto parameter inside ModelService methods
-        // TODO: Review Models: add FK to collection properties?
         // TODO: Review multiple Include statements in Repositories
         // TODO: Test Save(), Edit() and Delete() methods in the Repositories
 
