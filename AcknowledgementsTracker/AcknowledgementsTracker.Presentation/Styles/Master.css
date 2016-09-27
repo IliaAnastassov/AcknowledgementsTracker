@@ -1,5 +1,5 @@
 ﻿body {
-    font-family: Verdana;
+    font-family: Helvetica, sans-serif;
     padding: 0;
     margin: 0;
 }
@@ -23,6 +23,7 @@
     float: right;
     padding: 30px 90px;
     color: #00234C;
+    font-family: Helvetica, sans-serif;
     font-weight: bold;
     font-size: x-large;
     text-align: right;
@@ -30,9 +31,5 @@
 
 h2 {
     color: #00234C;
-    padding: 10px 40px;
-}
-
-p {
     padding: 10px 40px;
 }
