@@ -27,7 +27,7 @@ Example: "Thanks for helping me understand Asp.Net WebForms ViewState!" to Peter
 * Search acknowledgements by tag
 
 Example:  
-Searchd by: \#atlas  
+Search by: \#atlas  
 
 Results: 
 Maria received 5 #atlas acknowledgements  
@@ -36,7 +36,7 @@ Peter received 3 #atlas acknowledgements
 * Search acknowledgements by text
 
 Example:  
-Searchd by: WebForms ViewState  
+Search by: WebForms ViewState  
 
 Results: 
 "Thanks for helping me understand Asp.Net WebForms ViewState!" to Peter  
