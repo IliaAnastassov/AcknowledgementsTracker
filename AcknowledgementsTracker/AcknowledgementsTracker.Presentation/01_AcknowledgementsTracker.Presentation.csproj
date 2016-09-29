@@ -66,9 +66,33 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Dashboard.aspx" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Login.aspx" />
     <Content Include="packages.config" />
     <Content Include="AcknowledgementsTracker.Master" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="fonts\Arista2.0-RegularTrial.ttf" />
+    <None Include="Scripts\jquery-1.9.1.intellisense.js" />
+    <Content Include="Resources\ProxiadBulgariaLogo_big.png" />
+    <Content Include="Resources\ProxiadBulgariaLogo_White.png" />
+    <Content Include="Resources\Proxiad_Logo_big.png" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\jquery-1.9.1.js" />
+    <Content Include="Scripts\jquery-1.9.1.min.js" />
+    <Content Include="Scripts\jquery-1.9.1.min.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -81,8 +105,7 @@
     <Content Include="NewAcknowledgement.aspx" />
     <Content Include="Search.aspx" />
     <Content Include="Styles\Master.css" />
-    <Content Include="Styles\NewAcknowledgement.css" />
-    <Content Include="Styles\Search.css" />
+    <Content Include="Styles\app.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -92,6 +115,13 @@
     </Compile>
     <Compile Include="AcknowledgementsTracker.Master.designer.cs">
       <DependentUpon>AcknowledgementsTracker.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboard.aspx.cs">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Dashboard.aspx.designer.cs">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -122,7 +152,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Resources\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
