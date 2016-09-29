@@ -16,7 +16,8 @@ namespace ConsoleApplication
     /// </summary>
     public class Startup
     {
-        // TODO: Develop Presentation Layer
+        // TODO: Link Presentation and Business layers
+        // TODO: Develop Presentation layer
         // TODO: Use a single Dto parameter inside Service methods
         // TODO: Use factory as container of singleton repositories
         // TODO: Research Delete() method
