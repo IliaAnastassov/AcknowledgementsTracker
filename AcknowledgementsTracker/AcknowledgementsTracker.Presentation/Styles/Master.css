@@ -1,35 +1,5 @@
-﻿body {
-    font-family: Helvetica, sans-serif;
-    padding: 0;
-    margin: 0;
-}
-
-#MasterHeader {
-    background-color: lightgrey;
-    height: 120px;
-}
-
-#MasterFooter {
+﻿header, footer {
     background-color: #00234C;
-    color: lightgrey;
-}
-
-#Logo {
-    float: left;
-    padding: 30px 90px;
-}
-
-#Title {
-    float: right;
-    padding: 30px 90px;
-    color: #00234C;
-    font-family: Helvetica, sans-serif;
-    font-weight: bold;
-    font-size: x-large;
-    text-align: right;
-}
-
-h2 {
-    color: #00234C;
-    padding: 10px 40px;
+    color: white;
+    font-family: Arista2.0-Regular, Arial, sans-serif;
 }
