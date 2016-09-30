@@ -22,6 +22,7 @@
             <fieldset runat="server">
                 <legend>Your acknowledgements</legend>
 
+                <%--Data--%>
                 <table class="table table-striped table-hover">
                     <tr>
                         <th>From</th>
@@ -31,6 +32,7 @@
                     </tr>
                 </table>
 
+                <%--Buttons--%>
                 <div class="form-group">
                     <div class="col-lg-10 col-lg-offset-2">
                         <a href="NewAcknowledgement.aspx" class="btn btn-primary btn-lg"><i class="glyphicon glyphicon-plus"></i></a>

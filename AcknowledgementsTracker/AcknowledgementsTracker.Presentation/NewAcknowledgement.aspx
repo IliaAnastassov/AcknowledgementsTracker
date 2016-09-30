@@ -23,27 +23,29 @@
             <fieldset runat="server">
                 <legend>Give someone credit</legend>
 
+                <%--Input--%>
                 <div class="form-group">
                     <label for="inputBeneficiary" class="col-lg-2 control-label text-right">To</label>
                     <div class="col-lg-10">
-                        <input type="text" class="form-control" id="inputBeneficiary" placeholder="Firstname Lastname">
+                        <input type="text" class="form-control" id="inputBeneficiary" placeholder="Firstname Lastname" required>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="contentText" class="col-lg-2 control-label text-right">Content</label>
                     <div class="col-lg-10">
-                        <textarea class="form-control" rows="6" id="contentText" placeholder="Thank you for..."></textarea>
+                        <textarea class="form-control" rows="6" id="contentText" placeholder="Thank you for..." required></textarea>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="inputTags" class="col-lg-2 control-label text-right">Tags</label>
                     <div class="col-lg-10">
-                        <input type="text" class="form-control" id="inputTags" placeholder="#tag">
+                        <input type="text" class="form-control" id="inputTags" placeholder="#tag" required>
                     </div>
                 </div>
 
+                <%--Buttons--%>
                 <div class="form-group">
                     <div class="col-lg-10 col-lg-offset-2">
                         <button type="submit" class="btn btn-primary btn-lg"><i class="glyphicon glyphicon-ok"></i></button>

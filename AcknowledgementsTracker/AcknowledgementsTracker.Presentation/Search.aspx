@@ -21,15 +21,17 @@
 
         <main class="col-sm-6">
             <fieldset runat="server">
-                <legend>Search for people, acknowledgements, tags</legend>
+                <legend>Search for people, content or tags</legend>
 
+                <%--Input--%>
                 <div class="form-group">
                     <label for="inputSearch" class="col-lg-2 control-label text-right">Search</label>
                     <div class="col-lg-10">
-                        <input type="email" class="form-control" id="inputSearch" placeholder="enter your query">
+                        <input type="text" class="form-control" id="inputSearch" placeholder="enter your query" required>
                     </div>
                 </div>
 
+                <%--Buttons--%>
                 <div class="form-group">
                     <div class="col-lg-10 col-lg-offset-2">
                         <button type="submit" class="btn btn-info btn-lg"><i class="glyphicon glyphicon-search"></i></button>
