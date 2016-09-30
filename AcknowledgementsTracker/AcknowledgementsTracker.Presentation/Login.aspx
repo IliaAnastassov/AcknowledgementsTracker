@@ -16,29 +16,29 @@
         <aside class="col-sm-3"></aside>
 
         <main class="col-sm-6">
-            <fieldset runat="server">
-                <legend>Use your Proxiad credentials</legend>
+            <fieldset>
+                <legend>Use your Proxiad credentials to log in</legend>
 
                 <%--Input--%>
                 <div class="form-group">
-                    <label for="inputEmail" class="col-lg-2 control-label text-right">Email</label>
+                    <label for="EmailTextBox" class="col-lg-2 control-label text-right">Email</label>
                     <div class="col-lg-10">
-                        <input type="email" class="form-control" id="inputEmail" placeholder="username@proxiad.com" required>
+                        <input type="email" class="form-control" placeholder="username@proxiad.com" required runat="server" id="EmailTextBox">
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="inputPassword" class="col-lg-2 control-label text-right">Password</label>
+                    <label for="PasswordTextBox" class="col-lg-2 control-label text-right">Password</label>
                     <div class="col-lg-10">
-                        <input type="password" class="form-control" id="inputPassword" placeholder="password" required>
+                        <input type="password" class="form-control" placeholder="password" required runat="server" id="PasswordTextBox">
                     </div>
                 </div>
 
                 <%--Buttons--%>
                 <div class="form-group">
                     <div class="col-lg-10 col-lg-offset-2">
-                        <button type="submit" class="btn btn-primary btn-lg"><i class="glyphicon glyphicon-ok"></i></button>
-                        <button type="reset" class="btn btn-default btn-lg"><i class="glyphicon glyphicon-repeat"></i></button>
+                        <button type="submit" class="btn btn-primary btn-lg"><i class="glyphicon glyphicon-ok" runat="server" id="SubmitBtn"></i></button>
+                        <button type="reset" class="btn btn-default btn-lg"><i class="glyphicon glyphicon-repeat" runat="server" id="ResetBtn"></i></button>
                     </div>
                 </div>
             </fieldset>

@@ -19,11 +19,11 @@
         <aside class="col-sm-3"></aside>
 
         <main class="col-sm-6">
-            <fieldset runat="server">
+            <fieldset>
                 <legend>Your acknowledgements</legend>
 
                 <%--Data--%>
-                <table class="table table-striped table-hover">
+                <table class="table table-striped table-hover" runat="server" id="AcknowledgementsTable">
                     <tr>
                         <th>From</th>
                         <th>Content</th>
