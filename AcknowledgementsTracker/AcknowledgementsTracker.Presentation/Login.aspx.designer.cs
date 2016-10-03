@@ -13,13 +13,13 @@ namespace AcknowledgementsTracker.Presentation {
     public partial class Login {
         
         /// <summary>
-        /// EmailTextBox control.
+        /// UsernameTextBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl EmailTextBox;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText UsernameTextBox;
         
         /// <summary>
         /// PasswordTextBox control.
@@ -31,21 +31,12 @@ namespace AcknowledgementsTracker.Presentation {
         protected global::System.Web.UI.HtmlControls.HtmlInputPassword PasswordTextBox;
         
         /// <summary>
-        /// SubmitBtn control.
+        /// LoginBtn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl SubmitBtn;
-        
-        /// <summary>
-        /// ResetBtn control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ResetBtn;
+        protected global::System.Web.UI.HtmlControls.HtmlButton LoginBtn;
     }
 }
