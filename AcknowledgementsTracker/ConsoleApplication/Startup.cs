@@ -16,6 +16,9 @@ namespace ConsoleApplication
     /// </summary>
     public class Startup
     {
+        // TODO: Add Settings in the Web.config file
+        // TODO: Create a container class for the settings and pass them to the business layer (LdapConnection.cs)
+        // TODO: Update Global.asax
         // TODO: Use LDAP server for authentication
         // TODO: Link Presentation and Business layers
         // TODO: Develop Presentation layer
