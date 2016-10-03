@@ -32,6 +32,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -41,8 +42,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interfaces\IDtoFactory.cs" />
+    <Compile Include="Interfaces\ILdapSettingsService.cs" />
     <Compile Include="Logic\AcknowledgementDtoService.cs" />
     <Compile Include="Logic\EmployeeDtoService.cs" />
+    <Compile Include="Logic\LdapAuthentication.cs" />
+    <Compile Include="Logic\LdapConnection.cs" />
+    <Compile Include="Logic\LdapSettingsService.cs" />
     <Compile Include="Logic\Printer.cs" />
     <Compile Include="Logic\TagDtoService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
