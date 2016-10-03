@@ -21,9 +21,9 @@
 
                 <%--Input--%>
                 <div class="form-group">
-                    <label for="EmailTextBox" class="col-lg-2 control-label text-right">Email</label>
+                    <label for="UsernameTextBox" class="col-lg-2 control-label text-right">Username</label>
                     <div class="col-lg-10">
-                        <input type="email" class="form-control" placeholder="username@proxiad.com" required runat="server" id="EmailTextBox">
+                        <input type="text" class="form-control" placeholder="username" required runat="server" id="UsernameTextBox">
                     </div>
                 </div>
 
@@ -37,8 +37,8 @@
                 <%--Buttons--%>
                 <div class="form-group">
                     <div class="col-lg-10 col-lg-offset-2">
-                        <button type="submit" class="btn btn-primary btn-lg"><i class="glyphicon glyphicon-ok" runat="server" id="SubmitBtn"></i></button>
-                        <button type="reset" class="btn btn-default btn-lg"><i class="glyphicon glyphicon-repeat" runat="server" id="ResetBtn"></i></button>
+                        <button type="submit" class="btn btn-primary btn-lg" runat="server" id="LoginBtn" onserverclick="Login_Click"><i class="glyphicon glyphicon-ok"></i></button>
+                        <button type="reset" class="btn btn-default btn-lg"><i class="glyphicon glyphicon-repeat"></i></button>
                     </div>
                 </div>
             </fieldset>
