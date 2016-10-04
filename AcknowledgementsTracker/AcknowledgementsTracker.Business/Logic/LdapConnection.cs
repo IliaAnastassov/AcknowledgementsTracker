@@ -12,5 +12,15 @@
         {
             RootEntry = new DirectoryEntry(settings.Path, settings.Username, settings.UserPassword, AuthenticationTypes.None);
         }
+
+        public bool IsAuthenticated()
+        {
+            if (RootEntry == null)
+            {
+                return false;
+            }
+
+            return true;
+        }
     }
 }
