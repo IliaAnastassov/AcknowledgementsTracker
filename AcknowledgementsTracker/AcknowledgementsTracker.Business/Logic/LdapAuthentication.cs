@@ -14,21 +14,14 @@
 
         public bool IsAuthenticated(string username, string password)
         {
-            try
-            {
-                DirectorySearcher searcher = new DirectorySearcher(this.connection.RootEntry);
-                searcher.Filter = $"&(uid={username})(userPassword={password})";
-                searcher.PropertiesToLoad.Add("cn");
-                SearchResult result = searcher.FindOne();
+            DirectorySearcher searcher = new DirectorySearcher(this.connection.RootEntry);
+            searcher.Filter = $"(&(uid={username})(userPassword={password}))";
+            searcher.PropertiesToLoad.Add("cn");
+            SearchResult result = searcher.FindOne();
 
-                if (result == null)
-                {
-                    return false;
-                }
-            }
-            catch (Exception ex)
+            if (result == null)
             {
-                throw new Exception($"User not found. Please verify your credentials. {ex.Message}");
+                return false;
             }
 
             return true;
