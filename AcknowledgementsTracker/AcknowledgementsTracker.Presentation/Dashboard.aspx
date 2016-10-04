@@ -23,7 +23,7 @@
                 <legend>Your acknowledgements</legend>
 
                 <%--Data--%>
-                <table class="table table-striped table-hover" runat="server" id="AcknowledgementsTable">
+                <table class="table table-striped table-hover" visible="True" id="AcknowledgementsTable" runat="server">
                     <tr>
                         <th>From</th>
                         <th>Content</th>
