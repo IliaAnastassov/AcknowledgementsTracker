@@ -13,7 +13,6 @@ namespace AcknowledgementsTracker.Presentation
     {
         protected void Application_Start(object sender, EventArgs e)
         {
-
         }
 
         protected void Application_AuthenticateRequest(object sender, EventArgs e)
