@@ -3,13 +3,15 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Runtime.InteropServices;
+    using System.Threading;
     using System.Web;
+    using System.Web.Configuration;
+    using System.Web.Security;
     using System.Web.UI;
     using System.Web.UI.WebControls;
-    using System.Web.Configuration;
-    using Business.Logic;
     using Business.Interfaces;
-    using System.Web.Security;
+    using Business.Logic;
 
     public partial class Login : Page
     {
@@ -22,16 +24,14 @@
             ILdapSettingsService settings = new LdapSettingsService();
 
             settings.Path = WebConfigurationManager.AppSettings["LDAPServerPath"];
-            settings.Username = WebConfigurationManager.AppSettings["LDAPUsername"];
-            settings.UserPassword = WebConfigurationManager.AppSettings["LDAPUserPassword"];
-
-            var authentication = new LdapAuthentication(new LdapConnection(settings));
+            settings.Username = UsernameTextBox.Value;
+            settings.UserPassword = PasswordTextBox.Value;
 
             try
             {
-                var authenticated = authentication.IsAuthenticated(UsernameTextBox.Value, PasswordTextBox.Value);
+                var connection = new LdapConnection(settings);
 
-                if (authenticated)
+                if (connection.IsAuthenticated())
                 {
                     var authenticationTicket = new FormsAuthenticationTicket(1, UsernameTextBox.Value, DateTime.Now, DateTime.Now.AddMinutes(60), true, string.Empty);
                     var encryptedTicket = FormsAuthentication.Encrypt(authenticationTicket);
@@ -41,17 +41,18 @@
                     Response.Redirect(@"~/Dashboard.aspx");
                 }
             }
-            catch (ArgumentNullException ex)
-            {
-                // TODO: Create a MessageBox informing that the user is not found
-            }
             catch (HttpException)
             {
-                // TODO:
+            }
+            catch (COMException)
+            {
+            }
+            catch (ThreadAbortException)
+            {
             }
             catch (Exception)
             {
-                // TODO:
+                // TODO: Create a MessageBox informing that the user is not found
             }
         }
     }
