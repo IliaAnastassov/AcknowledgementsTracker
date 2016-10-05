@@ -12,6 +12,7 @@
     using System.Web.UI.WebControls;
     using Business.Interfaces;
     using Business.Logic;
+    using System.Web.UI.HtmlControls;
 
     public partial class Login : Page
     {
@@ -41,18 +42,15 @@
                     Response.Redirect(@"~/Dashboard.aspx");
                 }
             }
-            catch (HttpException)
-            {
-            }
-            catch (COMException)
-            {
-            }
             catch (ThreadAbortException)
+            {
+            }
+            catch (HttpException)
             {
             }
             catch (Exception)
             {
-                // TODO: Create a MessageBox informing that the user is not found
+                ErrorLabel.InnerText = "Failed to authenticate. Please verify username and password.";
             }
         }
     }

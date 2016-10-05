@@ -42,6 +42,11 @@
                     </div>
                 </div>
             </fieldset>
+
+            <%--Error label--%>
+            <div id="ErrorMsg">
+                <label class="alert-warning" id="ErrorLabel" runat="server"></label>
+            </div>
         </main>
 
         <aside class="col-sm-3"></aside>
