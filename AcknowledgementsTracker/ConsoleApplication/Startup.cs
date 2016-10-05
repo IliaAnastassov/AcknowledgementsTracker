@@ -16,7 +16,7 @@ namespace ConsoleApplication
     /// </summary>
     public class Startup
     {
-        // TODO: Make Ldap Authentication and Connection Work!!!
+        // TODO: Add Icon to Logout button
         // TODO: Update Global.asax
         // TODO: Link Presentation and Business layers
         // TODO: Develop Presentation layer
