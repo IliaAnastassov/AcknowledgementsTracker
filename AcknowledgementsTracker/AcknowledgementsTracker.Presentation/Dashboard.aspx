@@ -9,9 +9,6 @@
             <div class="col-sm-11">
                 <h2>Dashboard</h2>
             </div>
-            <div class="col-sm-1">
-                <a href="Login.aspx" class="btn btn-default btn-lg"><i class="glyphicon glyphicon-off"></i></a>
-            </div>
         </div>
     </div>
 
