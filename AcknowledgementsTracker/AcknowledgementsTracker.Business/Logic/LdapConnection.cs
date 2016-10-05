@@ -10,12 +10,13 @@
 
         public LdapConnection(ILdapSettingsService settings)
         {
-            RootEntry = new DirectoryEntry(settings.Path, settings.Username, settings.UserPassword, AuthenticationTypes.None);
+            var userId = $"uid={settings.Username},ou=People,dc=proxiad,dc=bg";
+            RootEntry = new DirectoryEntry(settings.Path, userId, settings.UserPassword, AuthenticationTypes.None);
         }
 
         public bool IsAuthenticated()
         {
-            if (RootEntry == null)
+            if (RootEntry.SchemaEntry == null)
             {
                 return false;
             }
