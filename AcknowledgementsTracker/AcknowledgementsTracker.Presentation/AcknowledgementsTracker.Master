@@ -13,19 +13,35 @@
 </head>
 <body>
     <%--Header--%>
-    <header class="container-fluid">
-        <div class="row">
-            <div class="col-sm-6">
-                <img src="Resources/ProxiadBulgariaLogo_White.png" alt="Proxiad Logo" />
+    <form id="form1" runat="server">
+        <header class="container-fluid">
+            <div class="row">
+                <div class="col-sm-6">
+                    <img src="Resources/ProxiadBulgariaLogo_White.png" alt="Proxiad Logo" />
+                </div>
+                <div class="col-sm-6">
+                    <h1 class="pull-right">Acknowledgements Tracker</h1>
+                </div>
             </div>
-            <div class="col-sm-6">
-                <h1 class="pull-right">Acknowledgements Tracker</h1>
+        </header>
+
+        <%--Login/Logout--%>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-11"></div>
+                <div class="col-sm-1">
+                    <%--<a href="Login.aspx" class="btn btn-default btn-lg" id="LogoutBtn" runat="server"><i class="glyphicon glyphicon-off"></i></a>--%>
+                    <asp:LoginView ID="LoginView" runat="server">
+                        <LoggedInTemplate>
+                            <asp:LoginName ID="LoginName" runat="server" />
+                            <asp:LoginStatus CssClass="btn btn-default btn-sm" ID="LoginStatus" runat="server" />
+                        </LoggedInTemplate>
+                    </asp:LoginView>
+                </div>
             </div>
         </div>
-    </header>
 
-    <%--Content--%>
-    <form id="form1" runat="server">
+        <%--Content--%>
         <div>
             <asp:ContentPlaceHolder ID="cphMain" runat="server" />
         </div>
