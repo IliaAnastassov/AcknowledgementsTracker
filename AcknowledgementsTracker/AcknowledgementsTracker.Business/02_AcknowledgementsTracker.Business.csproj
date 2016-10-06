@@ -45,8 +45,8 @@
     <Compile Include="Interfaces\ILdapSettingsService.cs" />
     <Compile Include="Logic\AcknowledgementDtoService.cs" />
     <Compile Include="Logic\EmployeeDtoService.cs" />
-    <Compile Include="Logic\LdapAuthentication.cs" />
     <Compile Include="Logic\LdapConnection.cs" />
+    <Compile Include="Logic\LdapSearcher.cs" />
     <Compile Include="Logic\LdapSettingsService.cs" />
     <Compile Include="Logic\Printer.cs" />
     <Compile Include="Logic\TagDtoService.cs" />
