@@ -33,6 +33,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.DirectoryServices.AccountManagement" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,7 +47,7 @@
     <Compile Include="Logic\AcknowledgementDtoService.cs" />
     <Compile Include="Logic\EmployeeDtoService.cs" />
     <Compile Include="Logic\LdapConnection.cs" />
-    <Compile Include="Logic\LdapSearcher.cs" />
+    <Compile Include="Logic\LdapAccountManager.cs" />
     <Compile Include="Logic\LdapSettingsService.cs" />
     <Compile Include="Logic\Printer.cs" />
     <Compile Include="Logic\TagDtoService.cs" />
