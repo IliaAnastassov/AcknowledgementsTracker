@@ -28,13 +28,12 @@
         <%--Login/Logout--%>
         <div class="container-fluid">
             <div class="row">
-                <div class="col-sm-11"></div>
-                <div class="col-sm-1">
-                    <%--<a href="Login.aspx" class="btn btn-default btn-lg" id="LogoutBtn" runat="server"><i class="glyphicon glyphicon-off"></i></a>--%>
+                <div class="col-sm-10"></div>
+                <div class="col-sm-2">
                     <asp:LoginView ID="LoginView" runat="server">
                         <LoggedInTemplate>
                             <asp:LoginName ID="LoginName" runat="server" />
-                            <asp:LoginStatus CssClass="btn btn-default btn-sm" ID="LoginStatus" runat="server" />
+                            <asp:LoginStatus CssClass="btn btn-default btn-sm pull-right" ID="LoginStatus" runat="server" />
                         </LoggedInTemplate>
                     </asp:LoginView>
                 </div>
