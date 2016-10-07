@@ -23,15 +23,11 @@ namespace AcknowledgementsTracker.DTO
 
         public string Text { get; set; }
 
-        public int AuthorId { get; set; }
+        public int AuthorEmail { get; set; }
 
-        public int BeneficiaryId { get; set; }
+        public int BeneficiaryEmail { get; set; }
 
         public DateTime DateCreated { get; set; }
-
-        public virtual Employee Author { get; set; }
-
-        public virtual Employee Beneficiary { get; set; }
 
         public virtual ICollection<Tag> Tags { get; set; }
     }
