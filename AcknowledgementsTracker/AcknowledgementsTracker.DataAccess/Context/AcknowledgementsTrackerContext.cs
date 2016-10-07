@@ -13,25 +13,11 @@ namespace AcknowledgementsTracker.DataAccess.Context
     {
         public DbSet<Acknowledgement> Acknowledgements { get; set; }
 
-        public DbSet<Employee> Employees { get; set; }
-
         public DbSet<Tag> Tags { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
-            modelBuilder.Entity<Employee>()
-                .HasMany<Acknowledgement>(p => p.AcknowledgementsGiven)
-                .WithRequired(a => a.Author)
-                .HasForeignKey(a => a.AuthorId)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<Employee>()
-                .HasMany<Acknowledgement>(p => p.AcknowledgementsReceived)
-                .WithRequired(a => a.Beneficiary)
-                .HasForeignKey(a => a.BeneficiaryId)
-                .WillCascadeOnDelete(false);
         }
     }
 }
