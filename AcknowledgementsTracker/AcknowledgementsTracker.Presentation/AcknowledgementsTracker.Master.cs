@@ -7,11 +7,15 @@ using System.Web.UI.WebControls;
 
 namespace AcknowledgementsTracker.Presentation
 {
-    public partial class AcknowledgementsTracker : System.Web.UI.MasterPage
+    public partial class AcknowledgementsTracker1 : System.Web.UI.MasterPage
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            // TODO:
+            if (LoginView.Visible)
+            {
+                UserNameLabel.Text = "Find full name from LDAP";
+            }
         }
     }
 }

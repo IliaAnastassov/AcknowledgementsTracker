@@ -10,7 +10,7 @@
 namespace AcknowledgementsTracker.Presentation {
     
     
-    public partial class AcknowledgementsTracker {
+    public partial class AcknowledgementsTracker1 {
         
         /// <summary>
         /// head control.
@@ -29,6 +29,15 @@ namespace AcknowledgementsTracker.Presentation {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+        
+        /// <summary>
+        /// UserNameLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal UserNameLabel;
         
         /// <summary>
         /// LoginView control.

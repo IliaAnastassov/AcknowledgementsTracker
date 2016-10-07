@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="AcknowledgementsTracker.master.cs" Inherits="AcknowledgementsTracker.Presentation.AcknowledgementsTracker" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="AcknowledgementsTracker.master.cs" Inherits="AcknowledgementsTracker.Presentation.AcknowledgementsTracker1" %>
 
 <!DOCTYPE HTML5>
 
@@ -30,9 +30,9 @@
             <div class="row">
                 <div class="col-sm-10"></div>
                 <div class="col-sm-2">
+                    <asp:Literal ID="UserNameLabel" runat="server"></asp:Literal>
                     <asp:LoginView ID="LoginView" runat="server">
                         <LoggedInTemplate>
-                            <asp:LoginName ID="LoginName" runat="server" />
                             <asp:LoginStatus CssClass="btn btn-default btn-sm pull-right" ID="LoginStatus" runat="server" />
                         </LoggedInTemplate>
                     </asp:LoginView>

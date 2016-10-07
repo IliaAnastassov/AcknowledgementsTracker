@@ -74,7 +74,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Login.aspx" />
     <Content Include="packages.config" />
-    <Content Include="AcknowledgementsTracker.Master" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -84,6 +83,7 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="fonts\Arista2.0-RegularTrial.ttf" />
+    <Content Include="AcknowledgementsTracker.Master" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Resources\ProxiadBulgariaLogo_big.png" />
     <Content Include="Resources\ProxiadBulgariaLogo_White.png" />
