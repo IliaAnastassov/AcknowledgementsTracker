@@ -23,9 +23,9 @@ namespace AcknowledgementsTracker.Model
         [Required, MaxLength(1500)]
         public string Text { get; set; }
 
-        public int AuthorEmail { get; set; }
+        public string AuthorEmail { get; set; }
 
-        public int BeneficiaryEmail { get; set; }
+        public string BeneficiaryEmail { get; set; }
 
         public DateTime DateCreated { get; set; }
 
