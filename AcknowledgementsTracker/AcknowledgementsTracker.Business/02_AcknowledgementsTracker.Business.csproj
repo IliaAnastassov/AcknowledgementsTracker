@@ -42,10 +42,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\User.cs" />
     <Compile Include="Interfaces\IDtoFactory.cs" />
     <Compile Include="Interfaces\ILdapSettingsService.cs" />
+    <Compile Include="Interfaces\IUser.cs" />
     <Compile Include="Logic\AcknowledgementDtoService.cs" />
-    <Compile Include="Logic\EmployeeDtoService.cs" />
     <Compile Include="Logic\LdapConnection.cs" />
     <Compile Include="Logic\LdapAccountManager.cs" />
     <Compile Include="Logic\LdapSettingsService.cs" />
@@ -68,9 +69,7 @@
       <Name>06_AcknowledgementsTracker.Model</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Entities\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

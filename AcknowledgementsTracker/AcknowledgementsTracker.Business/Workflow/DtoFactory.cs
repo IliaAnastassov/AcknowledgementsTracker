@@ -13,7 +13,6 @@
         private Dictionary<Type, object> repositories = new Dictionary<Type, object>
         {
             { typeof(AcknowledgementDTO), new AcknowledgementsRepository() },
-            { typeof(EmployeeDTO), new EmployeesRepository() },
             { typeof(TagDTO), new TagsRepository() }
         };
 

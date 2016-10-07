@@ -17,7 +17,7 @@
                     Console.Write($"#{tag.Title} ");
                 }
 
-                Console.WriteLine($"\nfrom: {acknowledgement.Author.UserName}\n");
+                Console.WriteLine($"\nfrom: {acknowledgement.AuthorEmail}\n");
             }
         }
     }

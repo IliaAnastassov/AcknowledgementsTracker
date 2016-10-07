@@ -5,23 +5,25 @@
     using System.Collections.ObjectModel;
     using System.DirectoryServices.AccountManagement;
     using System.Linq;
+    using Entities;
+    using Interfaces;
 
     public class LdapAccountManager
     {
         private PrincipalContext context;
 
-        public LdapAccountManager(string domainName)
+        public LdapAccountManager(string domainName, string username, string password)
         {
-            context = new PrincipalContext(ContextType.Domain, domainName);
+            context = new PrincipalContext(ContextType.Domain, domainName, username, password);
         }
 
         public string GetUserName(string username)
         {
-            UserPrincipal user = new UserPrincipal(context);
+            UserPrincipal queryFilter = new UserPrincipal(context);
+            queryFilter.SamAccountName = username;
             UserPrincipal result;
-            user.SamAccountName = username;
 
-            using (var searcher = new PrincipalSearcher(user))
+            using (var searcher = new PrincipalSearcher(queryFilter))
             {
                 result = (UserPrincipal)searcher.FindOne();
             }
@@ -29,17 +31,24 @@
             return result.Name;
         }
 
-        public IEnumerable<string> GetAllUserNames()
+        public IEnumerable<IUser> GetAllUserData()
         {
-            UserPrincipal user = new UserPrincipal(context);
-            var names = new List<string>();
+            UserPrincipal queryFilter = new UserPrincipal(context);
+            var users = new List<User>();
 
-            using (var searcher = new PrincipalSearcher(user))
+            using (var searcher = new PrincipalSearcher(queryFilter))
             {
-                names.AddRange(searcher.FindAll().Select(r => r.Name));
+                foreach (UserPrincipal result in searcher.FindAll())
+                {
+                    var user = new User();
+                    user.Email = result.EmailAddress;
+                    user.Name = result.Name;
+
+                    users.Add(user);
+                }
             }
 
-            return names;
+            return users;
         }
     }
 }
