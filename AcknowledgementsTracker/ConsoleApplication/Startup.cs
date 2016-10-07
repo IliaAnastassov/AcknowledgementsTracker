@@ -32,16 +32,13 @@ namespace ConsoleApplication
             Database.SetInitializer(new NullDatabaseInitializer<AcknowledgementsTrackerContext>());
 
             var acknowledgementsRepo = new AcknowledgementsRepository();
-            var employeesRepo = new EmployeesRepository();
             var tagsRepo = new TagsRepository();
             var printer = new Printer();
 
-            int employeeId = 5;
+            var employeeEmail = "wolverine@proxiad.com";
 
             // Wolverine's acknowledgements
-            var acknowledgements = acknowledgementsRepo.GetAcknowledgements(employeeId);
-            var employee = employeesRepo.Get(employeeId);
-            Console.WriteLine($"{employee.UserName}'s acknowledgements:\n");
+            var acknowledgements = acknowledgementsRepo.GetAcknowledgements(employeeEmail);
             printer.PrintAcknowledgements(acknowledgements);
 
             // Today's acknowledgements
