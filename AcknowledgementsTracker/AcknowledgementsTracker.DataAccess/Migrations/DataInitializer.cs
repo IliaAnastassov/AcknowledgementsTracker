@@ -17,7 +17,7 @@ namespace AcknowledgementsTracker.DataAccess.Migrations
         {
             using (var context = new AcknowledgementsTrackerContext())
             {
-                if (context.Acknowledgements.Any() || context.Tags.Any() || context.Employees.Any())
+                if (context.Acknowledgements.Any() || context.Tags.Any())
                 {
                     return;
                 }
@@ -45,69 +45,36 @@ namespace AcknowledgementsTracker.DataAccess.Migrations
 
                 context.Tags.AddOrUpdate(weatherTag, theftTag, drinkingTag, fightTag);
 
-                // EMPLOYEES
-                var wolverine = new Employee()
-                {
-                    UserName = "wolverine",
-                    Email = "wolverine@xmen.com"
-                };
-
-                var magneto = new Employee()
-                {
-                    UserName = "Magneto",
-                    Email = "magneto@xmen.com"
-                };
-
-                var storm = new Employee()
-                {
-                    UserName = "storm",
-                    Email = "storm@xmen.com"
-                };
-
-                var mystique = new Employee()
-                {
-                    UserName = "mystique",
-                    Email = "mystique@xmen.com"
-                };
-
-                var profesorX = new Employee()
-                {
-                    UserName = "professorX",
-                    Email = "professorX@xmen.com"
-                };
-
-                context.Employees.AddOrUpdate(wolverine, magneto, storm, mystique, profesorX);
-
                 // ACKNOWLEDGEMENTS
                 var acknowledgementOne = new Acknowledgement()
                 {
                     Text = "Thank you for making it rain all weekend. Biatch.",
-                    Author = magneto,
-                    Beneficiary = storm,
+                    AuthorEmail = "magneto@proxiad.com",
+                    BeneficiaryEmail = "storm@proxiad.com",
                     Tags = new List<Tag> { weatherTag }
                 };
 
                 var acknowledgementTwo = new Acknowledgement()
                 {
                     Text = "Thanks for being such an asshole and stealing my bike. If you don't give it back to me in one peace I'll kick your magnetic ass!",
-                    Author = wolverine,
-                    Beneficiary = magneto,
+                    AuthorEmail = "wolverine@proxiad.com",
+                    BeneficiaryEmail = "magneto@proxiad.com",
                     Tags = new List<Tag> { theftTag, fightTag }
                 };
 
                 var acknowledgementThree = new Acknowledgement()
                 {
                     Text = "When I was depressed you were there for me. We had such a nice time drinking till collapse.",
-                    Author = profesorX,
-                    Beneficiary = wolverine,
+                    AuthorEmail = "profesorX@proxiad.com",
+                    BeneficiaryEmail = "wolverin@proxiad.come",
                     Tags = new List<Tag> { drinkingTag }
                 };
 
                 var acknowledgementFour = new Acknowledgement()
                 {
                     Text = "Thanks for impersonating me and making it rain all weekend. Now everyone HATES ME because of you!",
-                    Author = storm,
-                    Beneficiary = mystique,
+                    AuthorEmail = "storm@proxiad.com",
+                    BeneficiaryEmail = "mystique@proxiad.com",
                     Tags = new List<Tag> { weatherTag, theftTag }
                 };
 
