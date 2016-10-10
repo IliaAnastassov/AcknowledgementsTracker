@@ -30,12 +30,10 @@
             <div class="row">
                 <div class="col-sm-10"></div>
                 <div class="col-sm-2">
-                    <asp:Literal ID="UserNameLabel" runat="server"></asp:Literal>
-                    <asp:LoginView ID="LoginView" runat="server">
-                        <LoggedInTemplate>
-                            <asp:LoginStatus CssClass="btn btn-default btn-sm pull-right" ID="LoginStatus" runat="server" />
-                        </LoggedInTemplate>
-                    </asp:LoginView>
+                    <div>
+                        <asp:Literal ID="UserNameLabel" runat="server"></asp:Literal>
+                        <asp:Button CssClass="btn btn-default btn-sm pull-right" Text="Logout" Visible="false" OnClick="LogoutBtn_Click" ID="LogoutBtn" runat="server" />
+                    </div>
                 </div>
             </div>
         </div>
