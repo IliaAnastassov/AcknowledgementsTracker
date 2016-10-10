@@ -10,14 +10,42 @@
 
     public class LdapAccountManager
     {
+        private string username;
         private PrincipalContext context;
+        private static LdapAccountManager instance;
 
-        public LdapAccountManager(string domainName, string username, string password)
+        public static LdapAccountManager Instance
         {
-            context = new PrincipalContext(ContextType.Domain, domainName, username, password);
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new LdapAccountManager();
+                }
+                return instance;
+            }
         }
 
-        public string GetUserName(string username)
+        private LdapAccountManager()
+        {
+        }
+
+        public void Setup(string domainName, string username, string password)
+        {
+            var userId = $"uid={username},ou=People,dc=proxiad,dc=bg";
+            context = new PrincipalContext(ContextType.Domain, "ldap.proxiad.corp/dc=proxiad,dc=bg");
+            this.username = username;
+        }
+
+        public void Destroy()
+        {
+            if (instance != null)
+            {
+                instance = null;
+            }
+        }
+
+        public string GetUserName()
         {
             UserPrincipal queryFilter = new UserPrincipal(context);
             queryFilter.SamAccountName = username;
@@ -31,7 +59,21 @@
             return result.Name;
         }
 
-        public IEnumerable<IUser> GetAllUserData()
+        public string GetUserEmail()
+        {
+            UserPrincipal queryFilter = new UserPrincipal(context);
+            queryFilter.SamAccountName = username;
+            UserPrincipal result;
+
+            using (var searcher = new PrincipalSearcher(queryFilter))
+            {
+                result = (UserPrincipal)searcher.FindOne();
+            }
+
+            return result.EmailAddress;
+        }
+
+        public IEnumerable<IUser> GetAllUsersData()
         {
             UserPrincipal queryFilter = new UserPrincipal(context);
             var users = new List<User>();
