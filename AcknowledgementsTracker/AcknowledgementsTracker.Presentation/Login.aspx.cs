@@ -18,6 +18,7 @@
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+
         }
 
         protected void Login_Click(object sender, EventArgs e)
@@ -34,7 +35,8 @@
 
                 if (connection.IsAuthenticated())
                 {
-                    SaveUserConfiguration(settings.Username, settings.UserPassword);
+                    var manager = LdapAccountManager.Instance;
+                    manager.Setup(WebConfigurationManager.AppSettings["Domain"], settings.Username, settings.UserPassword);
 
                     var authenticationTicket = new FormsAuthenticationTicket(1, UsernameTextBox.Value, DateTime.Now, DateTime.Now.AddMinutes(60), true, string.Empty);
                     var encryptedTicket = FormsAuthentication.Encrypt(authenticationTicket);
