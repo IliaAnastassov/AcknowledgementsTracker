@@ -31,7 +31,7 @@
 
             try
             {
-                var connection = new LdapConnection(settings);
+                var connection = new CustomLdapConnection(settings);
 
                 if (connection.IsAuthenticated())
                 {
