@@ -34,6 +34,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.DirectoryServices" />
     <Reference Include="System.DirectoryServices.AccountManagement" />
+    <Reference Include="System.DirectoryServices.Protocols" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -44,11 +45,13 @@
   <ItemGroup>
     <Compile Include="Entities\User.cs" />
     <Compile Include="Interfaces\IDtoFactory.cs" />
+    <Compile Include="Interfaces\ILdapManager.cs" />
     <Compile Include="Interfaces\ILdapSettingsService.cs" />
     <Compile Include="Interfaces\IUser.cs" />
     <Compile Include="Logic\AcknowledgementDtoService.cs" />
-    <Compile Include="Logic\LdapConnection.cs" />
+    <Compile Include="Logic\CustomLdapConnection.cs" />
     <Compile Include="Logic\LdapAccountManager.cs" />
+    <Compile Include="Logic\LdapManager.cs" />
     <Compile Include="Logic\LdapSettingsService.cs" />
     <Compile Include="Logic\Printer.cs" />
     <Compile Include="Logic\TagDtoService.cs" />

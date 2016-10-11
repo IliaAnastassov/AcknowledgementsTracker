@@ -4,11 +4,11 @@
     using System.DirectoryServices;
     using Interfaces;
 
-    public class LdapConnection
+    public class CustomLdapConnection
     {
         public DirectoryEntry RootEntry { get; }
 
-        public LdapConnection(ILdapSettingsService settings)
+        public CustomLdapConnection(ILdapSettingsService settings)
         {
             var userId = $"uid={settings.Username},ou=People,dc=proxiad,dc=bg";
             RootEntry = new DirectoryEntry(settings.Path, userId, settings.UserPassword, AuthenticationTypes.None);
