@@ -33,7 +33,7 @@
         public void Setup(string domainName, string username, string password)
         {
             var userId = $"uid={username},ou=People,dc=proxiad,dc=bg";
-            context = new PrincipalContext(ContextType.Domain, "ldap.proxiad.corp/dc=proxiad,dc=bg");
+            context = new PrincipalContext(ContextType.Domain, domainName);
             this.username = username;
         }
 
