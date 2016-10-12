@@ -16,12 +16,16 @@
 
         public bool IsAuthenticated()
         {
-            if (RootEntry.SchemaEntry == null)
+            try
+            {
+                var schema = RootEntry.SchemaEntry;
+            }
+            catch (Exception)
             {
                 return false;
             }
 
-            return true;
+            return false;
         }
     }
 }
