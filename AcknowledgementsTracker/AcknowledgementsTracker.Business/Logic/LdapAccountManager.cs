@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.DirectoryServices.AccountManagement;
+    using System.DirectoryServices;
     using System.Linq;
     using Entities;
     using Interfaces;
@@ -11,7 +11,6 @@
     public class LdapAccountManager
     {
         private string username;
-        private PrincipalContext context;
         private static LdapAccountManager instance;
 
         public static LdapAccountManager Instance
@@ -30,11 +29,9 @@
         {
         }
 
-        public void Setup(string domainName, string username, string password)
+        public void Setup(string username, string password)
         {
-            var userId = $"uid={username},ou=People,dc=proxiad,dc=bg";
-            context = new PrincipalContext(ContextType.Domain, domainName);
-            this.username = username;
+            // TODO: ?
         }
 
         public void Destroy()
@@ -47,50 +44,44 @@
 
         public string GetUserName()
         {
-            UserPrincipal queryFilter = new UserPrincipal(context);
-            queryFilter.SamAccountName = username;
-            UserPrincipal result;
+            var searcher = new DirectorySearcher();
+            searcher.Filter = $"(uid={username})";
 
-            using (var searcher = new PrincipalSearcher(queryFilter))
+            var searchedProperty = "cn";
+            searcher.PropertiesToLoad.Add(searchedProperty);
+
+            var result = searcher.FindOne();
+
+            if (result != null)
             {
-                result = (UserPrincipal)searcher.FindOne();
+                return result.Properties[searchedProperty].ToString();
             }
 
-            return result.Name;
+            return null;
         }
 
         public string GetUserEmail()
         {
-            UserPrincipal queryFilter = new UserPrincipal(context);
-            queryFilter.SamAccountName = username;
-            UserPrincipal result;
+            var searcher = new DirectorySearcher();
+            searcher.Filter = $"(uid={username})";
 
-            using (var searcher = new PrincipalSearcher(queryFilter))
+            var searchedProperty = "mail";
+            searcher.PropertiesToLoad.Add(searchedProperty);
+
+            var result = searcher.FindOne();
+
+            if (result != null)
             {
-                result = (UserPrincipal)searcher.FindOne();
+                return result.Properties[searchedProperty].ToString();
             }
 
-            return result.EmailAddress;
+            return null;
         }
 
         public IEnumerable<IUser> GetAllUsersData()
         {
-            UserPrincipal queryFilter = new UserPrincipal(context);
-            var users = new List<User>();
-
-            using (var searcher = new PrincipalSearcher(queryFilter))
-            {
-                foreach (UserPrincipal result in searcher.FindAll())
-                {
-                    var user = new User();
-                    user.Email = result.EmailAddress;
-                    user.Name = result.Name;
-
-                    users.Add(user);
-                }
-            }
-
-            return users;
+            // TODO:
+            return null;
         }
     }
 }
