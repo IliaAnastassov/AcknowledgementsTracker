@@ -35,8 +35,7 @@
 
                 if (connection.IsAuthenticated())
                 {
-                    var manager = LdapAccountManager.Instance;
-                    manager.Setup(WebConfigurationManager.AppSettings["Domain"], settings.Username, settings.UserPassword);
+                    // TODO:
 
                     var authenticationTicket = new FormsAuthenticationTicket(1, UsernameTextBox.Value, DateTime.Now, DateTime.Now.AddMinutes(60), true, string.Empty);
                     var encryptedTicket = FormsAuthentication.Encrypt(authenticationTicket);
@@ -58,16 +57,6 @@
             {
                 ErrorLabel.InnerText = "Failed to authenticate. Please verify username and password.";
             }
-        }
-
-        private void SaveUserConfiguration(string username, string password)
-        {
-            var config = WebConfigurationManager.OpenWebConfiguration(HttpContext.Current.Request.ApplicationPath);
-            config.AppSettings.Settings.Remove("Username");
-            config.AppSettings.Settings.Remove("Password");
-            config.AppSettings.Settings.Add("Username", username);
-            config.AppSettings.Settings.Add("Password", password);
-            config.Save();
         }
     }
 }
