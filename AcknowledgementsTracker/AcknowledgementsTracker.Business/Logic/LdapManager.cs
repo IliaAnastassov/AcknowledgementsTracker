@@ -1,34 +1,34 @@
 ﻿namespace AcknowledgementsTracker.Business.Logic
 {
     using System;
-    using System.Net;
-    using System.DirectoryServices.Protocols;
-    using Interfaces;
     using System.Collections.Generic;
+    using System.DirectoryServices.Protocols;
+    using System.Linq;
+    using System.Net;
+    using Interfaces;
 
     public class LdapManager : ILdapManager
     {
         private LdapConnection connection;
+        private LdapDirectoryIdentifier serverId;
 
-        public LdapManager(string username, string passsword, string domain, string url)
+        public LdapManager(string serverPath)
         {
-            var credentials = new NetworkCredential(username, passsword);
-            var serverId = new LdapDirectoryIdentifier(url);
-
-            connection = new LdapConnection(serverId, credentials);
+            serverId = new LdapDirectoryIdentifier(serverPath);
+            connection = new LdapConnection(serverId);
         }
 
         public bool ValidateUser(string username, string password)
         {
-            bool isValid = true;
-            var credentials = new NetworkCredential(username, password);
-            var serverId = new LdapDirectoryIdentifier(connection.SessionOptions.HostName);
+            var isValid = true;
+            var userId = $"uid={username},ou=People,dc=proxiad,dc=bg";
+            var credentials = new NetworkCredential(userId, password);
 
-            using (var bindConnection = new LdapConnection(serverId, credentials))
+            using (var testConnection = new LdapConnection(serverId, credentials))
             {
                 try
                 {
-                    bindConnection.Bind();
+                    testConnection.Bind();
                 }
                 catch (Exception)
                 {
@@ -39,27 +39,50 @@
             return isValid;
         }
 
-        public List<Dictionary<string, string>> FindUser(string baseDn, string ldapFilter)
+        public string GetUserFullname(string baseDn, string username)
         {
-            var result = new List<Dictionary<string, string>>();
+            string fullname = null;
+            string ldapFilter = $"uid={username}";
 
-            var request = new SearchRequest(baseDn, ldapFilter, SearchScope.Subtree, null);
-            var response = (SearchResponse)connection.SendRequest(request);
-
-            foreach (SearchResultEntry entry in response.Entries)
+            try
             {
-                var dictionary = new Dictionary<string, string>();
-                dictionary["DN"] = entry.DistinguishedName;
+                var request = new SearchRequest(baseDn, ldapFilter, SearchScope.OneLevel, null);
+                var response = (SearchResponse)connection.SendRequest(request);
 
-                foreach (string attributeName in entry.Attributes.AttributeNames)
-                {
-                    dictionary[attributeName] = string.Join(",", entry.Attributes[attributeName].GetValues(typeof(string)));
-                }
-
-                result.Add(dictionary);
+                fullname = response.Entries[0].DistinguishedName;
+            }
+            catch (Exception)
+            {
+                return null;
             }
 
-            return result;
+            return fullname;
+        }
+
+        public string GetUserEmail(string baseDn, string username)
+        {
+            string email = null;
+            string ldapFiletr = $"uid={username}";
+            string[] attributesToReturn = { "mail" };
+
+            try
+            {
+                var request = new SearchRequest(baseDn, ldapFiletr, SearchScope.OneLevel, attributesToReturn);
+                var response = (SearchResponse)connection.SendRequest(request);
+
+                var attributes = response.Entries[0].Attributes;
+
+                foreach (DirectoryAttribute attribute in attributes.Values)
+                {
+                    email = (string)attribute[0];
+                }
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+
+            return email;
         }
     }
 }
