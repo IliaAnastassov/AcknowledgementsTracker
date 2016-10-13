@@ -46,13 +46,15 @@
   <ItemGroup>
     <Compile Include="Entities\User.cs" />
     <Compile Include="Interfaces\IDtoFactory.cs" />
-    <Compile Include="Interfaces\ILdapManager.cs" />
+    <Compile Include="Interfaces\ILdapAccountManager.cs" />
+    <Compile Include="Interfaces\ILdapServerConnection.cs" />
     <Compile Include="Interfaces\ILdapSettingsService.cs" />
     <Compile Include="Interfaces\IUser.cs" />
     <Compile Include="Logic\AcknowledgementDtoService.cs" />
-    <Compile Include="Logic\CustomLdapConnection.cs" />
-    <Compile Include="Logic\LdapAccountManager.cs" />
-    <Compile Include="Logic\LdapManager.cs" />
+    <Compile Include="Logic\LdapServerConnection.cs" />
+    <Compile Include="Logic\LdapAccountManager.cs">
+      <ExcludeFromStyleCop>False</ExcludeFromStyleCop>
+    </Compile>
     <Compile Include="Logic\LdapSettingsService.cs" />
     <Compile Include="Logic\Printer.cs" />
     <Compile Include="Logic\TagDtoService.cs" />

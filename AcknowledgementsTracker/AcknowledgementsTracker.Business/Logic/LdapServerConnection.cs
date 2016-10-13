@@ -4,14 +4,17 @@
     using System.DirectoryServices;
     using Interfaces;
 
-    public class CustomLdapConnection
+    public class LdapServerConnection : ILdapServerConnection
     {
+        public string Username { get; set; }
+
         public DirectoryEntry RootEntry { get; }
 
-        public CustomLdapConnection(ILdapSettingsService settings)
+        public LdapServerConnection(ILdapSettingsService settings)
         {
-            var userId = $"uid={settings.Username},ou=People,dc=proxiad,dc=bg";
-            RootEntry = new DirectoryEntry(settings.Path, userId, settings.UserPassword, AuthenticationTypes.None);
+            Username = settings.Username;
+            var ldapUsername = $"uid={Username},ou=People,dc=proxiad,dc=bg";
+            RootEntry = new DirectoryEntry(settings.Path, ldapUsername, settings.UserPassword, AuthenticationTypes.None);
         }
 
         public bool IsAuthenticated()
@@ -25,7 +28,7 @@
                 return false;
             }
 
-            return false;
+            return true;
         }
     }
 }
