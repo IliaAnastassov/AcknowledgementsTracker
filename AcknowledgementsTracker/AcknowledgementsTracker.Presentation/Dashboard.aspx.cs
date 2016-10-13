@@ -11,8 +11,6 @@
 
     public partial class Dashboard : System.Web.UI.Page
     {
-        ////private LdapAccountManager manager = new LdapAccountManager(ConfigurationManager.AppSettings.);
-
         protected void Page_Load(object sender, EventArgs e)
         {
             var username = HttpContext.Current?.User?.Identity.Name;
