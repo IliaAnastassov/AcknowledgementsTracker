@@ -16,6 +16,7 @@ namespace ConsoleApplication
     /// </summary>
     public class Startup
     {
+        // TODO: Add Ajax controls to enable partial postback
         // TODO: Link Presentation and Business layers
         // TODO: Develop Presentation layer
         // TODO: Use a single Dto parameter inside Service methods
