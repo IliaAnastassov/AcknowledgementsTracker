@@ -7,11 +7,17 @@
     using System.Linq;
     using Entities;
     using Interfaces;
+    using System.Text;
 
-    public class LdapAccountManager
+    public class LdapAccountManager : ILdapAccountManager
     {
-        private string username;
         private static LdapAccountManager instance;
+        private ILdapServerConnection ldapConnection;
+
+        // TODO: Review Singleton pattern
+        protected LdapAccountManager()
+        {
+        }
 
         public static LdapAccountManager Instance
         {
@@ -21,17 +27,26 @@
                 {
                     instance = new LdapAccountManager();
                 }
+
                 return instance;
             }
         }
 
-        private LdapAccountManager()
+        public static bool HasInstance()
         {
+            if (instance != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
-        public void Setup(string username, string password)
+        public void Setup(ILdapServerConnection ldapConnection)
         {
-            // TODO: ?
+            this.ldapConnection = ldapConnection;
         }
 
         public void Destroy()
@@ -44,8 +59,9 @@
 
         public string GetUserName()
         {
-            var searcher = new DirectorySearcher();
-            searcher.Filter = $"(uid={username})";
+            string fullName = string.Empty;
+            var searcher = new DirectorySearcher(ldapConnection.RootEntry);
+            searcher.Filter = $"(uid={ldapConnection.Username})";
 
             var searchedProperty = "cn";
             searcher.PropertiesToLoad.Add(searchedProperty);
@@ -54,7 +70,12 @@
 
             if (result != null)
             {
-                return result.Properties[searchedProperty].ToString();
+                foreach (object resultCollection in result.Properties[searchedProperty])
+                {
+                    fullName = resultCollection.ToString();
+                }
+
+                return fullName;
             }
 
             return null;
@@ -62,8 +83,9 @@
 
         public string GetUserEmail()
         {
-            var searcher = new DirectorySearcher();
-            searcher.Filter = $"(uid={username})";
+            string email = string.Empty;
+            var searcher = new DirectorySearcher(ldapConnection.RootEntry);
+            searcher.Filter = $"(uid={ldapConnection.Username})";
 
             var searchedProperty = "mail";
             searcher.PropertiesToLoad.Add(searchedProperty);
@@ -72,16 +94,81 @@
 
             if (result != null)
             {
-                return result.Properties[searchedProperty].ToString();
+                foreach (object resultCollection in result.Properties[searchedProperty])
+                {
+                    email = resultCollection.ToString();
+                }
+
+                return email;
             }
 
             return null;
         }
 
+        public IUser GetUserData()
+        {
+            User user = new User();
+            var searcher = new DirectorySearcher(ldapConnection.RootEntry);
+            searcher.Filter = $"(uid={ldapConnection.Username})";
+
+            var cnProperty = "cn";
+            var mailProperty = "mail";
+
+            searcher.PropertiesToLoad.Add(cnProperty);
+            searcher.PropertiesToLoad.Add(mailProperty);
+
+            var result = searcher.FindOne();
+
+            if (result != null)
+            {
+                foreach (var resultCollection in result.Properties[cnProperty])
+                {
+                    user.Name = resultCollection.ToString();
+                }
+
+                foreach (var resultCollection in result.Properties[mailProperty])
+                {
+                    user.Email = resultCollection.ToString();
+                }
+            }
+
+            return user;
+        }
+
         public IEnumerable<IUser> GetAllUsersData()
         {
-            // TODO:
-            return null;
+            List<User> users = new List<User>();
+            var searcher = new DirectorySearcher(ldapConnection.RootEntry);
+
+            var cnProperty = "cn";
+            var mailProperty = "mail";
+
+            searcher.PropertiesToLoad.Add(cnProperty);
+            searcher.PropertiesToLoad.Add(mailProperty);
+
+            var results = searcher.FindAll();
+
+            if (results != null)
+            {
+                foreach (SearchResult result in results)
+                {
+                    var user = new User();
+
+                    foreach (var resultCollection in result.Properties[cnProperty])
+                    {
+                        user.Name = resultCollection.ToString();
+                    }
+
+                    foreach (var resultCollection in result.Properties[mailProperty])
+                    {
+                        user.Email = resultCollection.ToString();
+                    }
+
+                    users.Add(user);
+                }
+            }
+
+            return users;
         }
     }
 }
