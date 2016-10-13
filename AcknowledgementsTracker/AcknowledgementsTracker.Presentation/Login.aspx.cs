@@ -31,13 +31,14 @@
 
             try
             {
-                var connection = new CustomLdapConnection(settings);
+                ILdapServerConnection ldapConnection = new LdapServerConnection(settings);
 
-                if (connection.IsAuthenticated())
+                if (ldapConnection.IsAuthenticated())
                 {
-                    // TODO:
+                    ILdapAccountManager ldapManager = LdapAccountManager.Instance;
+                    ldapManager.Setup(ldapConnection);
 
-                    var authenticationTicket = new FormsAuthenticationTicket(1, UsernameTextBox.Value, DateTime.Now, DateTime.Now.AddMinutes(60), true, string.Empty);
+                    var authenticationTicket = new FormsAuthenticationTicket(1, UsernameTextBox.Value, DateTime.Now, DateTime.Now.AddMinutes(30), true, string.Empty);
                     var encryptedTicket = FormsAuthentication.Encrypt(authenticationTicket);
 
                     var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
@@ -46,12 +47,10 @@
 
                     Response.Redirect(@"~/Dashboard.aspx");
                 }
-            }
-            catch (ThreadAbortException)
-            {
-            }
-            catch (HttpException)
-            {
+                else
+                {
+                    throw new Exception();
+                }
             }
             catch (Exception)
             {
