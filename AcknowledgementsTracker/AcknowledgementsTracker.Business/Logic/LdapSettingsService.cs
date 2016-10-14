@@ -5,7 +5,9 @@
 
     public class LdapSettingsService : ILdapSettingsService
     {
-        public string Path { get; set; }
+        public string ServerPath { get; set; }
+
+        public string SearchRoot { get; set; }
 
         public string Username { get; set; }
 

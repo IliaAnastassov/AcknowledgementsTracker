@@ -14,6 +14,8 @@
         private static LdapAccountManager instance;
         private ILdapServerConnection ldapConnection;
 
+        public string Username { get; private set; }
+
         // TODO: Review Singleton pattern
         protected LdapAccountManager()
         {
@@ -47,6 +49,7 @@
         public void Setup(ILdapServerConnection ldapConnection)
         {
             this.ldapConnection = ldapConnection;
+            Username = ldapConnection.Username;
         }
 
         public void Destroy()
@@ -60,7 +63,7 @@
         public string GetUserName()
         {
             string fullName = string.Empty;
-            var searcher = new DirectorySearcher(ldapConnection.RootEntry);
+            var searcher = new DirectorySearcher(ldapConnection.SearchRoot);
             searcher.Filter = $"(uid={ldapConnection.Username})";
 
             var searchedProperty = "cn";
@@ -84,7 +87,7 @@
         public string GetUserEmail()
         {
             string email = string.Empty;
-            var searcher = new DirectorySearcher(ldapConnection.RootEntry);
+            var searcher = new DirectorySearcher(ldapConnection.SearchRoot);
             searcher.Filter = $"(uid={ldapConnection.Username})";
 
             var searchedProperty = "mail";
@@ -108,7 +111,7 @@
         public IUser GetUserData()
         {
             User user = new User();
-            var searcher = new DirectorySearcher(ldapConnection.RootEntry);
+            var searcher = new DirectorySearcher(ldapConnection.SearchRoot);
             searcher.Filter = $"(uid={ldapConnection.Username})";
 
             var cnProperty = "cn";
@@ -138,7 +141,7 @@
         public IEnumerable<IUser> GetAllUsersData()
         {
             List<User> users = new List<User>();
-            var searcher = new DirectorySearcher(ldapConnection.RootEntry);
+            var searcher = new DirectorySearcher(ldapConnection.SearchRoot);
 
             var cnProperty = "cn";
             var mailProperty = "mail";
@@ -164,7 +167,10 @@
                         user.Email = resultCollection.ToString();
                     }
 
-                    users.Add(user);
+                    if (user.Email != null && user.Name != null)
+                    {
+                        users.Add(user);
+                    }
                 }
             }
 

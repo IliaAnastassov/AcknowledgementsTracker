@@ -2,7 +2,9 @@
 {
     public interface ILdapSettingsService
     {
-        string Path { get; set; }
+        string ServerPath { get; set; }
+
+        string SearchRoot { get; set; }
 
         string Username { get; set; }
 

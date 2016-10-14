@@ -3,8 +3,9 @@
     using System;
     using DataAccess.Repositories;
     using DTO;
+    using Interfaces;
 
-    public class AcknowledgementDtoService
+    public class AcknowledgementDtoService : IAcknowledgementDtoService
     {
         private AcknowledgementsRepository repository = new AcknowledgementsRepository();
 

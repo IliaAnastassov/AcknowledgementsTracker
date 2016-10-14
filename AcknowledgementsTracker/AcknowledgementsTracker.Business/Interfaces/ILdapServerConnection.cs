@@ -6,6 +6,8 @@
     {
         string Username { get; set; }
 
+        DirectoryEntry SearchRoot { get; set; }
+
         DirectoryEntry RootEntry { get; }
 
         bool IsAuthenticated();
