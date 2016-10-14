@@ -20,7 +20,7 @@
             var dto = new AcknowledgementDTO();
 
             dto.Id = entity.AcknowledgementId;
-            dto.AuthorEmail = entity.AuthorEmail;
+            dto.AuthorUsername = entity.AuthorUsername;
             dto.DateCreated = entity.DateCreated;
             dto.Tags = entity.Tags;
             dto.Text = entity.Text;
@@ -38,8 +38,8 @@
             var acknowledgement = new Acknowledgement();
 
             acknowledgement.AcknowledgementId = entity.Id;
-            acknowledgement.AuthorEmail = entity.AuthorEmail;
-            acknowledgement.BeneficiaryEmail = entity.BeneficiaryEmail;
+            acknowledgement.AuthorUsername = entity.AuthorUsername;
+            acknowledgement.BeneficiaryUsername = entity.BeneficiaryUsername;
             acknowledgement.DateCreated = entity.DateCreated;
             acknowledgement.Tags = entity.Tags;
             acknowledgement.Text = entity.Text;
