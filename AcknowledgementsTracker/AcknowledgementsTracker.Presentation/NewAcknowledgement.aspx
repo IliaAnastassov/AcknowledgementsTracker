@@ -45,7 +45,7 @@
                 <%--Buttons--%>
                 <div class="form-group">
                     <div class="col-lg-10 col-lg-offset-2">
-                        <button type="submit" class="btn btn-primary btn-lg"><i class="glyphicon glyphicon-ok" runat="server" id="SubmitBtn"></i></button>
+                        <button type="submit" class="btn btn-primary btn-lg" runat="server" id="CreateNewFormBtn" onclick="CreateNewFormBtn_Click"><i class="glyphicon glyphicon-ok"></i></button>
                         <button type="reset" class="btn btn-default btn-lg"><i class="glyphicon glyphicon-repeat"></i></button>
                         <a href="Dashboard.aspx" class="btn btn-default btn-lg"><i class="glyphicon glyphicon-remove"></i></a>
                     </div>

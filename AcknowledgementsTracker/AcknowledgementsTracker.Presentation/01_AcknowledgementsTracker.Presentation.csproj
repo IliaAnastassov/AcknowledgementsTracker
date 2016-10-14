@@ -169,6 +169,10 @@
       <Project>{b7cbb0b4-2f0e-486e-85ab-1303d055b016}</Project>
       <Name>02_AcknowledgementsTracker.Business</Name>
     </ProjectReference>
+    <ProjectReference Include="..\AcknowledgementsTracker.DTO\05_AcknowledgementsTracker.DTO.csproj">
+      <Project>{8658766D-DE69-44E2-8F29-C31F9EA9B4A0}</Project>
+      <Name>05_AcknowledgementsTracker.DTO</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

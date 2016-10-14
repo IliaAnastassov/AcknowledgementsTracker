@@ -18,14 +18,14 @@
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
         }
 
         protected void Login_Click(object sender, EventArgs e)
         {
             ILdapSettingsService settings = new LdapSettingsService();
 
-            settings.Path = WebConfigurationManager.AppSettings["LDAPServerPath"];
+            settings.ServerPath = WebConfigurationManager.AppSettings["LDAPServerPath"];
+            settings.SearchRoot = WebConfigurationManager.AppSettings["LDAPSearchRoot"];
             settings.Username = UsernameTextBox.Value;
             settings.UserPassword = PasswordTextBox.Value;
 
@@ -45,12 +45,15 @@
                     cookie.Expires = authenticationTicket.Expiration;
                     Response.Cookies.Add(cookie);
 
-                    Response.Redirect(@"~/Dashboard.aspx");
+                    Response.Redirect(Global.DashboardPage);
                 }
                 else
                 {
                     throw new Exception();
                 }
+            }
+            catch (ThreadAbortException)
+            {
             }
             catch (Exception)
             {

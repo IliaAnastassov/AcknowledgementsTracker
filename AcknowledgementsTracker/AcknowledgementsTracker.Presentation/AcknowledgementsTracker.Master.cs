@@ -10,20 +10,18 @@
     using Business.Logic;
     using System.Web.Security;
 
-    public partial class AcknowledgementsTracker1 : System.Web.UI.MasterPage
+    public partial class AcknowledgementsTracker1 : MasterPage
     {
         protected void Page_Load(object sender, EventArgs e)
         {
             if (LdapAccountManager.HasInstance())
             {
-                LogoutBtn.Visible = true;
-                ////UserNameLabel.Text = $"{LdapAccountManager.Instance.GetUserName()} {LdapAccountManager.Instance.GetUserEmail()}";
-
                 var user = LdapAccountManager.Instance.GetUserData();
                 UserNameLabel.Text = $"{user.Name} email:{user.Email}";
             }
             else
             {
+                LogoutBtn.Visible = false;
                 FormsAuthentication.SignOut();
             }
         }

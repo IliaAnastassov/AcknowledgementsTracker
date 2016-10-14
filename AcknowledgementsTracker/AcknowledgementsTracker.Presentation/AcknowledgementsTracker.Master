@@ -29,10 +29,11 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-10"></div>
+
                 <div class="col-sm-2">
                     <div>
                         <asp:Literal ID="UserNameLabel" runat="server"></asp:Literal>
-                        <asp:Button CssClass="btn btn-default btn-sm pull-right" Text="Logout" Visible="false" OnClick="LogoutBtn_Click" ID="LogoutBtn" runat="server" />
+                        <asp:Button CssClass="btn btn-default btn-sm pull-right" Text="Logout" Visible="true" OnClick="LogoutBtn_Click" ID="LogoutBtn" runat="server" />
                     </div>
                 </div>
             </div>
