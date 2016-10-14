@@ -14,13 +14,13 @@ namespace AcknowledgementsTracker.DTO
     {
         public TagDTO()
         {
-            Acknowledgements = new HashSet<Acknowledgement>();
+            Acknowledgements = new HashSet<AcknowledgementDTO>();
         }
 
         public int Id { get; set; }
 
         public string Title { get; set; }
 
-        public virtual ICollection<Acknowledgement> Acknowledgements { get; set; }
+        public virtual ICollection<AcknowledgementDTO> Acknowledgements { get; set; }
     }
 }

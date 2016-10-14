@@ -15,7 +15,7 @@ namespace AcknowledgementsTracker.DTO
     {
         public AcknowledgementDTO()
         {
-            Tags = new HashSet<Tag>();
+            Tags = new HashSet<TagDTO>();
             DateCreated = DateTime.Now;
         }
 
@@ -23,12 +23,12 @@ namespace AcknowledgementsTracker.DTO
 
         public string Text { get; set; }
 
-        public string AuthorEmail { get; set; }
+        public string AuthorUsername { get; set; }
 
-        public string BeneficiaryEmail { get; set; }
+        public string BeneficiaryUsername { get; set; }
 
         public DateTime DateCreated { get; set; }
 
-        public virtual ICollection<Tag> Tags { get; set; }
+        public virtual ICollection<TagDTO> Tags { get; set; }
     }
 }
