@@ -16,7 +16,6 @@
 
         public string Username { get; private set; }
 
-        // TODO: Review Singleton pattern
         protected LdapAccountManager()
         {
         }

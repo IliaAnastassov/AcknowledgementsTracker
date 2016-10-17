@@ -47,9 +47,11 @@
     <Compile Include="Entities\User.cs" />
     <Compile Include="Interfaces\IAcknowledgementDtoService.cs" />
     <Compile Include="Interfaces\IDtoFactory.cs" />
+    <Compile Include="Interfaces\IDtoService.cs" />
     <Compile Include="Interfaces\ILdapAccountManager.cs" />
     <Compile Include="Interfaces\ILdapServerConnection.cs" />
     <Compile Include="Interfaces\ILdapSettingsService.cs" />
+    <Compile Include="Interfaces\ITagDtoService.cs" />
     <Compile Include="Interfaces\IUser.cs" />
     <Compile Include="Logic\AcknowledgementDtoService.cs" />
     <Compile Include="Logic\LdapAccountService.cs" />

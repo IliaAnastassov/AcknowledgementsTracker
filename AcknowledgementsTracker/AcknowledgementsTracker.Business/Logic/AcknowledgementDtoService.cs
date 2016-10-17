@@ -4,6 +4,7 @@
     using DataAccess.Repositories;
     using DTO;
     using Interfaces;
+    using DTO.Interfaces;
 
     public class AcknowledgementDtoService : IAcknowledgementDtoService
     {
@@ -13,6 +14,8 @@
         {
             repository.Add(dto);
         }
+
+        // TODO: Read
 
         public void Update(AcknowledgementDTO dto)
         {

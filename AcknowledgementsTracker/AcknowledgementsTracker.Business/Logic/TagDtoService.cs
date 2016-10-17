@@ -1,10 +1,10 @@
 ﻿namespace AcknowledgementsTracker.Business.Logic
 {
-    using System;
     using DataAccess.Repositories;
     using DTO;
+    using Interfaces;
 
-    public class TagDtoService
+    public class TagDtoService : ITagDtoService
     {
         private TagsRepository repository = new TagsRepository();
 
