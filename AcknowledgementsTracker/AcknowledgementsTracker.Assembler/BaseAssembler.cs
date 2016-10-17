@@ -1,11 +1,12 @@
 ﻿namespace AcknowledgementsTracker.Assembler
 {
+    using DTO.Interfaces;
     using System;
     using System.Collections.Generic;
 
     public abstract class BaseAssembler<From, To>
         where From : new()
-        where To : new()
+        where To : IDto, new()
     {
         public BaseAssembler()
         {
@@ -23,7 +24,7 @@
             }
         }
 
-        public IEnumerable<From> DisassembleMultiple(IEnumerable<To> entities)
+        public IEnumerable<From> DisassembleCollection(IEnumerable<To> entities)
         {
             foreach (var entity in entities)
             {

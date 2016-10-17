@@ -1,11 +1,13 @@
 ﻿namespace AcknowledgementsTracker.Assembler
 {
-    using System;
+    using System.Collections.Generic;
     using DTO;
     using Model;
 
     public class TagDtoAssembler : BaseAssembler<Tag, TagDTO>
     {
+        private DtoSubCollectionAssembler collectionAssembler = new DtoSubCollectionAssembler();
+
         public override TagDTO Assemble(Tag entity)
         {
             if (entity == null)
@@ -16,7 +18,7 @@
             var dto = new TagDTO();
 
             dto.Id = entity.TagId;
-            dto.Acknowledgements = entity.Acknowledgements;
+            dto.Acknowledgements = (ICollection<AcknowledgementDTO>)collectionAssembler.AssembleSubCollection(entity.Acknowledgements);
             dto.Title = entity.Title;
 
             return dto;
@@ -32,7 +34,7 @@
             var tag = new Tag();
 
             tag.TagId = entity.Id;
-            tag.Acknowledgements = entity.Acknowledgements;
+            tag.Acknowledgements = (ICollection<Acknowledgement>)collectionAssembler.DisassembleSubCollection(entity.Acknowledgements);
             tag.Title = entity.Title;
 
             return tag;

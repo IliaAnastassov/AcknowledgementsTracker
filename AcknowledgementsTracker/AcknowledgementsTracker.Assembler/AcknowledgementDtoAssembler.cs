@@ -1,11 +1,13 @@
 ﻿namespace AcknowledgementsTracker.Assembler
 {
-    using System;
+    using System.Collections.Generic;
     using DTO;
     using Model;
 
     public class AcknowledgementDtoAssembler : BaseAssembler<Acknowledgement, AcknowledgementDTO>
     {
+        private DtoSubCollectionAssembler collectionAssembler = new DtoSubCollectionAssembler();
+
         public AcknowledgementDtoAssembler()
         {
         }
@@ -22,7 +24,7 @@
             dto.Id = entity.AcknowledgementId;
             dto.AuthorUsername = entity.AuthorUsername;
             dto.DateCreated = entity.DateCreated;
-            dto.Tags = entity.Tags;
+            dto.Tags = (ICollection<TagDTO>)collectionAssembler.AssembleSubCollection(entity.Tags);
             dto.Text = entity.Text;
 
             return dto;
@@ -35,16 +37,16 @@
                 return null;
             }
 
-            var acknowledgement = new Acknowledgement();
+            var dto = new Acknowledgement();
 
-            acknowledgement.AcknowledgementId = entity.Id;
-            acknowledgement.AuthorUsername = entity.AuthorUsername;
-            acknowledgement.BeneficiaryUsername = entity.BeneficiaryUsername;
-            acknowledgement.DateCreated = entity.DateCreated;
-            acknowledgement.Tags = entity.Tags;
-            acknowledgement.Text = entity.Text;
+            dto.AcknowledgementId = entity.Id;
+            dto.AuthorUsername = entity.AuthorUsername;
+            dto.BeneficiaryUsername = entity.BeneficiaryUsername;
+            dto.DateCreated = entity.DateCreated;
+            dto.Tags = (ICollection<Tag>)collectionAssembler.DisassembleSubCollection(entity.Tags);
+            dto.Text = entity.Text;
 
-            return acknowledgement;
+            return dto;
         }
     }
 }
