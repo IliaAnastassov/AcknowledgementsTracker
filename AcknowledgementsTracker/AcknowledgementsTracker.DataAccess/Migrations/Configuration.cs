@@ -18,9 +18,7 @@ namespace AcknowledgementsTracker.DataAccess.Migrations
 
         protected override void Seed(AcknowledgementsTrackerContext context)
         {
-            // This method will be called after migrating to the latest version.
-            var initializer = new DataInitializer();
-            initializer.InitializeData();
+            // This method will be called after migrating to the latest version
         }
     }
 }
