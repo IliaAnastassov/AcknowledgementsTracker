@@ -24,7 +24,7 @@
                 <div class="form-group">
                     <label for="BeneficiaryTextBox" class="col-lg-2 control-label text-right">To</label>
                     <div class="col-lg-10">
-                        <input type="text" class="form-control" placeholder="Firstname Lastname" required runat="server" id="BeneficiaryTextBox">
+                        <input type="text" class="form-control" placeholder="LDAP username" required runat="server" id="BeneficiaryTextBox">
                     </div>
                 </div>
 
@@ -45,7 +45,7 @@
                 <%--Buttons--%>
                 <div class="form-group">
                     <div class="col-lg-10 col-lg-offset-2">
-                        <button type="submit" class="btn btn-primary btn-lg" runat="server" id="CreateNewFormBtn" onclick="CreateNewFormBtn_Click"><i class="glyphicon glyphicon-ok"></i></button>
+                        <button type="submit" class="btn btn-primary btn-lg" runat="server" id="CreateNewAcknowledgementBtn" onserverclick="CreateNewAcknowledgementBtn_Click"><i class="glyphicon glyphicon-ok"></i></button>
                         <button type="reset" class="btn btn-default btn-lg"><i class="glyphicon glyphicon-repeat"></i></button>
                         <a href="Dashboard.aspx" class="btn btn-default btn-lg"><i class="glyphicon glyphicon-remove"></i></a>
                     </div>

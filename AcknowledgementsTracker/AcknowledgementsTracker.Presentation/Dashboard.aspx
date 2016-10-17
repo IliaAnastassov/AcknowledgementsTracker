@@ -20,14 +20,16 @@
                 <legend>Your acknowledgements</legend>
 
                 <%--Data--%>
-                <table class="table table-striped table-hover" visible="True" id="AcknowledgementsTable" runat="server">
+                <%--              <table class="table table-striped table-hover" visible="True" id="AcknowledgementsTable" runat="server">
                     <tr>
                         <th>From</th>
                         <th>Content</th>
                         <th>Tags</th>
                         <th>Date</th>
                     </tr>
-                </table>
+                </table>--%>
+
+                <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped" AllowPaging="True" AutoGenerateColumns="False" ID="AcknowledgementsGridView" runat="server"></asp:GridView>
 
                 <%--Buttons--%>
                 <div class="form-group">

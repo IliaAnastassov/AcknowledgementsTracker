@@ -17,20 +17,20 @@
 
         <main class="col-sm-6">
             <fieldset>
-                <legend>Use your Proxiad credentials to log in</legend>
+                <legend>Use your Proxiad-LDAP credentials to log in</legend>
 
                 <%--Input--%>
                 <div class="form-group">
                     <label for="UsernameTextBox" class="col-lg-2 control-label text-right">Username</label>
                     <div class="col-lg-10">
-                        <input type="text" class="form-control" placeholder="username" required id="UsernameTextBox" runat="server">
+                        <input type="text" class="form-control" placeholder="LDAP username" required id="UsernameTextBox" runat="server">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="PasswordTextBox" class="col-lg-2 control-label text-right">Password</label>
                     <div class="col-lg-10">
-                        <input type="password" class="form-control" placeholder="password" required id="PasswordTextBox" runat="server">
+                        <input type="password" class="form-control" placeholder="LDAP password" required id="PasswordTextBox" runat="server">
                     </div>
                 </div>
 
