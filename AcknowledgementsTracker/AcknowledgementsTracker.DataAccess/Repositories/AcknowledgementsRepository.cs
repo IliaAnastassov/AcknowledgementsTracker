@@ -122,7 +122,7 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
 
         public void Add(AcknowledgementDTO acknowledgementDto)
         {
-            var acknowledgement = assembler.Disassemble((AcknowledgementDTO)acknowledgementDto);
+            var acknowledgement = assembler.Disassemble(acknowledgementDto);
 
             using (var context = new AcknowledgementsTrackerContext())
             {
@@ -134,7 +134,7 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
 
         public void Edit(AcknowledgementDTO acknowledgementDto)
         {
-            var acknowledgement = assembler.Disassemble((AcknowledgementDTO)acknowledgementDto);
+            var acknowledgement = assembler.Disassemble(acknowledgementDto);
 
             using (var context = new AcknowledgementsTrackerContext())
             {

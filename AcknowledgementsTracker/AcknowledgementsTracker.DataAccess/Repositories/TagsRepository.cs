@@ -13,7 +13,6 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
     using Assembler;
     using Context;
     using DTO;
-    using DTO.Interfaces;
     using Interfaces;
     using Model;
 
@@ -49,7 +48,7 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
 
         public void Add(TagDTO tagDto)
         {
-            var tag = assembler.Disassemble((TagDTO)tagDto);
+            var tag = assembler.Disassemble(tagDto);
 
             using (var context = new AcknowledgementsTrackerContext())
             {
@@ -61,7 +60,7 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
 
         public void Edit(TagDTO tagDto)
         {
-            var tag = assembler.Disassemble((TagDTO)tagDto);
+            var tag = assembler.Disassemble(tagDto);
 
             using (var context = new AcknowledgementsTrackerContext())
             {

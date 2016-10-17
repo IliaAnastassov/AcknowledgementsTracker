@@ -54,10 +54,9 @@
     <Compile Include="Migrations\201609211254578_FixRelations.Designer.cs">
       <DependentUpon>201609211254578_FixRelations.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\DataInitializer.cs" />
-    <Compile Include="Migrations\201609140857054_FixAcknowledgementEmployeeRelationship.cs" />
-    <Compile Include="Migrations\201609140857054_FixAcknowledgementEmployeeRelationship.Designer.cs">
-      <DependentUpon>201609140857054_FixAcknowledgementEmployeeRelationship.cs</DependentUpon>
+    <Compile Include="Migrations\201610171212437_RemoveEmployeeEntity.cs" />
+    <Compile Include="Migrations\201610171212437_RemoveEmployeeEntity.Designer.cs">
+      <DependentUpon>201610171212437_RemoveEmployeeEntity.cs</DependentUpon>
     </Compile>
     <Compile Include="Repositories\AcknowledgementsRepository.cs" />
     <Compile Include="Context\AcknowledgementsTrackerContext.cs" />
@@ -105,11 +104,11 @@
     <EmbeddedResource Include="Migrations\201609101418119_AddFKs.resx">
       <DependentUpon>201609101418119_AddFKs.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201609140857054_FixAcknowledgementEmployeeRelationship.resx">
-      <DependentUpon>201609140857054_FixAcknowledgementEmployeeRelationship.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201609211254578_FixRelations.resx">
       <DependentUpon>201609211254578_FixRelations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610171212437_RemoveEmployeeEntity.resx">
+      <DependentUpon>201610171212437_RemoveEmployeeEntity.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
