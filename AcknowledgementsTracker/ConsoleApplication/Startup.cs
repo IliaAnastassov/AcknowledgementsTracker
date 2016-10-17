@@ -39,8 +39,8 @@ namespace ConsoleApplication
             var employeeEmail = "wolverine@proxiad.com";
 
             // Wolverine's acknowledgements
-            var acknowledgements = acknowledgementsRepo.GetAcknowledgements(employeeEmail);
-            printer.PrintAcknowledgements(acknowledgements);
+            ////var acknowledgements = acknowledgementsRepo.GetAcknowledgements(employeeEmail);
+            ////printer.PrintAcknowledgements(acknowledgements);
 
             // Today's acknowledgements
             ////var todaysAcknowledgements = acknowledgementsRepo.GetTodaysAcknowledgements();
