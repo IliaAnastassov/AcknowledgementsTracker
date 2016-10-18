@@ -8,10 +8,6 @@
     {
         private DtoSubCollectionAssembler collectionAssembler = new DtoSubCollectionAssembler();
 
-        public AcknowledgementDtoAssembler()
-        {
-        }
-
         public override AcknowledgementDTO Assemble(Acknowledgement entity)
         {
             if (entity == null)
@@ -24,29 +20,29 @@
             dto.Id = entity.AcknowledgementId;
             dto.AuthorUsername = entity.AuthorUsername;
             dto.DateCreated = entity.DateCreated;
-            dto.Tags = (ICollection<TagDTO>)collectionAssembler.AssembleSubCollection(entity.Tags);
             dto.Text = entity.Text;
+            dto.Tags = (ICollection<TagDTO>)collectionAssembler.AssembleSubCollection(entity.Tags);
 
             return dto;
         }
 
-        public override Acknowledgement Disassemble(AcknowledgementDTO entity)
+        public override Acknowledgement Disassemble(AcknowledgementDTO dto)
         {
-            if (entity == null)
+            if (dto == null)
             {
                 return null;
             }
 
-            var dto = new Acknowledgement();
+            var entity = new Acknowledgement();
 
-            dto.AcknowledgementId = entity.Id;
-            dto.AuthorUsername = entity.AuthorUsername;
-            dto.BeneficiaryUsername = entity.BeneficiaryUsername;
-            dto.DateCreated = entity.DateCreated;
-            dto.Tags = (ICollection<Tag>)collectionAssembler.DisassembleSubCollection(entity.Tags);
-            dto.Text = entity.Text;
+            entity.AcknowledgementId = dto.Id;
+            entity.AuthorUsername = dto.AuthorUsername;
+            entity.BeneficiaryUsername = dto.BeneficiaryUsername;
+            entity.DateCreated = dto.DateCreated;
+            entity.Text = dto.Text;
+            entity.Tags = (ICollection<Tag>)collectionAssembler.DisassembleSubCollection(dto.Tags);
 
-            return dto;
+            return entity;
         }
     }
 }

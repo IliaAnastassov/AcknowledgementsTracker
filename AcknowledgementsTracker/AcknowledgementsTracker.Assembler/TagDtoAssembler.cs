@@ -18,26 +18,24 @@
             var dto = new TagDTO();
 
             dto.Id = entity.TagId;
-            dto.Acknowledgements = (ICollection<AcknowledgementDTO>)collectionAssembler.AssembleSubCollection(entity.Acknowledgements);
             dto.Title = entity.Title;
 
             return dto;
         }
 
-        public override Tag Disassemble(TagDTO entity)
+        public override Tag Disassemble(TagDTO dto)
         {
-            if (entity == null)
+            if (dto == null)
             {
                 return null;
             }
 
-            var tag = new Tag();
+            var entity = new Tag();
 
-            tag.TagId = entity.Id;
-            tag.Acknowledgements = (ICollection<Acknowledgement>)collectionAssembler.DisassembleSubCollection(entity.Acknowledgements);
-            tag.Title = entity.Title;
+            entity.TagId = dto.Id;
+            entity.Title = dto.Title;
 
-            return tag;
+            return entity;
         }
     }
 }
