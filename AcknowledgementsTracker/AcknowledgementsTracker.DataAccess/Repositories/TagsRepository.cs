@@ -20,6 +20,19 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
     {
         private TagDtoAssembler assembler = new TagDtoAssembler();
 
+        public TagDTO Get(string title)
+        {
+            Tag tag;
+
+            using (var context = new AcknowledgementsTrackerContext())
+            {
+                context.Database.Log = message => Debug.WriteLine(message);
+                tag = context.Tags.AsNoTracking().Where(t => t.Title == title).FirstOrDefault();
+            }
+
+            return assembler.Assemble(tag);
+        }
+
         public TagDTO Get(int id)
         {
             Tag tag;

@@ -46,7 +46,7 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
             return assembler.AssembleCollection(acknowledgements);
         }
 
-        public IEnumerable<AcknowledgementDTO> GetAcknowledgements(string employeeEmail)
+        public IEnumerable<AcknowledgementDTO> GetAcknowledgements(string username)
         {
             IEnumerable<Acknowledgement> acknowledgements;
 
@@ -54,7 +54,7 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
             {
                 context.Database.Log = message => Debug.WriteLine(message);
                 acknowledgements = context.Acknowledgements.AsNoTracking().Include(a => a.Tags)
-                    .Where(a => a.BeneficiaryUsername == employeeEmail).ToList();
+                    .Where(a => a.BeneficiaryUsername == username).ToList();
             }
 
             return assembler.AssembleCollection(acknowledgements);
@@ -123,6 +123,15 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
         public void Add(AcknowledgementDTO acknowledgementDto)
         {
             var acknowledgement = assembler.Disassemble(acknowledgementDto);
+            acknowledgement.Tags = new List<Tag>();
+
+            foreach (TagDTO tagdto in acknowledgementDto.Tags)
+            {
+                //find
+                //add(found)
+                //add(new Tag() {} );
+
+            }
 
             using (var context = new AcknowledgementsTrackerContext())
             {
