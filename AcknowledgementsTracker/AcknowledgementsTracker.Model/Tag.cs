@@ -18,6 +18,7 @@ namespace AcknowledgementsTracker.Model
         public int TagId { get; set; }
 
         [Required, MaxLength(100)]
+        [Index(IsUnique=true)]
         public string Title { get; set; }
 
         // Navigation Properties
