@@ -1,11 +1,13 @@
 ﻿namespace AcknowledgementsTracker.Business.Interfaces
 {
+    using System.Collections.Generic;
     using DTO;
-    using DTO.Interfaces;
 
     public interface IAcknowledgementDtoService : IDtoService
     {
-        void Create(AcknowledgementDTO dto);
+        void Create(AcknowledgementDTO dto, IEnumerable<string> tags);
+
+        IEnumerable<AcknowledgementDTO> Read(string username);
 
         void Update(AcknowledgementDTO dto);
     }
