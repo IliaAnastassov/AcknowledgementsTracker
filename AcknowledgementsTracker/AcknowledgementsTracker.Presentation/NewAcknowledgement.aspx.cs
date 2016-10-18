@@ -25,20 +25,10 @@
 
             var tags = TagsTextBox.Value.Split();
 
-            foreach (var tag in tags)
-            {
-                var tagDto = new TagDTO();
-                tagDto.Title = tag;
-                tagDto.Acknowledgements.Add(acknowledgementDto);
 
-                // Add tag to database
-                tagDtoService.Create(tagDto);
-
-                acknowledgementDto.Tags.Add(tagDto);
-            }
 
             // Add acknowledgement to database
-            acknowledgementDtoService.Create(acknowledgementDto);
+            acknowledgementDtoService.Create(acknowledgementDto, tags);
 
             // Clear all entries
             BeneficiaryTextBox.Value = string.Empty;

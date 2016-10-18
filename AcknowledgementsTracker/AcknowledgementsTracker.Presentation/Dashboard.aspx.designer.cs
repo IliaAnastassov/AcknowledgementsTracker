@@ -13,6 +13,15 @@ namespace AcknowledgementsTracker.Presentation {
     public partial class Dashboard {
         
         /// <summary>
+        /// hfUsername control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfUsername;
+        
+        /// <summary>
         /// AcknowledgementsGridView control.
         /// </summary>
         /// <remarks>
@@ -20,5 +29,14 @@ namespace AcknowledgementsTracker.Presentation {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView AcknowledgementsGridView;
+        
+        /// <summary>
+        /// AcknowledgementsODS control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ObjectDataSource AcknowledgementsODS;
     }
 }

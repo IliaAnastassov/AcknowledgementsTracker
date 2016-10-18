@@ -28,8 +28,21 @@
                         <th>Date</th>
                     </tr>
                 </table>--%>
+                <asp:HiddenField runat="server" ID="hfUsername" />
+                <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped" AllowPaging="True" AutoGenerateColumns="False" ID="AcknowledgementsGridView" runat="server" DataSourceID="AcknowledgementsODS">
+                    <Columns>
+                        <asp:BoundField DataField="Id" HeaderText="Id" SortExpression="Id" />
+                        <asp:BoundField DataField="AuthorUsername" HeaderText="From" SortExpression="AuthorUsername" />
+                        <asp:BoundField DataField="Text" HeaderText="Text" SortExpression="Text" />
+                        <asp:BoundField DataField="DateCreated" HeaderText="Date Created" SortExpression="DateCreated" />
+                    </Columns>
+                </asp:GridView>
 
-                <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped" AllowPaging="True" AutoGenerateColumns="False" ID="AcknowledgementsGridView" runat="server"></asp:GridView>
+                <asp:ObjectDataSource ID="AcknowledgementsODS" runat="server" SelectMethod="Read" TypeName="AcknowledgementsTracker.Business.Logic.AcknowledgementDtoService">
+                    <SelectParameters>
+                        <asp:ControlParameter ControlID="hfUsername" Name="username" PropertyName="Value" Type="String" />
+                    </SelectParameters>
+                </asp:ObjectDataSource>
 
                 <%--Buttons--%>
                 <div class="form-group">
