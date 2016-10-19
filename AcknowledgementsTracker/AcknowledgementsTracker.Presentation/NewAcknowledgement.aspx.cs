@@ -23,9 +23,8 @@
             acknowledgementDto.BeneficiaryUsername = BeneficiaryTextBox.Value;
             acknowledgementDto.Text = ContentTextBox.Value;
 
-            var tags = TagsTextBox.Value.Split();
-
-
+            // NOTE: All tags are stored in lowercase
+            var tags = TagsTextBox.Value.ToLower().Split();
 
             // Add acknowledgement to database
             acknowledgementDtoService.Create(acknowledgementDto, tags);

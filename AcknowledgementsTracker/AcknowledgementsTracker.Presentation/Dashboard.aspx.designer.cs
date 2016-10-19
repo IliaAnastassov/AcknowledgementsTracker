@@ -38,5 +38,77 @@ namespace AcknowledgementsTracker.Presentation {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ObjectDataSource AcknowledgementsODS;
+        
+        /// <summary>
+        /// LastAcknowledgemetsGridView control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView LastAcknowledgemetsGridView;
+        
+        /// <summary>
+        /// LastAcknowledgementsODS control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ObjectDataSource LastAcknowledgementsODS;
+        
+        /// <summary>
+        /// TodaysAcknowledgementsGridView control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView TodaysAcknowledgementsGridView;
+        
+        /// <summary>
+        /// TodaysAcknowledgementsODS control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ObjectDataSource TodaysAcknowledgementsODS;
+        
+        /// <summary>
+        /// ThisWeeksGridView control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView ThisWeeksGridView;
+        
+        /// <summary>
+        /// ThisWeeksAcknowledgementsODS control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ObjectDataSource ThisWeeksAcknowledgementsODS;
+        
+        /// <summary>
+        /// ThisMonthsGridView control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView ThisMonthsGridView;
+        
+        /// <summary>
+        /// ThisMonthsAcknowledgementsODS control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ObjectDataSource ThisMonthsAcknowledgementsODS;
     }
 }

@@ -19,19 +19,11 @@
             <fieldset>
                 <legend>Your acknowledgements</legend>
 
-                <%--Data--%>
-                <%--              <table class="table table-striped table-hover" visible="True" id="AcknowledgementsTable" runat="server">
-                    <tr>
-                        <th>From</th>
-                        <th>Content</th>
-                        <th>Tags</th>
-                        <th>Date</th>
-                    </tr>
-                </table>--%>
+                <%--Hidden username field--%>
                 <asp:HiddenField runat="server" ID="hfUsername" />
+
                 <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped" AllowPaging="True" AutoGenerateColumns="False" ID="AcknowledgementsGridView" runat="server" DataSourceID="AcknowledgementsODS">
                     <Columns>
-                        <asp:BoundField DataField="Id" HeaderText="Id" SortExpression="Id" />
                         <asp:BoundField DataField="AuthorUsername" HeaderText="From" SortExpression="AuthorUsername" />
                         <asp:BoundField DataField="Text" HeaderText="Text" SortExpression="Text" />
                         <asp:BoundField DataField="DateCreated" HeaderText="Date Created" SortExpression="DateCreated" />
@@ -52,7 +44,73 @@
                         <a href="EmployeeIndex.aspx" class="btn btn-info btn-lg"><i class="glyphicon glyphicon-globe"></i></a>
                     </div>
                 </div>
+            </fieldset>
 
+            <%--Last 10 acknowledgements grid view--%>
+            <fieldset>
+                <legend>Last acknowledgements</legend>
+
+                <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped" AllowPaging="True" AutoGenerateColumns="False" ID="LastAcknowledgemetsGridView" runat="server" DataSourceID="LastAcknowledgementsODS">
+                    <Columns>
+                        <asp:BoundField DataField="BeneficiaryUsername" HeaderText="To" SortExpression="BeneficiaryUsername" />
+                        <asp:BoundField DataField="Text" HeaderText="Text" SortExpression="Text" />
+                        <asp:BoundField DataField="AuthorUsername" HeaderText="From" SortExpression="AuthorUsername" />
+                        <asp:BoundField DataField="DateCreated" HeaderText="Date Created" SortExpression="DateCreated" />
+                    </Columns>
+                </asp:GridView>
+
+                <asp:ObjectDataSource ID="LastAcknowledgementsODS" runat="server" SelectMethod="ReadLast" TypeName="AcknowledgementsTracker.Business.Logic.AcknowledgementDtoService"></asp:ObjectDataSource>
+            </fieldset>
+
+            <%--Todays Acknowledgements--%>
+            <fieldset>
+                <legend>Today's acknowledgements</legend>
+
+
+                <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped" AllowPaging="True" AutoGenerateColumns="False" ID="TodaysAcknowledgementsGridView" runat="server" DataSourceID="TodaysAcknowledgementsODS">
+                    <Columns>
+                        <asp:BoundField DataField="BeneficiaryUsername" HeaderText="To" SortExpression="BeneficiaryUsername" />
+                        <asp:BoundField DataField="Text" HeaderText="Text" SortExpression="Text" />
+                        <asp:BoundField DataField="AuthorUsername" HeaderText="From" SortExpression="AuthorUsername" />
+                        <asp:BoundField DataField="DateCreated" HeaderText="Date Created" SortExpression="DateCreated" />
+                    </Columns>
+                </asp:GridView>
+
+                <asp:ObjectDataSource ID="TodaysAcknowledgementsODS" runat="server" SelectMethod="ReadTodays" TypeName="AcknowledgementsTracker.Business.Logic.AcknowledgementDtoService"></asp:ObjectDataSource>
+            </fieldset>
+
+            <%--This Week's Acknowledgements--%>
+            <fieldset>
+                <legend>This week's acknowledgements</legend>
+
+
+                <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped" AllowPaging="True" AutoGenerateColumns="False" ID="ThisWeeksGridView" runat="server" DataSourceID="ThisWeeksAcknowledgementsODS">
+                    <Columns>
+                        <asp:BoundField DataField="BeneficiaryUsername" HeaderText="To" SortExpression="BeneficiaryUsername" />
+                        <asp:BoundField DataField="Text" HeaderText="Text" SortExpression="Text" />
+                        <asp:BoundField DataField="AuthorUsername" HeaderText="From" SortExpression="AuthorUsername" />
+                        <asp:BoundField DataField="DateCreated" HeaderText="Date Created" SortExpression="DateCreated" />
+                    </Columns>
+                </asp:GridView>
+
+                <asp:ObjectDataSource ID="ThisWeeksAcknowledgementsODS" runat="server" SelectMethod="ReadThisWeek" TypeName="AcknowledgementsTracker.Business.Logic.AcknowledgementDtoService"></asp:ObjectDataSource>
+            </fieldset>
+
+            <%--This Month's Acknowledgements--%>
+            <fieldset>
+                <legend>This month's acknowledgements</legend>
+
+
+                <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped" AllowPaging="True" AutoGenerateColumns="False" ID="ThisMonthsGridView" runat="server" DataSourceID="ThisMonthsAcknowledgementsODS">
+                    <Columns>
+                        <asp:BoundField DataField="BeneficiaryUsername" HeaderText="To" SortExpression="BeneficiaryUsername" />
+                        <asp:BoundField DataField="Text" HeaderText="Text" SortExpression="Text" />
+                        <asp:BoundField DataField="AuthorUsername" HeaderText="From" SortExpression="AuthorUsername" />
+                        <asp:BoundField DataField="DateCreated" HeaderText="Date Created" SortExpression="DateCreated" />
+                    </Columns>
+                </asp:GridView>
+
+                <asp:ObjectDataSource ID="ThisMonthsAcknowledgementsODS" runat="server" SelectMethod="ReadThisMonth" TypeName="AcknowledgementsTracker.Business.Logic.AcknowledgementDtoService"></asp:ObjectDataSource>
             </fieldset>
         </main>
 
