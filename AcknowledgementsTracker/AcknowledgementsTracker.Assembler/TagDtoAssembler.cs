@@ -6,8 +6,6 @@
 
     public class TagDtoAssembler : BaseAssembler<Tag, TagDTO>
     {
-        private DtoSubCollectionAssembler collectionAssembler = new DtoSubCollectionAssembler();
-
         public override TagDTO Assemble(Tag entity)
         {
             if (entity == null)
