@@ -19,6 +19,7 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
     public class AcknowledgementsRepository : IRepository<AcknowledgementDTO>
     {
         private AcknowledgementDtoAssembler assembler = new AcknowledgementDtoAssembler();
+        private TagsRepository tagsRepo = new TagsRepository();
 
         public AcknowledgementDTO Get(int id)
         {
@@ -54,7 +55,7 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
             {
                 context.Database.Log = message => Debug.WriteLine(message);
                 acknowledgements = context.Acknowledgements.AsNoTracking().Include(a => a.Tags)
-                    .Where(a => a.BeneficiaryUsername == username).ToList();
+                    .Where(a => a.BeneficiaryUsername == username).OrderByDescending(a => a.DateCreated).ToList();
             }
 
             return assembler.AssembleCollection(acknowledgements);
@@ -70,7 +71,7 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
                 acknowledgements = context.Acknowledgements.AsNoTracking().Include(a => a.Tags)
                     .Where(a => a.DateCreated.Year == DateTime.Today.Year &&
                                 a.DateCreated.Month == DateTime.Today.Month &&
-                                a.DateCreated.Day == DateTime.Today.Day).ToList();
+                                a.DateCreated.Day == DateTime.Today.Day).OrderByDescending(a => a.DateCreated).ToList();
             }
 
             return assembler.AssembleCollection(acknowledgements);
@@ -85,7 +86,7 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
                 context.Database.Log = message => Debug.WriteLine(message);
                 var lastWeek = DateTime.Today.AddDays(-7);
                 acknowledgements = context.Acknowledgements.AsNoTracking().Include(a => a.Tags)
-                    .Where(a => a.DateCreated >= lastWeek).ToList();
+                    .Where(a => a.DateCreated >= lastWeek).OrderByDescending(a => a.DateCreated).ToList();
             }
 
             return assembler.AssembleCollection(acknowledgements);
@@ -100,7 +101,7 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
                 context.Database.Log = message => Debug.WriteLine(message);
                 acknowledgements = context.Acknowledgements.AsNoTracking().Include(a => a.Tags)
                     .Where(a => a.DateCreated.Year == DateTime.Today.Year &&
-                                a.DateCreated.Month == DateTime.Today.Month).ToList();
+                                a.DateCreated.Month == DateTime.Today.Month).OrderByDescending(a => a.DateCreated).ToList();
             }
 
             return assembler.AssembleCollection(acknowledgements);
@@ -114,7 +115,7 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
             {
                 context.Database.Log = message => Debug.WriteLine(message);
                 acknowledgements = context.Acknowledgements.AsNoTracking().Include(a => a.Tags)
-                    .OrderBy(a => a.DateCreated).Take(10).ToList();
+                    .OrderByDescending(a => a.DateCreated).Take(10).ToList();
             }
 
             return assembler.AssembleCollection(acknowledgements);
@@ -123,18 +124,41 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
         public void Add(AcknowledgementDTO acknowledgementDto)
         {
             var acknowledgement = assembler.Disassemble(acknowledgementDto);
-            acknowledgement.Tags = new List<Tag>();
-
-            foreach (TagDTO tagdto in acknowledgementDto.Tags)
-            {
-                //find
-                //add(found)
-                //add(new Tag() {} );
-
-            }
 
             using (var context = new AcknowledgementsTrackerContext())
             {
+                context.Database.Log = message => Debug.WriteLine(message);
+                context.Acknowledgements.Add(acknowledgement);
+                context.SaveChanges();
+            }
+        }
+
+        public void Add(AcknowledgementDTO acknowledgementDto, IEnumerable<string> tags)
+        {
+            var acknowledgement = assembler.Disassemble(acknowledgementDto);
+            acknowledgement.Tags = new List<Tag>();
+
+            using (var context = new AcknowledgementsTrackerContext())
+            {
+                foreach (var tag in tags)
+                {
+                    // Verify if tag already exists
+                    if (tagsRepo.Get(tag) != null)
+                    {
+                        // Add existing tag from database
+                        context.Database.Log = message => Debug.WriteLine(message);
+                        acknowledgement.Tags.Add(context.Tags.Where(t => t.Title == tag).FirstOrDefault());
+                    }
+                    else
+                    {
+                        // Create new tag and add it to tags
+                        Tag newTag = new Tag();
+                        newTag.Title = tag;
+
+                        acknowledgement.Tags.Add(newTag);
+                    }
+                }
+
                 context.Database.Log = message => Debug.WriteLine(message);
                 context.Acknowledgements.Add(acknowledgement);
                 context.SaveChanges();

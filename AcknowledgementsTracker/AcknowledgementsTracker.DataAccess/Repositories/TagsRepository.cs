@@ -59,6 +59,7 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
             return assembler.AssembleCollection(tags);
         }
 
+        // TODO: Is this method really necessary?
         public void Add(TagDTO tagDto)
         {
             var tag = assembler.Disassemble(tagDto);

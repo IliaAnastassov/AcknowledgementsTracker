@@ -58,6 +58,10 @@
     <Compile Include="Migrations\201610171212437_RemoveEmployeeEntity.Designer.cs">
       <DependentUpon>201610171212437_RemoveEmployeeEntity.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201610191210195_AddUniqueAttributeToTagTitle.cs" />
+    <Compile Include="Migrations\201610191210195_AddUniqueAttributeToTagTitle.Designer.cs">
+      <DependentUpon>201610191210195_AddUniqueAttributeToTagTitle.cs</DependentUpon>
+    </Compile>
     <Compile Include="Repositories\AcknowledgementsRepository.cs" />
     <Compile Include="Context\AcknowledgementsTrackerContext.cs" />
     <Compile Include="Migrations\201609091516183_Initial.cs" />
@@ -109,6 +113,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201610171212437_RemoveEmployeeEntity.resx">
       <DependentUpon>201610171212437_RemoveEmployeeEntity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610191210195_AddUniqueAttributeToTagTitle.resx">
+      <DependentUpon>201610191210195_AddUniqueAttributeToTagTitle.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
