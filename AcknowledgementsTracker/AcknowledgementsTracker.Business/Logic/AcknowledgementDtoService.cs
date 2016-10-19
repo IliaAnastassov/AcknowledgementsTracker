@@ -12,34 +12,32 @@
 
         public void Create(AcknowledgementDTO dto, IEnumerable<string> tags)
         {
-            ////foreach (var tag in tags)
-            ////{
-            ////    // If tag exists - add the tag to the acknowledgement,
-            ////    // else - create new tag and add the new tag to the acknowledgement
-            ////    // NOTE: all acknowledgements are stored in lowercase
-            ////    var tagDto = tagDtoService.Read(tag.ToLower());
-
-            ////    if (tagDto != null)
-            ////    {
-            ////        acknowledgementDto.Tags.Add(tagDto);
-            ////    }
-            ////    else
-            ////    {
-            ////        var newTagDto = new TagDTO();
-            ////        newTagDto.Title = tag.ToLower();
-
-            ////        tagDtoService.Create(newTagDto);
-
-            ////        acknowledgementDto.Tags.Add(newTagDto);
-            ////    }
-            ////}
-
-            ////repository.Add(dto);
+            repository.Add(dto, tags);
         }
 
         public IEnumerable<AcknowledgementDTO> Read(string username)
         {
             return repository.GetAcknowledgements(username).ToList();
+        }
+
+        public IEnumerable<AcknowledgementDTO> ReadLast()
+        {
+            return repository.GetLastAcknowledgements().ToList();
+        }
+
+        public IEnumerable<AcknowledgementDTO> ReadTodays()
+        {
+            return repository.GetTodaysAcknowledgements().ToList();
+        }
+
+        public IEnumerable<AcknowledgementDTO> ReadThisWeek()
+        {
+            return repository.GetThisWeekAcknowledgements().ToList();
+        }
+
+        public IEnumerable<AcknowledgementDTO> ReadThisMonth()
+        {
+            return repository.GetThisMonthAcknowledgements().ToList();
         }
 
         public void Update(AcknowledgementDTO dto)
