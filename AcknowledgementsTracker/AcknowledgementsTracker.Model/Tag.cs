@@ -7,6 +7,7 @@ namespace AcknowledgementsTracker.Model
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     public class Tag
     {
@@ -18,7 +19,7 @@ namespace AcknowledgementsTracker.Model
         public int TagId { get; set; }
 
         [Required, MaxLength(100)]
-        [Index(IsUnique=true)]
+        [Index(IsUnique = true)]
         public string Title { get; set; }
 
         // Navigation Properties
