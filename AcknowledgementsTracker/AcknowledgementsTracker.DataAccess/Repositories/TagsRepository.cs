@@ -46,6 +46,20 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
             return assembler.Assemble(tag);
         }
 
+        public IEnumerable<TagDTO> GetAcknowledgementTags(int acknowledgementId)
+        {
+            IEnumerable<Tag> tags;
+
+            using (var context = new AcknowledgementsTrackerContext())
+            {
+                context.Database.Log = message => Debug.WriteLine(message);
+                var acknowledgement = context.Acknowledgements.Find(acknowledgementId);
+                tags = acknowledgement.Tags;
+            }
+
+            return assembler.AssembleCollection(tags);
+        }
+
         public IEnumerable<TagDTO> GetAll()
         {
             IEnumerable<Tag> tags;
