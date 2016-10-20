@@ -29,6 +29,6 @@ namespace AcknowledgementsTracker.DTO
 
         public DateTime DateCreated { get; set; }
 
-        public virtual ICollection<TagDTO> Tags { get; set; }
+        public virtual IEnumerable<TagDTO> Tags { get; set; }
     }
 }
