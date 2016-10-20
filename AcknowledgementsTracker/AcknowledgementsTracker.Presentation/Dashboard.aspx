@@ -16,25 +16,28 @@
         <aside class="col-sm-3"></aside>
 
         <main class="col-sm-6">
+
+            <%--User Acknowledgements--%>
             <fieldset>
                 <legend>Your acknowledgements</legend>
 
-                <%--Hidden username field--%>
-                <asp:HiddenField runat="server" ID="hfUsername" />
-
-                <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped" AllowPaging="True" AutoGenerateColumns="False" ID="AcknowledgementsGridView" runat="server" DataSourceID="AcknowledgementsODS">
+                <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped"
+                    AllowPaging="True"
+                    AutoGenerateColumns="False"
+                    ID="UserAcknowledgementsGridView"
+                    runat="server"
+                    OnRowDataBound="AcknowledgementsGridView_RowDataBound">
                     <Columns>
+                        <asp:TemplateField HeaderText="Tags">
+                            <ItemTemplate>
+                                <asp:Literal ID="ltrTags" runat="server" />
+                            </ItemTemplate>
+                        </asp:TemplateField>
                         <asp:BoundField DataField="AuthorUsername" HeaderText="From" SortExpression="AuthorUsername" />
                         <asp:BoundField DataField="Text" HeaderText="Text" SortExpression="Text" />
                         <asp:BoundField DataField="DateCreated" HeaderText="Date Created" SortExpression="DateCreated" />
                     </Columns>
                 </asp:GridView>
-
-                <asp:ObjectDataSource ID="AcknowledgementsODS" runat="server" SelectMethod="Read" TypeName="AcknowledgementsTracker.Business.Logic.AcknowledgementDtoService">
-                    <SelectParameters>
-                        <asp:ControlParameter ControlID="hfUsername" Name="username" PropertyName="Value" Type="String" />
-                    </SelectParameters>
-                </asp:ObjectDataSource>
 
                 <%--Buttons--%>
                 <div class="form-group">
@@ -50,28 +53,35 @@
             <fieldset>
                 <legend>Last acknowledgements</legend>
 
-                <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped" AllowPaging="True" AutoGenerateColumns="False" ID="LastAcknowledgemetsGridView" runat="server" DataSourceID="LastAcknowledgementsODS">
+                <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped"
+                    AllowPaging="True"
+                    AutoGenerateColumns="False"
+                    ID="LastAcknowledgemetsGridView"
+                    runat="server"
+                    OnRowDataBound="LastAcknowledgemetsGridView_RowDataBound">
                     <Columns>
+                        <asp:TemplateField HeaderText="Tags">
+                            <ItemTemplate>
+                                <asp:Literal ID="ltrTags" runat="server" />
+                            </ItemTemplate>
+                        </asp:TemplateField>
                         <asp:BoundField DataField="BeneficiaryUsername" HeaderText="To" SortExpression="BeneficiaryUsername" />
                         <asp:BoundField DataField="Text" HeaderText="Text" SortExpression="Text" />
                         <asp:BoundField DataField="AuthorUsername" HeaderText="From" SortExpression="AuthorUsername" />
                         <asp:BoundField DataField="DateCreated" HeaderText="Date Created" SortExpression="DateCreated" />
                     </Columns>
                 </asp:GridView>
-
-                <asp:ObjectDataSource ID="LastAcknowledgementsODS" runat="server" SelectMethod="ReadLast" TypeName="AcknowledgementsTracker.Business.Logic.AcknowledgementDtoService"></asp:ObjectDataSource>
             </fieldset>
 
-            <%--Todays Acknowledgements--%>
+            <%--Today's Acknowledgements--%>
             <fieldset>
                 <legend>Today's acknowledgements</legend>
 
-
                 <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped" AllowPaging="True" AutoGenerateColumns="False" ID="TodaysAcknowledgementsGridView" runat="server" DataSourceID="TodaysAcknowledgementsODS">
                     <Columns>
-                        <asp:BoundField DataField="BeneficiaryUsername" HeaderText="To" SortExpression="BeneficiaryUsername" />
+                        <asp:BoundField DataField="BeneficiaryUsername" HeaderText="From" SortExpression="BeneficiaryUsername" />
                         <asp:BoundField DataField="Text" HeaderText="Text" SortExpression="Text" />
-                        <asp:BoundField DataField="AuthorUsername" HeaderText="From" SortExpression="AuthorUsername" />
+                        <asp:BoundField DataField="AuthorUsername" HeaderText="To" SortExpression="AuthorUsername" />
                         <asp:BoundField DataField="DateCreated" HeaderText="Date Created" SortExpression="DateCreated" />
                     </Columns>
                 </asp:GridView>
@@ -82,7 +92,6 @@
             <%--This Week's Acknowledgements--%>
             <fieldset>
                 <legend>This week's acknowledgements</legend>
-
 
                 <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped" AllowPaging="True" AutoGenerateColumns="False" ID="ThisWeeksGridView" runat="server" DataSourceID="ThisWeeksAcknowledgementsODS">
                     <Columns>
@@ -99,7 +108,6 @@
             <%--This Month's Acknowledgements--%>
             <fieldset>
                 <legend>This month's acknowledgements</legend>
-
 
                 <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped" AllowPaging="True" AutoGenerateColumns="False" ID="ThisMonthsGridView" runat="server" DataSourceID="ThisMonthsAcknowledgementsODS">
                     <Columns>
