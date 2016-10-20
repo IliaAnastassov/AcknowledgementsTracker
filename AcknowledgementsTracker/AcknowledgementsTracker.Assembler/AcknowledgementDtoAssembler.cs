@@ -6,6 +6,8 @@
 
     public class AcknowledgementDtoAssembler : BaseAssembler<Acknowledgement, AcknowledgementDTO>
     {
+        private TagDtoAssembler tagAssembler = new TagDtoAssembler();
+
         public override AcknowledgementDTO Assemble(Acknowledgement entity)
         {
             if (entity == null)
@@ -17,8 +19,10 @@
 
             dto.Id = entity.AcknowledgementId;
             dto.AuthorUsername = entity.AuthorUsername;
+            dto.BeneficiaryUsername = entity.BeneficiaryUsername;
             dto.DateCreated = entity.DateCreated;
             dto.Text = entity.Text;
+            dto.Tags = tagAssembler.AssembleCollection(entity.Tags);
 
             return dto;
         }
