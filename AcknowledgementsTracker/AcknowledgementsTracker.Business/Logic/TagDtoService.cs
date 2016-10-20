@@ -1,6 +1,8 @@
 ﻿namespace AcknowledgementsTracker.Business.Logic
 {
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
     using DataAccess.Repositories;
     using DTO;
     using Interfaces;
@@ -17,6 +19,11 @@
         public TagDTO Read(string title)
         {
             return repository.Get(title);
+        }
+
+        public IEnumerable<TagDTO> Read(int acknowledgementid)
+        {
+            return repository.GetAcknowledgementTags(acknowledgementid).ToList();
         }
 
         public void Update(TagDTO dto)
