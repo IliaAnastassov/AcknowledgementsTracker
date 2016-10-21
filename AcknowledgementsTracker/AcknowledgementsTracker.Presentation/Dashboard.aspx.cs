@@ -2,19 +2,17 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Configuration;
-    using System.Linq;
     using System.Web;
     using System.Web.UI;
     using System.Web.UI.WebControls;
+    using Business.Interfaces;
     using Business.Logic;
-    using System.Data;
     using DTO;
 
-    public partial class Dashboard : System.Web.UI.Page
+    public partial class Dashboard : Page
     {
         private string username;
-        private AcknowledgementDtoService acknowledgementService = new AcknowledgementDtoService();
+        private IAcknowledgementDtoService acknowledgementDtoService = new AcknowledgementDtoService();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -31,22 +29,39 @@
         protected void BindGridViews()
         {
             // Bind user acknowledgements
-            var userAcknowledgements = acknowledgementService.Read(username);
-            UserAcknowledgementsGridView.DataSource = userAcknowledgements;
+            UserAcknowledgementsGridView.DataSource = acknowledgementDtoService.Read(username);
             UserAcknowledgementsGridView.DataBind();
 
             // Bind last acknowledgements
-            var lastAcknowledgements = acknowledgementService.ReadLast();
-            LastAcknowledgemetsGridView.DataSource = lastAcknowledgements;
+            LastAcknowledgemetsGridView.DataSource = acknowledgementDtoService.ReadLast();
             LastAcknowledgemetsGridView.DataBind();
+
+            // Bind today's acknowledgements
+            TodaysAcknowledgementsGridView.DataSource = acknowledgementDtoService.ReadTodays();
+            TodaysAcknowledgementsGridView.DataBind();
+
+            // Bind this week's acknowledgements
+            ThisWeeksAcknowledgementsGridView.DataSource = acknowledgementDtoService.ReadThisWeek();
+            ThisWeeksAcknowledgementsGridView.DataBind();
+
+            // Bind this month's acknowledgements
+            ThisMonthsAcknowledgementsGridView.DataSource = acknowledgementDtoService.ReadThisMonth();
+            ThisMonthsAcknowledgementsGridView.DataBind();
+
+            // Bind All Time Champion
+            ltrAllTimeChampion.Text = acknowledgementDtoService.ReadAllTimeChampion();
+
+            // Bind All Time Top Ten
+            AllTimeTopTenGridView.DataSource = acknowledgementDtoService.ReadAllTimeTopTen();
+            AllTimeTopTenGridView.DataBind();
         }
 
         protected void AcknowledgementsGridView_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                var acknowledgement = e.Row.DataItem as AcknowledgementDTO;
                 var ltrTags = e.Row.FindControl("ltrTags") as Literal;
+                var acknowledgement = e.Row.DataItem as AcknowledgementDTO;
                 var tagTitles = new List<string>();
 
                 foreach (var tag in acknowledgement.Tags)

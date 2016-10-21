@@ -21,12 +21,8 @@
             <fieldset>
                 <legend>Your acknowledgements</legend>
 
-                <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped"
-                    AllowPaging="True"
-                    AutoGenerateColumns="False"
-                    ID="UserAcknowledgementsGridView"
-                    runat="server"
-                    OnRowDataBound="AcknowledgementsGridView_RowDataBound">
+                <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped" AllowPaging="True"
+                    AutoGenerateColumns="False" ID="UserAcknowledgementsGridView" runat="server" OnRowDataBound="AcknowledgementsGridView_RowDataBound">
                     <Columns>
                         <asp:TemplateField HeaderText="Tags">
                             <ItemTemplate>
@@ -53,12 +49,8 @@
             <fieldset>
                 <legend>Last acknowledgements</legend>
 
-                <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped"
-                    AllowPaging="True"
-                    AutoGenerateColumns="False"
-                    ID="LastAcknowledgemetsGridView"
-                    runat="server"
-                    OnRowDataBound="LastAcknowledgemetsGridView_RowDataBound">
+                <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped" AllowPaging="True"
+                    AutoGenerateColumns="False" ID="LastAcknowledgemetsGridView" runat="server" OnRowDataBound="AcknowledgementsGridView_RowDataBound">
                     <Columns>
                         <asp:TemplateField HeaderText="Tags">
                             <ItemTemplate>
@@ -77,48 +69,80 @@
             <fieldset>
                 <legend>Today's acknowledgements</legend>
 
-                <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped" AllowPaging="True" AutoGenerateColumns="False" ID="TodaysAcknowledgementsGridView" runat="server" DataSourceID="TodaysAcknowledgementsODS">
+                <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped" AllowPaging="True"
+                    AutoGenerateColumns="False" ID="TodaysAcknowledgementsGridView" runat="server" OnRowDataBound="AcknowledgementsGridView_RowDataBound">
                     <Columns>
-                        <asp:BoundField DataField="BeneficiaryUsername" HeaderText="From" SortExpression="BeneficiaryUsername" />
+                        <asp:TemplateField HeaderText="Tags">
+                            <ItemTemplate>
+                                <asp:Literal ID="ltrTags" runat="server" />
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:BoundField DataField="BeneficiaryUsername" HeaderText="To" SortExpression="BeneficiaryUsername" />
                         <asp:BoundField DataField="Text" HeaderText="Text" SortExpression="Text" />
-                        <asp:BoundField DataField="AuthorUsername" HeaderText="To" SortExpression="AuthorUsername" />
+                        <asp:BoundField DataField="AuthorUsername" HeaderText="From" SortExpression="AuthorUsername" />
                         <asp:BoundField DataField="DateCreated" HeaderText="Date Created" SortExpression="DateCreated" />
                     </Columns>
                 </asp:GridView>
-
-                <asp:ObjectDataSource ID="TodaysAcknowledgementsODS" runat="server" SelectMethod="ReadTodays" TypeName="AcknowledgementsTracker.Business.Logic.AcknowledgementDtoService"></asp:ObjectDataSource>
             </fieldset>
 
             <%--This Week's Acknowledgements--%>
             <fieldset>
                 <legend>This week's acknowledgements</legend>
 
-                <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped" AllowPaging="True" AutoGenerateColumns="False" ID="ThisWeeksGridView" runat="server" DataSourceID="ThisWeeksAcknowledgementsODS">
+                <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped" AllowPaging="True"
+                    AutoGenerateColumns="False" ID="ThisWeeksAcknowledgementsGridView" runat="server" OnRowDataBound="AcknowledgementsGridView_RowDataBound">
                     <Columns>
+                        <asp:TemplateField HeaderText="Tags">
+                            <ItemTemplate>
+                                <asp:Literal ID="ltrTags" runat="server" />
+                            </ItemTemplate>
+                        </asp:TemplateField>
                         <asp:BoundField DataField="BeneficiaryUsername" HeaderText="To" SortExpression="BeneficiaryUsername" />
                         <asp:BoundField DataField="Text" HeaderText="Text" SortExpression="Text" />
                         <asp:BoundField DataField="AuthorUsername" HeaderText="From" SortExpression="AuthorUsername" />
                         <asp:BoundField DataField="DateCreated" HeaderText="Date Created" SortExpression="DateCreated" />
                     </Columns>
                 </asp:GridView>
-
-                <asp:ObjectDataSource ID="ThisWeeksAcknowledgementsODS" runat="server" SelectMethod="ReadThisWeek" TypeName="AcknowledgementsTracker.Business.Logic.AcknowledgementDtoService"></asp:ObjectDataSource>
             </fieldset>
 
             <%--This Month's Acknowledgements--%>
             <fieldset>
                 <legend>This month's acknowledgements</legend>
 
-                <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped" AllowPaging="True" AutoGenerateColumns="False" ID="ThisMonthsGridView" runat="server" DataSourceID="ThisMonthsAcknowledgementsODS">
+                <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped" AllowPaging="True"
+                    AutoGenerateColumns="False" ID="ThisMonthsAcknowledgementsGridView" runat="server" OnRowDataBound="AcknowledgementsGridView_RowDataBound">
                     <Columns>
+                        <asp:TemplateField HeaderText="Tags">
+                            <ItemTemplate>
+                                <asp:Literal ID="ltrTags" runat="server" />
+                            </ItemTemplate>
+                        </asp:TemplateField>
                         <asp:BoundField DataField="BeneficiaryUsername" HeaderText="To" SortExpression="BeneficiaryUsername" />
                         <asp:BoundField DataField="Text" HeaderText="Text" SortExpression="Text" />
                         <asp:BoundField DataField="AuthorUsername" HeaderText="From" SortExpression="AuthorUsername" />
                         <asp:BoundField DataField="DateCreated" HeaderText="Date Created" SortExpression="DateCreated" />
                     </Columns>
                 </asp:GridView>
+            </fieldset>
 
-                <asp:ObjectDataSource ID="ThisMonthsAcknowledgementsODS" runat="server" SelectMethod="ReadThisMonth" TypeName="AcknowledgementsTracker.Business.Logic.AcknowledgementDtoService"></asp:ObjectDataSource>
+            <%--Most Acknowledged person all time--%>
+            <fieldset>
+                <legend>All Time Champion</legend>
+
+                <asp:Literal ID="ltrAllTimeChampion" runat="server" />
+            </fieldset>
+
+            <%--Top Ten Most Acknowledged persons all time--%>
+            <fieldset>
+                <legend>Most acknowledged persons all time</legend>
+
+                <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped" AllowPaging="true"
+                    AutoGenerateColumns="false" ID="AllTimeTopTenGridView" runat="server">
+                    <Columns>
+                        <asp:BoundField DataField="Username" HeaderText="Username" SortExpression="Username" />
+                        <asp:BoundField DataField="Count" HeaderText="Number of Acknowledgements" SortExpression="Count" />
+                    </Columns>
+                </asp:GridView>
             </fieldset>
         </main>
 
