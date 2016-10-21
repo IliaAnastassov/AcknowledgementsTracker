@@ -40,6 +40,16 @@
             return repository.GetThisMonthAcknowledgements().ToList();
         }
 
+        public string ReadAllTimeChampion()
+        {
+            return repository.GetAllTimeChampion();
+        }
+
+        public Dictionary<string, int> ReadAllTimeTopTen()
+        {
+            return repository.GetAllTimeTopTen();
+        }
+
         public void Update(AcknowledgementDTO dto)
         {
             repository.Edit(dto);
