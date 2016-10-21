@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="AcknowledgementDtoAssembler.cs" />
     <Compile Include="BaseAssembler.cs" />
+    <Compile Include="Interfaces\IAssembler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TagDtoAssembler.cs" />
   </ItemGroup>

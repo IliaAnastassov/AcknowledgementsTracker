@@ -3,8 +3,9 @@
     using DTO.Interfaces;
     using System;
     using System.Collections.Generic;
+    using Interfaces;
 
-    public abstract class BaseAssembler<From, To>
+    public abstract class BaseAssembler<From, To> : IAssembler<From, To>
         where From : new()
         where To : IDto, new()
     {
@@ -14,7 +15,7 @@
 
         public abstract To Assemble(From entity);
 
-        public abstract From Disassemble(To entity);
+        public abstract From Disassemble(To dto);
 
         public IEnumerable<To> AssembleCollection(IEnumerable<From> entities)
         {
@@ -24,11 +25,11 @@
             }
         }
 
-        public IEnumerable<From> DisassembleCollection(IEnumerable<To> entities)
+        public IEnumerable<From> DisassembleCollection(IEnumerable<To> dtos)
         {
-            foreach (var entity in entities)
+            foreach (var dto in dtos)
             {
-                yield return Disassemble(entity);
+                yield return Disassemble(dto);
             }
         }
     }
