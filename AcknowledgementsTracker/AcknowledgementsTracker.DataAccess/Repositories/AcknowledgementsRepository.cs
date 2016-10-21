@@ -11,6 +11,7 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
     using System.Diagnostics;
     using System.Linq;
     using Assembler;
+    using Assembler.Interfaces;
     using Context;
     using DTO;
     using Interfaces;
@@ -18,7 +19,7 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
 
     public class AcknowledgementsRepository : IRepository<AcknowledgementDTO>
     {
-        private AcknowledgementDtoAssembler assembler = new AcknowledgementDtoAssembler();
+        private IAssembler<Acknowledgement, AcknowledgementDTO> assembler = new AcknowledgementDtoAssembler();
         private TagsRepository tagsRepo = new TagsRepository();
 
         public AcknowledgementDTO Get(int id)
@@ -80,13 +81,14 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
         public IEnumerable<AcknowledgementDTO> GetThisWeekAcknowledgements()
         {
             IEnumerable<Acknowledgement> acknowledgements;
+            DateTime startOfWeek = DateTime.Today.AddDays(-(int)DateTime.Today.DayOfWeek + 1),
+                endOfWeek = startOfWeek.AddDays(7);
 
             using (var context = new AcknowledgementsTrackerContext())
             {
                 context.Database.Log = message => Debug.WriteLine(message);
-                var lastWeek = DateTime.Today.AddDays(-7);
                 acknowledgements = context.Acknowledgements.AsNoTracking().Include(a => a.Tags)
-                    .Where(a => a.DateCreated >= lastWeek).OrderByDescending(a => a.DateCreated).ToList();
+                    .Where(a => a.DateCreated >= startOfWeek && a.DateCreated < endOfWeek).OrderByDescending(a => a.DateCreated).ToList();
             }
 
             return assembler.AssembleCollection(acknowledgements);
@@ -119,6 +121,42 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
             }
 
             return assembler.AssembleCollection(acknowledgements);
+        }
+
+        public string GetAllTimeChampion()
+        {
+            using (var context = new AcknowledgementsTrackerContext())
+            {
+                context.Database.Log = message => Debug.WriteLine(message);
+                return context.Acknowledgements.GroupBy(a => a.BeneficiaryUsername,
+                    (key, values) => new { Username = key, Count = values.Count() })
+                    .OrderByDescending(b => b.Count).Select(b => b.Username).First();
+            }
+        }
+
+        // TODO: Review return type
+        public Dictionary<string, int> GetAllTimeTopTen()
+        {
+            using (var context = new AcknowledgementsTrackerContext())
+            {
+                context.Database.Log = message => Debug.WriteLine(message);
+                return context.Acknowledgements.GroupBy(a => a.BeneficiaryUsername,
+                    (key, values) => new { Username = key, Count = values.Count() })
+                    .OrderByDescending(b => b.Count).Take(10).ToDictionary(b => b.Username, b => b.Count);
+            }
+        }
+
+        public Dictionary<string, int> GetThisMonthTopTen()
+        {
+            using (var context = new AcknowledgementsTrackerContext())
+            {
+                context.Database.Log = message => Debug.WriteLine(message);
+                return context.Acknowledgements
+                    .Where(a => a.DateCreated.Month == DateTime.Today.Month && a.DateCreated.Year == DateTime.Today.Year)
+                    .GroupBy(a => a.BeneficiaryUsername, (key, values) => new { Username = key, Count = values.Count() })
+                    .OrderByDescending(b => b.Count).Take(10)
+                    .ToDictionary(b => b.Username, b => b.Count);
+            }
         }
 
         public void Add(AcknowledgementDTO acknowledgementDto)

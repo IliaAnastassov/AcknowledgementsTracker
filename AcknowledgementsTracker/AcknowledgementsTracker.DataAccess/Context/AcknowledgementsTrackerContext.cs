@@ -14,10 +14,5 @@ namespace AcknowledgementsTracker.DataAccess.Context
         public DbSet<Acknowledgement> Acknowledgements { get; set; }
 
         public DbSet<Tag> Tags { get; set; }
-
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
-        }
     }
 }

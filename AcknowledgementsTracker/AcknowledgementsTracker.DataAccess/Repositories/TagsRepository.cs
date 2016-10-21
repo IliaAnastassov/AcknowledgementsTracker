@@ -11,6 +11,7 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
     using System.Diagnostics;
     using System.Linq;
     using Assembler;
+    using Assembler.Interfaces;
     using Context;
     using DTO;
     using Interfaces;
@@ -18,7 +19,7 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
 
     public class TagsRepository : IRepository<TagDTO>
     {
-        private TagDtoAssembler assembler = new TagDtoAssembler();
+        private IAssembler<Tag, TagDTO> assembler = new TagDtoAssembler();
 
         public TagDTO Get(string title)
         {
