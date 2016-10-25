@@ -58,15 +58,6 @@ namespace AcknowledgementsTracker.Presentation {
         protected global::System.Web.UI.WebControls.GridView ThisMonthsAcknowledgementsGridView;
         
         /// <summary>
-        /// ltrAllTimeChampion control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal ltrAllTimeChampion;
-        
-        /// <summary>
         /// AllTimeTopTenGridView control.
         /// </summary>
         /// <remarks>
@@ -74,5 +65,32 @@ namespace AcknowledgementsTracker.Presentation {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView AllTimeTopTenGridView;
+        
+        /// <summary>
+        /// ThisMonthTopTenGridView control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView ThisMonthTopTenGridView;
+        
+        /// <summary>
+        /// MostFrequentTagsAllTimeGV control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView MostFrequentTagsAllTimeGV;
+        
+        /// <summary>
+        /// MostFrequentTagsThisMonthGV control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView MostFrequentTagsThisMonthGV;
     }
 }

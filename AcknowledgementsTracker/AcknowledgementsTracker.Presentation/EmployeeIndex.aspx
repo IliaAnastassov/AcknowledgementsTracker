@@ -27,7 +27,7 @@
                         <asp:BoundField DataField="Email" HeaderText="Email" SortExpression="Email" />
                     </Columns>
                 </asp:GridView>
-                <asp:ObjectDataSource ID="EmployeesODS" runat="server" SelectMethod="GetAllUsersData" TypeName="AcknowledgementsTracker.Business.Logic.LdapAccountService"></asp:ObjectDataSource>
+                <asp:ObjectDataSource ID="EmployeesODS" runat="server" SelectMethod="ReadAllUsersData" TypeName="AcknowledgementsTracker.Business.Logic.LdapAccountService"></asp:ObjectDataSource>
 
                 <%--Buttons--%>
                 <div class="form-group">

@@ -21,16 +21,23 @@
             <fieldset>
                 <legend>Your acknowledgements</legend>
 
-                <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped" AllowPaging="True"
-                    AutoGenerateColumns="False" ID="UserAcknowledgementsGridView" runat="server" OnRowDataBound="AcknowledgementsGridView_RowDataBound">
+                <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped"
+                    AllowPaging="True" AutoGenerateColumns="False" ID="UserAcknowledgementsGridView" runat="server">
                     <Columns>
                         <asp:TemplateField HeaderText="Tags">
                             <ItemTemplate>
-                                <asp:Literal ID="ltrTags" runat="server" />
+                                <asp:Literal ID="ltrTags" runat="server" Text='<%#GetTags((IEnumerable<AcknowledgementsTracker.DTO.TagDTO>)(Eval("Tags"))) %>' />
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:BoundField DataField="AuthorUsername" HeaderText="From" SortExpression="AuthorUsername" />
                         <asp:BoundField DataField="Text" HeaderText="Text" SortExpression="Text" />
+                        <asp:TemplateField>
+                            <HeaderTemplate>
+                                <asp:Literal Text="From" runat="server" />
+                            </HeaderTemplate>
+                            <ItemTemplate>
+                                <asp:Literal ID="ltrAuthorName" runat="server" Text='<%#GetUserFullName(Convert.ToString(Eval("AuthorUsername")))%>' />
+                            </ItemTemplate>
+                        </asp:TemplateField>
                         <asp:BoundField DataField="DateCreated" HeaderText="Date Created" SortExpression="DateCreated" />
                     </Columns>
                 </asp:GridView>
@@ -49,17 +56,31 @@
             <fieldset>
                 <legend>Last acknowledgements</legend>
 
-                <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped" AllowPaging="True"
-                    AutoGenerateColumns="False" ID="LastAcknowledgemetsGridView" runat="server" OnRowDataBound="AcknowledgementsGridView_RowDataBound">
+                <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped"
+                    AllowPaging="True" AutoGenerateColumns="False" ID="LastAcknowledgemetsGridView" runat="server">
                     <Columns>
                         <asp:TemplateField HeaderText="Tags">
                             <ItemTemplate>
-                                <asp:Literal ID="ltrTags" runat="server" />
+                                <asp:Literal ID="ltrTags" runat="server" Text='<%#GetTags((IEnumerable<AcknowledgementsTracker.DTO.TagDTO>)(Eval("Tags"))) %>' />
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:BoundField DataField="BeneficiaryUsername" HeaderText="To" SortExpression="BeneficiaryUsername" />
+                        <asp:TemplateField>
+                            <HeaderTemplate>
+                                <asp:Literal Text="To" runat="server" />
+                            </HeaderTemplate>
+                            <ItemTemplate>
+                                <asp:Literal ID="ltrBeneficiaryName" runat="server" Text='<%#GetUserFullName(Convert.ToString(Eval("BeneficiaryUsername")))%>' />
+                            </ItemTemplate>
+                        </asp:TemplateField>
                         <asp:BoundField DataField="Text" HeaderText="Text" SortExpression="Text" />
-                        <asp:BoundField DataField="AuthorUsername" HeaderText="From" SortExpression="AuthorUsername" />
+                        <asp:TemplateField>
+                            <HeaderTemplate>
+                                <asp:Literal Text="From" runat="server" />
+                            </HeaderTemplate>
+                            <ItemTemplate>
+                                <asp:Literal ID="ltrAuthorName" runat="server" Text='<%#GetUserFullName(Convert.ToString(Eval("AuthorUsername")))%>' />
+                            </ItemTemplate>
+                        </asp:TemplateField>
                         <asp:BoundField DataField="DateCreated" HeaderText="Date Created" SortExpression="DateCreated" />
                     </Columns>
                 </asp:GridView>
@@ -69,17 +90,31 @@
             <fieldset>
                 <legend>Today's acknowledgements</legend>
 
-                <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped" AllowPaging="True"
-                    AutoGenerateColumns="False" ID="TodaysAcknowledgementsGridView" runat="server" OnRowDataBound="AcknowledgementsGridView_RowDataBound">
+                <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped"
+                    AllowPaging="True" AutoGenerateColumns="False" ID="TodaysAcknowledgementsGridView" runat="server">
                     <Columns>
                         <asp:TemplateField HeaderText="Tags">
                             <ItemTemplate>
-                                <asp:Literal ID="ltrTags" runat="server" />
+                                <asp:Literal ID="ltrTags" runat="server" Text='<%#GetTags((IEnumerable<AcknowledgementsTracker.DTO.TagDTO>)(Eval("Tags"))) %>' />
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:BoundField DataField="BeneficiaryUsername" HeaderText="To" SortExpression="BeneficiaryUsername" />
+                        <asp:TemplateField>
+                            <HeaderTemplate>
+                                <asp:Literal Text="To" runat="server" />
+                            </HeaderTemplate>
+                            <ItemTemplate>
+                                <asp:Literal ID="ltrBeneficiaryName" runat="server" Text='<%#GetUserFullName(Convert.ToString(Eval("BeneficiaryUsername")))%>' />
+                            </ItemTemplate>
+                        </asp:TemplateField>
                         <asp:BoundField DataField="Text" HeaderText="Text" SortExpression="Text" />
-                        <asp:BoundField DataField="AuthorUsername" HeaderText="From" SortExpression="AuthorUsername" />
+                        <asp:TemplateField>
+                            <HeaderTemplate>
+                                <asp:Literal Text="From" runat="server" />
+                            </HeaderTemplate>
+                            <ItemTemplate>
+                                <asp:Literal ID="ltrAuthorName" runat="server" Text='<%#GetUserFullName(Convert.ToString(Eval("AuthorUsername")))%>' />
+                            </ItemTemplate>
+                        </asp:TemplateField>
                         <asp:BoundField DataField="DateCreated" HeaderText="Date Created" SortExpression="DateCreated" />
                     </Columns>
                 </asp:GridView>
@@ -89,17 +124,31 @@
             <fieldset>
                 <legend>This week's acknowledgements</legend>
 
-                <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped" AllowPaging="True"
-                    AutoGenerateColumns="False" ID="ThisWeeksAcknowledgementsGridView" runat="server" OnRowDataBound="AcknowledgementsGridView_RowDataBound">
+                <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped"
+                    AllowPaging="True" AutoGenerateColumns="False" ID="ThisWeeksAcknowledgementsGridView" runat="server">
                     <Columns>
                         <asp:TemplateField HeaderText="Tags">
                             <ItemTemplate>
-                                <asp:Literal ID="ltrTags" runat="server" />
+                                <asp:Literal ID="ltrTags" runat="server" Text='<%#GetTags((IEnumerable<AcknowledgementsTracker.DTO.TagDTO>)(Eval("Tags"))) %>' />
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:BoundField DataField="BeneficiaryUsername" HeaderText="To" SortExpression="BeneficiaryUsername" />
+                        <asp:TemplateField>
+                            <HeaderTemplate>
+                                <asp:Literal Text="To" runat="server" />
+                            </HeaderTemplate>
+                            <ItemTemplate>
+                                <asp:Literal ID="ltrBeneficiaryName" runat="server" Text='<%#GetUserFullName(Convert.ToString(Eval("BeneficiaryUsername")))%>' />
+                            </ItemTemplate>
+                        </asp:TemplateField>
                         <asp:BoundField DataField="Text" HeaderText="Text" SortExpression="Text" />
-                        <asp:BoundField DataField="AuthorUsername" HeaderText="From" SortExpression="AuthorUsername" />
+                        <asp:TemplateField>
+                            <HeaderTemplate>
+                                <asp:Literal Text="From" runat="server" />
+                            </HeaderTemplate>
+                            <ItemTemplate>
+                                <asp:Literal ID="ltrAuthorName" runat="server" Text='<%#GetUserFullName(Convert.ToString(Eval("AuthorUsername")))%>' />
+                            </ItemTemplate>
+                        </asp:TemplateField>
                         <asp:BoundField DataField="DateCreated" HeaderText="Date Created" SortExpression="DateCreated" />
                     </Columns>
                 </asp:GridView>
@@ -110,26 +159,34 @@
                 <legend>This month's acknowledgements</legend>
 
                 <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped" AllowPaging="True"
-                    AutoGenerateColumns="False" ID="ThisMonthsAcknowledgementsGridView" runat="server" OnRowDataBound="AcknowledgementsGridView_RowDataBound">
+                    AutoGenerateColumns="False" ID="ThisMonthsAcknowledgementsGridView" runat="server"
+                    OnPageIndexChanging="ThisMonthsAcknowledgementsGridView_PageIndexChanging">
                     <Columns>
                         <asp:TemplateField HeaderText="Tags">
                             <ItemTemplate>
-                                <asp:Literal ID="ltrTags" runat="server" />
+                                <asp:Literal ID="ltrTags" runat="server" Text='<%#GetTags((IEnumerable<AcknowledgementsTracker.DTO.TagDTO>)(Eval("Tags"))) %>' />
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:BoundField DataField="BeneficiaryUsername" HeaderText="To" SortExpression="BeneficiaryUsername" />
+                        <asp:TemplateField>
+                            <HeaderTemplate>
+                                <asp:Literal Text="To" runat="server" />
+                            </HeaderTemplate>
+                            <ItemTemplate>
+                                <asp:Literal ID="ltrBeneficiaryName" runat="server" Text='<%#GetUserFullName(Convert.ToString(Eval("BeneficiaryUsername")))%>' />
+                            </ItemTemplate>
+                        </asp:TemplateField>
                         <asp:BoundField DataField="Text" HeaderText="Text" SortExpression="Text" />
-                        <asp:BoundField DataField="AuthorUsername" HeaderText="From" SortExpression="AuthorUsername" />
+                        <asp:TemplateField>
+                            <HeaderTemplate>
+                                <asp:Literal Text="From" runat="server" />
+                            </HeaderTemplate>
+                            <ItemTemplate>
+                                <asp:Literal ID="ltrAuthorName" runat="server" Text='<%#GetUserFullName(Convert.ToString(Eval("AuthorUsername")))%>' />
+                            </ItemTemplate>
+                        </asp:TemplateField>
                         <asp:BoundField DataField="DateCreated" HeaderText="Date Created" SortExpression="DateCreated" />
                     </Columns>
                 </asp:GridView>
-            </fieldset>
-
-            <%--Most Acknowledged person all time--%>
-            <fieldset>
-                <legend>All Time Champion</legend>
-
-                <asp:Literal ID="ltrAllTimeChampion" runat="server" />
             </fieldset>
 
             <%--Top Ten Most Acknowledged persons all time--%>
@@ -139,8 +196,47 @@
                 <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped" AllowPaging="true"
                     AutoGenerateColumns="false" ID="AllTimeTopTenGridView" runat="server">
                     <Columns>
-                        <asp:BoundField DataField="Username" HeaderText="Username" SortExpression="Username" />
-                        <asp:BoundField DataField="Count" HeaderText="Number of Acknowledgements" SortExpression="Count" />
+                        <asp:BoundField DataField="Key" HeaderText="Username" />
+                        <asp:BoundField DataField="Value" HeaderText="Number of Acknowledgements" />
+                    </Columns>
+                </asp:GridView>
+            </fieldset>
+
+            <%--Top Ten Most Acknowledged persons this month--%>
+            <fieldset>
+                <legend>Most acknowledged persons this month</legend>
+
+                <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped" AllowPaging="true"
+                    AutoGenerateColumns="false" ID="ThisMonthTopTenGridView" runat="server">
+                    <Columns>
+                        <asp:BoundField DataField="Key" HeaderText="Username" />
+                        <asp:BoundField DataField="Value" HeaderText="Number of Acknowledgements" />
+                    </Columns>
+                </asp:GridView>
+            </fieldset>
+
+            <%--Top Ten Most Frequent Tags All Time--%>
+            <fieldset>
+                <legend>Most frequently used tags all time</legend>
+
+                <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped" AllowPaging="true"
+                    AutoGenerateColumns="false" ID="MostFrequentTagsAllTimeGV" runat="server">
+                    <Columns>
+                        <asp:BoundField DataField="Key" HeaderText="Tag" />
+                        <asp:BoundField DataField="Value" HeaderText="Times mentioned" />
+                    </Columns>
+                </asp:GridView>
+            </fieldset>
+
+            <%--Top Ten Most Frequent Tags This Month--%>
+            <fieldset>
+                <legend>Most frequently used tags this month</legend>
+
+                <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped" AllowPaging="true"
+                    AutoGenerateColumns="false" ID="MostFrequentTagsThisMonthGV" runat="server">
+                    <Columns>
+                        <asp:BoundField DataField="Key" HeaderText="Tag" />
+                        <asp:BoundField DataField="Value" HeaderText="Times mentioned" />
                     </Columns>
                 </asp:GridView>
             </fieldset>

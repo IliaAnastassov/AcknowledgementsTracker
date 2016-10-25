@@ -12,11 +12,13 @@
 
     public partial class AcknowledgementsTracker1 : MasterPage
     {
+        private LdapAccountService accountService = new LdapAccountService();
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (LdapAccountManager.HasInstance())
             {
-                var user = LdapAccountManager.Instance.GetUserData();
+                var user = accountService.ReadUserData(HttpContext.Current.User.Identity.Name);
                 UserNameLabel.Text = $"{user.Name} email:{user.Email}";
             }
             else

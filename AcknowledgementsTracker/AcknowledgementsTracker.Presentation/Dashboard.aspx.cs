@@ -12,7 +12,9 @@
     public partial class Dashboard : Page
     {
         private string username;
+        private ILdapAccountService ldapAccountService = new LdapAccountService();
         private IAcknowledgementDtoService acknowledgementDtoService = new AcknowledgementDtoService();
+        private ITagDtoService tagDtoService = new TagDtoService();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -21,12 +23,12 @@
 
         protected override void OnInitComplete(EventArgs e)
         {
-            username = HttpContext.Current.User.Identity.Name;
             base.OnInitComplete(e);
+            username = HttpContext.Current.User.Identity.Name;
             BindGridViews();
         }
 
-        protected void BindGridViews()
+        private void BindGridViews()
         {
             // Bind user acknowledgements
             UserAcknowledgementsGridView.DataSource = acknowledgementDtoService.Read(username);
@@ -48,29 +50,44 @@
             ThisMonthsAcknowledgementsGridView.DataSource = acknowledgementDtoService.ReadThisMonth();
             ThisMonthsAcknowledgementsGridView.DataBind();
 
-            // Bind All Time Champion
-            ltrAllTimeChampion.Text = acknowledgementDtoService.ReadAllTimeChampion();
-
             // Bind All Time Top Ten
             AllTimeTopTenGridView.DataSource = acknowledgementDtoService.ReadAllTimeTopTen();
             AllTimeTopTenGridView.DataBind();
+
+            // Bind This Month Top Ten
+            ThisMonthTopTenGridView.DataSource = acknowledgementDtoService.ReadThisMonthTopTen();
+            ThisMonthTopTenGridView.DataBind();
+
+            // Bind Top Tags All time
+            MostFrequentTagsAllTimeGV.DataSource = tagDtoService.ReadMostFrequentTagsAllTime();
+            MostFrequentTagsAllTimeGV.DataBind();
+
+            // Bind Top Tags This Month
+            MostFrequentTagsThisMonthGV.DataSource = tagDtoService.ReadMostFrequentTagsThisMonth();
+            MostFrequentTagsThisMonthGV.DataBind();
         }
 
-        protected void AcknowledgementsGridView_RowDataBound(object sender, GridViewRowEventArgs e)
+        protected void ThisMonthsAcknowledgementsGridView_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
-            if (e.Row.RowType == DataControlRowType.DataRow)
+            ThisMonthsAcknowledgementsGridView.PageIndex = e.NewPageIndex;
+            ThisMonthsAcknowledgementsGridView.DataBind();
+        }
+
+        protected string GetUserFullName(string username)
+        {
+            return ldapAccountService.ReadUserFullName(username);
+        }
+
+        protected string GetTags(IEnumerable<TagDTO> tags)
+        {
+            var tagTitles = new List<string>();
+
+            foreach (var tag in tags)
             {
-                var ltrTags = e.Row.FindControl("ltrTags") as Literal;
-                var acknowledgement = e.Row.DataItem as AcknowledgementDTO;
-                var tagTitles = new List<string>();
-
-                foreach (var tag in acknowledgement.Tags)
-                {
-                    tagTitles.Add(tag.Title);
-                }
-
-                ltrTags.Text = string.Join(" ", tagTitles);
+                tagTitles.Add(tag.Title);
             }
+
+            return string.Join(" ", tagTitles);
         }
     }
 }
