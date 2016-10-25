@@ -8,7 +8,9 @@
 
         void Destroy();
 
-        string GetUserName();
+        string GetUserFullName(string username);
+
+        string GetUsername(string fullName);
 
         string GetUserEmail();
 

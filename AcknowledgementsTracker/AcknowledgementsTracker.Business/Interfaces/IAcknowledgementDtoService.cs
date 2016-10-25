@@ -21,6 +21,8 @@
 
         Dictionary<string, int> ReadAllTimeTopTen();
 
+        Dictionary<string, int> ReadThisMonthTopTen();
+
         void Update(AcknowledgementDTO dto);
     }
 }

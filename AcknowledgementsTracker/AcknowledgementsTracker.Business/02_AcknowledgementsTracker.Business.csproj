@@ -49,6 +49,7 @@
     <Compile Include="Interfaces\IDtoFactory.cs" />
     <Compile Include="Interfaces\IDtoService.cs" />
     <Compile Include="Interfaces\ILdapAccountManager.cs" />
+    <Compile Include="Interfaces\ILdapAccountService.cs" />
     <Compile Include="Interfaces\ILdapServerConnection.cs" />
     <Compile Include="Interfaces\ILdapSettingsService.cs" />
     <Compile Include="Interfaces\ITagDtoService.cs" />

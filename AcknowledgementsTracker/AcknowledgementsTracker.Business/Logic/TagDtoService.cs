@@ -26,6 +26,16 @@
             return repository.GetAcknowledgementTags(acknowledgementid).ToList();
         }
 
+        public Dictionary<string, int> ReadMostFrequentTagsAllTime()
+        {
+            return repository.GetMostFrequentTagsAllTime();
+        }
+
+        public Dictionary<string, int> ReadMostFrequentTagsThisMonth()
+        {
+            return repository.GetMostFrequentTagsThisMonth();
+        }
+
         public void Update(TagDTO dto)
         {
             repository.Edit(dto);

@@ -4,24 +4,29 @@
     using System.Collections.Generic;
     using Interfaces;
 
-    public class LdapAccountService
+    public class LdapAccountService : ILdapAccountService
     {
-        public string GetUserName()
+        public string ReadUserFullName(string username)
         {
-            return LdapAccountManager.Instance.GetUserName();
+            return LdapAccountManager.Instance.GetUserFullName(username);
         }
 
-        public string GetUserEmail()
+        public string ReadUsername(string fullname)
+        {
+            return LdapAccountManager.Instance.GetUsername(fullname);
+        }
+
+        public string ReadUserEmail()
         {
             return LdapAccountManager.Instance.GetUserEmail();
         }
 
-        public IUser GetUserData()
+        public IUser ReadUserData(string username)
         {
-            return LdapAccountManager.Instance.GetUserData();
+            return LdapAccountManager.Instance.GetUserData(username);
         }
 
-        public IEnumerable<IUser> GetAllUsersData()
+        public IEnumerable<IUser> ReadAllUsersData()
         {
             return LdapAccountManager.Instance.GetAllUsersData();
         }

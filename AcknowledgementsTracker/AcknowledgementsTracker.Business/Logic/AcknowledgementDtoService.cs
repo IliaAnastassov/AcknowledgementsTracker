@@ -50,6 +50,16 @@
             return repository.GetAllTimeTopTen();
         }
 
+        public Dictionary<string, int> ReadThisMonthTopTen()
+        {
+            return repository.GetThisMonthTopTen();
+        }
+
+        public Dictionary<string, int> ReadTopTenByTag(string tagTitle)
+        {
+            return repository.GetTopTenByTag(tagTitle);
+        }
+
         public void Update(AcknowledgementDTO dto)
         {
             repository.Edit(dto);

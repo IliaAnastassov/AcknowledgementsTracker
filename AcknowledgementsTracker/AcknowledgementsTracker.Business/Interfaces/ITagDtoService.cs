@@ -11,6 +11,10 @@
 
         IEnumerable<TagDTO> Read(int acknowledgementid);
 
+        Dictionary<string, int> ReadMostFrequentTagsAllTime();
+
+        Dictionary<string, int> ReadMostFrequentTagsThisMonth();
+
         void Update(TagDTO dto);
     }
 }

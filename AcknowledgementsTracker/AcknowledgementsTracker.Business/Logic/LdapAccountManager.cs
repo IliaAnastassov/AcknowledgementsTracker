@@ -14,8 +14,6 @@
         private static LdapAccountManager instance;
         private ILdapServerConnection ldapConnection;
 
-        public string Username { get; private set; }
-
         protected LdapAccountManager()
         {
         }
@@ -48,7 +46,6 @@
         public void Setup(ILdapServerConnection ldapConnection)
         {
             this.ldapConnection = ldapConnection;
-            Username = ldapConnection.Username;
         }
 
         public void Destroy()
@@ -59,28 +56,57 @@
             }
         }
 
-        public string GetUserName()
+        public string GetUserFullName(string username)
         {
-            string fullName = string.Empty;
+            string firstname = string.Empty;
+            string lastname = string.Empty;
             var searcher = new DirectorySearcher(ldapConnection.SearchRoot);
-            searcher.Filter = $"(uid={ldapConnection.Username})";
+            searcher.Filter = $"(uid={username})";
 
-            var searchedProperty = "cn";
+            var givenNameProperty = "givenName";
+            var surnameProperty = "sn";
+            searcher.PropertiesToLoad.Add(givenNameProperty);
+            searcher.PropertiesToLoad.Add(surnameProperty);
+
+            var result = searcher.FindOne();
+
+            if (result != null)
+            {
+                foreach (var resultCollection in result.Properties[givenNameProperty])
+                {
+                    firstname = resultCollection.ToString();
+                }
+
+                foreach (var resultCollection in result.Properties[surnameProperty])
+                {
+                    lastname = resultCollection.ToString();
+                }
+            }
+
+            return $"{firstname} {lastname}";
+        }
+
+        // TODO: Fix the search filter
+        public string GetUsername(string fullName)
+        {
+            string username = string.Empty;
+            var searcher = new DirectorySearcher(ldapConnection.SearchRoot);
+            searcher.Filter = $"((givenName={fullName.Split()[0]})(sn={fullName.Split()[1]}))";
+
+            var searchedProperty = "uid";
             searcher.PropertiesToLoad.Add(searchedProperty);
 
             var result = searcher.FindOne();
 
             if (result != null)
             {
-                foreach (object resultCollection in result.Properties[searchedProperty])
+                foreach (var resultCollection in result.Properties[searchedProperty])
                 {
-                    fullName = resultCollection.ToString();
+                    username = resultCollection.ToString();
                 }
-
-                return fullName;
             }
 
-            return null;
+            return username;
         }
 
         public string GetUserEmail()
@@ -96,36 +122,41 @@
 
             if (result != null)
             {
-                foreach (object resultCollection in result.Properties[searchedProperty])
+                foreach (var resultCollection in result.Properties[searchedProperty])
                 {
                     email = resultCollection.ToString();
                 }
-
-                return email;
             }
 
-            return null;
+            return email;
         }
 
-        public IUser GetUserData()
+        public IUser GetUserData(string username)
         {
             User user = new User();
+            string firstname = string.Empty;
+            string lastname = string.Empty;
             var searcher = new DirectorySearcher(ldapConnection.SearchRoot);
-            searcher.Filter = $"(uid={ldapConnection.Username})";
+            searcher.Filter = $"(uid={username})";
 
-            var cnProperty = "cn";
+            var givenNameProperty = "givenName";
+            var surnameProperty = "sn";
             var mailProperty = "mail";
 
-            searcher.PropertiesToLoad.Add(cnProperty);
-            searcher.PropertiesToLoad.Add(mailProperty);
+            searcher.PropertiesToLoad.AddRange(new string[] { givenNameProperty, surnameProperty, mailProperty });
 
             var result = searcher.FindOne();
 
             if (result != null)
             {
-                foreach (var resultCollection in result.Properties[cnProperty])
+                foreach (var resultCollection in result.Properties[givenNameProperty])
                 {
-                    user.Name = resultCollection.ToString();
+                    firstname = resultCollection.ToString();
+                }
+
+                foreach (var resultCollection in result.Properties[surnameProperty])
+                {
+                    lastname = resultCollection.ToString();
                 }
 
                 foreach (var resultCollection in result.Properties[mailProperty])
@@ -134,19 +165,23 @@
                 }
             }
 
+            user.Name = $"{firstname} {lastname}";
+
             return user;
         }
 
         public IEnumerable<IUser> GetAllUsersData()
         {
             List<User> users = new List<User>();
+            string firstname = string.Empty;
+            string lastname = string.Empty;
             var searcher = new DirectorySearcher(ldapConnection.SearchRoot);
 
-            var cnProperty = "cn";
+            var givenNameProperty = "givenName";
+            var surnameProperty = "sn";
             var mailProperty = "mail";
 
-            searcher.PropertiesToLoad.Add(cnProperty);
-            searcher.PropertiesToLoad.Add(mailProperty);
+            searcher.PropertiesToLoad.AddRange(new string[] { givenNameProperty, surnameProperty, mailProperty });
 
             var results = searcher.FindAll();
 
@@ -156,15 +191,23 @@
                 {
                     var user = new User();
 
-                    foreach (var resultCollection in result.Properties[cnProperty])
+                    foreach (var resultCollection in result.Properties[givenNameProperty])
                     {
-                        user.Name = resultCollection.ToString();
+                        firstname = resultCollection.ToString();
+                    }
+
+                    foreach (var resultCollection in result.Properties[surnameProperty])
+                    {
+                        lastname = resultCollection.ToString();
                     }
 
                     foreach (var resultCollection in result.Properties[mailProperty])
                     {
                         user.Email = resultCollection.ToString();
                     }
+
+                    // Set the full name of the user
+                    user.Name = $"{firstname} {lastname}";
 
                     if (user.Email != null && user.Name != null)
                     {
