@@ -134,7 +134,6 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
             }
         }
 
-        // TODO: Review return type
         public Dictionary<string, int> GetAllTimeTopTen()
         {
             using (var context = new AcknowledgementsTrackerContext())
@@ -153,6 +152,21 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
                 context.Database.Log = message => Debug.WriteLine(message);
                 return context.Acknowledgements
                     .Where(a => a.DateCreated.Month == DateTime.Today.Month && a.DateCreated.Year == DateTime.Today.Year)
+                    .GroupBy(a => a.BeneficiaryUsername, (key, values) => new { Username = key, Count = values.Count() })
+                    .OrderByDescending(b => b.Count).Take(10)
+                    .ToDictionary(b => b.Username, b => b.Count);
+            }
+        }
+
+        public Dictionary<string, int> GetTopTenByTag(string tagTitle)
+        {
+            using (var context = new AcknowledgementsTrackerContext())
+            {
+                context.Database.Log = message => Debug.WriteLine(message);
+                Tag tag = context.Tags.Where(t => t.Title == tagTitle).FirstOrDefault();
+
+                return context.Acknowledgements
+                    .Where(a => a.Tags.Contains(tag))
                     .GroupBy(a => a.BeneficiaryUsername, (key, values) => new { Username = key, Count = values.Count() })
                     .OrderByDescending(b => b.Count).Take(10)
                     .ToDictionary(b => b.Username, b => b.Count);

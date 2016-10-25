@@ -74,7 +74,30 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
             return assembler.AssembleCollection(tags);
         }
 
-        // TODO: Is this method really necessary?
+        public Dictionary<string, int> GetMostFrequentTagsAllTime()
+        {
+            using (var context = new AcknowledgementsTrackerContext())
+            {
+                context.Database.Log = message => Debug.WriteLine(message);
+                return context.Tags
+                    .OrderByDescending(t => t.Acknowledgements.Count()).Take(10)
+                    .ToDictionary(t => t.Title, t => t.Acknowledgements.Count());
+            }
+        }
+
+        public Dictionary<string, int> GetMostFrequentTagsThisMonth()
+        {
+            using (var context = new AcknowledgementsTrackerContext())
+            {
+                context.Database.Log = message => Debug.WriteLine(message);
+                return context.Tags
+                    .OrderByDescending(t => t.Acknowledgements
+                    .Where(a => a.DateCreated.Month == DateTime.Today.Month
+                    && a.DateCreated.Year == DateTime.Today.Year).Count()).Take(10)
+                    .ToDictionary(t => t.Title, t => t.Acknowledgements.Count());
+            }
+        }
+
         public void Add(TagDTO tagDto)
         {
             var tag = assembler.Disassemble(tagDto);
