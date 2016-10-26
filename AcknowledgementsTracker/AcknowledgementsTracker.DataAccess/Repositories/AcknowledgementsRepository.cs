@@ -173,6 +173,30 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
             }
         }
 
+        public IEnumerable<AcknowledgementDTO> GetByContent(IEnumerable<string> usernames, string search)
+        {
+            List<Acknowledgement> acknowledgements = new List<Acknowledgement>();
+
+            using (var context = new AcknowledgementsTrackerContext())
+            {
+                context.Database.Log = message => Debug.WriteLine(message);
+
+                foreach (var username in usernames)
+                {
+                    acknowledgements.AddRange(context.Acknowledgements
+                        .Where(a => a.AuthorUsername.Contains(username) || a.BeneficiaryUsername.Contains(username)));
+                }
+
+                acknowledgements.AddRange(context.Acknowledgements
+                    .Where(a => a.Text.ToLower().Contains(search.ToLower())));
+
+                acknowledgements.AddRange(context.Acknowledgements
+                    .Where(a => a.Tags.Select(t => t.Title).Contains(search.ToLower())));
+
+                return assembler.AssembleCollection(acknowledgements).ToList();
+            }
+        }
+
         public void Add(AcknowledgementDTO acknowledgementDto)
         {
             var acknowledgement = assembler.Disassemble(acknowledgementDto);
