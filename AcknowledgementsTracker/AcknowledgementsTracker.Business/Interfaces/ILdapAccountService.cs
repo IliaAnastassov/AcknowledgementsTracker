@@ -6,7 +6,9 @@
     {
         string ReadUserFullName(string username);
 
-        string ReadUsername(string fullname);
+        string ReadUserUsername(string fullname);
+
+        IEnumerable<string> ReadAllUsernames(string name);
 
         string ReadUserEmail();
 

@@ -11,9 +11,14 @@
             return LdapAccountManager.Instance.GetUserFullName(username);
         }
 
-        public string ReadUsername(string fullname)
+        public string ReadUserUsername(string fullname)
         {
-            return LdapAccountManager.Instance.GetUsername(fullname);
+            return LdapAccountManager.Instance.GetUserUsername(fullname);
+        }
+
+        public IEnumerable<string> ReadAllUsernames(string name)
+        {
+            return LdapAccountManager.Instance.GetAllUsernames(name);
         }
 
         public string ReadUserEmail()

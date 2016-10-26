@@ -10,7 +10,9 @@
 
         string GetUserFullName(string username);
 
-        string GetUsername(string fullName);
+        string GetUserUsername(string fullName);
+
+        IEnumerable<string> GetAllUsernames(string name);
 
         string GetUserEmail();
 

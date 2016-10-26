@@ -52,6 +52,7 @@
     <Compile Include="Interfaces\ILdapAccountService.cs" />
     <Compile Include="Interfaces\ILdapServerConnection.cs" />
     <Compile Include="Interfaces\ILdapSettingsService.cs" />
+    <Compile Include="Interfaces\ISearchService.cs" />
     <Compile Include="Interfaces\ITagDtoService.cs" />
     <Compile Include="Interfaces\IUser.cs" />
     <Compile Include="Logic\AcknowledgementDtoService.cs" />
@@ -62,6 +63,7 @@
     </Compile>
     <Compile Include="Logic\LdapSettingsService.cs" />
     <Compile Include="Logic\Printer.cs" />
+    <Compile Include="Logic\SearchService.cs" />
     <Compile Include="Logic\TagDtoService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Workflow\DtoFactory.cs" />
