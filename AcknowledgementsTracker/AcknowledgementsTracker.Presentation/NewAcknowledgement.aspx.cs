@@ -26,8 +26,9 @@
             {
                 var acknowledgementDto = new AcknowledgementDTO();
                 acknowledgementDto.AuthorUsername = HttpContext.Current.User.Identity.Name;
+
                 // Transform full name to username
-                acknowledgementDto.BeneficiaryUsername = ldapAccountService.ReadUsername(BeneficiaryTextBox.Value);
+                acknowledgementDto.BeneficiaryUsername = ldapAccountService.ReadUserUsername(BeneficiaryTextBox.Value);
                 acknowledgementDto.Text = ContentTextBox.Value;
 
                 // NOTE: All tags are stored in lowercase

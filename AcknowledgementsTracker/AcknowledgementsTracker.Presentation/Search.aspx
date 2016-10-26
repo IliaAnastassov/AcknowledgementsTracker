@@ -18,24 +18,71 @@
 
         <main class="col-sm-6">
             <fieldset>
-                <legend>Search for people, content or tags</legend>
+                <legend>Search for employees, acknowledgements or tags</legend>
 
                 <%--Input--%>
                 <div class="form-group">
                     <label for="SearchTextBox" class="col-lg-2 control-label text-right">Search</label>
                     <div class="col-lg-10">
-                        <input type="text" class="form-control" placeholder="enter your query" required runat="server" id="SearchTextBox">
+                        <input type="text" class="form-control" placeholder="enter your query" required id="SearchTextBox" runat="server">
                     </div>
                 </div>
 
                 <%--Buttons--%>
                 <div class="form-group">
                     <div class="col-lg-10 col-lg-offset-2">
-                        <button type="submit" class="btn btn-info btn-lg" runat="server" id="SearchBtn"><i class="glyphicon glyphicon-search"></i></button>
+                        <button type="submit" class="btn btn-info btn-lg" runat="server" id="SearchBtn" onserverclick="SearchBtn_ServerClick"><i class="glyphicon glyphicon-search"></i></button>
                         <button type="reset" class="btn btn-default btn-lg"><i class="glyphicon glyphicon-repeat"></i></button>
                         <a href="Dashboard.aspx" class="btn btn-default btn-lg"><i class="glyphicon glyphicon-remove"></i></a>
                     </div>
                 </div>
+            </fieldset>
+
+            <%--RESULTS--%>
+
+            <%--Employees--%>
+            <fieldset>
+                <legend>Employees</legend>
+
+                <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped"
+                    AllowPaging="True" AutoGenerateColumns="False" ID="EmployeesResultsGridView" runat="server" Visible="false"
+                    OnPageIndexChanging="EmployeesResultsGridView_PageIndexChanging">
+                </asp:GridView>
+            </fieldset>
+
+            <%--Acknowledgements--%>
+            <fieldset>
+                <legend>Acknowledgements</legend>
+
+                <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped"
+                    AllowPaging="True" AutoGenerateColumns="False" ID="AcknowledgementsResultsGridView" runat="server" Visible="false"
+                    OnPageIndexChanging="AcknowledgementsResultsGridView_PageIndexChanging">
+                    <Columns>
+                        <asp:TemplateField HeaderText="Tags">
+                            <ItemTemplate>
+                                <asp:Literal ID="ltrTags" runat="server" Text='<%#GetTags((IEnumerable<AcknowledgementsTracker.DTO.TagDTO>)(Eval("Tags"))) %>' />
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField>
+                            <HeaderTemplate>
+                                <asp:Literal Text="To" runat="server" />
+                            </HeaderTemplate>
+                            <ItemTemplate>
+                                <asp:Literal ID="ltrBeneficiaryName" runat="server" Text='<%#GetUserFullName(Convert.ToString(Eval("BeneficiaryUsername")))%>' />
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:BoundField DataField="Text" HeaderText="Text" SortExpression="Text" />
+                        <asp:TemplateField>
+                            <HeaderTemplate>
+                                <asp:Literal Text="From" runat="server" />
+                            </HeaderTemplate>
+                            <ItemTemplate>
+                                <asp:Literal ID="ltrAuthorName" runat="server" Text='<%#GetUserFullName(Convert.ToString(Eval("AuthorUsername")))%>' />
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:BoundField DataField="DateCreated" HeaderText="Date Created" SortExpression="DateCreated" />
+                    </Columns>
+                </asp:GridView>
             </fieldset>
         </main>
 

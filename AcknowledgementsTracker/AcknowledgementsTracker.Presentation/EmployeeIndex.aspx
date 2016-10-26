@@ -20,7 +20,8 @@
                 <legend>Proxiad Employees and their acknowledgements</legend>
 
                 <%--Data--%>
-                <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped" AllowPaging="True" AutoGenerateColumns="False" DataSourceID="EmployeesODS" ID="EmployeesGridView" runat="server">
+                <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped"
+                    AllowPaging="True" AutoGenerateColumns="False" DataSourceID="EmployeesODS" ID="EmployeesGridView" runat="server">
                     <Columns>
                         <asp:CommandField ShowSelectButton="True" />
                         <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name" />

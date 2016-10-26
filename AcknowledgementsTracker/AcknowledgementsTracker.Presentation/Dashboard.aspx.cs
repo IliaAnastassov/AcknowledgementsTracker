@@ -18,7 +18,6 @@
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
         }
 
         protected override void OnInitComplete(EventArgs e)
@@ -71,6 +70,24 @@
         {
             ThisMonthsAcknowledgementsGridView.PageIndex = e.NewPageIndex;
             ThisMonthsAcknowledgementsGridView.DataBind();
+        }
+
+        protected void UserAcknowledgementsGridView_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            UserAcknowledgementsGridView.PageIndex = e.NewPageIndex;
+            UserAcknowledgementsGridView.DataBind();
+        }
+
+        protected void TodaysAcknowledgementsGridView_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            TodaysAcknowledgementsGridView.PageIndex = e.NewPageIndex;
+            TodaysAcknowledgementsGridView.DataBind();
+        }
+
+        protected void ThisWeeksAcknowledgementsGridView_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            ThisWeeksAcknowledgementsGridView.PageIndex = e.NewPageIndex;
+            ThisWeeksAcknowledgementsGridView.DataBind();
         }
 
         protected string GetUserFullName(string username)

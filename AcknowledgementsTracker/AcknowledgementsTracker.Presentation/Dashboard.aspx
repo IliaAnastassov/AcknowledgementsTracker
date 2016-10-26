@@ -22,7 +22,8 @@
                 <legend>Your acknowledgements</legend>
 
                 <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped"
-                    AllowPaging="True" AutoGenerateColumns="False" ID="UserAcknowledgementsGridView" runat="server">
+                    AllowPaging="True" AutoGenerateColumns="False" ID="UserAcknowledgementsGridView" runat="server"
+                    OnPageIndexChanging="UserAcknowledgementsGridView_PageIndexChanging">
                     <Columns>
                         <asp:TemplateField HeaderText="Tags">
                             <ItemTemplate>
@@ -91,7 +92,8 @@
                 <legend>Today's acknowledgements</legend>
 
                 <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped"
-                    AllowPaging="True" AutoGenerateColumns="False" ID="TodaysAcknowledgementsGridView" runat="server">
+                    AllowPaging="True" AutoGenerateColumns="False" ID="TodaysAcknowledgementsGridView" runat="server"
+                    OnPageIndexChanging="TodaysAcknowledgementsGridView_PageIndexChanging">
                     <Columns>
                         <asp:TemplateField HeaderText="Tags">
                             <ItemTemplate>
@@ -125,7 +127,8 @@
                 <legend>This week's acknowledgements</legend>
 
                 <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped"
-                    AllowPaging="True" AutoGenerateColumns="False" ID="ThisWeeksAcknowledgementsGridView" runat="server">
+                    AllowPaging="True" AutoGenerateColumns="False" ID="ThisWeeksAcknowledgementsGridView" runat="server"
+                    OnPageIndexChanging="ThisWeeksAcknowledgementsGridView_PageIndexChanging">
                     <Columns>
                         <asp:TemplateField HeaderText="Tags">
                             <ItemTemplate>

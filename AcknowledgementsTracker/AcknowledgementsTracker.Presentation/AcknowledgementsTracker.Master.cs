@@ -18,8 +18,17 @@
         {
             if (LdapAccountManager.HasInstance())
             {
-                var user = accountService.ReadUserData(HttpContext.Current.User.Identity.Name);
-                UserNameLabel.Text = $"{user.Name} email:{user.Email}";
+                try
+                {
+                    var user = accountService.ReadUserData(HttpContext.Current.User.Identity.Name);
+                    UserNameLabel.Text = $"{user.Name} email:{user.Email}";
+                }
+                catch
+                {
+                    LdapAccountManager.Instance.Destroy();
+                    LogoutBtn.Visible = false;
+                    FormsAuthentication.SignOut();
+                }
             }
             else
             {

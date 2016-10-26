@@ -21,7 +21,6 @@
                 && !string.IsNullOrWhiteSpace(PasswordTextBox.Value))
             {
                 ILdapSettingsService settings = new LdapSettingsService();
-
                 settings.ServerPath = WebConfigurationManager.AppSettings["LDAPServerPath"];
                 settings.SearchRoot = WebConfigurationManager.AppSettings["LDAPSearchRoot"];
                 settings.Username = UsernameTextBox.Value;
