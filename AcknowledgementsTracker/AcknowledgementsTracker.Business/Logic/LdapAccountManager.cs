@@ -155,9 +155,9 @@
             return usernames;
         }
 
-        public IEnumerable<string> GetUsers(string search)
+        public IEnumerable<IUser> GetUsers(string search)
         {
-            List<string> users = new List<string>();
+            List<User> users = new List<User>();
             string firstname = string.Empty;
             string lastname = string.Empty;
             var searcher = new DirectorySearcher(ldapConnection.RootEntry);
@@ -165,8 +165,8 @@
 
             var givenNameProperty = "givenName";
             var surnameProperty = "sn";
-            searcher.PropertiesToLoad.Add(givenNameProperty);
-            searcher.PropertiesToLoad.Add(surnameProperty);
+            var mailProperty = "mail";
+            searcher.PropertiesToLoad.AddRange(new string[] { givenNameProperty, surnameProperty, mailProperty });
 
             var results = searcher.FindAll();
 
@@ -174,6 +174,8 @@
             {
                 foreach (SearchResult result in results)
                 {
+                    User user = new User();
+
                     foreach (var resultCollection in result.Properties[givenNameProperty])
                     {
                         firstname = resultCollection.ToString();
@@ -184,11 +186,23 @@
                         lastname = resultCollection.ToString();
                     }
 
-                    users.Add($"{firstname} {lastname}");
+                    user.Name = $"{firstname} {lastname}";
+
+                    foreach (var resultCollection in result.Properties[mailProperty])
+                    {
+                        user.Email = resultCollection.ToString();
+                    }
+
+                    if (user.Name != null && user.Email != null)
+                    {
+                        users.Add(user);
+                    }
+
                 }
             }
 
-            return users;
+            // Return list ordered alphabetically
+            return users.OrderBy(u => u.Name).ToList();
         }
 
         public IUser GetUserData(string username)

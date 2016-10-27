@@ -18,7 +18,7 @@
             return repository.GetByContent(usernames, search);
         }
 
-        public IEnumerable<string> FindUsers(string search)
+        public IEnumerable<IUser> FindUsers(string search)
         {
             return LdapAccountManager.Instance.GetUsers(search);
         }

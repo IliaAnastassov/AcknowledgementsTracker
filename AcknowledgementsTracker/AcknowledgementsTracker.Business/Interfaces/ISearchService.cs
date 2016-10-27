@@ -7,6 +7,6 @@
     {
         IEnumerable<AcknowledgementDTO> FindAcknowledgements(string search);
 
-        IEnumerable<string> FindUsers(string search);
+        IEnumerable<IUser> FindUsers(string search);
     }
 }
