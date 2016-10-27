@@ -14,6 +14,21 @@
         private ILdapAccountService ldapAccountService = new LdapAccountService();
         private ISearchService searcher = new SearchService();
 
+        public string SearchQuery
+        {
+            get
+            {
+                if (ViewState["SearchQuery"] == null)
+                {
+                    return string.Empty;
+                }
+
+                return (string)ViewState["SearchQuery"];
+            }
+
+            set { ViewState["SearchQuery"] = value; }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
         }
@@ -21,13 +36,21 @@
         protected override void OnInitComplete(EventArgs e)
         {
             base.OnInitComplete(e);
+
+            if (!string.IsNullOrWhiteSpace(SearchQuery))
+            {
+                BindGridViews(SearchQuery);
+            }
         }
 
         protected void SearchBtn_ServerClick(object sender, EventArgs e)
         {
-            BindGridViews(SearchTextBox.Value);
-            EmployeesResultsGridView.Visible = true;
-            AcknowledgementsResultsGridView.Visible = true;
+            SearchQuery = SearchTextBox.Value;
+
+            if (!string.IsNullOrWhiteSpace(SearchQuery))
+            {
+                BindGridViews(SearchQuery);
+            }
         }
 
         protected void EmployeesResultsGridView_PageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -46,9 +69,11 @@
         {
             EmployeesResultsGridView.DataSource = searcher.FindUsers(search);
             EmployeesResultsGridView.DataBind();
+            fldsEmployeesResults.Visible = true;
 
             AcknowledgementsResultsGridView.DataSource = searcher.FindAcknowledgements(search);
             AcknowledgementsResultsGridView.DataBind();
+            fldsAcknowledgementsResults.Visible = true;
         }
 
         protected string GetUserFullName(string username)
