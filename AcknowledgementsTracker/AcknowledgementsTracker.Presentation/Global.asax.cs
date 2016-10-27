@@ -16,11 +16,5 @@ namespace AcknowledgementsTracker.Presentation
         public const string SearchPage = @"~/Search.aspx";
         public const string NewAcknowledgementPage = @"~/NewAcknowledgement.aspx";
         public const string EmployeeIndexPage = @"~/EmployeeIndex.aspx";
-
-        public bool UserLoggedIn { get; set; }
-
-        protected void Application_Start(object sender, EventArgs e)
-        {
-        }
     }
 }
