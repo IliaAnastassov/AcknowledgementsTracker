@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AcknowledgementsTracker.Master" AutoEventWireup="true" CodeBehind="Dashboard.aspx.cs" Inherits="AcknowledgementsTracker.Presentation.Dashboard" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/LoggedIn.Master" AutoEventWireup="true" CodeBehind="Dashboard.aspx.cs" Inherits="AcknowledgementsTracker.Presentation.Dashboard" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -42,15 +42,6 @@
                         <asp:BoundField DataField="DateCreated" HeaderText="Date Created" SortExpression="DateCreated" />
                     </Columns>
                 </asp:GridView>
-
-                <%--Buttons--%>
-                <div class="form-group">
-                    <div class="col-lg-10 col-lg-offset-2">
-                        <a href="NewAcknowledgement.aspx" class="btn btn-primary btn-lg"><i class="glyphicon glyphicon-plus"></i></a>
-                        <a href="Search.aspx" class="btn btn-info btn-lg"><i class="glyphicon glyphicon-search"></i></a>
-                        <a href="EmployeeIndex.aspx" class="btn btn-info btn-lg"><i class="glyphicon glyphicon-globe"></i></a>
-                    </div>
-                </div>
             </fieldset>
 
             <%--Last 10 acknowledgements grid view--%>
@@ -199,7 +190,14 @@
                 <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped" AllowPaging="true"
                     AutoGenerateColumns="false" ID="AllTimeTopTenGridView" runat="server">
                     <Columns>
-                        <asp:BoundField DataField="Key" HeaderText="Username" />
+                        <asp:TemplateField>
+                            <HeaderTemplate>
+                                <asp:Literal Text="Name" runat="server" />
+                            </HeaderTemplate>
+                            <ItemTemplate>
+                                <asp:Literal ID="ltrEmployeeName" runat="server" Text='<%#GetUserFullName(Convert.ToString(Eval("Key"))) %>' />
+                            </ItemTemplate>
+                        </asp:TemplateField>
                         <asp:BoundField DataField="Value" HeaderText="Number of Acknowledgements" />
                     </Columns>
                 </asp:GridView>
@@ -212,7 +210,14 @@
                 <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped" AllowPaging="true"
                     AutoGenerateColumns="false" ID="ThisMonthTopTenGridView" runat="server">
                     <Columns>
-                        <asp:BoundField DataField="Key" HeaderText="Username" />
+                        <asp:TemplateField>
+                            <HeaderTemplate>
+                                <asp:Literal Text="Name" runat="server" />
+                            </HeaderTemplate>
+                            <ItemTemplate>
+                                <asp:Literal ID="ltrEmployeeName" runat="server" Text='<%#GetUserFullName(Convert.ToString(Eval("Key"))) %>' />
+                            </ItemTemplate>
+                        </asp:TemplateField>
                         <asp:BoundField DataField="Value" HeaderText="Number of Acknowledgements" />
                     </Columns>
                 </asp:GridView>

@@ -1,9 +1,17 @@
 ﻿.form-control, .control-label {
-    margin: 20px 0px 20px 0;
+    margin: 20px 0px 10px 0;
 }
 
 .btn {
     margin-top: 10px;
+}
+
+h2 {
+    margin-top: 5px;
+}
+
+nav {
+    margin: 5px 0px 5px 0;
 }
 
 #ErrorMsg {
@@ -12,4 +20,9 @@
 
 fieldset {
     margin-bottom: 20px;
+}
+
+#parUserName {
+    font-size: small;
+    margin: 10px 0px 0px 0px;
 }

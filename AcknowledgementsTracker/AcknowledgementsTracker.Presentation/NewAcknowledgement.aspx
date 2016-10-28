@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AcknowledgementsTracker.Master" AutoEventWireup="true" CodeBehind="NewAcknowledgement.aspx.cs" Inherits="AcknowledgementsTracker.Presentation.NewAcknowledgement" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/LoggedIn.Master" AutoEventWireup="true" CodeBehind="NewAcknowledgement.aspx.cs" Inherits="AcknowledgementsTracker.Presentation.NewAcknowledgement" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -45,9 +45,9 @@
                 <%--Buttons--%>
                 <div class="form-group">
                     <div class="col-lg-10 col-lg-offset-2">
-                        <button class="btn btn-primary btn-lg" id="CreateNewAcknowledgementBtn" runat="server" onserverclick="CreateNewAcknowledgementBtn_Click"><i class="glyphicon glyphicon-ok"></i></button>
-                        <button type="reset" class="btn btn-default btn-lg" id="ResetBtn" runat="server" onserverclick="ResetBtn_ServerClick"><i class="glyphicon glyphicon-repeat"></i></button>
-                        <a href="Dashboard.aspx" class="btn btn-default btn-lg"><i class="glyphicon glyphicon-remove"></i></a>
+                        <button class="btn btn-info" id="CreateNewAcknowledgementBtn" runat="server" onserverclick="CreateNewAcknowledgementBtn_Click"><i class="glyphicon glyphicon-ok"></i></button>
+                        <button type="reset" class="btn btn-default" id="ResetBtn" runat="server" onserverclick="ResetBtn_ServerClick"><i class="glyphicon glyphicon-repeat"></i></button>
+                        <a href="Dashboard.aspx" class="btn btn-default"><i class="glyphicon glyphicon-remove"></i></a>
                     </div>
                 </div>
             </fieldset>

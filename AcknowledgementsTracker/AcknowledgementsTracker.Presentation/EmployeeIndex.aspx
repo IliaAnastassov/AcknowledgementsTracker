@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AcknowledgementsTracker.Master" AutoEventWireup="true" CodeBehind="EmployeeIndex.aspx.cs" Inherits="AcknowledgementsTracker.Presentation.EmployeeIndex" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/LoggedIn.Master" AutoEventWireup="true" CodeBehind="EmployeeIndex.aspx.cs" Inherits="AcknowledgementsTracker.Presentation.EmployeeIndex" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -28,15 +28,8 @@
                         <asp:BoundField DataField="Email" HeaderText="Email" SortExpression="Email" />
                     </Columns>
                 </asp:GridView>
-                <asp:ObjectDataSource ID="EmployeesODS" runat="server" SelectMethod="ReadAllUsersData" TypeName="AcknowledgementsTracker.Business.Logic.LdapAccountService"></asp:ObjectDataSource>
-
-                <%--Buttons--%>
-                <div class="form-group">
-                    <div class="col-lg-10 col-lg-offset-2">
-                        <a href="Dashboard.aspx" class="btn btn-primary btn-lg"><i class="glyphicon glyphicon-dashboard"></i></a>
-                    </div>
-                </div>
-
+                <asp:ObjectDataSource ID="EmployeesODS" runat="server" SelectMethod="ReadAllUsersData"
+                    TypeName="AcknowledgementsTracker.Business.Logic.LdapAccountService"></asp:ObjectDataSource>
             </fieldset>
         </main>
 

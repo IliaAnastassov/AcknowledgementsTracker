@@ -31,19 +31,12 @@
 
         protected void Page_Load(object sender, EventArgs e)
         {
-        }
-
-        protected override void OnInitComplete(EventArgs e)
-        {
-            base.OnInitComplete(e);
-
             if (!string.IsNullOrWhiteSpace(SearchQuery))
             {
                 BindGridViews(SearchQuery);
             }
         }
-
-        protected void SearchBtn_ServerClick(object sender, EventArgs e)
+        protected void btnSearch_Click(object sender, EventArgs e)
         {
             SearchQuery = SearchTextBox.Value;
 
@@ -51,6 +44,14 @@
             {
                 BindGridViews(SearchQuery);
             }
+        }
+
+        protected void ResetBtn_ServerClick(object sender, EventArgs e)
+        {
+            SearchTextBox.Value = string.Empty;
+            SearchQuery = string.Empty;
+            fldsEmployeesResults.Visible = false;
+            fldsAcknowledgementsResults.Visible = false;
         }
 
         protected void EmployeesResultsGridView_PageIndexChanging(object sender, GridViewPageEventArgs e)

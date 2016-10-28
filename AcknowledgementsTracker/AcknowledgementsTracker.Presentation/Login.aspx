@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AcknowledgementsTracker.Master" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="AcknowledgementsTracker.Presentation.Login" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/LoggedOut.Master" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="AcknowledgementsTracker.Presentation.Login" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -37,8 +37,8 @@
                 <%--Buttons--%>
                 <div class="form-group">
                     <div class="col-lg-10 col-lg-offset-2">
-                        <button type="submit" class="btn btn-primary btn-lg" onserverclick="Login_Click" id="LoginBtn" runat="server"><i class="glyphicon glyphicon-ok"></i></button>
-                        <button type="reset" class="btn btn-default btn-lg" onserverclick="ResetBtn_ServerClick" id="ResetBtn" runat="server"><i class="glyphicon glyphicon-repeat"></i></button>
+                        <button type="submit" class="btn btn-info" onserverclick="Login_Click" id="LoginBtn" runat="server"><i class="glyphicon glyphicon-ok"></i></button>
+                        <button type="reset" class="btn btn-default" onserverclick="ResetBtn_ServerClick" id="ResetBtn" runat="server"><i class="glyphicon glyphicon-repeat"></i></button>
                     </div>
                 </div>
             </fieldset>

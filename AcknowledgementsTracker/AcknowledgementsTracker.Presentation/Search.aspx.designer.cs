@@ -13,6 +13,15 @@ namespace AcknowledgementsTracker.Presentation {
     public partial class Search {
         
         /// <summary>
+        /// SearchPanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel SearchPanel;
+        
+        /// <summary>
         /// SearchTextBox control.
         /// </summary>
         /// <remarks>
@@ -22,13 +31,22 @@ namespace AcknowledgementsTracker.Presentation {
         protected global::System.Web.UI.HtmlControls.HtmlInputText SearchTextBox;
         
         /// <summary>
-        /// SearchBtn control.
+        /// btnSearch control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton SearchBtn;
+        protected global::System.Web.UI.WebControls.LinkButton btnSearch;
+        
+        /// <summary>
+        /// ResetBtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlButton ResetBtn;
         
         /// <summary>
         /// fldsEmployeesResults control.
