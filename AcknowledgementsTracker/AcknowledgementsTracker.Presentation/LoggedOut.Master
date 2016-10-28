@@ -1,13 +1,13 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="AcknowledgementsTracker.master.cs" Inherits="AcknowledgementsTracker.Presentation.AcknowledgementsTracker1" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="LoggedOut.master.cs" Inherits="AcknowledgementsTracker.Presentation.LoggedOut" %>
 
 <!DOCTYPE HTML5>
 
 <html lang="en-us">
 <head runat="server">
     <title>Acknowledgements Tracker</title>
-    <link href="Styles/Master.css" rel="stylesheet" />
     <link href="Content/bootstrap.min.css" rel="stylesheet" />
     <link href="Content/bootstrap-theme.min.css" rel="stylesheet" />
+    <link href="Styles/Master.css" rel="stylesheet" />
     <link href="Styles/app.css" rel="stylesheet" />
     <asp:ContentPlaceHolder ID="head" runat="server" />
 </head>
@@ -24,20 +24,6 @@
                 </div>
             </div>
         </header>
-
-        <%--Login/Logout--%>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-sm-10"></div>
-
-                <div class="col-sm-2">
-                    <div>
-                        <asp:Literal ID="UserNameLabel" runat="server"></asp:Literal>
-                        <asp:Button CssClass="btn btn-default btn-sm pull-right" Text="Logout" Visible="true" OnClick="LogoutBtn_Click" ID="LogoutBtn" runat="server" TabIndex="1000" />
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <%--Content--%>
         <div>

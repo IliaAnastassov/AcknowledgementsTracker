@@ -1,0 +1,53 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="LoggedIn.Master.cs" Inherits="AcknowledgementsTracker.Presentation.LoggedIn" %>
+
+<!DOCTYPE HTML5>
+
+<html lang="en-us">
+<head runat="server">
+    <title>Acknowledgements Tracker</title>
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="Content/bootstrap-theme.min.css" rel="stylesheet" />
+    <link href="Styles/Master.css" rel="stylesheet" />
+    <link href="Styles/app.css" rel="stylesheet" />
+    <asp:ContentPlaceHolder ID="head" runat="server" />
+</head>
+<body>
+    <%--Header--%>
+    <form id="form1" runat="server">
+        <header class="container-fluid">
+            <div class="row">
+                <div class="col-sm-6">
+                    <img src="Resources/ProxiadBulgariaLogo_White.png" alt="Proxiad Logo" />
+                </div>
+                <div class="col-sm-6">
+                    <h1 class="pull-right">Acknowledgements Tracker</h1>
+                </div>
+            </div>
+        </header>
+
+        <%--Navigation--%>
+        <nav class="navbar navbar-btn">
+            <ul class="nav nav-tabs">
+                <li><a href="Dashboard.aspx"><span aria-hidden="true" class="glyphicon glyphicon-home"></span>&nbsp Home</a></li>
+                <li><a href="EmployeeIndex.aspx"><span aria-hidden="true" class="glyphicon glyphicon-globe"></span>&nbsp Index</a></li>
+                <li><a href="NewAcknowledgement.aspx"><span aria-hidden="true" class="glyphicon glyphicon-plus"></span>&nbsp New Acknowledgement</a></li>
+                <li><a href="Search.aspx"><span aria-hidden="true" class="glyphicon glyphicon-search"></span>&nbsp Search</a></li>
+                <li class="pull-right"><a id="btnLogout" runat="server" onserverclick="BtnLogout_Click"><span aria-hidden="true" class="glyphicon glyphicon-off"></span></a></li>
+                <li class="pull-right">
+                    <p class="navbar-text" id="parUserName" runat="server">First name Last name</p>
+                </li>
+            </ul>
+        </nav>
+
+        <%--Content--%>
+        <div>
+            <asp:ContentPlaceHolder ID="cphMain" runat="server" />
+        </div>
+    </form>
+
+    <%--Footer--%>
+    <footer class="container-fluid navbar-fixed-bottom">
+        <span><i class="glyphicon glyphicon-copyright-mark"></i>&nbspProxiad Bulgaria</span>
+    </footer>
+</body>
+</html>
