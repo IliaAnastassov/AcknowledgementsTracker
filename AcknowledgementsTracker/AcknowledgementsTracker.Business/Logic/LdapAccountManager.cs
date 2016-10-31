@@ -161,12 +161,13 @@
             string firstname = string.Empty;
             string lastname = string.Empty;
             var searcher = new DirectorySearcher(ldapConnection.RootEntry);
-            searcher.Filter = $"(|(uid=*{search}*)(givenName=*{search}*)(sn=*{search}*)(displayName=*{search}*)(cn=*{search}*))";
+            searcher.Filter = $"(|(uid=*{search}*)(givenName=*{search}*)(sn=*{search}*)(displayName=*{search}*)(cn=*{search}*)(description=*{search}*))";
 
             var givenNameProperty = "givenName";
             var surnameProperty = "sn";
             var mailProperty = "mail";
-            searcher.PropertiesToLoad.AddRange(new string[] { givenNameProperty, surnameProperty, mailProperty });
+            var teamProperty = "description";
+            searcher.PropertiesToLoad.AddRange(new string[] { givenNameProperty, surnameProperty, mailProperty, teamProperty });
 
             var results = searcher.FindAll();
 
@@ -193,11 +194,15 @@
                         user.Email = resultCollection.ToString();
                     }
 
+                    foreach (var resultColleciton in result.Properties[teamProperty])
+                    {
+                        user.Team = resultColleciton.ToString();
+                    }
+
                     if (user.Name != null && user.Email != null)
                     {
                         users.Add(user);
                     }
-
                 }
             }
 
@@ -254,8 +259,9 @@
             var givenNameProperty = "givenName";
             var surnameProperty = "sn";
             var mailProperty = "mail";
+            var teamProperty = "description";
 
-            searcher.PropertiesToLoad.AddRange(new string[] { givenNameProperty, surnameProperty, mailProperty });
+            searcher.PropertiesToLoad.AddRange(new string[] { givenNameProperty, surnameProperty, mailProperty, teamProperty });
 
             var results = searcher.FindAll();
 
@@ -280,6 +286,11 @@
                         user.Email = resultCollection.ToString();
                     }
 
+                    foreach (var resultCollection in result.Properties[teamProperty])
+                    {
+                        user.Team = resultCollection.ToString();
+                    }
+
                     // Set the full name of the user
                     user.Name = $"{firstname} {lastname}";
 
@@ -290,7 +301,8 @@
                 }
             }
 
-            return users;
+            // Order by name
+            return users.OrderBy(u => u.Name).ToList();
         }
     }
 }
