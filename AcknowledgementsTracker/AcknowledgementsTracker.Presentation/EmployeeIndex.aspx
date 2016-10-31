@@ -13,9 +13,9 @@
     </div>
 
     <div class="container-fluid">
-        <aside class="col-sm-3"></aside>
+        <aside class="col-sm-2"></aside>
 
-        <main class="col-sm-6">
+        <main class="col-sm-8">
             <fieldset>
                 <legend>Proxiad Employees and their acknowledgements</legend>
 
@@ -26,6 +26,7 @@
                         <asp:CommandField ShowSelectButton="True" />
                         <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name" />
                         <asp:BoundField DataField="Email" HeaderText="Email" SortExpression="Email" />
+                        <asp:BoundField DataField="Team" HeaderText="Team" SortExpression="Team" />
                     </Columns>
                 </asp:GridView>
                 <asp:ObjectDataSource ID="EmployeesODS" runat="server" SelectMethod="ReadAllUsersData"
@@ -33,7 +34,7 @@
             </fieldset>
         </main>
 
-        <aside class="col-sm-3"></aside>
+        <aside class="col-sm-2"></aside>
     </div>
 
 </asp:Content>

@@ -18,11 +18,6 @@
 
         protected void Page_Load(object sender, EventArgs e)
         {
-        }
-
-        protected override void OnInitComplete(EventArgs e)
-        {
-            base.OnInitComplete(e);
             username = HttpContext.Current.User.Identity.Name;
             BindGridViews();
         }
@@ -95,7 +90,7 @@
             return ldapAccountService.ReadUserFullName(username);
         }
 
-        protected string GetTags(IEnumerable<TagDTO> tags)
+        protected IEnumerable<string> GetTags(IEnumerable<TagDTO> tags)
         {
             var tagTitles = new List<string>();
 
@@ -104,7 +99,7 @@
                 tagTitles.Add(tag.Title);
             }
 
-            return string.Join(" ", tagTitles);
+            return tagTitles;
         }
     }
 }
