@@ -18,6 +18,11 @@
             return repository.GetByContent(usernames, search);
         }
 
+        public IEnumerable<AcknowledgementDTO> FindAcknowledgementsByTag(string tagTitle)
+        {
+            return repository.GetByTag(tagTitle);
+        }
+
         public IEnumerable<IUser> FindUsers(string search)
         {
             return LdapAccountManager.Instance.GetUsers(search);
