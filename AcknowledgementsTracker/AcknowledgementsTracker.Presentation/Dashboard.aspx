@@ -6,7 +6,7 @@
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-11">
+            <div class="col-sm-12">
                 <h2>Dashboard</h2>
             </div>
         </div>
@@ -30,9 +30,8 @@
                                 <ItemTemplate>
                                     <asp:Repeater ID="rptrTags" runat="server" DataSource='<%# GetTags((IEnumerable<AcknowledgementsTracker.DTO.TagDTO>)(Eval("Tags"))) %>'>
                                         <ItemTemplate>
-                                            <asp:HyperLink ID="lnkTag" runat="server" Text='<%# Container.DataItem %>'>
-                                            <%--TODO--%>
-                                            </asp:HyperLink>
+                                            <asp:HyperLink CssClass="label label-info" ID="lnkTag" runat="server" Text="<%# Container.DataItem %>"
+                                                NavigateUrl='<%# string.Format("~/AcknowledgementsByTag.aspx?tag={0}", Uri.EscapeDataString(Container.DataItem.ToString())) %>' />
                                         </ItemTemplate>
                                     </asp:Repeater>
                                 </ItemTemplate>
@@ -60,7 +59,12 @@
                         <Columns>
                             <asp:TemplateField HeaderText="Tags">
                                 <ItemTemplate>
-                                    <asp:Literal ID="ltrTags" runat="server" Text='<%#GetTags((IEnumerable<AcknowledgementsTracker.DTO.TagDTO>)(Eval("Tags"))) %>' />
+                                    <asp:Repeater ID="rptrTags" runat="server" DataSource='<%# GetTags((IEnumerable<AcknowledgementsTracker.DTO.TagDTO>)(Eval("Tags"))) %>'>
+                                        <ItemTemplate>
+                                            <asp:HyperLink CssClass="label label-info" ID="lnkTag" runat="server" Text="<%# Container.DataItem %>"
+                                                NavigateUrl='<%# string.Format("~/AcknowledgementsByTag.aspx?tag={0}", Uri.EscapeDataString(Container.DataItem.ToString())) %>' />
+                                        </ItemTemplate>
+                                    </asp:Repeater>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField>
@@ -95,7 +99,12 @@
                         <Columns>
                             <asp:TemplateField HeaderText="Tags">
                                 <ItemTemplate>
-                                    <asp:Literal ID="ltrTags" runat="server" Text='<%#GetTags((IEnumerable<AcknowledgementsTracker.DTO.TagDTO>)(Eval("Tags"))) %>' />
+                                    <asp:Repeater ID="rptrTags" runat="server" DataSource='<%# GetTags((IEnumerable<AcknowledgementsTracker.DTO.TagDTO>)(Eval("Tags"))) %>'>
+                                        <ItemTemplate>
+                                            <asp:HyperLink CssClass="label label-info" ID="lnkTag" runat="server" Text="<%# Container.DataItem %>"
+                                                NavigateUrl='<%# string.Format("~/AcknowledgementsByTag.aspx?tag={0}", Uri.EscapeDataString(Container.DataItem.ToString())) %>' />
+                                        </ItemTemplate>
+                                    </asp:Repeater>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField>
@@ -130,7 +139,12 @@
                         <Columns>
                             <asp:TemplateField HeaderText="Tags">
                                 <ItemTemplate>
-                                    <asp:Literal ID="ltrTags" runat="server" Text='<%#GetTags((IEnumerable<AcknowledgementsTracker.DTO.TagDTO>)(Eval("Tags"))) %>' />
+                                    <asp:Repeater ID="rptrTags" runat="server" DataSource='<%# GetTags((IEnumerable<AcknowledgementsTracker.DTO.TagDTO>)(Eval("Tags"))) %>'>
+                                        <ItemTemplate>
+                                            <asp:HyperLink CssClass="label label-info" ID="lnkTag" runat="server" Text="<%# Container.DataItem %>"
+                                                NavigateUrl='<%# string.Format("~/AcknowledgementsByTag.aspx?tag={0}", Uri.EscapeDataString(Container.DataItem.ToString())) %>' />
+                                        </ItemTemplate>
+                                    </asp:Repeater>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField>
@@ -165,7 +179,12 @@
                         <Columns>
                             <asp:TemplateField HeaderText="Tags">
                                 <ItemTemplate>
-                                    <asp:Literal ID="ltrTags" runat="server" Text='<%#GetTags((IEnumerable<AcknowledgementsTracker.DTO.TagDTO>)(Eval("Tags"))) %>' />
+                                    <asp:Repeater ID="rptrTags" runat="server" DataSource='<%# GetTags((IEnumerable<AcknowledgementsTracker.DTO.TagDTO>)(Eval("Tags"))) %>'>
+                                        <ItemTemplate>
+                                            <asp:HyperLink CssClass="label label-info" ID="lnkTag" runat="server" Text="<%# Container.DataItem %>"
+                                                NavigateUrl='<%# string.Format("~/AcknowledgementsByTag.aspx?tag={0}", Uri.EscapeDataString(Container.DataItem.ToString())) %>' />
+                                        </ItemTemplate>
+                                    </asp:Repeater>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField>
@@ -237,7 +256,16 @@
                     <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped" AllowPaging="true"
                         AutoGenerateColumns="false" ID="MostFrequentTagsAllTimeGV" runat="server">
                         <Columns>
-                            <asp:BoundField DataField="Key" HeaderText="Tag" />
+                            <asp:TemplateField>
+                                <HeaderTemplate>
+                                    <asp:Literal Text="Tag" runat="server" />
+                                </HeaderTemplate>
+                                <ItemTemplate>
+                                    <%--TODO--%>
+                                    <asp:HyperLink CssClass="label label-info" ID="lnkTag" runat="server" Text="<%# Container.DataItem %>"
+                                        NavigateUrl='<%# string.Format("~/AcknowledgementsByTag.aspx?tag={0}", Uri.EscapeDataString(Container.DataItem.ToString())) %>' />
+                                </ItemTemplate>
+                            </asp:TemplateField>
                             <asp:BoundField DataField="Value" HeaderText="Times mentioned" />
                         </Columns>
                     </asp:GridView>

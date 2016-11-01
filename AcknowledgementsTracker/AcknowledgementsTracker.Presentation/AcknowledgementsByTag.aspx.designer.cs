@@ -13,12 +13,21 @@ namespace AcknowledgementsTracker.Presentation {
     public partial class AcknowledgementsByTag {
         
         /// <summary>
-        /// LastAcknowledgemetsGridView control.
+        /// ltrTag control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView LastAcknowledgemetsGridView;
+        protected global::System.Web.UI.WebControls.Literal ltrTag;
+        
+        /// <summary>
+        /// gvAcknowledgementsByTag control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvAcknowledgementsByTag;
     }
 }

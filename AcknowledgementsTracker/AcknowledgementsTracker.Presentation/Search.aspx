@@ -7,7 +7,7 @@
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-11">
+            <div class="col-sm-12">
                 <h2>Search</h2>
             </div>
         </div>

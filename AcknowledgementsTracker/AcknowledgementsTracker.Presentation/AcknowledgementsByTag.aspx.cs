@@ -13,10 +13,19 @@
     public partial class AcknowledgementsByTag : System.Web.UI.Page
     {
         private ILdapAccountService ldapAccountService = new LdapAccountService();
+        private ISearchService searcher = new SearchService();
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            ltrTag.Text = Request.QueryString["tag"];
+            gvAcknowledgementsByTag.DataSource = searcher.FindAcknowledgementsByTag(ltrTag.Text);
+            gvAcknowledgementsByTag.DataBind();
+        }
 
+        protected void gvAcknowledgementsByTag_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            gvAcknowledgementsByTag.PageIndex = e.NewPageIndex;
+            gvAcknowledgementsByTag.DataBind();
         }
 
         protected string GetUserFullName(string username)

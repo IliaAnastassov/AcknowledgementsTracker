@@ -6,7 +6,7 @@
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-11">
+            <div class="col-sm-12">
                 <h2>Acknowledgements</h2>
             </div>
         </div>
@@ -20,14 +20,22 @@
 
                 <%--Acknowledgements By Tag--%>
                 <fieldset>
-                    <legend>Acknowledgements for </legend>
+                    <legend>Acknowledgements for
+                        <asp:Literal ID="ltrTag" runat="server" />
+                    </legend>
 
                     <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped"
-                        AllowPaging="True" AutoGenerateColumns="False" ID="LastAcknowledgemetsGridView" runat="server">
+                        AllowPaging="True" AutoGenerateColumns="False" ID="gvAcknowledgementsByTag" runat="server"
+                        OnPageIndexChanging="gvAcknowledgementsByTag_PageIndexChanging">
                         <Columns>
                             <asp:TemplateField HeaderText="Tags">
                                 <ItemTemplate>
-                                    <asp:Literal ID="ltrTags" runat="server" Text='<%#GetTags((IEnumerable<AcknowledgementsTracker.DTO.TagDTO>)(Eval("Tags"))) %>' />
+                                    <asp:Repeater ID="rptrTags" runat="server" DataSource='<%# GetTags((IEnumerable<AcknowledgementsTracker.DTO.TagDTO>)(Eval("Tags"))) %>'>
+                                        <ItemTemplate>
+                                            <asp:HyperLink CssClass="label label-info" ID="lnkTag" runat="server" Text="<%# Container.DataItem %>"
+                                                NavigateUrl='<%# string.Format("~/AcknowledgementsByTag.aspx?tag={0}", Uri.EscapeDataString(Container.DataItem.ToString())) %>' />
+                                        </ItemTemplate>
+                                    </asp:Repeater>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField>

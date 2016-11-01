@@ -4,8 +4,13 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="cphMain" runat="server">
-
-    <h2>New Acknowledgement</h2>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <h2>New Acknowledgement</h2>
+            </div>
+        </div>
+    </div>
 
     <div class="container-fluid">
         <div class="row">
