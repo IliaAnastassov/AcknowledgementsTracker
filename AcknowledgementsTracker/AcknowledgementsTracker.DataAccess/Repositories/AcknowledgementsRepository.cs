@@ -173,6 +173,17 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
             }
         }
 
+        public IEnumerable<AcknowledgementDTO> GetByTag(string tagTitle)
+        {
+            using (var context = new AcknowledgementsTrackerContext())
+            {
+                context.Database.Log = message => Debug.WriteLine(message);
+                Tag tag = context.Tags.Where(t => t.Title == tagTitle).FirstOrDefault();
+
+                return assembler.AssembleCollection(tag.Acknowledgements).ToList();
+            }
+        }
+
         public IEnumerable<AcknowledgementDTO> GetByContent(IEnumerable<string> usernames, string search)
         {
             List<Acknowledgement> acknowledgements = new List<Acknowledgement>();
