@@ -79,22 +79,33 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
             using (var context = new AcknowledgementsTrackerContext())
             {
                 context.Database.Log = message => Debug.WriteLine(message);
-                return context.Tags
-                    .OrderByDescending(t => t.Acknowledgements.Count()).Take(10)
+                var result = context.Tags
+                    .OrderByDescending(t => t.Acknowledgements.Count())
+                    .Take(10)
                     .ToDictionary(t => t.Title, t => t.Acknowledgements.Count());
+
+                return result;
             }
         }
 
+        // TODO: OPTIMIZE!!!
         public Dictionary<string, int> GetMostFrequentTagsThisMonth()
         {
             using (var context = new AcknowledgementsTrackerContext())
             {
+                var currentMonth = DateTime.Today.Month;
+                var currentYear = DateTime.Today.Year;
+
                 context.Database.Log = message => Debug.WriteLine(message);
-                return context.Tags
+                var result = context.Tags
                     .OrderByDescending(t => t.Acknowledgements
-                    .Where(a => a.DateCreated.Month == DateTime.Today.Month
-                    && a.DateCreated.Year == DateTime.Today.Year).Count()).Take(10)
-                    .ToDictionary(t => t.Title, t => t.Acknowledgements.Count());
+                                             .Where(a => a.DateCreated.Month == currentMonth && a.DateCreated.Year == currentYear)
+                                             .Count())
+                    .Where(t => t.Acknowledgements.Where(a => a.DateCreated.Month == currentMonth && a.DateCreated.Year == currentYear).Count() > 0)
+                    .Take(10)
+                    .ToDictionary(t => t.Title, t => t.Acknowledgements.Where(a => a.DateCreated.Month == currentMonth && a.DateCreated.Year == currentYear).Count());
+
+                return result;
             }
         }
 
