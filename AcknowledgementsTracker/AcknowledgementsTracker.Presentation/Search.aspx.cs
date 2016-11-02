@@ -76,22 +76,5 @@
             AcknowledgementsResultsGridView.DataBind();
             fldsAcknowledgementsResults.Visible = true;
         }
-
-        protected string GetUserFullName(string username)
-        {
-            return ldapAccountService.ReadUserFullName(username);
-        }
-
-        protected string GetTags(IEnumerable<TagDTO> tags)
-        {
-            var tagTitles = new List<string>();
-
-            foreach (var tag in tags)
-            {
-                tagTitles.Add(tag.Title);
-            }
-
-            return string.Join(" ", tagTitles);
-        }
     }
 }

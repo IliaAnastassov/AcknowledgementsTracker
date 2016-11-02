@@ -77,7 +77,8 @@
                         <Columns>
                             <asp:TemplateField HeaderText="Tags">
                                 <ItemTemplate>
-                                    <asp:Literal ID="ltrTags" runat="server" Text='<%#GetTags((IEnumerable<AcknowledgementsTracker.DTO.TagDTO>)(Eval("Tags"))) %>' />
+                                    <asp:Literal ID="ltrTags" runat="server" Text='<%# new AcknowledgementsTracker.Presentation.UIHelperService()
+                                            .ReadTags((IEnumerable<AcknowledgementsTracker.DTO.TagDTO>)(Eval("Tags"))) %>' />
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField>
@@ -85,7 +86,8 @@
                                     <asp:Literal Text="To" runat="server" />
                                 </HeaderTemplate>
                                 <ItemTemplate>
-                                    <asp:Literal ID="ltrBeneficiaryName" runat="server" Text='<%#GetUserFullName(Convert.ToString(Eval("BeneficiaryUsername")))%>' />
+                                    <asp:Literal ID="ltrBeneficiaryName" runat="server" Text='<%# new AcknowledgementsTracker.Presentation.UIHelperService()
+                                            .ReadUserFullName(Convert.ToString(Eval("BeneficiaryUsername")))%>' />
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:BoundField DataField="Text" HeaderText="Text" SortExpression="Text" />
@@ -94,7 +96,8 @@
                                     <asp:Literal Text="From" runat="server" />
                                 </HeaderTemplate>
                                 <ItemTemplate>
-                                    <asp:Literal ID="ltrAuthorName" runat="server" Text='<%#GetUserFullName(Convert.ToString(Eval("AuthorUsername")))%>' />
+                                    <asp:Literal ID="ltrAuthorName" runat="server" Text='<%# new AcknowledgementsTracker.Presentation.UIHelperService()
+                                            .ReadUserFullName(Convert.ToString(Eval("AuthorUsername")))%>' />
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:BoundField DataField="DateCreated" HeaderText="Date Created" SortExpression="DateCreated" />

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/LoggedIn.Master" AutoEventWireup="true" CodeBehind="AcknowledgementsByTag.aspx.cs" Inherits="AcknowledgementsTracker.Presentation.AcknowledgementsByTag" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/LoggedIn.Master" AutoEventWireup="true" CodeBehind="AcknowledgementsByUser.aspx.cs" Inherits="AcknowledgementsTracker.Presentation.AcknowledgementsByUser" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -7,7 +7,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
-                <h2>Acknowledgements</h2>
+                <h2><asp:Literal ID="ltrUser" runat="server" />'s Acknowledgements</h2>
             </div>
         </div>
     </div>
@@ -18,15 +18,13 @@
 
             <main class="col-sm-8">
 
-                <%--Acknowledgements By Tag--%>
+                <%--Acknowledgements By User--%>
                 <fieldset>
-                    <legend>Acknowledgements for
-                        <asp:Literal ID="ltrTag" runat="server" />
-                    </legend>
+                    <legend>Acknowledgements received</legend>
 
                     <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped"
-                        AllowPaging="True" AutoGenerateColumns="False" ID="gvAcknowledgementsByTag" runat="server"
-                        OnPageIndexChanging="gvAcknowledgementsByTag_PageIndexChanging">
+                        AllowPaging="True" AutoGenerateColumns="False" ID="gvAcknowledgementsReceived" runat="server"
+                        OnPageIndexChanging="gvAcknowledgementsReceived_PageIndexChanging">
                         <Columns>
                             <asp:TemplateField HeaderText="Tags">
                                 <ItemTemplate>

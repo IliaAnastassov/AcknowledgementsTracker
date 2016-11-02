@@ -12,7 +12,6 @@
     public partial class Dashboard : Page
     {
         private string username;
-        private ILdapAccountService ldapAccountService = new LdapAccountService();
         private IAcknowledgementDtoService acknowledgementDtoService = new AcknowledgementDtoService();
         private ITagDtoService tagDtoService = new TagDtoService();
 
@@ -83,23 +82,6 @@
         {
             ThisWeeksAcknowledgementsGridView.PageIndex = e.NewPageIndex;
             ThisWeeksAcknowledgementsGridView.DataBind();
-        }
-
-        protected string GetUserFullName(string username)
-        {
-            return ldapAccountService.ReadUserFullName(username);
-        }
-
-        protected IEnumerable<string> GetTags(IEnumerable<TagDTO> tags)
-        {
-            var tagTitles = new List<string>();
-
-            foreach (var tag in tags)
-            {
-                tagTitles.Add(tag.Title);
-            }
-
-            return tagTitles;
         }
     }
 }

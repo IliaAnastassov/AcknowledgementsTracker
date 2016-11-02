@@ -12,7 +12,6 @@
 
     public partial class AcknowledgementsByTag : System.Web.UI.Page
     {
-        private ILdapAccountService ldapAccountService = new LdapAccountService();
         private ISearchService searcher = new SearchService();
 
         protected void Page_Load(object sender, EventArgs e)
@@ -26,23 +25,6 @@
         {
             gvAcknowledgementsByTag.PageIndex = e.NewPageIndex;
             gvAcknowledgementsByTag.DataBind();
-        }
-
-        protected string GetUserFullName(string username)
-        {
-            return ldapAccountService.ReadUserFullName(username);
-        }
-
-        protected IEnumerable<string> GetTags(IEnumerable<TagDTO> tags)
-        {
-            var tagTitles = new List<string>();
-
-            foreach (var tag in tags)
-            {
-                tagTitles.Add(tag.Title);
-            }
-
-            return tagTitles;
         }
     }
 }

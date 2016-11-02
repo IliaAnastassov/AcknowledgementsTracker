@@ -75,6 +75,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AcknowledgementsByTag.aspx" />
+    <Content Include="AcknowledgementsByUser.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -126,6 +127,13 @@
     </Compile>
     <Compile Include="AcknowledgementsByTag.aspx.designer.cs">
       <DependentUpon>AcknowledgementsByTag.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AcknowledgementsByUser.aspx.cs">
+      <DependentUpon>AcknowledgementsByUser.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AcknowledgementsByUser.aspx.designer.cs">
+      <DependentUpon>AcknowledgementsByUser.aspx</DependentUpon>
     </Compile>
     <Compile Include="LoggedIn.Master.cs">
       <DependentUpon>LoggedIn.Master</DependentUpon>
@@ -180,6 +188,7 @@
     <Compile Include="Search.aspx.designer.cs">
       <DependentUpon>Search.aspx</DependentUpon>
     </Compile>
+    <Compile Include="UIHelperService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
