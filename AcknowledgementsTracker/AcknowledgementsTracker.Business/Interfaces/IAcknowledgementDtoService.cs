@@ -7,7 +7,9 @@
     {
         void Create(AcknowledgementDTO dto, IEnumerable<string> tags);
 
-        IEnumerable<AcknowledgementDTO> Read(string username);
+        IEnumerable<AcknowledgementDTO> ReadReceived(string username);
+
+        IEnumerable<AcknowledgementDTO> ReadGiven(string username);
 
         IEnumerable<AcknowledgementDTO> ReadLast();
 

@@ -15,9 +15,14 @@
             repository.Add(dto, tags);
         }
 
-        public IEnumerable<AcknowledgementDTO> Read(string username)
+        public IEnumerable<AcknowledgementDTO> ReadReceived(string username)
         {
-            return repository.GetAcknowledgements(username).ToList();
+            return repository.GetReceived(username).ToList();
+        }
+
+        public IEnumerable<AcknowledgementDTO> ReadGiven(string username)
+        {
+            return repository.GetGiven(username).ToList();
         }
 
         public IEnumerable<AcknowledgementDTO> ReadLast()

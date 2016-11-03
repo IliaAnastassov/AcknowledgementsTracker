@@ -68,7 +68,15 @@
             searcher.PropertiesToLoad.Add(givenNameProperty);
             searcher.PropertiesToLoad.Add(surnameProperty);
 
-            var result = searcher.FindOne();
+            SearchResult result;
+            try
+            {
+                result = searcher.FindOne();
+            }
+            catch (ArgumentException)
+            {
+                throw new Exception("User not found");
+            }
 
             if (result != null)
             {
@@ -95,7 +103,15 @@
             var searchedProperty = "uid";
             searcher.PropertiesToLoad.Add(searchedProperty);
 
-            var result = searcher.FindOne();
+            SearchResult result;
+            try
+            {
+                result = searcher.FindOne();
+            }
+            catch (ArgumentException)
+            {
+                throw new Exception("User not found");
+            }
 
             if (result != null)
             {
@@ -117,7 +133,15 @@
             var searchedProperty = "mail";
             searcher.PropertiesToLoad.Add(searchedProperty);
 
-            var result = searcher.FindOne();
+            SearchResult result;
+            try
+            {
+                result = searcher.FindOne();
+            }
+            catch (ArgumentException)
+            {
+                throw new Exception("User not found");
+            }
 
             if (result != null)
             {
@@ -139,7 +163,15 @@
             var searchedProperty = "uid";
             searcher.PropertiesToLoad.Add(searchedProperty);
 
-            var results = searcher.FindAll();
+            SearchResultCollection results;
+            try
+            {
+                results = searcher.FindAll();
+            }
+            catch (ArgumentException)
+            {
+                throw new Exception("User not found");
+            }
 
             if (results != null)
             {
@@ -158,8 +190,10 @@
         public IEnumerable<IUser> GetUsers(string search)
         {
             List<User> users = new List<User>();
-            string firstname = string.Empty;
-            string lastname = string.Empty;
+            var firstname = string.Empty;
+            var lastname = string.Empty;
+            var email = string.Empty;
+            var team = string.Empty;
             var searcher = new DirectorySearcher(ldapConnection.RootEntry);
             searcher.Filter = $"(|(uid=*{search}*)(givenName=*{search}*)(sn=*{search}*)(displayName=*{search}*)(cn=*{search}*)(description=*{search}*))";
 
@@ -169,14 +203,20 @@
             var teamProperty = "description";
             searcher.PropertiesToLoad.AddRange(new string[] { givenNameProperty, surnameProperty, mailProperty, teamProperty });
 
-            var results = searcher.FindAll();
+            SearchResultCollection results;
+            try
+            {
+                results = searcher.FindAll();
+            }
+            catch (ArgumentException)
+            {
+                throw new Exception("User not found");
+            }
 
             if (results != null)
             {
                 foreach (SearchResult result in results)
                 {
-                    User user = new User();
-
                     foreach (var resultCollection in result.Properties[givenNameProperty])
                     {
                         firstname = resultCollection.ToString();
@@ -187,20 +227,20 @@
                         lastname = resultCollection.ToString();
                     }
 
-                    user.Name = $"{firstname} {lastname}";
-
                     foreach (var resultCollection in result.Properties[mailProperty])
                     {
-                        user.Email = resultCollection.ToString();
+                        email = resultCollection.ToString();
                     }
 
                     foreach (var resultColleciton in result.Properties[teamProperty])
                     {
-                        user.Team = resultColleciton.ToString();
+                        team = resultColleciton.ToString();
                     }
 
-                    if (user.Name != null && user.Email != null)
+                    // Check explicitly for first name AND last name AND proxiad email
+                    if (email != null && email.Contains("proxiad") && firstname != null && lastname != null)
                     {
+                        var user = new User($"{firstname} {lastname}", email, team);
                         users.Add(user);
                     }
                 }
@@ -212,9 +252,9 @@
 
         public IUser GetUserData(string username)
         {
-            User user = new User();
-            string firstname = string.Empty;
-            string lastname = string.Empty;
+            var firstname = string.Empty;
+            var lastname = string.Empty;
+            var email = string.Empty;
             var searcher = new DirectorySearcher(ldapConnection.SearchRoot);
             searcher.Filter = $"(uid={username})";
 
@@ -224,7 +264,15 @@
 
             searcher.PropertiesToLoad.AddRange(new string[] { givenNameProperty, surnameProperty, mailProperty });
 
-            var result = searcher.FindOne();
+            SearchResult result;
+            try
+            {
+                result = searcher.FindOne();
+            }
+            catch (ArgumentException)
+            {
+                throw new Exception("User not found");
+            }
 
             if (result != null)
             {
@@ -240,20 +288,20 @@
 
                 foreach (var resultCollection in result.Properties[mailProperty])
                 {
-                    user.Email = resultCollection.ToString();
+                    email = resultCollection.ToString();
                 }
             }
 
-            user.Name = $"{firstname} {lastname}";
-
-            return user;
+            return new User($"{firstname} {lastname}", email);
         }
 
         public IEnumerable<IUser> GetAllUsersData()
         {
             List<User> users = new List<User>();
-            string firstname = string.Empty;
-            string lastname = string.Empty;
+            var firstname = string.Empty;
+            var lastname = string.Empty;
+            var email = string.Empty;
+            var team = string.Empty;
             var searcher = new DirectorySearcher(ldapConnection.SearchRoot);
 
             var givenNameProperty = "givenName";
@@ -263,13 +311,20 @@
 
             searcher.PropertiesToLoad.AddRange(new string[] { givenNameProperty, surnameProperty, mailProperty, teamProperty });
 
-            var results = searcher.FindAll();
+            SearchResultCollection results;
+            try
+            {
+                results = searcher.FindAll();
+            }
+            catch (ArgumentException)
+            {
+                throw new Exception("User not found");
+            }
 
             if (results != null)
             {
                 foreach (SearchResult result in results)
                 {
-                    var user = new User();
 
                     foreach (var resultCollection in result.Properties[givenNameProperty])
                     {
@@ -283,19 +338,18 @@
 
                     foreach (var resultCollection in result.Properties[mailProperty])
                     {
-                        user.Email = resultCollection.ToString();
+                        email = resultCollection.ToString();
                     }
 
                     foreach (var resultCollection in result.Properties[teamProperty])
                     {
-                        user.Team = resultCollection.ToString();
+                        team = resultCollection.ToString();
                     }
 
-                    // Set the full name of the user
-                    user.Name = $"{firstname} {lastname}";
-
-                    if (user.Email != null && user.Name != null)
+                    // Check explicitly for first name AND last name AND proxiad email
+                    if (email != null && email.Contains("proxiad") && firstname != null && lastname != null)
                     {
+                        var user = new User($"{firstname} {lastname}", email, team);
                         users.Add(user);
                     }
                 }
