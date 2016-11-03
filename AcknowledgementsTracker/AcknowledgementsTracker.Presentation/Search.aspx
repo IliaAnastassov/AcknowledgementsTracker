@@ -8,7 +8,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
-                <h2>Search</h2>
+                <h2 class="pageHeader">Search</h2>
             </div>
         </div>
     </div>
@@ -33,9 +33,9 @@
                         <%--Buttons--%>
                         <div class="form-group">
                             <div class="col-lg-10 col-lg-offset-2">
-                                <asp:LinkButton CssClass="btn btn-info" ID="btnSearch" runat="server" OnClick="btnSearch_Click" TabIndex="200"><span aria-hidden="true" class="glyphicon glyphicon-search"></span></asp:LinkButton>
-                                <button type="reset" class="btn btn-default" id="ResetBtn" runat="server" onserverclick="ResetBtn_ServerClick" tabindex="300"><i class="glyphicon glyphicon-repeat"></i></button>
-                                <a href="Dashboard.aspx" class="btn btn-default" tabindex="400"><i class="glyphicon glyphicon-remove"></i></a>
+                                <asp:LinkButton CssClass="btn btn-info mt-10" ID="btnSearch" runat="server" OnClick="btnSearch_Click" TabIndex="200"><span aria-hidden="true" class="glyphicon glyphicon-search"></span></asp:LinkButton>
+                                <button type="reset" class="btn btn-default mt-10" id="ResetBtn" runat="server" onserverclick="ResetBtn_ServerClick" tabindex="300"><i class="glyphicon glyphicon-repeat"></i></button>
+                                <a href="Dashboard.aspx" class="btn btn-default mt-10" tabindex="400"><i class="glyphicon glyphicon-remove"></i></a>
                             </div>
                         </div>
                     </asp:Panel>

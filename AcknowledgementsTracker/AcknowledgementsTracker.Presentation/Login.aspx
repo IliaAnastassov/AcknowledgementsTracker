@@ -7,7 +7,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
-                <h2>Login</h2>
+                <h2 class="pageHeader">Login</h2>
             </div>
         </div>
     </div>
@@ -22,24 +22,24 @@
 
                     <%--Input--%>
                     <div class="form-group">
-                        <label for="UsernameTextBox" class="col-lg-2 control-label text-right">Username</label>
+                        <label for="txtbUsername" class="col-lg-2 control-label text-right">Username</label>
                         <div class="col-lg-10">
-                            <input type="text" class="form-control" placeholder="LDAP username" required id="UsernameTextBox" runat="server">
+                            <input type="text" class="form-control" placeholder="LDAP username" required id="txtbUsername" runat="server">
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="PasswordTextBox" class="col-lg-2 control-label text-right">Password</label>
+                        <label for="txtbPassword" class="col-lg-2 control-label text-right">Password</label>
                         <div class="col-lg-10">
-                            <input type="password" class="form-control" placeholder="LDAP password" required id="PasswordTextBox" runat="server">
+                            <input type="password" class="form-control" placeholder="LDAP password" required id="txtbPassword" runat="server">
                         </div>
                     </div>
 
                     <%--Buttons--%>
                     <div class="form-group">
                         <div class="col-lg-10 col-lg-offset-2">
-                            <button type="submit" class="btn btn-info" onserverclick="Login_Click" id="LoginBtn" runat="server"><i class="glyphicon glyphicon-ok"></i></button>
-                            <button type="reset" class="btn btn-default" onserverclick="ResetBtn_ServerClick" id="ResetBtn" runat="server"><i class="glyphicon glyphicon-repeat"></i></button>
+                            <button type="submit" class="btn btn-info mt-10" onserverclick="Login_Click" id="LoginBtn" runat="server"><i class="glyphicon glyphicon-ok"></i></button>
+                            <button type="reset" class="btn btn-default mt-10" onserverclick="ResetBtn_ServerClick" id="ResetBtn" runat="server"><i class="glyphicon glyphicon-repeat"></i></button>
                         </div>
                     </div>
                 </fieldset>

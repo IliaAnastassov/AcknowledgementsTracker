@@ -13,22 +13,22 @@ namespace AcknowledgementsTracker.Presentation {
     public partial class Login {
         
         /// <summary>
-        /// UsernameTextBox control.
+        /// txtbUsername control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText UsernameTextBox;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtbUsername;
         
         /// <summary>
-        /// PasswordTextBox control.
+        /// txtbPassword control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputPassword PasswordTextBox;
+        protected global::System.Web.UI.HtmlControls.HtmlInputPassword txtbPassword;
         
         /// <summary>
         /// LoginBtn control.

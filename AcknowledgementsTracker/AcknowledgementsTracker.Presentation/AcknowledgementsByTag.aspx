@@ -7,7 +7,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
-                <h2>Acknowledgements</h2>
+                <h2 class="pageHeader">Acknowledgements</h2>
             </div>
         </div>
     </div>
@@ -45,8 +45,9 @@
                                     <asp:Literal Text="To" runat="server" />
                                 </HeaderTemplate>
                                 <ItemTemplate>
-                                    <asp:Literal ID="ltrBeneficiaryName" runat="server" Text='<%# new AcknowledgementsTracker.Presentation.UIHelperService()
-                                            .ReadUserFullName(Convert.ToString(Eval("BeneficiaryUsername")))%>' />
+                                    <asp:HyperLink ID="lnkBeneficiaryName" runat="server" Text='<%# new AcknowledgementsTracker.Presentation.UIHelperService()
+                                            .ReadUserFullName(Convert.ToString(Eval("BeneficiaryUsername"))) %>'
+                                        NavigateUrl='<%# string.Format("~/AcknowledgementsByUser.aspx?user={0}", Convert.ToString(Eval("BeneficiaryUsername"))) %>' />
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:BoundField DataField="Text" HeaderText="Text" SortExpression="Text" />
@@ -55,8 +56,9 @@
                                     <asp:Literal Text="From" runat="server" />
                                 </HeaderTemplate>
                                 <ItemTemplate>
-                                    <asp:Literal ID="ltrAuthorName" runat="server" Text='<%# new AcknowledgementsTracker.Presentation.UIHelperService()
-                                            .ReadUserFullName(Convert.ToString(Eval("AuthorUsername")))%>' />
+                                    <asp:HyperLink ID="lnkAuthorName" runat="server" Text='<%# new AcknowledgementsTracker.Presentation.UIHelperService()
+                                            .ReadUserFullName(Convert.ToString(Eval("AuthorUsername"))) %>'
+                                        NavigateUrl='<%# string.Format("~/AcknowledgementsByUser.aspx?user={0}", Convert.ToString(Eval("AuthorUsername"))) %>' />
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:BoundField DataField="DateCreated" HeaderText="Date Created" SortExpression="DateCreated" />

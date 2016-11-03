@@ -24,7 +24,7 @@
         private void BindGridViews()
         {
             // Bind user acknowledgements
-            UserAcknowledgementsGridView.DataSource = acknowledgementDtoService.Read(username);
+            UserAcknowledgementsGridView.DataSource = acknowledgementDtoService.ReadReceived(username);
             UserAcknowledgementsGridView.DataBind();
 
             // Bind last acknowledgements

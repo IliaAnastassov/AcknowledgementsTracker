@@ -7,7 +7,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
-                <h2>Employee Index</h2>
+                <h2 class="pageHeader">Employee Index</h2>
             </div>
         </div>
     </div>
@@ -18,20 +18,26 @@
 
             <main class="col-sm-8">
                 <fieldset>
-                    <legend>Proxiad Employees and their acknowledgements</legend>
+                    <legend>Proxiad Employees</legend>
 
                     <%--Data--%>
                     <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped"
-                        AllowPaging="True" AutoGenerateColumns="False" DataSourceID="EmployeesODS" ID="EmployeesGridView" runat="server">
+                        AllowPaging="True" AutoGenerateColumns="False" ID="gvEmployees" runat="server" OnPageIndexChanging="gvEmployees_PageIndexChanging">
                         <Columns>
-                            <asp:CommandField ShowSelectButton="True" />
-                            <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name" />
+                            <asp:TemplateField>
+                                <HeaderTemplate>
+                                    <asp:Literal Text="Name" runat="server" />
+                                </HeaderTemplate>
+                                <ItemTemplate>
+                                    <asp:HyperLink ID="lnkName" runat="server" Text='<%# Eval("Name") %>'
+                                        NavigateUrl='<%# string.Format("~/AcknowledgementsByUser.aspx?user={0}",
+                                            new AcknowledgementsTracker.Business.Logic.LdapAccountService().ReadUserUsername(Convert.ToString(Eval("Name")))) %>' />
+                                </ItemTemplate>
+                            </asp:TemplateField>
                             <asp:BoundField DataField="Email" HeaderText="Email" SortExpression="Email" />
                             <asp:BoundField DataField="Team" HeaderText="Team" SortExpression="Team" />
                         </Columns>
                     </asp:GridView>
-                    <asp:ObjectDataSource ID="EmployeesODS" runat="server" SelectMethod="ReadAllUsersData"
-                        TypeName="AcknowledgementsTracker.Business.Logic.LdapAccountService"></asp:ObjectDataSource>
                 </fieldset>
             </main>
 

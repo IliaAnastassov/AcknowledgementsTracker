@@ -13,18 +13,19 @@
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            txtbUsername.Focus();
         }
 
         protected void Login_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrWhiteSpace(UsernameTextBox.Value)
-                && !string.IsNullOrWhiteSpace(PasswordTextBox.Value))
+            if (!string.IsNullOrWhiteSpace(txtbUsername.Value)
+                && !string.IsNullOrWhiteSpace(txtbPassword.Value))
             {
                 ILdapSettingsService settings = new LdapSettingsService();
                 settings.ServerPath = WebConfigurationManager.AppSettings["LDAPServerPath"];
                 settings.SearchRoot = WebConfigurationManager.AppSettings["LDAPSearchRoot"];
-                settings.Username = UsernameTextBox.Value;
-                settings.UserPassword = PasswordTextBox.Value;
+                settings.Username = txtbUsername.Value;
+                settings.UserPassword = txtbPassword.Value;
 
                 try
                 {
@@ -35,7 +36,7 @@
                         ILdapAccountManager ldapManager = LdapAccountManager.Instance;
                         ldapManager.Setup(ldapConnection);
 
-                        var authenticationTicket = new FormsAuthenticationTicket(1, UsernameTextBox.Value, DateTime.Now, DateTime.Now.AddMinutes(30), true, string.Empty);
+                        var authenticationTicket = new FormsAuthenticationTicket(1, txtbUsername.Value, DateTime.Now, DateTime.Now.AddMinutes(30), true, string.Empty);
                         var encryptedTicket = FormsAuthentication.Encrypt(authenticationTicket);
 
                         var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
@@ -65,8 +66,8 @@
 
         protected void ResetBtn_ServerClick(object sender, EventArgs e)
         {
-            UsernameTextBox.Value = string.Empty;
-            PasswordTextBox.Value = string.Empty;
+            txtbUsername.Value = string.Empty;
+            txtbPassword.Value = string.Empty;
         }
     }
 }

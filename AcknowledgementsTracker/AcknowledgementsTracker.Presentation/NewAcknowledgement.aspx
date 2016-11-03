@@ -7,7 +7,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
-                <h2>New Acknowledgement</h2>
+                <h2 class="pageHeader">New Acknowledgement</h2>
             </div>
         </div>
     </div>
@@ -45,16 +45,21 @@
                     <%--Buttons--%>
                     <div class="form-group">
                         <div class="col-lg-10 col-lg-offset-2">
-                            <button class="btn btn-info" id="CreateNewAcknowledgementBtn" runat="server" onserverclick="CreateNewAcknowledgementBtn_Click"><i class="glyphicon glyphicon-ok"></i></button>
-                            <button type="reset" class="btn btn-default" id="ResetBtn" runat="server" onserverclick="ResetBtn_ServerClick"><i class="glyphicon glyphicon-repeat"></i></button>
-                            <a href="Dashboard.aspx" class="btn btn-default"><i class="glyphicon glyphicon-remove"></i></a>
+                            <button class="btn btn-info mt-10" id="CreateNewAcknowledgementBtn" runat="server" onserverclick="CreateNewAcknowledgementBtn_Click"><i class="glyphicon glyphicon-ok"></i></button>
+                            <button type="reset" class="btn btn-default mt-10" id="ResetBtn" runat="server" onserverclick="ResetBtn_ServerClick"><i class="glyphicon glyphicon-repeat"></i></button>
+                            <a href="Dashboard.aspx" class="btn btn-default mt-10"><i class="glyphicon glyphicon-remove"></i></a>
                         </div>
                     </div>
                 </fieldset>
 
                 <%--Error label--%>
                 <div id="ErrorMsg">
-                    <label class="alert-warning" id="ErrorLabel" runat="server"></label>
+                    <label class="alert-warning" id="lblError" runat="server" />
+                </div>
+
+                <%--Success label--%>
+                <div>
+                    <label class="alert-success" id="lblSuccess" runat="server" />
                 </div>
             </main>
 

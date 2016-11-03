@@ -13,9 +13,19 @@
         private IAcknowledgementDtoService acknowledgementDtoService = new AcknowledgementDtoService();
         private ITagDtoService tagDtoService = new TagDtoService();
         private ILdapAccountService ldapAccountService = new LdapAccountService();
+        private UIHelper helper = new UIHelper();
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Request.QueryString["beneficiary"] != null)
+            {
+                BeneficiaryTextBox.Value = helper.GetUserFullName(Request.QueryString["beneficiary"]);
+                ContentTextBox.Focus();
+            }
+            else
+            {
+                BeneficiaryTextBox.Focus();
+            }
         }
 
         protected void CreateNewAcknowledgementBtn_Click(object sender, EventArgs e)
@@ -37,14 +47,19 @@
                 // Add acknowledgement to database
                 acknowledgementDtoService.Create(acknowledgementDto, tags);
 
-                // Clear all entries
-                BeneficiaryTextBox.Value = string.Empty;
+                // Clear all entries if necessary
+                if (Request.QueryString["beneficiary"] == null)
+                {
+                    BeneficiaryTextBox.Value = string.Empty;
+                }
                 ContentTextBox.Value = string.Empty;
                 TagsTextBox.Value = string.Empty;
+
+                lblSuccess.InnerText = "New acknowledgement created";
             }
             else
             {
-                ErrorLabel.InnerText = "Please fill all the boxes";
+                lblError.InnerText = "Please fill all the boxes";
             }
         }
 

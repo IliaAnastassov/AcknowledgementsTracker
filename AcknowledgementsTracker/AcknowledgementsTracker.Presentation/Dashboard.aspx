@@ -7,7 +7,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
-                <h2>Dashboard</h2>
+                <h2 class="pageHeader">Dashboard</h2>
             </div>
         </div>
     </div>
@@ -249,8 +249,9 @@
                                     <asp:Literal Text="Name" runat="server" />
                                 </HeaderTemplate>
                                 <ItemTemplate>
-                                    <asp:Literal ID="ltrEmployeeName" runat="server" Text='<%# new AcknowledgementsTracker.Presentation.UIHelperService()
-                                            .ReadUserFullName(Convert.ToString(Eval("Key"))) %>' />
+                                    <asp:HyperLink ID="lnkName" runat="server" Text='<%# new AcknowledgementsTracker.Presentation.UIHelperService()
+                                            .ReadUserFullName(Convert.ToString(Eval("Key"))) %>'
+                                        NavigateUrl='<%# string.Format("~/AcknowledgementsByUser.aspx?user={0}", Convert.ToString(Eval("Key"))) %>' />
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:BoundField DataField="Value" HeaderText="Number of Acknowledgements" />
@@ -270,8 +271,9 @@
                                     <asp:Literal Text="Name" runat="server" />
                                 </HeaderTemplate>
                                 <ItemTemplate>
-                                    <asp:Literal ID="ltrEmployeeName" runat="server" Text='<%# new AcknowledgementsTracker.Presentation.UIHelperService()
-                                            .ReadUserFullName(Convert.ToString(Eval("Key"))) %>' />
+                                    <asp:HyperLink ID="lnkName" runat="server" Text='<%# new AcknowledgementsTracker.Presentation.UIHelperService()
+                                            .ReadUserFullName(Convert.ToString(Eval("Key"))) %>'
+                                        NavigateUrl='<%# string.Format("~/AcknowledgementsByUser.aspx?user={0}", Convert.ToString(Eval("Key"))) %>' />
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:BoundField DataField="Value" HeaderText="Number of Acknowledgements" />
