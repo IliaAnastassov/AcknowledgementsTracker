@@ -48,7 +48,7 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
             return assembler.AssembleCollection(acknowledgements);
         }
 
-        public IEnumerable<AcknowledgementDTO> GetAcknowledgements(string username)
+        public IEnumerable<AcknowledgementDTO> GetReceived(string username)
         {
             IEnumerable<Acknowledgement> acknowledgements;
 
@@ -57,6 +57,20 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
                 context.Database.Log = message => Debug.WriteLine(message);
                 acknowledgements = context.Acknowledgements.AsNoTracking().Include(a => a.Tags)
                     .Where(a => a.BeneficiaryUsername == username).OrderByDescending(a => a.DateCreated).ToList();
+            }
+
+            return assembler.AssembleCollection(acknowledgements);
+        }
+
+        public IEnumerable<AcknowledgementDTO> GetGiven(string username)
+        {
+            IEnumerable<Acknowledgement> acknowledgements;
+
+            using (var context = new AcknowledgementsTrackerContext())
+            {
+                context.Database.Log = message => Debug.WriteLine(message);
+                acknowledgements = context.Acknowledgements.AsNoTracking().Include(a => a.Tags)
+                    .Where(a => a.AuthorUsername == username).OrderByDescending(a => a.DateCreated).ToList();
             }
 
             return assembler.AssembleCollection(acknowledgements);
