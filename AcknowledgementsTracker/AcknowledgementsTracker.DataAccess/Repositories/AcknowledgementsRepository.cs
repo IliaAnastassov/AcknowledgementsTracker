@@ -19,7 +19,7 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
 
     public class AcknowledgementsRepository : IRepository<AcknowledgementDTO>
     {
-        private IAssembler<Acknowledgement, AcknowledgementDTO> assembler = new AcknowledgementDtoAssembler();
+        private IAssembler<Acknowledgement, AcknowledgementDTO> acknowledgementsAssembler = new AcknowledgementDtoAssembler();
         private TagsRepository tagsRepo = new TagsRepository();
 
         public AcknowledgementDTO Get(int id)
@@ -32,7 +32,7 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
                 acknowledgement = context.Acknowledgements.Find(id);
             }
 
-            return assembler.Assemble(acknowledgement);
+            return acknowledgementsAssembler.Assemble(acknowledgement);
         }
 
         public IEnumerable<AcknowledgementDTO> GetAll()
@@ -45,7 +45,7 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
                 acknowledgements = context.Acknowledgements.ToList();
             }
 
-            return assembler.AssembleCollection(acknowledgements);
+            return acknowledgementsAssembler.AssembleCollection(acknowledgements);
         }
 
         public IEnumerable<AcknowledgementDTO> GetReceived(string username)
@@ -59,7 +59,7 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
                     .Where(a => a.BeneficiaryUsername == username).OrderByDescending(a => a.DateCreated).ToList();
             }
 
-            return assembler.AssembleCollection(acknowledgements);
+            return acknowledgementsAssembler.AssembleCollection(acknowledgements);
         }
 
         public IEnumerable<AcknowledgementDTO> GetGiven(string username)
@@ -73,7 +73,7 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
                     .Where(a => a.AuthorUsername == username).OrderByDescending(a => a.DateCreated).ToList();
             }
 
-            return assembler.AssembleCollection(acknowledgements);
+            return acknowledgementsAssembler.AssembleCollection(acknowledgements);
         }
 
         public IEnumerable<AcknowledgementDTO> GetTodaysAcknowledgements()
@@ -89,7 +89,7 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
                                 a.DateCreated.Day == DateTime.Today.Day).OrderByDescending(a => a.DateCreated).ToList();
             }
 
-            return assembler.AssembleCollection(acknowledgements);
+            return acknowledgementsAssembler.AssembleCollection(acknowledgements);
         }
 
         public IEnumerable<AcknowledgementDTO> GetThisWeekAcknowledgements()
@@ -105,7 +105,7 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
                     .Where(a => a.DateCreated >= startOfWeek && a.DateCreated < endOfWeek).OrderByDescending(a => a.DateCreated).ToList();
             }
 
-            return assembler.AssembleCollection(acknowledgements);
+            return acknowledgementsAssembler.AssembleCollection(acknowledgements);
         }
 
         public IEnumerable<AcknowledgementDTO> GetThisMonthAcknowledgements()
@@ -120,7 +120,7 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
                                 a.DateCreated.Month == DateTime.Today.Month).OrderByDescending(a => a.DateCreated).ToList();
             }
 
-            return assembler.AssembleCollection(acknowledgements);
+            return acknowledgementsAssembler.AssembleCollection(acknowledgements);
         }
 
         public IEnumerable<AcknowledgementDTO> GetLastAcknowledgements()
@@ -134,7 +134,7 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
                     .OrderByDescending(a => a.DateCreated).Take(10).ToList();
             }
 
-            return assembler.AssembleCollection(acknowledgements);
+            return acknowledgementsAssembler.AssembleCollection(acknowledgements);
         }
 
         public string GetAllTimeChampion()
@@ -194,13 +194,14 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
                 context.Database.Log = message => Debug.WriteLine(message);
                 Tag tag = context.Tags.Where(t => t.Title == tagTitle).FirstOrDefault();
 
-                return assembler.AssembleCollection(tag.Acknowledgements).ToList();
+                return acknowledgementsAssembler.AssembleCollection(tag.Acknowledgements).ToList();
             }
         }
 
         public IEnumerable<AcknowledgementDTO> GetByContent(IEnumerable<string> usernames, string search)
         {
             List<Acknowledgement> acknowledgements = new List<Acknowledgement>();
+            var searchToLower = search.ToLower().Split(new char[] { ' ', ',' }, StringSplitOptions.RemoveEmptyEntries);
 
             using (var context = new AcknowledgementsTrackerContext())
             {
@@ -208,23 +209,20 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
 
                 foreach (var username in usernames)
                 {
-                    acknowledgements.AddRange(context.Acknowledgements
-                        .Where(a => a.AuthorUsername.Contains(username) || a.BeneficiaryUsername.Contains(username)));
+                    acknowledgements
+                        .AddRange(context.Acknowledgements
+                                         .Where(a => (a.AuthorUsername.Contains(username) || a.BeneficiaryUsername.Contains(username))
+                                                  && (searchToLower.Any(s => a.Text.ToLower().Contains(s)) || a.Tags.Any(t => searchToLower.Contains(t.Title))))
+                                         .ToList());
                 }
 
-                acknowledgements.AddRange(context.Acknowledgements
-                    .Where(a => a.Text.ToLower().Contains(search.ToLower())));
-
-                acknowledgements.AddRange(context.Acknowledgements
-                    .Where(a => a.Tags.Select(t => t.Title).Contains(search.ToLower())));
-
-                return assembler.AssembleCollection(acknowledgements).ToList();
+                return acknowledgementsAssembler.AssembleCollection(acknowledgements).ToList();
             }
         }
 
         public void Add(AcknowledgementDTO acknowledgementDto)
         {
-            var acknowledgement = assembler.Disassemble(acknowledgementDto);
+            var acknowledgement = acknowledgementsAssembler.Disassemble(acknowledgementDto);
 
             using (var context = new AcknowledgementsTrackerContext())
             {
@@ -236,7 +234,7 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
 
         public void Add(AcknowledgementDTO acknowledgementDto, IEnumerable<string> tags)
         {
-            var acknowledgement = assembler.Disassemble(acknowledgementDto);
+            var acknowledgement = acknowledgementsAssembler.Disassemble(acknowledgementDto);
             acknowledgement.Tags = new List<Tag>();
 
             using (var context = new AcknowledgementsTrackerContext())
@@ -268,7 +266,7 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
 
         public void Edit(AcknowledgementDTO acknowledgementDto)
         {
-            var acknowledgement = assembler.Disassemble(acknowledgementDto);
+            var acknowledgement = acknowledgementsAssembler.Disassemble(acknowledgementDto);
 
             using (var context = new AcknowledgementsTrackerContext())
             {
