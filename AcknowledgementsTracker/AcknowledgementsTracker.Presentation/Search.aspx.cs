@@ -26,7 +26,10 @@
                 return (string)ViewState["SearchQuery"];
             }
 
-            set { ViewState["SearchQuery"] = value; }
+            set
+            {
+                ViewState["SearchQuery"] = value;
+            }
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -36,13 +39,20 @@
                 BindGridViews(SearchQuery);
             }
         }
+
         protected void btnSearch_Click(object sender, EventArgs e)
         {
             SearchQuery = SearchTextBox.Value;
 
             if (!string.IsNullOrWhiteSpace(SearchQuery))
             {
+                ErrorLabel.Visible = false;
                 BindGridViews(SearchQuery);
+            }
+            else
+            {
+                ErrorLabel.Visible = true;
+                ErrorLabel.InnerText = "Please fill the search textbox";
             }
         }
 
@@ -52,6 +62,7 @@
             SearchQuery = string.Empty;
             fldsEmployeesResults.Visible = false;
             fldsAcknowledgementsResults.Visible = false;
+            ErrorLabel.Visible = false;
         }
 
         protected void EmployeesResultsGridView_PageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -68,6 +79,14 @@
 
         private void BindGridViews(string search)
         {
+            ////List<AcknowledgementDTO> acknowledgementsFound = new List<AcknowledgementDTO>();
+
+            ////var keywords = search.Split(new char[] { ' ', ',' }, StringSplitOptions.RemoveEmptyEntries);
+            ////foreach (var keyword in keywords)
+            ////{
+            ////    acknowledgementsFound.AddRange(searcher.FindAcknowledgements(keyword));
+            ////}
+
             EmployeesResultsGridView.DataSource = searcher.FindUsers(search);
             EmployeesResultsGridView.DataBind();
             fldsEmployeesResults.Visible = true;

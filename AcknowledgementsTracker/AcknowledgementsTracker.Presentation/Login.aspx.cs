@@ -60,7 +60,7 @@
             }
             else
             {
-                ErrorLabel.InnerText = "Please fill all boxes";
+                ErrorLabel.InnerText = "Please fill all textboxes";
             }
         }
 

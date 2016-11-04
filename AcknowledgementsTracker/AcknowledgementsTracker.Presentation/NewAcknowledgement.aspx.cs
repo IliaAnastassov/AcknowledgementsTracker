@@ -42,7 +42,7 @@
                 acknowledgementDto.Text = ContentTextBox.Value;
 
                 // NOTE: All tags are stored in lowercase
-                var tags = TagsTextBox.Value.ToLower().Split();
+                var tags = TagsTextBox.Value.ToLower().Split(new char[] { ' ', ',' }, StringSplitOptions.RemoveEmptyEntries);
 
                 // Add acknowledgement to database
                 acknowledgementDtoService.Create(acknowledgementDto, tags);
@@ -55,11 +55,13 @@
                 ContentTextBox.Value = string.Empty;
                 TagsTextBox.Value = string.Empty;
 
-                lblSuccess.InnerText = "New acknowledgement created";
+                lblError.Visible = false;
+                lblSuccess.Visible = true;
             }
             else
             {
-                lblError.InnerText = "Please fill all the boxes";
+                lblError.Visible = true;
+                lblSuccess.Visible = false;
             }
         }
 
@@ -68,6 +70,9 @@
             BeneficiaryTextBox.Value = string.Empty;
             ContentTextBox.Value = string.Empty;
             TagsTextBox.Value = string.Empty;
+
+            lblError.Visible = false;
+            lblSuccess.Visible = false;
         }
     }
 }

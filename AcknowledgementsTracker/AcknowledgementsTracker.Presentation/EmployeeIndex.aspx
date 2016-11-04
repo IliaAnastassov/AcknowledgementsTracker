@@ -30,8 +30,7 @@
                                 </HeaderTemplate>
                                 <ItemTemplate>
                                     <asp:HyperLink ID="lnkName" runat="server" Text='<%# Eval("Name") %>'
-                                        NavigateUrl='<%# string.Format("~/AcknowledgementsByUser.aspx?user={0}",
-                                            new AcknowledgementsTracker.Business.Logic.LdapAccountService().ReadUserUsername(Convert.ToString(Eval("Name")))) %>' />
+                                        NavigateUrl='<%# string.Format("~/AcknowledgementsByUser.aspx?user={0}", Convert.ToString(Eval("Username"))) %>' />
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:BoundField DataField="Email" HeaderText="Email" SortExpression="Email" />

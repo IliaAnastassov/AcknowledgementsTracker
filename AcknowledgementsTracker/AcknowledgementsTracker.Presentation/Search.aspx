@@ -40,6 +40,11 @@
                         </div>
                     </asp:Panel>
                 </fieldset>
+
+                <%--Error label--%>
+                <div id="ErrorMsg">
+                    <label class="alert-warning" id="ErrorLabel" runat="server"></label>
+                </div>
             </main>
         </div>
     </div>
@@ -59,8 +64,15 @@
                         AllowPaging="true" AutoGenerateColumns="False" ID="EmployeesResultsGridView" runat="server"
                         OnPageIndexChanging="EmployeesResultsGridView_PageIndexChanging">
                         <Columns>
-                            <asp:CommandField ShowSelectButton="true" />
-                            <asp:BoundField DataField="Name" HeaderText="Name" />
+                            <asp:TemplateField>
+                                <HeaderTemplate>
+                                    <asp:Literal Text="Name" runat="server" />
+                                </HeaderTemplate>
+                                <ItemTemplate>
+                                    <asp:HyperLink ID="lnkName" runat="server" Text='<%# Eval("Name") %>'
+                                        NavigateUrl='<%# string.Format("~/AcknowledgementsByUser.aspx?user={0}", Convert.ToString(Eval("Username"))) %>' />
+                                </ItemTemplate>
+                            </asp:TemplateField>
                             <asp:BoundField DataField="Email" HeaderText="Email" />
                             <asp:BoundField DataField="Team" HeaderText="Team" />
                         </Columns>
@@ -77,8 +89,14 @@
                         <Columns>
                             <asp:TemplateField HeaderText="Tags">
                                 <ItemTemplate>
-                                    <asp:Literal ID="ltrTags" runat="server" Text='<%# new AcknowledgementsTracker.Presentation.UIHelperService()
-                                            .ReadTags((IEnumerable<AcknowledgementsTracker.DTO.TagDTO>)(Eval("Tags"))) %>' />
+                                    <asp:Repeater ID="rptrTags" runat="server" DataSource='<%# new AcknowledgementsTracker.Presentation.UIHelperService()
+                                            .ReadTags((IEnumerable<AcknowledgementsTracker.DTO.TagDTO>)(Eval("Tags"))) %>'>
+                                        <ItemTemplate>
+                                            <asp:HyperLink CssClass="label label-info label-margin" ID="lnkTag" runat="server" Text="<%# Container.DataItem %>"
+                                                NavigateUrl='<%# string.Format("~/AcknowledgementsByTag.aspx?tag={0}",
+                                                    Uri.EscapeDataString(Container.DataItem.ToString())) %>' />
+                                        </ItemTemplate>
+                                    </asp:Repeater>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField>
@@ -86,8 +104,9 @@
                                     <asp:Literal Text="To" runat="server" />
                                 </HeaderTemplate>
                                 <ItemTemplate>
-                                    <asp:Literal ID="ltrBeneficiaryName" runat="server" Text='<%# new AcknowledgementsTracker.Presentation.UIHelperService()
-                                            .ReadUserFullName(Convert.ToString(Eval("BeneficiaryUsername")))%>' />
+                                    <asp:HyperLink ID="lnkBeneficiaryName" runat="server" Text='<%# new AcknowledgementsTracker.Presentation.UIHelperService()
+                                            .ReadUserFullName(Convert.ToString(Eval("BeneficiaryUsername"))) %>'
+                                        NavigateUrl='<%# string.Format("~/AcknowledgementsByUser.aspx?user={0}", Convert.ToString(Eval("BeneficiaryUsername"))) %>' />
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:BoundField DataField="Text" HeaderText="Text" SortExpression="Text" />
@@ -96,8 +115,9 @@
                                     <asp:Literal Text="From" runat="server" />
                                 </HeaderTemplate>
                                 <ItemTemplate>
-                                    <asp:Literal ID="ltrAuthorName" runat="server" Text='<%# new AcknowledgementsTracker.Presentation.UIHelperService()
-                                            .ReadUserFullName(Convert.ToString(Eval("AuthorUsername")))%>' />
+                                    <asp:HyperLink ID="lnkAuthorName" runat="server" Text='<%# new AcknowledgementsTracker.Presentation.UIHelperService()
+                                            .ReadUserFullName(Convert.ToString(Eval("AuthorUsername"))) %>'
+                                        NavigateUrl='<%# string.Format("~/AcknowledgementsByUser.aspx?user={0}", Convert.ToString(Eval("AuthorUsername"))) %>' />
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:BoundField DataField="DateCreated" HeaderText="Date Created" SortExpression="DateCreated" />
