@@ -190,18 +190,15 @@
         public IEnumerable<IUser> GetUsers(string search)
         {
             List<User> users = new List<User>();
-            var firstname = string.Empty;
-            var lastname = string.Empty;
-            var email = string.Empty;
-            var team = string.Empty;
             var searcher = new DirectorySearcher(ldapConnection.RootEntry);
             searcher.Filter = $"(|(uid=*{search}*)(givenName=*{search}*)(sn=*{search}*)(displayName=*{search}*)(cn=*{search}*)(description=*{search}*))";
 
+            var usernameProperty = "uid";
             var givenNameProperty = "givenName";
             var surnameProperty = "sn";
             var mailProperty = "mail";
             var teamProperty = "description";
-            searcher.PropertiesToLoad.AddRange(new string[] { givenNameProperty, surnameProperty, mailProperty, teamProperty });
+            searcher.PropertiesToLoad.AddRange(new string[] { usernameProperty, givenNameProperty, surnameProperty, mailProperty, teamProperty });
 
             SearchResultCollection results;
             try
@@ -217,6 +214,17 @@
             {
                 foreach (SearchResult result in results)
                 {
+                    string username = null,
+                           firstname = null,
+                           lastname = null,
+                           email = null,
+                           team = null;
+
+                    foreach (var resultCollection in result.Properties[usernameProperty])
+                    {
+                        username = resultCollection.ToString();
+                    }
+
                     foreach (var resultCollection in result.Properties[givenNameProperty])
                     {
                         firstname = resultCollection.ToString();
@@ -240,7 +248,7 @@
                     // Check explicitly for first name AND last name AND proxiad email
                     if (email != null && email.Contains("proxiad") && firstname != null && lastname != null)
                     {
-                        var user = new User($"{firstname} {lastname}", email, team);
+                        var user = new User(username, $"{firstname} {lastname}", email, team);
                         users.Add(user);
                     }
                 }
@@ -255,14 +263,16 @@
             var firstname = string.Empty;
             var lastname = string.Empty;
             var email = string.Empty;
+            string team = string.Empty;
             var searcher = new DirectorySearcher(ldapConnection.SearchRoot);
             searcher.Filter = $"(uid={username})";
 
             var givenNameProperty = "givenName";
             var surnameProperty = "sn";
             var mailProperty = "mail";
+            var teamProperty = "description";
 
-            searcher.PropertiesToLoad.AddRange(new string[] { givenNameProperty, surnameProperty, mailProperty });
+            searcher.PropertiesToLoad.AddRange(new string[] { givenNameProperty, surnameProperty, mailProperty, teamProperty });
 
             SearchResult result;
             try
@@ -290,26 +300,28 @@
                 {
                     email = resultCollection.ToString();
                 }
+
+                foreach (var resultCollection in result.Properties[teamProperty])
+                {
+                    team = resultCollection.ToString();
+                }
             }
 
-            return new User($"{firstname} {lastname}", email);
+            return new User(username, $"{firstname} {lastname}", email, team);
         }
 
         public IEnumerable<IUser> GetAllUsersData()
         {
             List<User> users = new List<User>();
-            var firstname = string.Empty;
-            var lastname = string.Empty;
-            var email = string.Empty;
-            var team = string.Empty;
             var searcher = new DirectorySearcher(ldapConnection.SearchRoot);
 
+            var usernameProperty = "uid";
             var givenNameProperty = "givenName";
             var surnameProperty = "sn";
             var mailProperty = "mail";
             var teamProperty = "description";
 
-            searcher.PropertiesToLoad.AddRange(new string[] { givenNameProperty, surnameProperty, mailProperty, teamProperty });
+            searcher.PropertiesToLoad.AddRange(new string[] { usernameProperty, givenNameProperty, surnameProperty, mailProperty, teamProperty });
 
             SearchResultCollection results;
             try
@@ -325,6 +337,16 @@
             {
                 foreach (SearchResult result in results)
                 {
+                    string username = null,
+                           firstname = null,
+                           lastname = null,
+                           email = null,
+                           team = null;
+
+                    foreach (var resultCollection in result.Properties[usernameProperty])
+                    {
+                        username = resultCollection.ToString();
+                    }
 
                     foreach (var resultCollection in result.Properties[givenNameProperty])
                     {
@@ -349,7 +371,7 @@
                     // Check explicitly for first name AND last name AND proxiad email
                     if (email != null && email.Contains("proxiad") && firstname != null && lastname != null)
                     {
-                        var user = new User($"{firstname} {lastname}", email, team);
+                        var user = new User(username, $"{firstname} {lastname}", email, team);
                         users.Add(user);
                     }
                 }

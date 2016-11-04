@@ -14,7 +14,14 @@
 
         public IEnumerable<AcknowledgementDTO> FindAcknowledgements(string search)
         {
-            var usernames = accountService.ReadAllUsernames(search);
+            var keywords = search.Split(new char[] { ' ', ',' }, StringSplitOptions.RemoveEmptyEntries);
+            List<string> usernames = new List<string>();
+
+            foreach (var keyword in keywords)
+            {
+                usernames.AddRange(accountService.ReadAllUsernames(keyword));
+            }
+
             return repository.GetByContent(usernames, search);
         }
 

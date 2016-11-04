@@ -5,12 +5,15 @@
 
     public class User : IUser
     {
-        public User(string name, string email, string team = null)
+        public User(string username, string name, string email, string team)
         {
+            this.Username = username;
             this.Name = name;
             this.Email = email;
             this.Team = team;
         }
+
+        public string Username { get; set; }
 
         public string Name { get; set; }
 
