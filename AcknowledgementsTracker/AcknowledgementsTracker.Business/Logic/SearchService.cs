@@ -2,18 +2,20 @@
 {
     using System;
     using System.Collections.Generic;
+    using Interfaces;
     using DTO;
     using DataAccess.Repositories;
-    using Interfaces;
-    using System.Linq;
 
     public class SearchService : ISearchService
     {
         private AcknowledgementsRepository repository = new AcknowledgementsRepository();
         private ILdapAccountService accountService = new LdapAccountService();
+        private INormalizable textNormalizer = new TextNormalizationService();
 
         public IEnumerable<AcknowledgementDTO> FindAcknowledgements(string search)
         {
+            search = textNormalizer.NormalizeText(search);
+
             var keywords = search.Split(new char[] { ' ', ',' }, StringSplitOptions.RemoveEmptyEntries);
             List<string> usernames = new List<string>();
 
