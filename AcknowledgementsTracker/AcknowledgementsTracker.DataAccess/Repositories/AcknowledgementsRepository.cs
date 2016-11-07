@@ -201,19 +201,54 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
         public IEnumerable<AcknowledgementDTO> GetByContent(IEnumerable<string> usernames, string search)
         {
             List<Acknowledgement> acknowledgements = new List<Acknowledgement>();
-            var searchToLower = search.ToLower().Split(new char[] { ' ', ',' }, StringSplitOptions.RemoveEmptyEntries);
+            List<string> tags = new List<string>();
+            var keywords = search.ToLower().Split(new char[] { ' ', ',' }, StringSplitOptions.RemoveEmptyEntries).ToList();
 
             using (var context = new AcknowledgementsTrackerContext())
             {
                 context.Database.Log = message => Debug.WriteLine(message);
 
-                foreach (var username in usernames)
+                // Find all tags in search query
+                foreach (var keyword in keywords)
+                {
+                    tags.AddRange(context.Tags.Where(t => t.Title.Contains(keyword)).Select(t => t.Title).ToList());
+                }
+
+                if (usernames.Count() > 0 && tags.Count() > 0)
+                {
+                    foreach (var username in usernames)
+                    {
+                        acknowledgements
+                            .AddRange(context.Acknowledgements
+                                             .Where(a => (a.AuthorUsername == username || a.BeneficiaryUsername == username)
+                                                      && (keywords.Any(k => a.NormalizedText.Contains(k)) || tags.All(t => a.Tags.Any(tag => tag.Title.Contains(t)))))
+                                             .ToList());
+                    }
+                }
+                else if (usernames.Count() > 0 && tags.Count() == 0)
+                {
+                    foreach (var username in usernames)
+                    {
+                        acknowledgements
+                            .AddRange(context.Acknowledgements
+                                             .Where(a => (a.AuthorUsername == username || a.BeneficiaryUsername == username)
+                                                      || (keywords.Any(k => a.NormalizedText.Contains(k))))
+                                             .ToList());
+                    }
+                }
+                else if (usernames.Count() == 0 && tags.Count() > 0)
                 {
                     acknowledgements
-                        .AddRange(context.Acknowledgements
-                                         .Where(a => (a.AuthorUsername.Contains(username) || a.BeneficiaryUsername.Contains(username))
-                                                  && (searchToLower.Any(s => a.Text.ToLower().Contains(s)) || a.Tags.Any(t => searchToLower.Contains(t.Title))))
-                                         .ToList());
+                            .AddRange(context.Acknowledgements
+                                             .Where(a => (keywords.Any(k => a.NormalizedText.Contains(k)) || tags.All(t => a.Tags.Any(tag => tag.Title.Contains(t)))))
+                                             .ToList());
+                }
+                else
+                {
+                    acknowledgements
+                            .AddRange(context.Acknowledgements
+                                             .Where(a => keywords.Any(k => a.NormalizedText.Contains(k)))
+                                             .ToList());
                 }
 
                 return acknowledgementsAssembler.AssembleCollection(acknowledgements).ToList();

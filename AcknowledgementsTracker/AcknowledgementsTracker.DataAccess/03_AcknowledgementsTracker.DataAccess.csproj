@@ -62,6 +62,10 @@
     <Compile Include="Migrations\201610191210195_AddUniqueAttributeToTagTitle.Designer.cs">
       <DependentUpon>201610191210195_AddUniqueAttributeToTagTitle.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201611071329552_AddNormalizedTextProperty.cs" />
+    <Compile Include="Migrations\201611071329552_AddNormalizedTextProperty.Designer.cs">
+      <DependentUpon>201611071329552_AddNormalizedTextProperty.cs</DependentUpon>
+    </Compile>
     <Compile Include="Repositories\AcknowledgementsRepository.cs" />
     <Compile Include="Context\AcknowledgementsTrackerContext.cs" />
     <Compile Include="Migrations\201609091516183_Initial.cs" />
@@ -116,6 +120,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201610191210195_AddUniqueAttributeToTagTitle.resx">
       <DependentUpon>201610191210195_AddUniqueAttributeToTagTitle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611071329552_AddNormalizedTextProperty.resx">
+      <DependentUpon>201611071329552_AddNormalizedTextProperty.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
