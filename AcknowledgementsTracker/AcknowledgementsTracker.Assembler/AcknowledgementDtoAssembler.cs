@@ -41,6 +41,7 @@
             entity.BeneficiaryUsername = dto.BeneficiaryUsername;
             entity.DateCreated = dto.DateCreated;
             entity.Text = dto.Text;
+            entity.NormalizedText = dto.NormalizedText;
 
             return entity;
         }
