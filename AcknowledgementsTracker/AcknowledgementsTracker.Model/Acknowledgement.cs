@@ -23,6 +23,8 @@ namespace AcknowledgementsTracker.Model
         [Required, MaxLength(1500)]
         public string Text { get; set; }
 
+        public string NormalizedText { get; set; }
+
         public string AuthorUsername { get; set; }
 
         public string BeneficiaryUsername { get; set; }
