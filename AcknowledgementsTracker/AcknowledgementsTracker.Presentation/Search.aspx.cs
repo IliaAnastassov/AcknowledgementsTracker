@@ -38,6 +38,8 @@
             {
                 BindGridViews(SearchQuery);
             }
+
+            SearchTextBox.Focus();
         }
 
         protected void btnSearch_Click(object sender, EventArgs e)
@@ -79,14 +81,6 @@
 
         private void BindGridViews(string search)
         {
-            ////List<AcknowledgementDTO> acknowledgementsFound = new List<AcknowledgementDTO>();
-
-            ////var keywords = search.Split(new char[] { ' ', ',' }, StringSplitOptions.RemoveEmptyEntries);
-            ////foreach (var keyword in keywords)
-            ////{
-            ////    acknowledgementsFound.AddRange(searcher.FindAcknowledgements(keyword));
-            ////}
-
             EmployeesResultsGridView.DataSource = searcher.FindUsers(search);
             EmployeesResultsGridView.DataBind();
             fldsEmployeesResults.Visible = true;

@@ -38,7 +38,7 @@
                     <div class="form-group">
                         <label for="TagsTextBox" class="col-lg-2 control-label text-right">Tags</label>
                         <div class="col-lg-10">
-                            <input type="text" class="form-control" placeholder="#tag" required runat="server" id="TagsTextBox">
+                            <input type="text" class="form-control" placeholder="tag" required runat="server" id="TagsTextBox">
                         </div>
                     </div>
 

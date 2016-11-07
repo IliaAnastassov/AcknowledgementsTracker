@@ -34,12 +34,16 @@
                 && !string.IsNullOrWhiteSpace(ContentTextBox.Value)
                 && !string.IsNullOrWhiteSpace(TagsTextBox.Value))
             {
+                INormalizable textNormalizer = new TextNormalizationService();
                 var acknowledgementDto = new AcknowledgementDTO();
                 acknowledgementDto.AuthorUsername = HttpContext.Current.User.Identity.Name;
 
                 // Transform full name to username
                 acknowledgementDto.BeneficiaryUsername = ldapAccountService.ReadUserUsername(BeneficiaryTextBox.Value);
-                acknowledgementDto.Text = ContentTextBox.Value;
+
+                // Store the text and normalize it
+                acknowledgementDto.Text = textNormalizer.RemoveMultiSpaces(ContentTextBox.Value);
+                acknowledgementDto.NormalizedText = textNormalizer.NormalizeText(acknowledgementDto.Text);
 
                 // NOTE: All tags are stored in lowercase
                 var tags = TagsTextBox.Value.ToLower().Split(new char[] { ' ', ',' }, StringSplitOptions.RemoveEmptyEntries);
