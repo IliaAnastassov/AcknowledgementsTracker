@@ -25,6 +25,12 @@
 
         Dictionary<string, int> ReadThisMonthTopTen();
 
+        IEnumerable<AcknowledgementDTO> ReadReceivedThisMonth(string username);
+
+        IEnumerable<AcknowledgementDTO> ReadByTag(string tagTitle);
+
+        IEnumerable<AcknowledgementDTO> ReadByTagThisMonth(string tagTitle);
+
         void Update(AcknowledgementDTO dto);
     }
 }

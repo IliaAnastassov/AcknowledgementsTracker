@@ -60,9 +60,19 @@
             return repository.GetThisMonthTopTen();
         }
 
-        public Dictionary<string, int> ReadTopTenByTag(string tagTitle)
+        public IEnumerable<AcknowledgementDTO> ReadReceivedThisMonth(string username)
         {
-            return repository.GetTopTenByTag(tagTitle);
+            return repository.GetThisMonthsByUser(username);
+        }
+
+        public IEnumerable<AcknowledgementDTO> ReadByTag(string tagTitle)
+        {
+            return repository.GetByTag(tagTitle);
+        }
+
+        public IEnumerable<AcknowledgementDTO> ReadByTagThisMonth(string tagTitle)
+        {
+            return repository.GetByTagThisMonth(tagTitle);
         }
 
         public void Update(AcknowledgementDTO dto)

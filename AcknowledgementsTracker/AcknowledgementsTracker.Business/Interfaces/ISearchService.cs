@@ -7,8 +7,6 @@
     {
         IEnumerable<AcknowledgementDTO> FindAcknowledgements(string search);
 
-        IEnumerable<AcknowledgementDTO> FindAcknowledgementsByTag(string tagTitle);
-
         IEnumerable<IUser> FindUsers(string search);
     }
 }
