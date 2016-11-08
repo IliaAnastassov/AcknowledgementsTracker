@@ -24,64 +24,64 @@
         private void BindGridViews()
         {
             // Bind user acknowledgements
-            UserAcknowledgementsGridView.DataSource = acknowledgementDtoService.ReadReceived(username);
-            UserAcknowledgementsGridView.DataBind();
+            gvUserAcknowledgements.DataSource = acknowledgementDtoService.ReadReceived(username);
+            gvUserAcknowledgements.DataBind();
 
             // Bind last acknowledgements
-            LastAcknowledgemetsGridView.DataSource = acknowledgementDtoService.ReadLast();
-            LastAcknowledgemetsGridView.DataBind();
+            gvLastAcknowledgemets.DataSource = acknowledgementDtoService.ReadLast();
+            gvLastAcknowledgemets.DataBind();
 
             // Bind today's acknowledgements
-            TodaysAcknowledgementsGridView.DataSource = acknowledgementDtoService.ReadTodays();
-            TodaysAcknowledgementsGridView.DataBind();
+            gvTodaysAcknowledgements.DataSource = acknowledgementDtoService.ReadTodays();
+            gvTodaysAcknowledgements.DataBind();
 
             // Bind this week's acknowledgements
-            ThisWeeksAcknowledgementsGridView.DataSource = acknowledgementDtoService.ReadThisWeek();
-            ThisWeeksAcknowledgementsGridView.DataBind();
+            gvThisWeeksAcknowledgements.DataSource = acknowledgementDtoService.ReadThisWeek();
+            gvThisWeeksAcknowledgements.DataBind();
 
             // Bind this month's acknowledgements
-            ThisMonthsAcknowledgementsGridView.DataSource = acknowledgementDtoService.ReadThisMonth();
-            ThisMonthsAcknowledgementsGridView.DataBind();
+            gvThisMonthsAcknowledgements.DataSource = acknowledgementDtoService.ReadThisMonth();
+            gvThisMonthsAcknowledgements.DataBind();
 
-            // Bind All Time Top Ten
-            AllTimeTopTenGridView.DataSource = acknowledgementDtoService.ReadAllTimeTopTen();
-            AllTimeTopTenGridView.DataBind();
+            // Bind All Time Top Ten Users
+            gvAllTimeTopTen.DataSource = acknowledgementDtoService.ReadAllTimeTopTen();
+            gvAllTimeTopTen.DataBind();
 
-            // Bind This Month Top Ten
-            ThisMonthTopTenGridView.DataSource = acknowledgementDtoService.ReadThisMonthTopTen();
-            ThisMonthTopTenGridView.DataBind();
+            // Bind This Month Top Ten Users
+            gvThisMonthTopTen.DataSource = acknowledgementDtoService.ReadThisMonthTopTen();
+            gvThisMonthTopTen.DataBind();
 
             // Bind Top Tags All time
-            MostFrequentTagsAllTimeGV.DataSource = tagDtoService.ReadMostFrequentTagsAllTime();
-            MostFrequentTagsAllTimeGV.DataBind();
+            gvMostFrequentTagsAllTime.DataSource = tagDtoService.ReadMostFrequentTagsAllTime();
+            gvMostFrequentTagsAllTime.DataBind();
 
             // Bind Top Tags This Month
-            MostFrequentTagsThisMonthGV.DataSource = tagDtoService.ReadMostFrequentTagsThisMonth();
-            MostFrequentTagsThisMonthGV.DataBind();
+            gvMostFrequentTagsThisMonth.DataSource = tagDtoService.ReadMostFrequentTagsThisMonth();
+            gvMostFrequentTagsThisMonth.DataBind();
         }
 
         protected void ThisMonthsAcknowledgementsGridView_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
-            ThisMonthsAcknowledgementsGridView.PageIndex = e.NewPageIndex;
-            ThisMonthsAcknowledgementsGridView.DataBind();
+            gvThisMonthsAcknowledgements.PageIndex = e.NewPageIndex;
+            gvThisMonthsAcknowledgements.DataBind();
         }
 
         protected void UserAcknowledgementsGridView_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
-            UserAcknowledgementsGridView.PageIndex = e.NewPageIndex;
-            UserAcknowledgementsGridView.DataBind();
+            gvUserAcknowledgements.PageIndex = e.NewPageIndex;
+            gvUserAcknowledgements.DataBind();
         }
 
         protected void TodaysAcknowledgementsGridView_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
-            TodaysAcknowledgementsGridView.PageIndex = e.NewPageIndex;
-            TodaysAcknowledgementsGridView.DataBind();
+            gvTodaysAcknowledgements.PageIndex = e.NewPageIndex;
+            gvTodaysAcknowledgements.DataBind();
         }
 
         protected void ThisWeeksAcknowledgementsGridView_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
-            ThisWeeksAcknowledgementsGridView.PageIndex = e.NewPageIndex;
-            ThisWeeksAcknowledgementsGridView.DataBind();
+            gvThisWeeksAcknowledgements.PageIndex = e.NewPageIndex;
+            gvThisWeeksAcknowledgements.DataBind();
         }
     }
 }

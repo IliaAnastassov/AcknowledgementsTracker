@@ -13,84 +13,84 @@ namespace AcknowledgementsTracker.Presentation {
     public partial class Dashboard {
         
         /// <summary>
-        /// UserAcknowledgementsGridView control.
+        /// gvUserAcknowledgements control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView UserAcknowledgementsGridView;
+        protected global::System.Web.UI.WebControls.GridView gvUserAcknowledgements;
         
         /// <summary>
-        /// LastAcknowledgemetsGridView control.
+        /// gvLastAcknowledgemets control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView LastAcknowledgemetsGridView;
+        protected global::System.Web.UI.WebControls.GridView gvLastAcknowledgemets;
         
         /// <summary>
-        /// TodaysAcknowledgementsGridView control.
+        /// gvTodaysAcknowledgements control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView TodaysAcknowledgementsGridView;
+        protected global::System.Web.UI.WebControls.GridView gvTodaysAcknowledgements;
         
         /// <summary>
-        /// ThisWeeksAcknowledgementsGridView control.
+        /// gvThisWeeksAcknowledgements control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView ThisWeeksAcknowledgementsGridView;
+        protected global::System.Web.UI.WebControls.GridView gvThisWeeksAcknowledgements;
         
         /// <summary>
-        /// ThisMonthsAcknowledgementsGridView control.
+        /// gvThisMonthsAcknowledgements control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView ThisMonthsAcknowledgementsGridView;
+        protected global::System.Web.UI.WebControls.GridView gvThisMonthsAcknowledgements;
         
         /// <summary>
-        /// AllTimeTopTenGridView control.
+        /// gvAllTimeTopTen control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView AllTimeTopTenGridView;
+        protected global::System.Web.UI.WebControls.GridView gvAllTimeTopTen;
         
         /// <summary>
-        /// ThisMonthTopTenGridView control.
+        /// gvThisMonthTopTen control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView ThisMonthTopTenGridView;
+        protected global::System.Web.UI.WebControls.GridView gvThisMonthTopTen;
         
         /// <summary>
-        /// MostFrequentTagsAllTimeGV control.
+        /// gvMostFrequentTagsAllTime control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView MostFrequentTagsAllTimeGV;
+        protected global::System.Web.UI.WebControls.GridView gvMostFrequentTagsAllTime;
         
         /// <summary>
-        /// MostFrequentTagsThisMonthGV control.
+        /// gvMostFrequentTagsThisMonth control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView MostFrequentTagsThisMonthGV;
+        protected global::System.Web.UI.WebControls.GridView gvMostFrequentTagsThisMonth;
     }
 }

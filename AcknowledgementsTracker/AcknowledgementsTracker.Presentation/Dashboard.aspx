@@ -23,7 +23,7 @@
                     <legend>Your acknowledgements</legend>
 
                     <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped"
-                        AllowPaging="True" AutoGenerateColumns="False" ID="UserAcknowledgementsGridView" runat="server"
+                        AllowPaging="True" AutoGenerateColumns="False" ID="gvUserAcknowledgements" runat="server"
                         OnPageIndexChanging="UserAcknowledgementsGridView_PageIndexChanging">
                         <Columns>
                             <asp:TemplateField HeaderText="Tags">
@@ -32,7 +32,7 @@
                                             .ReadTags((IEnumerable<AcknowledgementsTracker.DTO.TagDTO>)(Eval("Tags"))) %>'>
                                         <ItemTemplate>
                                             <asp:HyperLink CssClass="label label-info label-margin" ID="lnkTag" runat="server" Text="<%# Container.DataItem %>"
-                                                NavigateUrl='<%# string.Format("~/AcknowledgementsByTag.aspx?tag={0}",
+                                                NavigateUrl='<%# string.Format("~/AcknowledgementsByTag.aspx?tag={0}&mode=allTime",
                                                     Uri.EscapeDataString(Container.DataItem.ToString())) %>' />
                                         </ItemTemplate>
                                     </asp:Repeater>
@@ -46,7 +46,7 @@
                                 <ItemTemplate>
                                     <asp:HyperLink ID="lnkAuthorName" runat="server" Text='<%# new AcknowledgementsTracker.Presentation.UIHelperService()
                                             .ReadUserFullName(Convert.ToString(Eval("AuthorUsername"))) %>'
-                                        NavigateUrl='<%# string.Format("~/AcknowledgementsByUser.aspx?user={0}", Convert.ToString(Eval("AuthorUsername"))) %>' />
+                                        NavigateUrl='<%# string.Format("~/AcknowledgementsByUser.aspx?user={0}&mode=allTime", Convert.ToString(Eval("AuthorUsername"))) %>' />
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:BoundField DataField="DateCreated" HeaderText="Date Created" SortExpression="DateCreated" />
@@ -59,7 +59,7 @@
                     <legend>Last acknowledgements</legend>
 
                     <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped"
-                        AllowPaging="True" AutoGenerateColumns="False" ID="LastAcknowledgemetsGridView" runat="server">
+                        AllowPaging="True" AutoGenerateColumns="False" ID="gvLastAcknowledgemets" runat="server">
                         <Columns>
                             <asp:TemplateField HeaderText="Tags">
                                 <ItemTemplate>
@@ -67,7 +67,7 @@
                                             .ReadTags((IEnumerable<AcknowledgementsTracker.DTO.TagDTO>)(Eval("Tags"))) %>'>
                                         <ItemTemplate>
                                             <asp:HyperLink CssClass="label label-info" ID="lnkTag" runat="server" Text="<%# Container.DataItem %>"
-                                                NavigateUrl='<%# string.Format("~/AcknowledgementsByTag.aspx?tag={0}",
+                                                NavigateUrl='<%# string.Format("~/AcknowledgementsByTag.aspx?tag={0}&mode=allTime",
                                                     Uri.EscapeDataString(Container.DataItem.ToString())) %>' />
                                         </ItemTemplate>
                                     </asp:Repeater>
@@ -80,7 +80,7 @@
                                 <ItemTemplate>
                                     <asp:HyperLink ID="lnkBeneficiaryName" runat="server" Text='<%# new AcknowledgementsTracker.Presentation.UIHelperService()
                                             .ReadUserFullName(Convert.ToString(Eval("BeneficiaryUsername"))) %>'
-                                        NavigateUrl='<%# string.Format("~/AcknowledgementsByUser.aspx?user={0}", Convert.ToString(Eval("BeneficiaryUsername"))) %>' />
+                                        NavigateUrl='<%# string.Format("~/AcknowledgementsByUser.aspx?user={0}&mode=allTime", Convert.ToString(Eval("BeneficiaryUsername"))) %>' />
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:BoundField DataField="Text" HeaderText="Text" SortExpression="Text" />
@@ -91,7 +91,7 @@
                                 <ItemTemplate>
                                     <asp:HyperLink ID="lnkAuthorName" runat="server" Text='<%# new AcknowledgementsTracker.Presentation.UIHelperService()
                                             .ReadUserFullName(Convert.ToString(Eval("AuthorUsername"))) %>'
-                                        NavigateUrl='<%# string.Format("~/AcknowledgementsByUser.aspx?user={0}", Convert.ToString(Eval("AuthorUsername"))) %>' />
+                                        NavigateUrl='<%# string.Format("~/AcknowledgementsByUser.aspx?user={0}&mode=allTime", Convert.ToString(Eval("AuthorUsername"))) %>' />
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:BoundField DataField="DateCreated" HeaderText="Date Created" SortExpression="DateCreated" />
@@ -104,7 +104,7 @@
                     <legend>Today's acknowledgements</legend>
 
                     <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped"
-                        AllowPaging="True" AutoGenerateColumns="False" ID="TodaysAcknowledgementsGridView" runat="server"
+                        AllowPaging="True" AutoGenerateColumns="False" ID="gvTodaysAcknowledgements" runat="server"
                         OnPageIndexChanging="TodaysAcknowledgementsGridView_PageIndexChanging">
                         <Columns>
                             <asp:TemplateField HeaderText="Tags">
@@ -113,7 +113,7 @@
                                             .ReadTags((IEnumerable<AcknowledgementsTracker.DTO.TagDTO>)(Eval("Tags"))) %>'>
                                         <ItemTemplate>
                                             <asp:HyperLink CssClass="label label-info" ID="lnkTag" runat="server" Text="<%# Container.DataItem %>"
-                                                NavigateUrl='<%# string.Format("~/AcknowledgementsByTag.aspx?tag={0}",
+                                                NavigateUrl='<%# string.Format("~/AcknowledgementsByTag.aspx?tag={0}&mode=allTime",
                                                     Uri.EscapeDataString(Container.DataItem.ToString())) %>' />
                                         </ItemTemplate>
                                     </asp:Repeater>
@@ -126,7 +126,7 @@
                                 <ItemTemplate>
                                     <asp:HyperLink ID="lnkBeneficiaryName" runat="server" Text='<%# new AcknowledgementsTracker.Presentation.UIHelperService()
                                             .ReadUserFullName(Convert.ToString(Eval("BeneficiaryUsername"))) %>'
-                                        NavigateUrl='<%# string.Format("~/AcknowledgementsByUser.aspx?user={0}", Convert.ToString(Eval("BeneficiaryUsername"))) %>' />
+                                        NavigateUrl='<%# string.Format("~/AcknowledgementsByUser.aspx?user={0}&mode=allTime", Convert.ToString(Eval("BeneficiaryUsername"))) %>' />
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:BoundField DataField="Text" HeaderText="Text" SortExpression="Text" />
@@ -137,7 +137,7 @@
                                 <ItemTemplate>
                                     <asp:HyperLink ID="lnkAuthorName" runat="server" Text='<%# new AcknowledgementsTracker.Presentation.UIHelperService()
                                             .ReadUserFullName(Convert.ToString(Eval("AuthorUsername"))) %>'
-                                        NavigateUrl='<%# string.Format("~/AcknowledgementsByUser.aspx?user={0}", Convert.ToString(Eval("AuthorUsername"))) %>' />
+                                        NavigateUrl='<%# string.Format("~/AcknowledgementsByUser.aspx?user={0}&mode=allTime", Convert.ToString(Eval("AuthorUsername"))) %>' />
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:BoundField DataField="DateCreated" HeaderText="Date Created" SortExpression="DateCreated" />
@@ -150,7 +150,7 @@
                     <legend>This week's acknowledgements</legend>
 
                     <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped"
-                        AllowPaging="True" AutoGenerateColumns="False" ID="ThisWeeksAcknowledgementsGridView" runat="server"
+                        AllowPaging="True" AutoGenerateColumns="False" ID="gvThisWeeksAcknowledgements" runat="server"
                         OnPageIndexChanging="ThisWeeksAcknowledgementsGridView_PageIndexChanging">
                         <Columns>
                             <asp:TemplateField HeaderText="Tags">
@@ -159,7 +159,7 @@
                                             .ReadTags((IEnumerable<AcknowledgementsTracker.DTO.TagDTO>)(Eval("Tags"))) %>'>
                                         <ItemTemplate>
                                             <asp:HyperLink CssClass="label label-info" ID="lnkTag" runat="server" Text="<%# Container.DataItem %>"
-                                                NavigateUrl='<%# string.Format("~/AcknowledgementsByTag.aspx?tag={0}",
+                                                NavigateUrl='<%# string.Format("~/AcknowledgementsByTag.aspx?tag={0}&mode=allTime",
                                                     Uri.EscapeDataString(Container.DataItem.ToString())) %>' />
                                         </ItemTemplate>
                                     </asp:Repeater>
@@ -172,7 +172,7 @@
                                 <ItemTemplate>
                                     <asp:HyperLink ID="lnkBeneficiaryName" runat="server" Text='<%# new AcknowledgementsTracker.Presentation.UIHelperService()
                                             .ReadUserFullName(Convert.ToString(Eval("BeneficiaryUsername"))) %>'
-                                        NavigateUrl='<%# string.Format("~/AcknowledgementsByUser.aspx?user={0}", Convert.ToString(Eval("BeneficiaryUsername"))) %>' />
+                                        NavigateUrl='<%# string.Format("~/AcknowledgementsByUser.aspx?user={0}&mode=allTime", Convert.ToString(Eval("BeneficiaryUsername"))) %>' />
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:BoundField DataField="Text" HeaderText="Text" SortExpression="Text" />
@@ -183,7 +183,7 @@
                                 <ItemTemplate>
                                     <asp:HyperLink ID="lnkAuthorName" runat="server" Text='<%# new AcknowledgementsTracker.Presentation.UIHelperService()
                                             .ReadUserFullName(Convert.ToString(Eval("AuthorUsername"))) %>'
-                                        NavigateUrl='<%# string.Format("~/AcknowledgementsByUser.aspx?user={0}", Convert.ToString(Eval("AuthorUsername"))) %>' />
+                                        NavigateUrl='<%# string.Format("~/AcknowledgementsByUser.aspx?user={0}&mode=allTime", Convert.ToString(Eval("AuthorUsername"))) %>' />
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:BoundField DataField="DateCreated" HeaderText="Date Created" SortExpression="DateCreated" />
@@ -196,7 +196,7 @@
                     <legend>This month's acknowledgements</legend>
 
                     <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped" AllowPaging="True"
-                        AutoGenerateColumns="False" ID="ThisMonthsAcknowledgementsGridView" runat="server"
+                        AutoGenerateColumns="False" ID="gvThisMonthsAcknowledgements" runat="server"
                         OnPageIndexChanging="ThisMonthsAcknowledgementsGridView_PageIndexChanging">
                         <Columns>
                             <asp:TemplateField HeaderText="Tags">
@@ -205,7 +205,7 @@
                                             .ReadTags((IEnumerable<AcknowledgementsTracker.DTO.TagDTO>)(Eval("Tags"))) %>'>
                                         <ItemTemplate>
                                             <asp:HyperLink CssClass="label label-info" ID="lnkTag" runat="server" Text="<%# Container.DataItem %>"
-                                                NavigateUrl='<%# string.Format("~/AcknowledgementsByTag.aspx?tag={0}",
+                                                NavigateUrl='<%# string.Format("~/AcknowledgementsByTag.aspx?tag={0}&mode=allTime",
                                                     Uri.EscapeDataString(Container.DataItem.ToString())) %>' />
                                         </ItemTemplate>
                                     </asp:Repeater>
@@ -218,7 +218,7 @@
                                 <ItemTemplate>
                                     <asp:HyperLink ID="lnkBeneficiaryName" runat="server" Text='<%# new AcknowledgementsTracker.Presentation.UIHelperService()
                                             .ReadUserFullName(Convert.ToString(Eval("BeneficiaryUsername"))) %>'
-                                        NavigateUrl='<%# string.Format("~/AcknowledgementsByUser.aspx?user={0}", Convert.ToString(Eval("BeneficiaryUsername"))) %>' />
+                                        NavigateUrl='<%# string.Format("~/AcknowledgementsByUser.aspx?user={0}&mode=allTime", Convert.ToString(Eval("BeneficiaryUsername"))) %>' />
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:BoundField DataField="Text" HeaderText="Text" SortExpression="Text" />
@@ -229,7 +229,7 @@
                                 <ItemTemplate>
                                     <asp:HyperLink ID="lnkAuthorName" runat="server" Text='<%# new AcknowledgementsTracker.Presentation.UIHelperService()
                                             .ReadUserFullName(Convert.ToString(Eval("AuthorUsername"))) %>'
-                                        NavigateUrl='<%# string.Format("~/AcknowledgementsByUser.aspx?user={0}", Convert.ToString(Eval("AuthorUsername"))) %>' />
+                                        NavigateUrl='<%# string.Format("~/AcknowledgementsByUser.aspx?user={0}&mode=allTime", Convert.ToString(Eval("AuthorUsername"))) %>' />
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:BoundField DataField="DateCreated" HeaderText="Date Created" SortExpression="DateCreated" />
@@ -242,7 +242,7 @@
                     <legend>Most acknowledged persons all time</legend>
 
                     <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped" AllowPaging="true"
-                        AutoGenerateColumns="false" ID="AllTimeTopTenGridView" runat="server">
+                        AutoGenerateColumns="false" ID="gvAllTimeTopTen" runat="server">
                         <Columns>
                             <asp:TemplateField>
                                 <HeaderTemplate>
@@ -251,10 +251,18 @@
                                 <ItemTemplate>
                                     <asp:HyperLink ID="lnkName" runat="server" Text='<%# new AcknowledgementsTracker.Presentation.UIHelperService()
                                             .ReadUserFullName(Convert.ToString(Eval("Key"))) %>'
-                                        NavigateUrl='<%# string.Format("~/AcknowledgementsByUser.aspx?user={0}", Convert.ToString(Eval("Key"))) %>' />
+                                        NavigateUrl='<%# string.Format("~/AcknowledgementsByUser.aspx?user={0}&mode=allTime", Convert.ToString(Eval("Key"))) %>' />
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:BoundField DataField="Value" HeaderText="Number of Acknowledgements" />
+                            <asp:TemplateField>
+                                <HeaderTemplate>
+                                    <asp:Literal Text="Number of Acknowledgements" runat="server" />
+                                </HeaderTemplate>
+                                <ItemTemplate>
+                                    <asp:HyperLink ID="lnkNumberOfAcknowledgements" runat="server" Text='<%# Eval("Value") %>'
+                                        NavigateUrl='<%# string.Format("~/AcknowledgementsByUser.aspx?user={0}&mode=allTime_Rec", Convert.ToString(Eval("Key"))) %>' />
+                                </ItemTemplate>
+                            </asp:TemplateField>
                         </Columns>
                     </asp:GridView>
                 </fieldset>
@@ -264,7 +272,7 @@
                     <legend>Most acknowledged persons this month</legend>
 
                     <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped" AllowPaging="true"
-                        AutoGenerateColumns="false" ID="ThisMonthTopTenGridView" runat="server">
+                        AutoGenerateColumns="false" ID="gvThisMonthTopTen" runat="server">
                         <Columns>
                             <asp:TemplateField>
                                 <HeaderTemplate>
@@ -273,10 +281,18 @@
                                 <ItemTemplate>
                                     <asp:HyperLink ID="lnkName" runat="server" Text='<%# new AcknowledgementsTracker.Presentation.UIHelperService()
                                             .ReadUserFullName(Convert.ToString(Eval("Key"))) %>'
-                                        NavigateUrl='<%# string.Format("~/AcknowledgementsByUser.aspx?user={0}", Convert.ToString(Eval("Key"))) %>' />
+                                        NavigateUrl='<%# string.Format("~/AcknowledgementsByUser.aspx?user={0}&mode=allTime", Convert.ToString(Eval("Key"))) %>' />
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:BoundField DataField="Value" HeaderText="Number of Acknowledgements" />
+                            <asp:TemplateField>
+                                <HeaderTemplate>
+                                    <asp:Literal Text="Number of Acknowledgements" runat="server" />
+                                </HeaderTemplate>
+                                <ItemTemplate>
+                                    <asp:HyperLink ID="lnkNumberOfAcknowledgements" runat="server" Text='<%#Eval("Value") %>'
+                                        NavigateUrl='<%# string.Format("~/AcknowledgementsByUser.aspx?user={0}&mode=thisMonth", Convert.ToString(Eval("Key"))) %>' />
+                                </ItemTemplate>
+                            </asp:TemplateField>
                         </Columns>
                     </asp:GridView>
                 </fieldset>
@@ -286,7 +302,7 @@
                     <legend>Most frequently used tags all time</legend>
 
                     <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped" AllowPaging="true"
-                        AutoGenerateColumns="false" ID="MostFrequentTagsAllTimeGV" runat="server">
+                        AutoGenerateColumns="false" ID="gvMostFrequentTagsAllTime" runat="server">
                         <Columns>
                             <asp:TemplateField>
                                 <HeaderTemplate>
@@ -295,11 +311,20 @@
                                 <ItemTemplate>
                                     <asp:HyperLink CssClass="label label-info" ID="lnkTag" runat="server"
                                         Text='<%# ((KeyValuePair<string, int>)Container.DataItem).Key %>'
-                                        NavigateUrl='<%# string.Format("~/AcknowledgementsByTag.aspx?tag={0}",
+                                        NavigateUrl='<%# string.Format("~/AcknowledgementsByTag.aspx?tag={0}&mode=allTime",
                                             Uri.EscapeDataString(((KeyValuePair<string, int>)Container.DataItem).Key)) %>' />
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:BoundField DataField="Value" HeaderText="Times mentioned" />
+                            <asp:TemplateField>
+                                <HeaderTemplate>
+                                    <asp:Literal Text="Times mentioned" runat="server" />
+                                </HeaderTemplate>
+                                <ItemTemplate>
+                                    <asp:HyperLink runat="server" Text='<%# ((KeyValuePair<string, int>)Container.DataItem).Value %>'
+                                        NavigateUrl='<%# string.Format("~/AcknowledgementsByTag.aspx?tag={0}&mode=allTime",
+                                            Uri.EscapeDataString(((KeyValuePair<string, int>)Container.DataItem).Key)) %>' />
+                                </ItemTemplate>
+                            </asp:TemplateField>
                         </Columns>
                     </asp:GridView>
                 </fieldset>
@@ -309,7 +334,7 @@
                     <legend>Most frequently used tags this month</legend>
 
                     <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped" AllowPaging="true"
-                        AutoGenerateColumns="false" ID="MostFrequentTagsThisMonthGV" runat="server">
+                        AutoGenerateColumns="false" ID="gvMostFrequentTagsThisMonth" runat="server">
                         <Columns>
                             <asp:TemplateField>
                                 <HeaderTemplate>
@@ -318,11 +343,20 @@
                                 <ItemTemplate>
                                     <asp:HyperLink CssClass="label label-info" ID="lnkTag" runat="server"
                                         Text='<%# ((KeyValuePair<string, int>)Container.DataItem).Key %>'
-                                        NavigateUrl='<%# string.Format("~/AcknowledgementsByTag.aspx?tag={0}",
+                                        NavigateUrl='<%# string.Format("~/AcknowledgementsByTag.aspx?tag={0}&mode=allTime",
                                             Uri.EscapeDataString(((KeyValuePair<string, int>)Container.DataItem).Key))%>' />
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:BoundField DataField="Value" HeaderText="Times mentioned" />
+                            <asp:TemplateField>
+                                <HeaderTemplate>
+                                    <asp:Literal Text="Times mentioned" runat="server" />
+                                </HeaderTemplate>
+                                <ItemTemplate>
+                                    <asp:HyperLink runat="server" Text='<%# ((KeyValuePair<string, int>)Container.DataItem).Value %>'
+                                        NavigateUrl='<%# string.Format("~/AcknowledgementsByTag.aspx?tag={0}&mode=thisMonth",
+                                            Uri.EscapeDataString(((KeyValuePair<string, int>)Container.DataItem).Key)) %>' />
+                                </ItemTemplate>
+                            </asp:TemplateField>
                         </Columns>
                     </asp:GridView>
                 </fieldset>

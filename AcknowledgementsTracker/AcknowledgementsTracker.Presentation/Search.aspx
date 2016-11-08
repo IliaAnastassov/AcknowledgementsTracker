@@ -70,7 +70,7 @@
                                 </HeaderTemplate>
                                 <ItemTemplate>
                                     <asp:HyperLink ID="lnkName" runat="server" Text='<%# Eval("Name") %>'
-                                        NavigateUrl='<%# string.Format("~/AcknowledgementsByUser.aspx?user={0}", Convert.ToString(Eval("Username"))) %>' />
+                                        NavigateUrl='<%# string.Format("~/AcknowledgementsByUser.aspx?user={0}&mode=allTime", Convert.ToString(Eval("Username"))) %>' />
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:BoundField DataField="Email" HeaderText="Email" />
@@ -93,7 +93,7 @@
                                             .ReadTags((IEnumerable<AcknowledgementsTracker.DTO.TagDTO>)(Eval("Tags"))) %>'>
                                         <ItemTemplate>
                                             <asp:HyperLink CssClass="label label-info label-margin" ID="lnkTag" runat="server" Text="<%# Container.DataItem %>"
-                                                NavigateUrl='<%# string.Format("~/AcknowledgementsByTag.aspx?tag={0}",
+                                                NavigateUrl='<%# string.Format("~/AcknowledgementsByTag.aspx?tag={0}&mode=allTime",
                                                     Uri.EscapeDataString(Container.DataItem.ToString())) %>' />
                                         </ItemTemplate>
                                     </asp:Repeater>
@@ -106,7 +106,7 @@
                                 <ItemTemplate>
                                     <asp:HyperLink ID="lnkBeneficiaryName" runat="server" Text='<%# new AcknowledgementsTracker.Presentation.UIHelperService()
                                             .ReadUserFullName(Convert.ToString(Eval("BeneficiaryUsername"))) %>'
-                                        NavigateUrl='<%# string.Format("~/AcknowledgementsByUser.aspx?user={0}", Convert.ToString(Eval("BeneficiaryUsername"))) %>' />
+                                        NavigateUrl='<%# string.Format("~/AcknowledgementsByUser.aspx?user={0}&mode=allTime", Convert.ToString(Eval("BeneficiaryUsername"))) %>' />
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:BoundField DataField="Text" HeaderText="Text" SortExpression="Text" />
@@ -117,7 +117,7 @@
                                 <ItemTemplate>
                                     <asp:HyperLink ID="lnkAuthorName" runat="server" Text='<%# new AcknowledgementsTracker.Presentation.UIHelperService()
                                             .ReadUserFullName(Convert.ToString(Eval("AuthorUsername"))) %>'
-                                        NavigateUrl='<%# string.Format("~/AcknowledgementsByUser.aspx?user={0}", Convert.ToString(Eval("AuthorUsername"))) %>' />
+                                        NavigateUrl='<%# string.Format("~/AcknowledgementsByUser.aspx?user={0}&mode=allTime", Convert.ToString(Eval("AuthorUsername"))) %>' />
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:BoundField DataField="DateCreated" HeaderText="Date Created" SortExpression="DateCreated" />
