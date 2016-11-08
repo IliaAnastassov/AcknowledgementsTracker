@@ -7,7 +7,10 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
-                <h2 class="pageHeader">Acknowledgements</h2>
+                <h2 class="pageHeader">Acknowledgements for
+                    <asp:Label CssClass="text-primary" ID="ltrTag" runat="server" />
+                    <asp:Literal ID="ltrMonth" runat="server" />
+                </h2>
             </div>
         </div>
     </div>
@@ -20,9 +23,7 @@
 
                 <%--Acknowledgements By Tag--%>
                 <fieldset>
-                    <legend>Acknowledgements for
-                        <asp:Literal ID="ltrTag" runat="server" />
-                    </legend>
+                    <legend>Acknowledgements</legend>
 
                     <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped"
                         AllowPaging="True" AutoGenerateColumns="False" ID="gvAcknowledgementsByTag" runat="server"
@@ -34,7 +35,7 @@
                                             .ReadTags((IEnumerable<AcknowledgementsTracker.DTO.TagDTO>)(Eval("Tags"))) %>'>
                                         <ItemTemplate>
                                             <asp:HyperLink CssClass="label label-info label-margin" ID="lnkTag" runat="server" Text="<%# Container.DataItem %>"
-                                                NavigateUrl='<%# string.Format("~/AcknowledgementsByTag.aspx?tag={0}",
+                                                NavigateUrl='<%# string.Format("~/AcknowledgementsByTag.aspx?tag={0}&mode=allTime",
                                                     Uri.EscapeDataString(Container.DataItem.ToString())) %>' />
                                         </ItemTemplate>
                                     </asp:Repeater>
@@ -47,7 +48,7 @@
                                 <ItemTemplate>
                                     <asp:HyperLink ID="lnkBeneficiaryName" runat="server" Text='<%# new AcknowledgementsTracker.Presentation.UIHelperService()
                                             .ReadUserFullName(Convert.ToString(Eval("BeneficiaryUsername"))) %>'
-                                        NavigateUrl='<%# string.Format("~/AcknowledgementsByUser.aspx?user={0}", Convert.ToString(Eval("BeneficiaryUsername"))) %>' />
+                                        NavigateUrl='<%# string.Format("~/AcknowledgementsByUser.aspx?user={0}&mode=allTime", Convert.ToString(Eval("BeneficiaryUsername"))) %>' />
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:BoundField DataField="Text" HeaderText="Text" SortExpression="Text" />
@@ -58,7 +59,7 @@
                                 <ItemTemplate>
                                     <asp:HyperLink ID="lnkAuthorName" runat="server" Text='<%# new AcknowledgementsTracker.Presentation.UIHelperService()
                                             .ReadUserFullName(Convert.ToString(Eval("AuthorUsername"))) %>'
-                                        NavigateUrl='<%# string.Format("~/AcknowledgementsByUser.aspx?user={0}", Convert.ToString(Eval("AuthorUsername"))) %>' />
+                                        NavigateUrl='<%# string.Format("~/AcknowledgementsByUser.aspx?user={0}&mode=allTime", Convert.ToString(Eval("AuthorUsername"))) %>' />
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:BoundField DataField="DateCreated" HeaderText="Date Created" SortExpression="DateCreated" />

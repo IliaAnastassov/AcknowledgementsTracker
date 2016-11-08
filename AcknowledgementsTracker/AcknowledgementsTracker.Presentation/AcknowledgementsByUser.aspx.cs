@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.Linq;
     using System.Web;
     using System.Web.UI;
@@ -9,7 +10,7 @@
     using Business.Interfaces;
     using Business.Logic;
 
-    public partial class AcknowledgementsByUser : System.Web.UI.Page
+    public partial class AcknowledgementsByUser : Page
     {
         private string username;
         private UIHelper helper = new UIHelper();
@@ -20,11 +21,30 @@
             username = Request.QueryString["user"];
             ltrUser.Text = helper.GetUserFullName(username);
 
-            gvAcknowledgementsReceived.DataSource = acknowledgementDtoService.ReadReceived(username);
-            gvAcknowledgementsReceived.DataBind();
+            if (Request.QueryString["mode"] == "allTime")
+            {
+                gvAcknowledgementsReceived.DataSource = acknowledgementDtoService.ReadReceived(username);
+                gvAcknowledgementsReceived.DataBind();
 
-            gvAcknowledgementsGiven.DataSource = acknowledgementDtoService.ReadGiven(username);
-            gvAcknowledgementsGiven.DataBind();
+                gvAcknowledgementsGiven.DataSource = acknowledgementDtoService.ReadGiven(username);
+                gvAcknowledgementsGiven.DataBind();
+            }
+            else if (Request.QueryString["mode"] == "allTime_Rec")
+            {
+                gvAcknowledgementsReceived.DataSource = acknowledgementDtoService.ReadReceived(username);
+                gvAcknowledgementsReceived.DataBind();
+
+                fldsAcknowledgementsGiven.Visible = false;
+            }
+            else if (Request.QueryString["mode"] == "thisMonth")
+            {
+                ltrMonth.Text = $" for {DateTime.Today.ToString("MMMM yyyy", CultureInfo.InvariantCulture)}";
+
+                gvAcknowledgementsReceived.DataSource = acknowledgementDtoService.ReadReceivedThisMonth(username);
+                gvAcknowledgementsReceived.DataBind();
+
+                fldsAcknowledgementsGiven.Visible = false;
+            }
         }
 
         protected void gvAcknowledgementsReceived_PageIndexChanging(object sender, GridViewPageEventArgs e)
