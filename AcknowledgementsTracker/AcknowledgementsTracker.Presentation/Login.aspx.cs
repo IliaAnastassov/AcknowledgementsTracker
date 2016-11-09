@@ -55,12 +55,14 @@
                 }
                 catch (Exception)
                 {
-                    ErrorLabel.InnerText = "Failed to authenticate. Please verify username and password";
+                    lblError.Visible = true;
+                    lblError.InnerText = "Failed to authenticate. Please verify username and password";
                 }
             }
             else
             {
-                ErrorLabel.InnerText = "Please fill all textboxes";
+                lblError.Visible = true;
+                lblError.InnerText = "Please fill all textboxes";
             }
         }
 
@@ -68,6 +70,7 @@
         {
             txtbUsername.Value = string.Empty;
             txtbPassword.Value = string.Empty;
+            lblError.Visible = false;
         }
     }
 }

@@ -13,6 +13,24 @@ namespace AcknowledgementsTracker.Presentation {
     public partial class NewAcknowledgement {
         
         /// <summary>
+        /// updatePanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updatePanel;
+        
+        /// <summary>
+        /// progress1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdateProgress progress1;
+        
+        /// <summary>
         /// BeneficiaryTextBox control.
         /// </summary>
         /// <remarks>

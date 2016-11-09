@@ -13,6 +13,15 @@ namespace AcknowledgementsTracker.Presentation {
     public partial class Login {
         
         /// <summary>
+        /// updatePanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updatePanel;
+        
+        /// <summary>
         /// txtbUsername control.
         /// </summary>
         /// <remarks>
@@ -49,12 +58,21 @@ namespace AcknowledgementsTracker.Presentation {
         protected global::System.Web.UI.HtmlControls.HtmlButton ResetBtn;
         
         /// <summary>
-        /// ErrorLabel control.
+        /// progress1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ErrorLabel;
+        protected global::System.Web.UI.UpdateProgress progress1;
+        
+        /// <summary>
+        /// lblError control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblError;
     }
 }
