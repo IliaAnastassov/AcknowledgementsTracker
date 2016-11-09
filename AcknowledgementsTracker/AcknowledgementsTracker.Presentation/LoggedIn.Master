@@ -25,6 +25,10 @@
             </div>
         </header>
 
+        <%--Script Manager--%>
+        <asp:ScriptManager ID="sm" runat="server">
+        </asp:ScriptManager>
+
         <%--Navigation--%>
         <nav class="navbar navbar-btn">
             <ul class="nav nav-tabs">

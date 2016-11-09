@@ -21,22 +21,31 @@
                     <legend>Proxiad Employees</legend>
 
                     <%--Data--%>
-                    <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped"
-                        AllowPaging="True" AutoGenerateColumns="False" ID="gvEmployees" runat="server" OnPageIndexChanging="gvEmployees_PageIndexChanging">
-                        <Columns>
-                            <asp:TemplateField>
-                                <HeaderTemplate>
-                                    <asp:Literal Text="Name" runat="server" />
-                                </HeaderTemplate>
-                                <ItemTemplate>
-                                    <asp:HyperLink ID="lnkName" runat="server" Text='<%# Eval("Name") %>'
-                                        NavigateUrl='<%# string.Format("~/AcknowledgementsByUser.aspx?user={0}&mode=allTime", Convert.ToString(Eval("Username"))) %>' />
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:BoundField DataField="Email" HeaderText="Email" SortExpression="Email" />
-                            <asp:BoundField DataField="Team" HeaderText="Team" SortExpression="Team" />
-                        </Columns>
-                    </asp:GridView>
+                    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                        <ContentTemplate>
+                            <asp:UpdateProgress ID="progress1" runat="server" DisplayAfter="300">
+                                <ProgressTemplate>
+                                    <img src="Images/progress.gif" />
+                                </ProgressTemplate>
+                            </asp:UpdateProgress>
+                            <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped"
+                                AllowPaging="True" AutoGenerateColumns="False" ID="gvEmployees" runat="server" OnPageIndexChanging="gvEmployees_PageIndexChanging">
+                                <Columns>
+                                    <asp:TemplateField>
+                                        <HeaderTemplate>
+                                            <asp:Literal Text="Name" runat="server" />
+                                        </HeaderTemplate>
+                                        <ItemTemplate>
+                                            <asp:HyperLink ID="lnkName" runat="server" Text='<%# Eval("Name") %>'
+                                                NavigateUrl='<%# string.Format("~/AcknowledgementsByUser.aspx?user={0}&mode=allTime", Convert.ToString(Eval("Username"))) %>' />
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:BoundField DataField="Email" HeaderText="Email" SortExpression="Email" />
+                                    <asp:BoundField DataField="Team" HeaderText="Team" SortExpression="Team" />
+                                </Columns>
+                            </asp:GridView>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
                 </fieldset>
             </main>
 
