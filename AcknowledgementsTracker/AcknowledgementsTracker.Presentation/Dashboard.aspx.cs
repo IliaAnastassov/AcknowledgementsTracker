@@ -2,6 +2,8 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
+    using System.Threading;
     using System.Web;
     using System.Web.UI;
     using System.Web.UI.WebControls;
@@ -9,23 +11,32 @@
     using Business.Logic;
     using DTO;
 
-    public partial class Dashboard : Page
+    public partial class Dashboard : Page, ICallbackEventHandler
     {
         private string username;
+        private string callback;
         private IAcknowledgementDtoService acknowledgementDtoService = new AcknowledgementDtoService();
         private ITagDtoService tagDtoService = new TagDtoService();
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!Page.IsCallback)
+            {
+                ltCallback.Text = ClientScript.GetCallbackEventReference(this, "'bindgrid'", "EndGetData", "'asyncgrid'", false);
+            }
+
             username = HttpContext.Current.User.Identity.Name;
+
+            Thread.Sleep(3000);
+
             BindGridViews();
         }
 
         private void BindGridViews()
         {
             // Bind user acknowledgements
-            gvUserAcknowledgements.DataSource = acknowledgementDtoService.ReadReceived(username);
-            gvUserAcknowledgements.DataBind();
+            ////gvUserAcknowledgements.DataSource = acknowledgementDtoService.ReadReceived(username);
+            ////gvUserAcknowledgements.DataBind();
 
             // Bind last acknowledgements
             gvLastAcknowledgemets.DataSource = acknowledgementDtoService.ReadLast();
@@ -82,6 +93,24 @@
         {
             gvThisWeeksAcknowledgements.PageIndex = e.NewPageIndex;
             gvThisWeeksAcknowledgements.DataBind();
+        }
+
+        // Implementing the ICallbackEventHandler
+        public void RaiseCallbackEvent(string eventArgument)
+        {
+            gvUserAcknowledgements.DataSource = acknowledgementDtoService.ReadReceived(username);
+            gvUserAcknowledgements.DataBind();
+
+            using (var writer = new StringWriter())
+            {
+                gvUserAcknowledgements.RenderControl(new HtmlTextWriter(writer));
+                callback = writer.ToString();
+            }
+        }
+
+        public string GetCallbackResult()
+        {
+            return this.callback;
         }
     }
 }
