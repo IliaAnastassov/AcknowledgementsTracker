@@ -83,6 +83,7 @@
     <Content Include="Dashboard.aspx" />
     <Content Include="EmployeeIndex.aspx" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Images\progress.gif" />
     <Content Include="Login.aspx" />
     <Content Include="packages.config" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
