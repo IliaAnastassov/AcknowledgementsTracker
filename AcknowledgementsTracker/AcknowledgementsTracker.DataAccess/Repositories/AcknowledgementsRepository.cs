@@ -50,11 +50,10 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
             {
                 context.Database.Log = message => Debug.WriteLine(message);
                 var acknowledgements = context.Acknowledgements
-                                          .AsNoTracking()
-                                          .Include(a => a.Tags)
-                                          .Where(a => a.BeneficiaryUsername == username)
-                                          .OrderByDescending(a => a.DateCreated)
-                                          .ToList();
+                                              .Include(a => a.Tags)
+                                              .Where(a => a.BeneficiaryUsername == username)
+                                              .OrderByDescending(a => a.DateCreated)
+                                              .ToList();
 
                 return acknowledgementsAssembler.AssembleCollection(acknowledgements);
             }
@@ -66,11 +65,10 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
             {
                 context.Database.Log = message => Debug.WriteLine(message);
                 var acknowledgements = context.Acknowledgements
-                                          .AsNoTracking()
-                                          .Include(a => a.Tags)
-                                          .Where(a => a.AuthorUsername == username)
-                                          .OrderByDescending(a => a.DateCreated)
-                                          .ToList();
+                                              .Include(a => a.Tags)
+                                              .Where(a => a.AuthorUsername == username)
+                                              .OrderByDescending(a => a.DateCreated)
+                                              .ToList();
 
                 return acknowledgementsAssembler.AssembleCollection(acknowledgements);
             }
@@ -82,11 +80,12 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
             {
                 context.Database.Log = message => Debug.WriteLine(message);
                 var acknowledgements = context.Acknowledgements
-                                          .AsNoTracking()
-                                          .Include(a => a.Tags)
-                                          .Where(a => a.DateCreated.Year == DateTime.Today.Year
-                                                   && a.DateCreated.Month == DateTime.Today.Month
-                                                   && a.DateCreated.Day == DateTime.Today.Day).OrderByDescending(a => a.DateCreated).ToList();
+                                              .Include(a => a.Tags)
+                                              .Where(a => a.DateCreated.Year == DateTime.Today.Year
+                                                       && a.DateCreated.Month == DateTime.Today.Month
+                                                       && a.DateCreated.Day == DateTime.Today.Day)
+                                              .OrderByDescending(a => a.DateCreated)
+                                              .ToList();
 
                 return acknowledgementsAssembler.AssembleCollection(acknowledgements);
             }
@@ -101,11 +100,10 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
             {
                 context.Database.Log = message => Debug.WriteLine(message);
                 var acknowledgements = context.Acknowledgements
-                                          .AsNoTracking()
-                                          .Include(a => a.Tags)
-                                          .Where(a => a.DateCreated >= startOfWeek && a.DateCreated < endOfWeek)
-                                          .OrderByDescending(a => a.DateCreated)
-                                          .ToList();
+                                              .Include(a => a.Tags)
+                                              .Where(a => a.DateCreated >= startOfWeek && a.DateCreated < endOfWeek)
+                                              .OrderByDescending(a => a.DateCreated)
+                                              .ToList();
 
                 return acknowledgementsAssembler.AssembleCollection(acknowledgements);
             }
@@ -117,12 +115,11 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
             {
                 context.Database.Log = message => Debug.WriteLine(message);
                 var acknowledgements = context.Acknowledgements
-                                          .AsNoTracking()
-                                          .Include(a => a.Tags)
-                                          .Where(a => a.DateCreated.Year == DateTime.Today.Year
-                                                   && a.DateCreated.Month == DateTime.Today.Month)
-                                          .OrderByDescending(a => a.DateCreated)
-                                          .ToList();
+                                              .Include(a => a.Tags)
+                                              .Where(a => a.DateCreated.Year == DateTime.Today.Year
+                                                       && a.DateCreated.Month == DateTime.Today.Month)
+                                              .OrderByDescending(a => a.DateCreated)
+                                              .ToList();
 
                 return acknowledgementsAssembler.AssembleCollection(acknowledgements);
             }
@@ -134,11 +131,10 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
             {
                 context.Database.Log = message => Debug.WriteLine(message);
                 var acknowledgements = context.Acknowledgements
-                                          .AsNoTracking()
-                                          .Include(a => a.Tags)
-                                          .OrderByDescending(a => a.DateCreated)
-                                          .Take(10)
-                                          .ToList();
+                                              .Include(a => a.Tags)
+                                              .OrderByDescending(a => a.DateCreated)
+                                              .Take(10)
+                                              .ToList();
 
                 return acknowledgementsAssembler.AssembleCollection(acknowledgements);
             }
@@ -150,10 +146,11 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
             {
                 context.Database.Log = message => Debug.WriteLine(message);
                 var champion = context.Acknowledgements
-                                  .GroupBy(a => a.BeneficiaryUsername, (key, values) => new { Username = key, Count = values.Count() })
-                                  .OrderByDescending(b => b.Count)
-                                  .Select(b => b.Username)
-                                  .First();
+                                      .GroupBy(a => a.BeneficiaryUsername,
+                                                    (key, values) => new { Username = key, Count = values.Count() })
+                                      .OrderByDescending(b => b.Count)
+                                      .Select(b => b.Username)
+                                      .First();
 
                 return champion;
             }
@@ -165,10 +162,11 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
             {
                 context.Database.Log = message => Debug.WriteLine(message);
                 var topTenAllTime = context.Acknowledgements
-                                       .GroupBy(a => a.BeneficiaryUsername, (key, values) => new { Username = key, Count = values.Count() })
-                                       .OrderByDescending(b => b.Count)
-                                       .Take(10)
-                                       .ToDictionary(b => b.Username, b => b.Count);
+                                           .GroupBy(a => a.BeneficiaryUsername,
+                                                         (key, values) => new { Username = key, Count = values.Count() })
+                                           .OrderByDescending(b => b.Count)
+                                           .Take(10)
+                                           .ToDictionary(b => b.Username, b => b.Count);
 
                 return topTenAllTime;
             }
@@ -180,11 +178,13 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
             {
                 context.Database.Log = message => Debug.WriteLine(message);
                 var topTenThisMonth = context.Acknowledgements
-                                         .Where(a => a.DateCreated.Month == DateTime.Today.Month && a.DateCreated.Year == DateTime.Today.Year)
-                                         .GroupBy(a => a.BeneficiaryUsername, (key, values) => new { Username = key, Count = values.Count() })
-                                         .OrderByDescending(b => b.Count)
-                                         .Take(10)
-                                         .ToDictionary(b => b.Username, b => b.Count);
+                                             .Where(a => a.DateCreated.Month == DateTime.Today.Month
+                                                      && a.DateCreated.Year == DateTime.Today.Year)
+                                             .GroupBy(a => a.BeneficiaryUsername,
+                                                           (key, values) => new { Username = key, Count = values.Count() })
+                                             .OrderByDescending(b => b.Count)
+                                             .Take(10)
+                                             .ToDictionary(b => b.Username, b => b.Count);
 
                 return topTenThisMonth;
             }
@@ -215,7 +215,8 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
 
                 var topTenByTag = context.Acknowledgements
                                          .Where(a => a.Tags.Contains(tag))
-                                         .GroupBy(a => a.BeneficiaryUsername, (key, values) => new { Username = key, Count = values.Count() })
+                                         .GroupBy(a => a.BeneficiaryUsername,
+                                                       (key, values) => new { Username = key, Count = values.Count() })
                                          .OrderByDescending(b => b.Count)
                                          .Take(10)
                                          .ToDictionary(b => b.Username, b => b.Count);
@@ -269,7 +270,10 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
                 // Find all tags in search query
                 foreach (var keyword in keywords)
                 {
-                    tags.AddRange(context.Tags.Where(t => t.Title.Contains(keyword)).Select(t => t.Title).ToList());
+                    tags.AddRange(context.Tags
+                                         .Where(t => t.Title.Contains(keyword))
+                                         .Select(t => t.Title)
+                                         .ToList());
                 }
 
                 if (usernames.Count() > 0 && tags.Count() > 0)
@@ -339,7 +343,9 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
                     {
                         // Add existing tag from database
                         context.Database.Log = message => Debug.WriteLine(message);
-                        acknowledgement.Tags.Add(context.Tags.Where(t => t.Title == tag).FirstOrDefault());
+                        acknowledgement.Tags.Add(context.Tags
+                                                        .Where(t => t.Title == tag)
+                                                        .FirstOrDefault());
                     }
                     else
                     {

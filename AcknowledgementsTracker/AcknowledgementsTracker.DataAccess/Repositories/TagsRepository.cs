@@ -28,7 +28,9 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
             using (var context = new AcknowledgementsTrackerContext())
             {
                 context.Database.Log = message => Debug.WriteLine(message);
-                tag = context.Tags.AsNoTracking().Where(t => t.Title == title).FirstOrDefault();
+                tag = context.Tags
+                             .Where(t => t.Title == title)
+                             .FirstOrDefault();
             }
 
             return assembler.Assemble(tag);
@@ -80,9 +82,9 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
             {
                 context.Database.Log = message => Debug.WriteLine(message);
                 var result = context.Tags
-                    .OrderByDescending(t => t.Acknowledgements.Count())
-                    .Take(10)
-                    .ToDictionary(t => t.Title, t => t.Acknowledgements.Count());
+                                    .OrderByDescending(t => t.Acknowledgements.Count())
+                                    .Take(10)
+                                    .ToDictionary(t => t.Title, t => t.Acknowledgements.Count());
 
                 return result;
             }
@@ -98,12 +100,14 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
 
                 context.Database.Log = message => Debug.WriteLine(message);
                 var result = context.Tags
-                    .OrderByDescending(t => t.Acknowledgements
-                                             .Where(a => a.DateCreated.Month == currentMonth && a.DateCreated.Year == currentYear)
-                                             .Count())
-                    .Where(t => t.Acknowledgements.Where(a => a.DateCreated.Month == currentMonth && a.DateCreated.Year == currentYear).Count() > 0)
-                    .Take(10)
-                    .ToDictionary(t => t.Title, t => t.Acknowledgements.Where(a => a.DateCreated.Month == currentMonth && a.DateCreated.Year == currentYear).Count());
+                                    .OrderByDescending(t => t.Acknowledgements
+                                                             .Where(a => a.DateCreated.Month == currentMonth && a.DateCreated.Year == currentYear)
+                                                             .Count())
+                                    .Where(t => t.Acknowledgements.Where(a => a.DateCreated.Month == currentMonth && a.DateCreated.Year == currentYear).Count() > 0)
+                                    .Take(10)
+                                    .ToDictionary(t => t.Title, t => t.Acknowledgements
+                                                                      .Where(a => a.DateCreated.Month == currentMonth && a.DateCreated.Year == currentYear)
+                                                                      .Count());
 
                 return result;
             }
