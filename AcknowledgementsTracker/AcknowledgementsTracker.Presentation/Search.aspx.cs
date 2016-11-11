@@ -34,17 +34,15 @@
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!string.IsNullOrWhiteSpace(SearchQuery))
+            if (!fldsAcknowledgementsResults.Visible && !fldsEmployeesResults.Visible)
             {
-                BindGridViews(SearchQuery);
+                txtbSearch.Focus();
             }
-
-            SearchTextBox.Focus();
         }
 
         protected void btnSearch_Click(object sender, EventArgs e)
         {
-            SearchQuery = SearchTextBox.Value;
+            SearchQuery = txtbSearch.Value.Trim();
 
             if (!string.IsNullOrWhiteSpace(SearchQuery))
             {
@@ -58,36 +56,76 @@
             }
         }
 
-        protected void ResetBtn_ServerClick(object sender, EventArgs e)
+        protected void btnReset_ServerClick(object sender, EventArgs e)
         {
-            SearchTextBox.Value = string.Empty;
+            txtbSearch.Value = string.Empty;
             SearchQuery = string.Empty;
+
             fldsEmployeesResults.Visible = false;
             fldsAcknowledgementsResults.Visible = false;
             ErrorLabel.Visible = false;
+
+            txtbSearch.Focus();
         }
 
-        protected void EmployeesResultsGridView_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        protected void gvEmployeesResults_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
-            EmployeesResultsGridView.PageIndex = e.NewPageIndex;
-            EmployeesResultsGridView.DataBind();
+            gvEmployeesResults.DataSource = searcher.FindUsers(SearchQuery);
+            gvEmployeesResults.PageIndex = e.NewPageIndex;
+            gvEmployeesResults.DataBind();
+
+            tmrEmployeesResults.Enabled = false;
+            pnlEmployeesResults.Visible = false;
         }
 
-        protected void AcknowledgementsResultsGridView_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        protected void gvAcknowledgementsResults_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
-            AcknowledgementsResultsGridView.PageIndex = e.NewPageIndex;
-            AcknowledgementsResultsGridView.DataBind();
+            gvAcknowledgementsResults.DataSource = searcher.FindAcknowledgements(SearchQuery);
+            gvAcknowledgementsResults.PageIndex = e.NewPageIndex;
+            gvAcknowledgementsResults.DataBind();
+
+            tmrAcknowledgementsResults.Enabled = false;
+            pnlAcknowledgementsResults.Visible = false;
+        }
+
+        protected void tmrEmployeesResults_Tick(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(SearchQuery) && fldsEmployeesResults.Visible)
+            {
+                gvEmployeesResults.DataSource = searcher.FindUsers(SearchQuery);
+                gvEmployeesResults.DataBind();
+                fldsEmployeesResults.Visible = true;
+
+                tmrEmployeesResults.Enabled = false;
+                pnlEmployeesResults.Visible = false;
+            }
+        }
+
+        protected void tmrAcknowledgementsResults_Tick(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(SearchQuery) && fldsAcknowledgementsResults.Visible)
+            {
+                gvAcknowledgementsResults.DataSource = searcher.FindAcknowledgements(SearchQuery);
+                gvAcknowledgementsResults.DataBind();
+                fldsAcknowledgementsResults.Visible = true;
+
+                tmrAcknowledgementsResults.Enabled = false;
+                pnlAcknowledgementsResults.Visible = false;
+            }
         }
 
         private void BindGridViews(string search)
         {
-            EmployeesResultsGridView.DataSource = searcher.FindUsers(search);
-            EmployeesResultsGridView.DataBind();
+            gvEmployeesResults.DataSource = searcher.FindUsers(search);
+            gvEmployeesResults.DataBind();
             fldsEmployeesResults.Visible = true;
 
-            AcknowledgementsResultsGridView.DataSource = searcher.FindAcknowledgements(search);
-            AcknowledgementsResultsGridView.DataBind();
+            gvAcknowledgementsResults.DataSource = searcher.FindAcknowledgements(search);
+            gvAcknowledgementsResults.DataBind();
             fldsAcknowledgementsResults.Visible = true;
+
+            pnlAcknowledgementsResults.Visible = false;
+            pnlEmployeesResults.Visible = false;
         }
     }
 }

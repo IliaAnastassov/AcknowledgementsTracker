@@ -15,14 +15,25 @@
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            gvEmployees.DataSource = ldapService.ReadAllUsersData();
-            gvEmployees.DataBind();
         }
 
         protected void gvEmployees_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
+            gvEmployees.DataSource = ldapService.ReadAllUsersData();
             gvEmployees.PageIndex = e.NewPageIndex;
             gvEmployees.DataBind();
+
+            tmrEmployees.Enabled = false;
+            pnlEmployees.Visible = false;
+        }
+
+        protected void tmrEmployees_Tick(object sender, EventArgs e)
+        {
+            gvEmployees.DataSource = ldapService.ReadAllUsersData();
+            gvEmployees.DataBind();
+
+            tmrEmployees.Enabled = false;
+            pnlEmployees.Visible = false;
         }
     }
 }

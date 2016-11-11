@@ -22,55 +22,58 @@
                 <fieldset>
                     <legend>Your acknowledgements</legend>
 
-                    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                    <asp:UpdatePanel runat="server">
                         <ContentTemplate>
-                            <asp:UpdateProgress ID="progress1" runat="server" DisplayAfter="300" DynamicLayout="true">
-                                <ProgressTemplate>
+
+                            <%--Timer--%>
+                            <asp:Timer ID="tmrUserAcknowledgements" runat="server" OnTick="tmrUserAcknowledgements_Tick" Interval="100" />
+
+                            <%--Loading Grid--%>
+                            <asp:Panel ID="pnlUserAcknowledgementsLoader" runat="server">
+                                <table class="table table-bordered table-condensed table-hover table-striped mb-0 bb-none">
+                                    <tr>
+                                        <th scope="col">Tags</th>
+                                        <th scope="col">Text</th>
+                                        <th scope="col">From</th>
+                                        <th scope="col">Date Created</th>
+                                    </tr>
+                                </table>
+                                <asp:Panel CssClass="table table-bordered progress-parent" Height="350px" runat="server">
                                     <img src="Images/progress.gif" />
-                                </ProgressTemplate>
-                            </asp:UpdateProgress>
+                                </asp:Panel>
+                            </asp:Panel>
 
-                            <div id="divUserAcknowledgements">
-                                <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped"
-                                    AllowPaging="True" AutoGenerateColumns="False" ID="gvUserAcknowledgements" runat="server"
-                                    OnPageIndexChanging="UserAcknowledgementsGridView_PageIndexChanging">
-                                    <Columns>
-                                        <asp:TemplateField HeaderText="Tags">
-                                            <ItemTemplate>
-                                                <asp:Repeater ID="rptrTags" runat="server" DataSource='<%# new AcknowledgementsTracker.Presentation.UIHelperService()
+                            <%--Bound Grid--%>
+                            <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped"
+                                AllowPaging="True" AutoGenerateColumns="False" ID="gvUserAcknowledgements" runat="server"
+                                OnPageIndexChanging="gvUserAcknowledgements_PageIndexChanging">
+                                <Columns>
+                                    <asp:TemplateField HeaderText="Tags">
+                                        <ItemTemplate>
+                                            <asp:Repeater ID="rptrTags" runat="server" DataSource='<%# new AcknowledgementsTracker.Presentation.UIHelperService()
                                                     .ReadTags((IEnumerable<AcknowledgementsTracker.DTO.TagDTO>)(Eval("Tags"))) %>'>
-                                                    <ItemTemplate>
-                                                        <asp:HyperLink CssClass="label label-info label-margin" ID="lnkTag" runat="server" Text="<%# Container.DataItem %>"
-                                                            NavigateUrl='<%# string.Format("~/AcknowledgementsByTag.aspx?tag={0}&mode=allTime",
+                                                <ItemTemplate>
+                                                    <asp:HyperLink CssClass="label label-info label-margin" ID="lnkTag" runat="server" Text="<%# Container.DataItem %>"
+                                                        NavigateUrl='<%# string.Format("~/AcknowledgementsByTag.aspx?tag={0}&mode=allTime",
                                                                 Uri.EscapeDataString(Container.DataItem.ToString())) %>' />
-                                                    </ItemTemplate>
-                                                </asp:Repeater>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:BoundField DataField="Text" HeaderText="Text" SortExpression="Text" />
-                                        <asp:TemplateField>
-                                            <HeaderTemplate>
-                                                <asp:Literal Text="From" runat="server" />
-                                            </HeaderTemplate>
-                                            <ItemTemplate>
-                                                <asp:HyperLink ID="lnkAuthorName" runat="server" Text='<%# new AcknowledgementsTracker.Presentation.UIHelperService()
+                                                </ItemTemplate>
+                                            </asp:Repeater>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:BoundField DataField="Text" HeaderText="Text" SortExpression="Text" />
+                                    <asp:TemplateField>
+                                        <HeaderTemplate>
+                                            <asp:Literal Text="From" runat="server" />
+                                        </HeaderTemplate>
+                                        <ItemTemplate>
+                                            <asp:HyperLink ID="lnkAuthorName" runat="server" Text='<%# new AcknowledgementsTracker.Presentation.UIHelperService()
                                                     .ReadUserFullName(Convert.ToString(Eval("AuthorUsername"))) %>'
-                                                    NavigateUrl='<%# string.Format("~/AcknowledgementsByUser.aspx?user={0}&mode=allTime", Convert.ToString(Eval("AuthorUsername"))) %>' />
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:BoundField DataField="DateCreated" HeaderText="Date Created" SortExpression="DateCreated" />
-                                    </Columns>
-                                </asp:GridView>
-                            </div>
-                            <%--Script--%>
-                            <script type="text/javascript">
-                                function EndGetData(arg)
-                                {
-                                    document.getElementById("divUserAcknowledgements").innerHTML = arg;
-                                }
-
-                                setTimeout("<asp:literal runat="server" id="ltCallback" />", 100);
-                            </script>
+                                                NavigateUrl='<%# string.Format("~/AcknowledgementsByUser.aspx?user={0}&mode=allTime", Convert.ToString(Eval("AuthorUsername"))) %>' />
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:BoundField DataField="DateCreated" HeaderText="Date Created" SortExpression="DateCreated" />
+                                </Columns>
+                            </asp:GridView>
                         </ContentTemplate>
                     </asp:UpdatePanel>
                 </fieldset>
@@ -79,61 +82,101 @@
                 <fieldset>
                     <legend>Last acknowledgements</legend>
 
-                    <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped"
-                        AllowPaging="True" AutoGenerateColumns="False" ID="gvLastAcknowledgemets" runat="server">
-                        <Columns>
-                            <asp:TemplateField HeaderText="Tags">
-                                <ItemTemplate>
-                                    <asp:Repeater ID="rptrTags" runat="server" DataSource='<%# new AcknowledgementsTracker.Presentation.UIHelperService()
-                                            .ReadTags((IEnumerable<AcknowledgementsTracker.DTO.TagDTO>)(Eval("Tags"))) %>'>
+                    <asp:UpdatePanel runat="server">
+                        <ContentTemplate>
+
+                            <%--Timer--%>
+                            <asp:Timer ID="tmrLastAcknowledgements" runat="server" OnTick="tmrLastAcknowledgements_Tick" Interval="100" />
+
+                            <%--Loading Grid--%>
+                            <asp:Panel ID="pnlLastAcknowledgements" runat="server">
+                                <table class="table table-bordered table-condensed table-hover table-striped mb-0 bb-none">
+                                    <tr>
+                                        <th scope="col">Tags</th>
+                                        <th scope="col">Text</th>
+                                        <th scope="col">From</th>
+                                        <th scope="col">Date Created</th>
+                                    </tr>
+                                </table>
+                                <asp:Panel CssClass="table table-bordered progress-parent" Height="350px" runat="server">
+                                    <img src="Images/progress.gif" />
+                                </asp:Panel>
+                            </asp:Panel>
+
+                            <%--Bound Grid--%>
+                            <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped"
+                                AllowPaging="True" AutoGenerateColumns="False" ID="gvLastAcknowledgemets" runat="server">
+                                <Columns>
+                                    <asp:TemplateField HeaderText="Tags">
                                         <ItemTemplate>
-                                            <asp:HyperLink CssClass="label label-info" ID="lnkTag" runat="server" Text="<%# Container.DataItem %>"
-                                                NavigateUrl='<%# string.Format("~/AcknowledgementsByTag.aspx?tag={0}&mode=allTime",
+                                            <asp:Repeater ID="rptrTags" runat="server" DataSource='<%# new AcknowledgementsTracker.Presentation.UIHelperService()
+                                            .ReadTags((IEnumerable<AcknowledgementsTracker.DTO.TagDTO>)(Eval("Tags"))) %>'>
+                                                <ItemTemplate>
+                                                    <asp:HyperLink CssClass="label label-info" ID="lnkTag" runat="server" Text="<%# Container.DataItem %>"
+                                                        NavigateUrl='<%# string.Format("~/AcknowledgementsByTag.aspx?tag={0}&mode=allTime",
                                                     Uri.EscapeDataString(Container.DataItem.ToString())) %>' />
+                                                </ItemTemplate>
+                                            </asp:Repeater>
                                         </ItemTemplate>
-                                    </asp:Repeater>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField>
-                                <HeaderTemplate>
-                                    <asp:Literal Text="To" runat="server" />
-                                </HeaderTemplate>
-                                <ItemTemplate>
-                                    <asp:HyperLink ID="lnkBeneficiaryName" runat="server" Text='<%# new AcknowledgementsTracker.Presentation.UIHelperService()
+                                    </asp:TemplateField>
+                                    <asp:TemplateField>
+                                        <HeaderTemplate>
+                                            <asp:Literal Text="To" runat="server" />
+                                        </HeaderTemplate>
+                                        <ItemTemplate>
+                                            <asp:HyperLink ID="lnkBeneficiaryName" runat="server" Text='<%# new AcknowledgementsTracker.Presentation.UIHelperService()
                                             .ReadUserFullName(Convert.ToString(Eval("BeneficiaryUsername"))) %>'
-                                        NavigateUrl='<%# string.Format("~/AcknowledgementsByUser.aspx?user={0}&mode=allTime", Convert.ToString(Eval("BeneficiaryUsername"))) %>' />
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:BoundField DataField="Text" HeaderText="Text" SortExpression="Text" />
-                            <asp:TemplateField>
-                                <HeaderTemplate>
-                                    <asp:Literal Text="From" runat="server" />
-                                </HeaderTemplate>
-                                <ItemTemplate>
-                                    <asp:HyperLink ID="lnkAuthorName" runat="server" Text='<%# new AcknowledgementsTracker.Presentation.UIHelperService()
+                                                NavigateUrl='<%# string.Format("~/AcknowledgementsByUser.aspx?user={0}&mode=allTime", Convert.ToString(Eval("BeneficiaryUsername"))) %>' />
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:BoundField DataField="Text" HeaderText="Text" SortExpression="Text" />
+                                    <asp:TemplateField>
+                                        <HeaderTemplate>
+                                            <asp:Literal Text="From" runat="server" />
+                                        </HeaderTemplate>
+                                        <ItemTemplate>
+                                            <asp:HyperLink ID="lnkAuthorName" runat="server" Text='<%# new AcknowledgementsTracker.Presentation.UIHelperService()
                                             .ReadUserFullName(Convert.ToString(Eval("AuthorUsername"))) %>'
-                                        NavigateUrl='<%# string.Format("~/AcknowledgementsByUser.aspx?user={0}&mode=allTime", Convert.ToString(Eval("AuthorUsername"))) %>' />
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:BoundField DataField="DateCreated" HeaderText="Date Created" SortExpression="DateCreated" />
-                        </Columns>
-                    </asp:GridView>
+                                                NavigateUrl='<%# string.Format("~/AcknowledgementsByUser.aspx?user={0}&mode=allTime", Convert.ToString(Eval("AuthorUsername"))) %>' />
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:BoundField DataField="DateCreated" HeaderText="Date Created" SortExpression="DateCreated" />
+                                </Columns>
+                            </asp:GridView>
+
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
                 </fieldset>
 
                 <%--Today's Acknowledgements--%>
                 <fieldset>
                     <legend>Today's acknowledgements</legend>
 
-                    <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                    <asp:UpdatePanel runat="server">
                         <ContentTemplate>
-                            <asp:UpdateProgress ID="progress2" runat="server" DisplayAfter="300">
-                                <ProgressTemplate>
+
+                            <%--Timer--%>
+                            <asp:Timer ID="tmrTodaysAcknowledgements" runat="server" OnTick="tmrTodaysAcknowledgements_Tick" Interval="100" />
+
+                            <%--Loading Grid--%>
+                            <asp:Panel ID="pnlTodaysAcknowledgements" runat="server">
+                                <table class="table table-bordered table-condensed table-hover table-striped mb-0 bb-none">
+                                    <tr>
+                                        <th scope="col">Tags</th>
+                                        <th scope="col">Text</th>
+                                        <th scope="col">From</th>
+                                        <th scope="col">Date Created</th>
+                                    </tr>
+                                </table>
+                                <asp:Panel CssClass="table table-bordered progress-parent" Height="350px" runat="server">
                                     <img src="Images/progress.gif" />
-                                </ProgressTemplate>
-                            </asp:UpdateProgress>
+                                </asp:Panel>
+                            </asp:Panel>
+
+                            <%--Bound Grid--%>
                             <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped"
                                 AllowPaging="True" AutoGenerateColumns="False" ID="gvTodaysAcknowledgements" runat="server"
-                                OnPageIndexChanging="TodaysAcknowledgementsGridView_PageIndexChanging">
+                                OnPageIndexChanging="gvTodaysAcknowledgements_PageIndexChanging">
                                 <Columns>
                                     <asp:TemplateField HeaderText="Tags">
                                         <ItemTemplate>
@@ -179,16 +222,31 @@
                 <fieldset>
                     <legend>This week's acknowledgements</legend>
 
-                    <asp:UpdatePanel ID="UpdatePanel3" runat="server">
+                    <asp:UpdatePanel runat="server">
                         <ContentTemplate>
-                            <asp:UpdateProgress ID="progress3" runat="server" DisplayAfter="300">
-                                <ProgressTemplate>
+
+                            <%--Timer--%>
+                            <asp:Timer ID="tmrThisWeeksAcnowledgements" runat="server" OnTick="tmrThisWeeksAcnowledgements_Tick" Interval="100" />
+
+                            <%--Loading Grid--%>
+                            <asp:Panel ID="pnlThisWeeksAcnowledgements" runat="server">
+                                <table class="table table-bordered table-condensed table-hover table-striped mb-0 bb-none">
+                                    <tr>
+                                        <th scope="col">Tags</th>
+                                        <th scope="col">Text</th>
+                                        <th scope="col">From</th>
+                                        <th scope="col">Date Created</th>
+                                    </tr>
+                                </table>
+                                <asp:Panel CssClass="table table-bordered progress-parent" Height="350px" runat="server">
                                     <img src="Images/progress.gif" />
-                                </ProgressTemplate>
-                            </asp:UpdateProgress>
+                                </asp:Panel>
+                            </asp:Panel>
+
+                            <%--Bound Grid--%>
                             <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped"
                                 AllowPaging="True" AutoGenerateColumns="False" ID="gvThisWeeksAcknowledgements" runat="server"
-                                OnPageIndexChanging="ThisWeeksAcknowledgementsGridView_PageIndexChanging">
+                                OnPageIndexChanging="gvThisWeeksAcknowledgements_PageIndexChanging">
                                 <Columns>
                                     <asp:TemplateField HeaderText="Tags">
                                         <ItemTemplate>
@@ -234,13 +292,28 @@
                 <fieldset>
                     <legend>This month's acknowledgements</legend>
 
-                    <asp:UpdatePanel ID="UpdatePanel4" runat="server">
+                    <asp:UpdatePanel runat="server">
                         <ContentTemplate>
-                            <asp:UpdateProgress ID="progress4" runat="server" DisplayAfter="300">
-                                <ProgressTemplate>
+
+                            <%--Timer--%>
+                            <asp:Timer ID="tmrThisMonthAcknowledgements" runat="server" OnTick="tmrThisMonthAcknowledgements_Tick" Interval="100" />
+
+                            <%--Loading Grid--%>
+                            <asp:Panel ID="pnlThisMonthAcknowledgements" runat="server">
+                                <table class="table table-bordered table-condensed table-hover table-striped mb-0 bb-none">
+                                    <tr>
+                                        <th scope="col">Tags</th>
+                                        <th scope="col">Text</th>
+                                        <th scope="col">From</th>
+                                        <th scope="col">Date Created</th>
+                                    </tr>
+                                </table>
+                                <asp:Panel CssClass="table table-bordered progress-parent" Height="350px" runat="server">
                                     <img src="Images/progress.gif" />
-                                </ProgressTemplate>
-                            </asp:UpdateProgress>
+                                </asp:Panel>
+                            </asp:Panel>
+
+                            <%--Bound Grid--%>
                             <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped" AllowPaging="True"
                                 AutoGenerateColumns="False" ID="gvThisMonthsAcknowledgements" runat="server"
                                 OnPageIndexChanging="ThisMonthsAcknowledgementsGridView_PageIndexChanging">
@@ -289,124 +362,220 @@
                 <fieldset>
                     <legend>Most acknowledged persons all time</legend>
 
-                    <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped" AllowPaging="true"
-                        AutoGenerateColumns="false" ID="gvAllTimeTopTen" runat="server">
-                        <Columns>
-                            <asp:TemplateField>
-                                <HeaderTemplate>
-                                    <asp:Literal Text="Name" runat="server" />
-                                </HeaderTemplate>
-                                <ItemTemplate>
-                                    <asp:HyperLink ID="lnkName" runat="server" Text='<%# new AcknowledgementsTracker.Presentation.UIHelperService()
+                    <asp:UpdatePanel runat="server">
+                        <ContentTemplate>
+
+                            <%--Timer--%>
+                            <asp:Timer ID="tmrAllTimeTopTen" runat="server" OnTick="tmrAllTimeTopTen_Tick" Interval="100" />
+
+                            <%--Loading Grid--%>
+                            <asp:Panel ID="pnlAllTimeTopTen" runat="server">
+                                <table class="table table-bordered table-condensed table-hover table-striped mb-0 bb-none">
+                                    <tr>
+                                        <th scope="col">Tags</th>
+                                        <th scope="col">Text</th>
+                                        <th scope="col">From</th>
+                                        <th scope="col">Date Created</th>
+                                    </tr>
+                                </table>
+                                <asp:Panel CssClass="table table-bordered progress-parent" Height="350px" runat="server">
+                                    <img src="Images/progress.gif" />
+                                </asp:Panel>
+                            </asp:Panel>
+
+                            <%--Bound Grid--%>
+                            <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped" AllowPaging="true"
+                                AutoGenerateColumns="false" ID="gvAllTimeTopTen" runat="server">
+                                <Columns>
+                                    <asp:TemplateField>
+                                        <HeaderTemplate>
+                                            <asp:Literal Text="Name" runat="server" />
+                                        </HeaderTemplate>
+                                        <ItemTemplate>
+                                            <asp:HyperLink ID="lnkName" runat="server" Text='<%# new AcknowledgementsTracker.Presentation.UIHelperService()
                                             .ReadUserFullName(Convert.ToString(Eval("Key"))) %>'
-                                        NavigateUrl='<%# string.Format("~/AcknowledgementsByUser.aspx?user={0}&mode=allTime", Convert.ToString(Eval("Key"))) %>' />
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField>
-                                <HeaderTemplate>
-                                    <asp:Literal Text="Number of Acknowledgements" runat="server" />
-                                </HeaderTemplate>
-                                <ItemTemplate>
-                                    <asp:HyperLink ID="lnkNumberOfAcknowledgements" runat="server" Text='<%# Eval("Value") %>'
-                                        NavigateUrl='<%# string.Format("~/AcknowledgementsByUser.aspx?user={0}&mode=allTime_Rec", Convert.ToString(Eval("Key"))) %>' />
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                        </Columns>
-                    </asp:GridView>
+                                                NavigateUrl='<%# string.Format("~/AcknowledgementsByUser.aspx?user={0}&mode=allTime", Convert.ToString(Eval("Key"))) %>' />
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField>
+                                        <HeaderTemplate>
+                                            <asp:Literal Text="Number of Acknowledgements" runat="server" />
+                                        </HeaderTemplate>
+                                        <ItemTemplate>
+                                            <asp:HyperLink ID="lnkNumberOfAcknowledgements" runat="server" Text='<%# Eval("Value") %>'
+                                                NavigateUrl='<%# string.Format("~/AcknowledgementsByUser.aspx?user={0}&mode=allTime_Rec", Convert.ToString(Eval("Key"))) %>' />
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                </Columns>
+                            </asp:GridView>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
                 </fieldset>
 
                 <%--Top 10 Most Acknowledged persons this month--%>
                 <fieldset>
                     <legend>Most acknowledged persons this month</legend>
 
-                    <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped" AllowPaging="true"
-                        AutoGenerateColumns="false" ID="gvThisMonthTopTen" runat="server">
-                        <Columns>
-                            <asp:TemplateField>
-                                <HeaderTemplate>
-                                    <asp:Literal Text="Name" runat="server" />
-                                </HeaderTemplate>
-                                <ItemTemplate>
-                                    <asp:HyperLink ID="lnkName" runat="server" Text='<%# new AcknowledgementsTracker.Presentation.UIHelperService()
+                    <asp:UpdatePanel runat="server">
+                        <ContentTemplate>
+
+                            <%--Timer--%>
+                            <asp:Timer ID="tmrThisMonthTopTen" runat="server" OnTick="tmrThisMonthTopTen_Tick" Interval="100" />
+
+                            <%--Loading Grid--%>
+                            <asp:Panel ID="pnlThisMonthTopTen" runat="server">
+                                <table class="table table-bordered table-condensed table-hover table-striped mb-0 bb-none">
+                                    <tr>
+                                        <th scope="col">Tags</th>
+                                        <th scope="col">Text</th>
+                                        <th scope="col">From</th>
+                                        <th scope="col">Date Created</th>
+                                    </tr>
+                                </table>
+                                <asp:Panel CssClass="table table-bordered progress-parent" Height="350px" runat="server">
+                                    <img src="Images/progress.gif" />
+                                </asp:Panel>
+                            </asp:Panel>
+
+                            <%--Bound Grid--%>
+                            <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped" AllowPaging="true"
+                                AutoGenerateColumns="false" ID="gvThisMonthTopTen" runat="server">
+                                <Columns>
+                                    <asp:TemplateField>
+                                        <HeaderTemplate>
+                                            <asp:Literal Text="Name" runat="server" />
+                                        </HeaderTemplate>
+                                        <ItemTemplate>
+                                            <asp:HyperLink ID="lnkName" runat="server" Text='<%# new AcknowledgementsTracker.Presentation.UIHelperService()
                                             .ReadUserFullName(Convert.ToString(Eval("Key"))) %>'
-                                        NavigateUrl='<%# string.Format("~/AcknowledgementsByUser.aspx?user={0}&mode=allTime", Convert.ToString(Eval("Key"))) %>' />
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField>
-                                <HeaderTemplate>
-                                    <asp:Literal Text="Number of Acknowledgements" runat="server" />
-                                </HeaderTemplate>
-                                <ItemTemplate>
-                                    <asp:HyperLink ID="lnkNumberOfAcknowledgements" runat="server" Text='<%#Eval("Value") %>'
-                                        NavigateUrl='<%# string.Format("~/AcknowledgementsByUser.aspx?user={0}&mode=thisMonth", Convert.ToString(Eval("Key"))) %>' />
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                        </Columns>
-                    </asp:GridView>
+                                                NavigateUrl='<%# string.Format("~/AcknowledgementsByUser.aspx?user={0}&mode=allTime", Convert.ToString(Eval("Key"))) %>' />
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField>
+                                        <HeaderTemplate>
+                                            <asp:Literal Text="Number of Acknowledgements" runat="server" />
+                                        </HeaderTemplate>
+                                        <ItemTemplate>
+                                            <asp:HyperLink ID="lnkNumberOfAcknowledgements" runat="server" Text='<%#Eval("Value") %>'
+                                                NavigateUrl='<%# string.Format("~/AcknowledgementsByUser.aspx?user={0}&mode=thisMonth", Convert.ToString(Eval("Key"))) %>' />
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                </Columns>
+                            </asp:GridView>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
                 </fieldset>
 
                 <%--Top 10 Most Frequent Tags All Time--%>
                 <fieldset>
                     <legend>Most frequently used tags all time</legend>
 
-                    <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped" AllowPaging="true"
-                        AutoGenerateColumns="false" ID="gvMostFrequentTagsAllTime" runat="server">
-                        <Columns>
-                            <asp:TemplateField>
-                                <HeaderTemplate>
-                                    <asp:Literal Text="Tag" runat="server" />
-                                </HeaderTemplate>
-                                <ItemTemplate>
-                                    <asp:HyperLink CssClass="label label-info" ID="lnkTag" runat="server"
-                                        Text='<%# ((KeyValuePair<string, int>)Container.DataItem).Key %>'
-                                        NavigateUrl='<%# string.Format("~/AcknowledgementsByTag.aspx?tag={0}&mode=allTime",
+                    <asp:UpdatePanel runat="server">
+                        <ContentTemplate>
+
+                            <%--Timer--%>
+                            <asp:Timer ID="tmrMostFrequentTagsAllTime" runat="server" OnTick="tmrMostFrequentTagsAllTime_Tick" Interval="100" />
+
+                            <%--Loading Grid--%>
+                            <asp:Panel ID="pnlMostFrequentTagsAllTime" runat="server">
+                                <table class="table table-bordered table-condensed table-hover table-striped mb-0 bb-none">
+                                    <tr>
+                                        <th scope="col">Tags</th>
+                                        <th scope="col">Text</th>
+                                        <th scope="col">From</th>
+                                        <th scope="col">Date Created</th>
+                                    </tr>
+                                </table>
+                                <asp:Panel CssClass="table table-bordered progress-parent" Height="350px" runat="server">
+                                    <img src="Images/progress.gif" />
+                                </asp:Panel>
+                            </asp:Panel>
+
+                            <%--Bound Grid--%>
+                            <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped" AllowPaging="true"
+                                AutoGenerateColumns="false" ID="gvMostFrequentTagsAllTime" runat="server">
+                                <Columns>
+                                    <asp:TemplateField>
+                                        <HeaderTemplate>
+                                            <asp:Literal Text="Tag" runat="server" />
+                                        </HeaderTemplate>
+                                        <ItemTemplate>
+                                            <asp:HyperLink CssClass="label label-info" ID="lnkTag" runat="server"
+                                                Text='<%# ((KeyValuePair<string, int>)Container.DataItem).Key %>'
+                                                NavigateUrl='<%# string.Format("~/AcknowledgementsByTag.aspx?tag={0}&mode=allTime",
                                             Uri.EscapeDataString(((KeyValuePair<string, int>)Container.DataItem).Key)) %>' />
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField>
-                                <HeaderTemplate>
-                                    <asp:Literal Text="Times mentioned" runat="server" />
-                                </HeaderTemplate>
-                                <ItemTemplate>
-                                    <asp:HyperLink runat="server" Text='<%# ((KeyValuePair<string, int>)Container.DataItem).Value %>'
-                                        NavigateUrl='<%# string.Format("~/AcknowledgementsByTag.aspx?tag={0}&mode=allTime",
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField>
+                                        <HeaderTemplate>
+                                            <asp:Literal Text="Times mentioned" runat="server" />
+                                        </HeaderTemplate>
+                                        <ItemTemplate>
+                                            <asp:HyperLink runat="server" Text='<%# ((KeyValuePair<string, int>)Container.DataItem).Value %>'
+                                                NavigateUrl='<%# string.Format("~/AcknowledgementsByTag.aspx?tag={0}&mode=allTime",
                                             Uri.EscapeDataString(((KeyValuePair<string, int>)Container.DataItem).Key)) %>' />
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                        </Columns>
-                    </asp:GridView>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                </Columns>
+                            </asp:GridView>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
                 </fieldset>
 
                 <%--Top 10 Most Frequent Tags This Month--%>
                 <fieldset>
                     <legend>Most frequently used tags this month</legend>
 
-                    <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped" AllowPaging="true"
-                        AutoGenerateColumns="false" ID="gvMostFrequentTagsThisMonth" runat="server">
-                        <Columns>
-                            <asp:TemplateField>
-                                <HeaderTemplate>
-                                    <asp:Literal Text="Tag" runat="server" />
-                                </HeaderTemplate>
-                                <ItemTemplate>
-                                    <asp:HyperLink CssClass="label label-info" ID="lnkTag" runat="server"
-                                        Text='<%# ((KeyValuePair<string, int>)Container.DataItem).Key %>'
-                                        NavigateUrl='<%# string.Format("~/AcknowledgementsByTag.aspx?tag={0}&mode=allTime",
+                    <asp:UpdatePanel runat="server">
+                        <ContentTemplate>
+
+                            <%--Timer--%>
+                            <asp:Timer ID="tmrMostFrequentTagsThisMonth" runat="server" OnTick="tmrMostFrequentTagsThisMonth_Tick" Interval="100" />
+
+                            <%--Loading Grid--%>
+                            <asp:Panel ID="pnlMostFrequentTagsThisMonth" runat="server">
+                                <table class="table table-bordered table-condensed table-hover table-striped mb-0 bb-none">
+                                    <tr>
+                                        <th scope="col">Tags</th>
+                                        <th scope="col">Text</th>
+                                        <th scope="col">From</th>
+                                        <th scope="col">Date Created</th>
+                                    </tr>
+                                </table>
+                                <asp:Panel CssClass="table table-bordered progress-parent" Height="350px" runat="server">
+                                    <img src="Images/progress.gif" />
+                                </asp:Panel>
+                            </asp:Panel>
+
+                            <%--Bound Grid--%>
+                            <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped" AllowPaging="true"
+                                AutoGenerateColumns="false" ID="gvMostFrequentTagsThisMonth" runat="server">
+                                <Columns>
+                                    <asp:TemplateField>
+                                        <HeaderTemplate>
+                                            <asp:Literal Text="Tag" runat="server" />
+                                        </HeaderTemplate>
+                                        <ItemTemplate>
+                                            <asp:HyperLink CssClass="label label-info" ID="lnkTag" runat="server"
+                                                Text='<%# ((KeyValuePair<string, int>)Container.DataItem).Key %>'
+                                                NavigateUrl='<%# string.Format("~/AcknowledgementsByTag.aspx?tag={0}&mode=allTime",
                                             Uri.EscapeDataString(((KeyValuePair<string, int>)Container.DataItem).Key))%>' />
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField>
-                                <HeaderTemplate>
-                                    <asp:Literal Text="Times mentioned" runat="server" />
-                                </HeaderTemplate>
-                                <ItemTemplate>
-                                    <asp:HyperLink runat="server" Text='<%# ((KeyValuePair<string, int>)Container.DataItem).Value %>'
-                                        NavigateUrl='<%# string.Format("~/AcknowledgementsByTag.aspx?tag={0}&mode=thisMonth",
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField>
+                                        <HeaderTemplate>
+                                            <asp:Literal Text="Times mentioned" runat="server" />
+                                        </HeaderTemplate>
+                                        <ItemTemplate>
+                                            <asp:HyperLink runat="server" Text='<%# ((KeyValuePair<string, int>)Container.DataItem).Value %>'
+                                                NavigateUrl='<%# string.Format("~/AcknowledgementsByTag.aspx?tag={0}&mode=thisMonth",
                                             Uri.EscapeDataString(((KeyValuePair<string, int>)Container.DataItem).Key)) %>' />
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                        </Columns>
-                    </asp:GridView>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                </Columns>
+                            </asp:GridView>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
                 </fieldset>
             </main>
 

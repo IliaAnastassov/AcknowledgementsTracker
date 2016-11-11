@@ -13,22 +13,22 @@ namespace AcknowledgementsTracker.Presentation {
     public partial class Dashboard {
         
         /// <summary>
-        /// UpdatePanel1 control.
+        /// tmrUserAcknowledgements control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
+        protected global::System.Web.UI.Timer tmrUserAcknowledgements;
         
         /// <summary>
-        /// progress1 control.
+        /// pnlUserAcknowledgementsLoader control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdateProgress progress1;
+        protected global::System.Web.UI.WebControls.Panel pnlUserAcknowledgementsLoader;
         
         /// <summary>
         /// gvUserAcknowledgements control.
@@ -40,13 +40,22 @@ namespace AcknowledgementsTracker.Presentation {
         protected global::System.Web.UI.WebControls.GridView gvUserAcknowledgements;
         
         /// <summary>
-        /// ltCallback control.
+        /// tmrLastAcknowledgements control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal ltCallback;
+        protected global::System.Web.UI.Timer tmrLastAcknowledgements;
+        
+        /// <summary>
+        /// pnlLastAcknowledgements control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlLastAcknowledgements;
         
         /// <summary>
         /// gvLastAcknowledgemets control.
@@ -58,22 +67,22 @@ namespace AcknowledgementsTracker.Presentation {
         protected global::System.Web.UI.WebControls.GridView gvLastAcknowledgemets;
         
         /// <summary>
-        /// UpdatePanel2 control.
+        /// tmrTodaysAcknowledgements control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel2;
+        protected global::System.Web.UI.Timer tmrTodaysAcknowledgements;
         
         /// <summary>
-        /// progress2 control.
+        /// pnlTodaysAcknowledgements control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdateProgress progress2;
+        protected global::System.Web.UI.WebControls.Panel pnlTodaysAcknowledgements;
         
         /// <summary>
         /// gvTodaysAcknowledgements control.
@@ -85,22 +94,22 @@ namespace AcknowledgementsTracker.Presentation {
         protected global::System.Web.UI.WebControls.GridView gvTodaysAcknowledgements;
         
         /// <summary>
-        /// UpdatePanel3 control.
+        /// tmrThisWeeksAcnowledgements control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel3;
+        protected global::System.Web.UI.Timer tmrThisWeeksAcnowledgements;
         
         /// <summary>
-        /// progress3 control.
+        /// pnlThisWeeksAcnowledgements control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdateProgress progress3;
+        protected global::System.Web.UI.WebControls.Panel pnlThisWeeksAcnowledgements;
         
         /// <summary>
         /// gvThisWeeksAcknowledgements control.
@@ -112,22 +121,22 @@ namespace AcknowledgementsTracker.Presentation {
         protected global::System.Web.UI.WebControls.GridView gvThisWeeksAcknowledgements;
         
         /// <summary>
-        /// UpdatePanel4 control.
+        /// tmrThisMonthAcknowledgements control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel4;
+        protected global::System.Web.UI.Timer tmrThisMonthAcknowledgements;
         
         /// <summary>
-        /// progress4 control.
+        /// pnlThisMonthAcknowledgements control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdateProgress progress4;
+        protected global::System.Web.UI.WebControls.Panel pnlThisMonthAcknowledgements;
         
         /// <summary>
         /// gvThisMonthsAcknowledgements control.
@@ -139,6 +148,24 @@ namespace AcknowledgementsTracker.Presentation {
         protected global::System.Web.UI.WebControls.GridView gvThisMonthsAcknowledgements;
         
         /// <summary>
+        /// tmrAllTimeTopTen control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.Timer tmrAllTimeTopTen;
+        
+        /// <summary>
+        /// pnlAllTimeTopTen control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlAllTimeTopTen;
+        
+        /// <summary>
         /// gvAllTimeTopTen control.
         /// </summary>
         /// <remarks>
@@ -146,6 +173,24 @@ namespace AcknowledgementsTracker.Presentation {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gvAllTimeTopTen;
+        
+        /// <summary>
+        /// tmrThisMonthTopTen control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.Timer tmrThisMonthTopTen;
+        
+        /// <summary>
+        /// pnlThisMonthTopTen control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlThisMonthTopTen;
         
         /// <summary>
         /// gvThisMonthTopTen control.
@@ -157,6 +202,24 @@ namespace AcknowledgementsTracker.Presentation {
         protected global::System.Web.UI.WebControls.GridView gvThisMonthTopTen;
         
         /// <summary>
+        /// tmrMostFrequentTagsAllTime control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.Timer tmrMostFrequentTagsAllTime;
+        
+        /// <summary>
+        /// pnlMostFrequentTagsAllTime control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlMostFrequentTagsAllTime;
+        
+        /// <summary>
         /// gvMostFrequentTagsAllTime control.
         /// </summary>
         /// <remarks>
@@ -164,6 +227,24 @@ namespace AcknowledgementsTracker.Presentation {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gvMostFrequentTagsAllTime;
+        
+        /// <summary>
+        /// tmrMostFrequentTagsThisMonth control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.Timer tmrMostFrequentTagsThisMonth;
+        
+        /// <summary>
+        /// pnlMostFrequentTagsThisMonth control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlMostFrequentTagsThisMonth;
         
         /// <summary>
         /// gvMostFrequentTagsThisMonth control.

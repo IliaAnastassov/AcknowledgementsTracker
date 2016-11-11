@@ -10,107 +10,127 @@
     using Business.Interfaces;
     using Business.Logic;
     using DTO;
+    using System.Data;
 
-    public partial class Dashboard : Page, ICallbackEventHandler
+    public partial class Dashboard : Page
     {
         private string username;
-        private string callback;
         private IAcknowledgementDtoService acknowledgementDtoService = new AcknowledgementDtoService();
         private ITagDtoService tagDtoService = new TagDtoService();
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!Page.IsCallback)
-            {
-                ltCallback.Text = ClientScript.GetCallbackEventReference(this, "'bindgrid'", "EndGetData", "'asyncgrid'", false);
-            }
+        }
 
+        protected void gvUserAcknowledgements_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
             username = HttpContext.Current.User.Identity.Name;
-
-            Thread.Sleep(3000);
-
-            BindGridViews();
-        }
-
-        private void BindGridViews()
-        {
-            // Bind user acknowledgements
-            ////gvUserAcknowledgements.DataSource = acknowledgementDtoService.ReadReceived(username);
-            ////gvUserAcknowledgements.DataBind();
-
-            // Bind last acknowledgements
-            gvLastAcknowledgemets.DataSource = acknowledgementDtoService.ReadLast();
-            gvLastAcknowledgemets.DataBind();
-
-            // Bind today's acknowledgements
-            gvTodaysAcknowledgements.DataSource = acknowledgementDtoService.ReadTodays();
-            gvTodaysAcknowledgements.DataBind();
-
-            // Bind this week's acknowledgements
-            gvThisWeeksAcknowledgements.DataSource = acknowledgementDtoService.ReadThisWeek();
-            gvThisWeeksAcknowledgements.DataBind();
-
-            // Bind this month's acknowledgements
-            gvThisMonthsAcknowledgements.DataSource = acknowledgementDtoService.ReadThisMonth();
-            gvThisMonthsAcknowledgements.DataBind();
-
-            // Bind All Time Top Ten Users
-            gvAllTimeTopTen.DataSource = acknowledgementDtoService.ReadAllTimeTopTen();
-            gvAllTimeTopTen.DataBind();
-
-            // Bind This Month Top Ten Users
-            gvThisMonthTopTen.DataSource = acknowledgementDtoService.ReadThisMonthTopTen();
-            gvThisMonthTopTen.DataBind();
-
-            // Bind Top Tags All time
-            gvMostFrequentTagsAllTime.DataSource = tagDtoService.ReadMostFrequentTagsAllTime();
-            gvMostFrequentTagsAllTime.DataBind();
-
-            // Bind Top Tags This Month
-            gvMostFrequentTagsThisMonth.DataSource = tagDtoService.ReadMostFrequentTagsThisMonth();
-            gvMostFrequentTagsThisMonth.DataBind();
-        }
-
-        protected void ThisMonthsAcknowledgementsGridView_PageIndexChanging(object sender, GridViewPageEventArgs e)
-        {
-            gvThisMonthsAcknowledgements.PageIndex = e.NewPageIndex;
-            gvThisMonthsAcknowledgements.DataBind();
-        }
-
-        protected void UserAcknowledgementsGridView_PageIndexChanging(object sender, GridViewPageEventArgs e)
-        {
+            gvUserAcknowledgements.DataSource = acknowledgementDtoService.ReadReceived(username);
             gvUserAcknowledgements.PageIndex = e.NewPageIndex;
             gvUserAcknowledgements.DataBind();
         }
 
-        protected void TodaysAcknowledgementsGridView_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        protected void gvTodaysAcknowledgements_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
+            gvTodaysAcknowledgements.DataSource = acknowledgementDtoService.ReadTodays();
             gvTodaysAcknowledgements.PageIndex = e.NewPageIndex;
             gvTodaysAcknowledgements.DataBind();
         }
 
-        protected void ThisWeeksAcknowledgementsGridView_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        protected void gvThisWeeksAcknowledgements_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
+            gvThisWeeksAcknowledgements.DataSource = acknowledgementDtoService.ReadThisWeek();
             gvThisWeeksAcknowledgements.PageIndex = e.NewPageIndex;
             gvThisWeeksAcknowledgements.DataBind();
         }
 
-        // Implementing the ICallbackEventHandler
-        public void RaiseCallbackEvent(string eventArgument)
+        protected void ThisMonthsAcknowledgementsGridView_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
+            gvThisMonthsAcknowledgements.DataSource = acknowledgementDtoService.ReadThisMonth();
+            gvThisMonthsAcknowledgements.PageIndex = e.NewPageIndex;
+            gvThisMonthsAcknowledgements.DataBind();
+        }
+
+        protected void tmrUserAcknowledgements_Tick(object sender, EventArgs e)
+        {
+            username = HttpContext.Current.User.Identity.Name;
             gvUserAcknowledgements.DataSource = acknowledgementDtoService.ReadReceived(username);
             gvUserAcknowledgements.DataBind();
 
-            using (var writer = new StringWriter())
-            {
-                gvUserAcknowledgements.RenderControl(new HtmlTextWriter(writer));
-                callback = writer.ToString();
-            }
+            tmrUserAcknowledgements.Enabled = false;
+            pnlUserAcknowledgementsLoader.Visible = false;
         }
 
-        public string GetCallbackResult()
+        protected void tmrLastAcknowledgements_Tick(object sender, EventArgs e)
         {
-            return this.callback;
+            gvLastAcknowledgemets.DataSource = acknowledgementDtoService.ReadLast();
+            gvLastAcknowledgemets.DataBind();
+
+            tmrLastAcknowledgements.Enabled = false;
+            pnlLastAcknowledgements.Visible = false;
+        }
+
+        protected void tmrTodaysAcknowledgements_Tick(object sender, EventArgs e)
+        {
+            gvTodaysAcknowledgements.DataSource = acknowledgementDtoService.ReadTodays();
+            gvTodaysAcknowledgements.DataBind();
+
+            tmrTodaysAcknowledgements.Enabled = false;
+            pnlTodaysAcknowledgements.Visible = false;
+        }
+
+        protected void tmrThisWeeksAcnowledgements_Tick(object sender, EventArgs e)
+        {
+            gvThisWeeksAcknowledgements.DataSource = acknowledgementDtoService.ReadThisWeek();
+            gvThisWeeksAcknowledgements.DataBind();
+
+            tmrThisWeeksAcnowledgements.Enabled = false;
+            pnlThisWeeksAcnowledgements.Visible = false;
+        }
+
+        protected void tmrThisMonthAcknowledgements_Tick(object sender, EventArgs e)
+        {
+            gvThisMonthsAcknowledgements.DataSource = acknowledgementDtoService.ReadThisMonth();
+            gvThisMonthsAcknowledgements.DataBind();
+
+            tmrThisMonthAcknowledgements.Enabled = false;
+            pnlThisMonthAcknowledgements.Visible = false;
+        }
+
+        protected void tmrAllTimeTopTen_Tick(object sender, EventArgs e)
+        {
+            gvAllTimeTopTen.DataSource = acknowledgementDtoService.ReadAllTimeTopTen();
+            gvAllTimeTopTen.DataBind();
+
+            tmrAllTimeTopTen.Enabled = false;
+            pnlAllTimeTopTen.Visible = false;
+        }
+
+        protected void tmrThisMonthTopTen_Tick(object sender, EventArgs e)
+        {
+            gvThisMonthTopTen.DataSource = acknowledgementDtoService.ReadThisMonthTopTen();
+            gvThisMonthTopTen.DataBind();
+
+            tmrThisMonthTopTen.Enabled = false;
+            pnlThisMonthTopTen.Visible = false;
+        }
+
+        protected void tmrMostFrequentTagsAllTime_Tick(object sender, EventArgs e)
+        {
+            gvMostFrequentTagsAllTime.DataSource = tagDtoService.ReadMostFrequentTagsAllTime();
+            gvMostFrequentTagsAllTime.DataBind();
+
+            tmrMostFrequentTagsAllTime.Enabled = false;
+            pnlMostFrequentTagsAllTime.Visible = false;
+        }
+
+        protected void tmrMostFrequentTagsThisMonth_Tick(object sender, EventArgs e)
+        {
+            gvMostFrequentTagsThisMonth.DataSource = tagDtoService.ReadMostFrequentTagsThisMonth();
+            gvMostFrequentTagsThisMonth.DataBind();
+
+            tmrMostFrequentTagsThisMonth.Enabled = false;
+            pnlMostFrequentTagsThisMonth.Visible = false;
         }
     }
 }

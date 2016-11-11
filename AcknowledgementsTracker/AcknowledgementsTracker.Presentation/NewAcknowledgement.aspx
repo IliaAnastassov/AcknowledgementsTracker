@@ -19,13 +19,14 @@
 
                 <asp:UpdatePanel ID="updatePanel" runat="server">
                     <ContentTemplate>
-                        <asp:UpdateProgress ID="progress1" runat="server" DisplayAfter="300" DynamicLayout="true">
-                            <ProgressTemplate>
-                                <img src="Images/progress.gif" />
-                            </ProgressTemplate>
-                        </asp:UpdateProgress>
+
                         <fieldset>
                             <legend>Give someone credit</legend>
+                            <asp:UpdateProgress ID="progress1" runat="server" DisplayAfter="300" DynamicLayout="true">
+                                <ProgressTemplate>
+                                    <img src="Images/progress.gif" />
+                                </ProgressTemplate>
+                            </asp:UpdateProgress>
 
                             <%--Input--%>
                             <div class="form-group">

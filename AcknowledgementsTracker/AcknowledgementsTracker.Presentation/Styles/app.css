@@ -2,10 +2,6 @@
     margin: 20px 0px 10px 0;
 }
 
-.mt-10 {
-    margin-top: 10px;
-}
-
 .pageHeader {
     margin: 5px 10px 10px 10px;
 }
@@ -32,6 +28,24 @@ fieldset {
     margin-bottom: 10px;
 }
 
+.mt-10 {
+    margin-top: 10px;
+}
+
+.mb-0 {
+    margin-bottom: 0px;
+}
+
+.bb-none {
+    border-bottom: hidden;
+}
+
 .ml-10 {
     margin-left: 10px;
+}
+
+.progress-parent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

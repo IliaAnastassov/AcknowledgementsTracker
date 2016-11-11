@@ -22,22 +22,13 @@ namespace AcknowledgementsTracker.Presentation {
         protected global::System.Web.UI.UpdatePanel mainUpdatePanel;
         
         /// <summary>
-        /// SearchPanel control.
+        /// txtbSearch control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel SearchPanel;
-        
-        /// <summary>
-        /// SearchTextBox control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText SearchTextBox;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtbSearch;
         
         /// <summary>
         /// btnSearch control.
@@ -49,13 +40,13 @@ namespace AcknowledgementsTracker.Presentation {
         protected global::System.Web.UI.WebControls.LinkButton btnSearch;
         
         /// <summary>
-        /// ResetBtn control.
+        /// btnReset control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton ResetBtn;
+        protected global::System.Web.UI.HtmlControls.HtmlButton btnReset;
         
         /// <summary>
         /// ErrorLabel control.
@@ -76,31 +67,31 @@ namespace AcknowledgementsTracker.Presentation {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl fldsEmployeesResults;
         
         /// <summary>
-        /// UpdatePanel1 control.
+        /// tmrEmployeesResults control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
+        protected global::System.Web.UI.Timer tmrEmployeesResults;
         
         /// <summary>
-        /// progress1 control.
+        /// pnlEmployeesResults control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdateProgress progress1;
+        protected global::System.Web.UI.WebControls.Panel pnlEmployeesResults;
         
         /// <summary>
-        /// EmployeesResultsGridView control.
+        /// gvEmployeesResults control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView EmployeesResultsGridView;
+        protected global::System.Web.UI.WebControls.GridView gvEmployeesResults;
         
         /// <summary>
         /// fldsAcknowledgementsResults control.
@@ -112,30 +103,30 @@ namespace AcknowledgementsTracker.Presentation {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl fldsAcknowledgementsResults;
         
         /// <summary>
-        /// UpdatePanel2 control.
+        /// tmrAcknowledgementsResults control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel2;
+        protected global::System.Web.UI.Timer tmrAcknowledgementsResults;
         
         /// <summary>
-        /// progress2 control.
+        /// pnlAcknowledgementsResults control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdateProgress progress2;
+        protected global::System.Web.UI.WebControls.Panel pnlAcknowledgementsResults;
         
         /// <summary>
-        /// AcknowledgementsResultsGridView control.
+        /// gvAcknowledgementsResults control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView AcknowledgementsResultsGridView;
+        protected global::System.Web.UI.WebControls.GridView gvAcknowledgementsResults;
     }
 }

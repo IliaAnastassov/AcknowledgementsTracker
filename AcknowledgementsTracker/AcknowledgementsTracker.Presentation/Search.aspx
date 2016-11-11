@@ -23,12 +23,12 @@
                         <fieldset>
                             <legend>Search for employees, acknowledgements or tags</legend>
 
-                            <asp:Panel ID="SearchPanel" runat="server" DefaultButton="btnSearch">
+                            <asp:Panel runat="server" DefaultButton="btnSearch">
                                 <%--Input--%>
                                 <div class="form-group">
-                                    <label for="SearchTextBox" class="col-lg-2 control-label text-right">Search</label>
+                                    <label for="txtbSearch" class="col-lg-2 control-label text-right">Search</label>
                                     <div class="col-lg-10">
-                                        <input type="text" class="form-control" placeholder="enter your query" required id="SearchTextBox" runat="server" tabindex="100">
+                                        <input type="text" class="form-control" placeholder="enter your query" required id="txtbSearch" runat="server" tabindex="100">
                                     </div>
                                 </div>
 
@@ -36,7 +36,7 @@
                                 <div class="form-group">
                                     <div class="col-lg-10 col-lg-offset-2">
                                         <asp:LinkButton CssClass="btn btn-info mt-10" ID="btnSearch" runat="server" OnClick="btnSearch_Click" TabIndex="200"><span aria-hidden="true" class="glyphicon glyphicon-search"></span></asp:LinkButton>
-                                        <button type="reset" class="btn btn-default mt-10" id="ResetBtn" runat="server" onserverclick="ResetBtn_ServerClick" tabindex="300"><i class="glyphicon glyphicon-repeat"></i></button>
+                                        <button type="reset" class="btn btn-default mt-10" id="btnReset" runat="server" onserverclick="btnReset_ServerClick" tabindex="300"><i class="glyphicon glyphicon-repeat"></i></button>
                                         <a href="Dashboard.aspx" class="btn btn-default mt-10" tabindex="400"><i class="glyphicon glyphicon-remove"></i></a>
                                     </div>
                                 </div>
@@ -62,16 +62,31 @@
                         <fieldset id="fldsEmployeesResults" runat="server" visible="false">
                             <legend>Employees</legend>
 
-                            <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                            <asp:UpdatePanel runat="server">
                                 <ContentTemplate>
-                                    <asp:UpdateProgress ID="progress1" runat="server" DisplayAfter="300">
-                                        <ProgressTemplate>
+
+                                    <%--Timer--%>
+                                    <asp:Timer ID="tmrEmployeesResults" runat="server" OnTick="tmrEmployeesResults_Tick" Interval="100" />
+
+                                    <%--Loading Grid--%>
+                                    <asp:Panel ID="pnlEmployeesResults" runat="server">
+                                        <table class="table table-bordered table-condensed table-hover table-striped mb-0 bb-none">
+                                            <tr>
+                                                <th scope="col">Tags</th>
+                                                <th scope="col">Text</th>
+                                                <th scope="col">From</th>
+                                                <th scope="col">Date Created</th>
+                                            </tr>
+                                        </table>
+                                        <asp:Panel CssClass="table table-bordered progress-parent" Height="350px" runat="server">
                                             <img src="Images/progress.gif" />
-                                        </ProgressTemplate>
-                                    </asp:UpdateProgress>
+                                        </asp:Panel>
+                                    </asp:Panel>
+
+                                    <%--Bound Grid--%>
                                     <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped"
-                                        AllowPaging="true" AutoGenerateColumns="False" ID="EmployeesResultsGridView" runat="server"
-                                        OnPageIndexChanging="EmployeesResultsGridView_PageIndexChanging">
+                                        AllowPaging="true" AutoGenerateColumns="False" ID="gvEmployeesResults" runat="server"
+                                        OnPageIndexChanging="gvEmployeesResults_PageIndexChanging">
                                         <Columns>
                                             <asp:TemplateField>
                                                 <HeaderTemplate>
@@ -94,25 +109,40 @@
                         <fieldset id="fldsAcknowledgementsResults" runat="server" visible="false">
                             <legend>Acknowledgements</legend>
 
-                            <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                            <asp:UpdatePanel runat="server">
                                 <ContentTemplate>
-                                    <asp:UpdateProgress ID="progress2" runat="server" DisplayAfter="300">
-                                        <ProgressTemplate>
+
+                                    <%--Timer--%>
+                                    <asp:Timer ID="tmrAcknowledgementsResults" runat="server" OnTick="tmrAcknowledgementsResults_Tick" Interval="100" />
+
+                                    <%--Loading Grid--%>
+                                    <asp:Panel ID="pnlAcknowledgementsResults" runat="server">
+                                        <table class="table table-bordered table-condensed table-hover table-striped mb-0 bb-none">
+                                            <tr>
+                                                <th scope="col">Tags</th>
+                                                <th scope="col">Text</th>
+                                                <th scope="col">From</th>
+                                                <th scope="col">Date Created</th>
+                                            </tr>
+                                        </table>
+                                        <asp:Panel CssClass="table table-bordered progress-parent" Height="350px" runat="server">
                                             <img src="Images/progress.gif" />
-                                        </ProgressTemplate>
-                                    </asp:UpdateProgress>
+                                        </asp:Panel>
+                                    </asp:Panel>
+
+                                    <%--Bound Grid--%>
                                     <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped"
-                                        AllowPaging="true" AutoGenerateColumns="False" ID="AcknowledgementsResultsGridView" runat="server"
-                                        OnPageIndexChanging="AcknowledgementsResultsGridView_PageIndexChanging">
+                                        AllowPaging="true" AutoGenerateColumns="False" ID="gvAcknowledgementsResults" runat="server"
+                                        OnPageIndexChanging="gvAcknowledgementsResults_PageIndexChanging">
                                         <Columns>
                                             <asp:TemplateField HeaderText="Tags">
                                                 <ItemTemplate>
                                                     <asp:Repeater ID="rptrTags" runat="server" DataSource='<%# new AcknowledgementsTracker.Presentation.UIHelperService()
-                                            .ReadTags((IEnumerable<AcknowledgementsTracker.DTO.TagDTO>)(Eval("Tags"))) %>'>
+                                                    .ReadTags((IEnumerable<AcknowledgementsTracker.DTO.TagDTO>)(Eval("Tags"))) %>'>
                                                         <ItemTemplate>
                                                             <asp:HyperLink CssClass="label label-info label-margin" ID="lnkTag" runat="server" Text="<%# Container.DataItem %>"
                                                                 NavigateUrl='<%# string.Format("~/AcknowledgementsByTag.aspx?tag={0}&mode=allTime",
-                                                    Uri.EscapeDataString(Container.DataItem.ToString())) %>' />
+                                                                Uri.EscapeDataString(Container.DataItem.ToString())) %>' />
                                                         </ItemTemplate>
                                                     </asp:Repeater>
                                                 </ItemTemplate>
@@ -123,7 +153,7 @@
                                                 </HeaderTemplate>
                                                 <ItemTemplate>
                                                     <asp:HyperLink ID="lnkBeneficiaryName" runat="server" Text='<%# new AcknowledgementsTracker.Presentation.UIHelperService()
-                                            .ReadUserFullName(Convert.ToString(Eval("BeneficiaryUsername"))) %>'
+                                                    .ReadUserFullName(Convert.ToString(Eval("BeneficiaryUsername"))) %>'
                                                         NavigateUrl='<%# string.Format("~/AcknowledgementsByUser.aspx?user={0}&mode=allTime", Convert.ToString(Eval("BeneficiaryUsername"))) %>' />
                                                 </ItemTemplate>
                                             </asp:TemplateField>
@@ -134,7 +164,7 @@
                                                 </HeaderTemplate>
                                                 <ItemTemplate>
                                                     <asp:HyperLink ID="lnkAuthorName" runat="server" Text='<%# new AcknowledgementsTracker.Presentation.UIHelperService()
-                                            .ReadUserFullName(Convert.ToString(Eval("AuthorUsername"))) %>'
+                                                    .ReadUserFullName(Convert.ToString(Eval("AuthorUsername"))) %>'
                                                         NavigateUrl='<%# string.Format("~/AcknowledgementsByUser.aspx?user={0}&mode=allTime", Convert.ToString(Eval("AuthorUsername"))) %>' />
                                                 </ItemTemplate>
                                             </asp:TemplateField>

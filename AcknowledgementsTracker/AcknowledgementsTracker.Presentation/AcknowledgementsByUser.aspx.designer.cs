@@ -40,22 +40,22 @@ namespace AcknowledgementsTracker.Presentation {
         protected global::System.Web.UI.HtmlControls.HtmlButton btnCreateNew;
         
         /// <summary>
-        /// UpdatePanel1 control.
+        /// tmrAcknowledgementsReceived control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
+        protected global::System.Web.UI.Timer tmrAcknowledgementsReceived;
         
         /// <summary>
-        /// progress1 control.
+        /// pnlAcknowledgementsReceived control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdateProgress progress1;
+        protected global::System.Web.UI.WebControls.Panel pnlAcknowledgementsReceived;
         
         /// <summary>
         /// gvAcknowledgementsReceived control.
@@ -76,22 +76,22 @@ namespace AcknowledgementsTracker.Presentation {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl fldsAcknowledgementsGiven;
         
         /// <summary>
-        /// UpdatePanel2 control.
+        /// tmrAcknowledgementsGiven control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel2;
+        protected global::System.Web.UI.Timer tmrAcknowledgementsGiven;
         
         /// <summary>
-        /// progress2 control.
+        /// pnlAcknowledgementsGiven control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdateProgress progress2;
+        protected global::System.Web.UI.WebControls.Panel pnlAcknowledgementsGiven;
         
         /// <summary>
         /// gvAcknowledgementsGiven control.
