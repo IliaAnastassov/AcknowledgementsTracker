@@ -20,8 +20,58 @@
         {
             username = Request.QueryString["user"];
             ltrUser.Text = helper.GetUserFullName(username);
+        }
 
-            if (Request.QueryString["mode"] == "allTime")
+        protected void btnCreateNew_ServerClick(object sender, EventArgs e)
+        {
+            Response.Redirect(string.Format("~/NewAcknowledgement.aspx?beneficiary={0}", username));
+        }
+
+        protected void tmrAcknowledgementsReceived_Tick(object sender, EventArgs e)
+        {
+            var mode = Request.QueryString["mode"];
+            BindGrid(mode);
+
+            tmrAcknowledgementsReceived.Enabled = false;
+            pnlAcknowledgementsReceived.Visible = false;
+        }
+
+        protected void tmrAcknowledgementsGiven_Tick(object sender, EventArgs e)
+        {
+            var mode = Request.QueryString["mode"];
+            BindGrid(mode);
+
+            tmrAcknowledgementsGiven.Enabled = false;
+            pnlAcknowledgementsGiven.Visible = false;
+        }
+
+        protected void gvAcknowledgementsReceived_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            var mode = Request.QueryString["mode"];
+            BindGrid(mode);
+
+            gvAcknowledgementsReceived.PageIndex = e.NewPageIndex;
+            gvAcknowledgementsReceived.DataBind();
+
+            tmrAcknowledgementsReceived.Enabled = false;
+            pnlAcknowledgementsReceived.Visible = false;
+        }
+
+        protected void gvAcknowledgementsGiven_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            var mode = Request.QueryString["mode"];
+            BindGrid(mode);
+
+            gvAcknowledgementsGiven.PageIndex = e.NewPageIndex;
+            gvAcknowledgementsGiven.DataBind();
+
+            tmrAcknowledgementsGiven.Enabled = false;
+            pnlAcknowledgementsGiven.Visible = false;
+        }
+
+        private void BindGrid(string mode)
+        {
+            if (mode == "allTime")
             {
                 gvAcknowledgementsReceived.DataSource = acknowledgementDtoService.ReadReceived(username);
                 gvAcknowledgementsReceived.DataBind();
@@ -29,14 +79,14 @@
                 gvAcknowledgementsGiven.DataSource = acknowledgementDtoService.ReadGiven(username);
                 gvAcknowledgementsGiven.DataBind();
             }
-            else if (Request.QueryString["mode"] == "allTime_Rec")
+            else if (mode == "allTime_Rec")
             {
                 gvAcknowledgementsReceived.DataSource = acknowledgementDtoService.ReadReceived(username);
                 gvAcknowledgementsReceived.DataBind();
 
                 fldsAcknowledgementsGiven.Visible = false;
             }
-            else if (Request.QueryString["mode"] == "thisMonth")
+            else if (mode == "thisMonth")
             {
                 ltrMonth.Text = $" for {DateTime.Today.ToString("MMMM yyyy", CultureInfo.InvariantCulture)}";
 
@@ -45,23 +95,6 @@
 
                 fldsAcknowledgementsGiven.Visible = false;
             }
-        }
-
-        protected void gvAcknowledgementsReceived_PageIndexChanging(object sender, GridViewPageEventArgs e)
-        {
-            gvAcknowledgementsReceived.PageIndex = e.NewPageIndex;
-            gvAcknowledgementsReceived.DataBind();
-        }
-
-        protected void gvAcknowledgementsGiven_PageIndexChanging(object sender, GridViewPageEventArgs e)
-        {
-            gvAcknowledgementsGiven.PageIndex = e.NewPageIndex;
-            gvAcknowledgementsGiven.DataBind();
-        }
-
-        protected void btnCreateNew_ServerClick(object sender, EventArgs e)
-        {
-            Response.Redirect(string.Format("~/NewAcknowledgement.aspx?beneficiary={0}", username));
         }
     }
 }

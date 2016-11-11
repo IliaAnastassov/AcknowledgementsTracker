@@ -21,25 +21,43 @@
         {
             tag = Request.QueryString["tag"];
             ltrTag.Text = $" {tag}";
+        }
 
-            if (Request.QueryString["mode"] == "allTime")
+        protected void gvAcknowledgementsByTag_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            var mode = Request.QueryString["mode"];
+            BindGrid(mode);
+
+            gvAcknowledgementsByTag.PageIndex = e.NewPageIndex;
+            gvAcknowledgementsByTag.DataBind();
+
+            tmrAcknowledgementsByTag.Enabled = false;
+            pnlAcknowledgementsByTag.Visible = false;
+        }
+
+        protected void tmrAcknowledgementsByTag_Tick(object sender, EventArgs e)
+        {
+            var mode = Request.QueryString["mode"];
+            BindGrid(mode);
+
+            tmrAcknowledgementsByTag.Enabled = false;
+            pnlAcknowledgementsByTag.Visible = false;
+        }
+
+        private void BindGrid(string mode)
+        {
+            if (mode == "allTime")
             {
                 gvAcknowledgementsByTag.DataSource = acknowledgementDtoService.ReadByTag(tag);
                 gvAcknowledgementsByTag.DataBind();
             }
-            else if (Request.QueryString["mode"] == "thisMonth")
+            else if (mode == "thisMonth")
             {
                 ltrMonth.Text = $" for {DateTime.Today.ToString("MMMM yyyy", CultureInfo.InvariantCulture)}";
 
                 gvAcknowledgementsByTag.DataSource = acknowledgementDtoService.ReadByTagThisMonth(tag);
                 gvAcknowledgementsByTag.DataBind();
             }
-        }
-
-        protected void gvAcknowledgementsByTag_PageIndexChanging(object sender, GridViewPageEventArgs e)
-        {
-            gvAcknowledgementsByTag.PageIndex = e.NewPageIndex;
-            gvAcknowledgementsByTag.DataBind();
         }
     }
 }

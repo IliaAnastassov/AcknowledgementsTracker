@@ -22,17 +22,32 @@
 
             <main class="col-sm-8">
 
-                <%--Acknowledgements By User--%>
+                <%--Acknowledgements Received--%>
                 <fieldset>
                     <legend>Acknowledgements received</legend>
 
-                    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                    <asp:UpdatePanel runat="server">
                         <ContentTemplate>
-                            <asp:UpdateProgress ID="progress1" runat="server" DisplayAfter="300">
-                                <ProgressTemplate>
+
+                            <%--Timer--%>
+                            <asp:Timer ID="tmrAcknowledgementsReceived" runat="server" OnTick="tmrAcknowledgementsReceived_Tick" Interval="100" />
+
+                            <%--Loading Grid--%>
+                            <asp:Panel ID="pnlAcknowledgementsReceived" runat="server">
+                                <table class="table table-bordered table-condensed table-hover table-striped mb-0 bb-none">
+                                    <tr>
+                                        <th scope="col">Tags</th>
+                                        <th scope="col">Text</th>
+                                        <th scope="col">From</th>
+                                        <th scope="col">Date Created</th>
+                                    </tr>
+                                </table>
+                                <asp:Panel CssClass="table table-bordered progress-parent" Height="350px" runat="server">
                                     <img src="Images/progress.gif" />
-                                </ProgressTemplate>
-                            </asp:UpdateProgress>
+                                </asp:Panel>
+                            </asp:Panel>
+
+                            <%--Bound Grid--%>
                             <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped"
                                 AllowPaging="True" AutoGenerateColumns="False" ID="gvAcknowledgementsReceived" runat="server"
                                 OnPageIndexChanging="gvAcknowledgementsReceived_PageIndexChanging">
@@ -67,16 +82,32 @@
                     </asp:UpdatePanel>
                 </fieldset>
 
+                <%--Acknowledgements Given--%>
                 <fieldset id="fldsAcknowledgementsGiven" runat="server">
                     <legend>Acknowledgements given</legend>
 
-                    <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                    <asp:UpdatePanel runat="server">
                         <ContentTemplate>
-                            <asp:UpdateProgress ID="progress2" runat="server" DisplayAfter="300">
-                                <ProgressTemplate>
+
+                            <%--Timer--%>
+                            <asp:Timer ID="tmrAcknowledgementsGiven" runat="server" OnTick="tmrAcknowledgementsGiven_Tick" Interval="100" />
+
+                            <%--Loading Grid--%>
+                            <asp:Panel ID="pnlAcknowledgementsGiven" runat="server">
+                                <table class="table table-bordered table-condensed table-hover table-striped mb-0 bb-none">
+                                    <tr>
+                                        <th scope="col">Tags</th>
+                                        <th scope="col">Text</th>
+                                        <th scope="col">From</th>
+                                        <th scope="col">Date Created</th>
+                                    </tr>
+                                </table>
+                                <asp:Panel CssClass="table table-bordered progress-parent" Height="350px" runat="server">
                                     <img src="Images/progress.gif" />
-                                </ProgressTemplate>
-                            </asp:UpdateProgress>
+                                </asp:Panel>
+                            </asp:Panel>
+
+                            <%--Bound Grid--%>
                             <asp:GridView CssClass="table table-bordered table-condensed table-hover table-striped"
                                 AllowPaging="True" AutoGenerateColumns="False" ID="gvAcknowledgementsGiven" runat="server"
                                 OnPageIndexChanging="gvAcknowledgementsGiven_PageIndexChanging">

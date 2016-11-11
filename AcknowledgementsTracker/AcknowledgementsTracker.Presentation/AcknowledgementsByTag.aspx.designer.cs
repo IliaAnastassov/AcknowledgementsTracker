@@ -31,22 +31,22 @@ namespace AcknowledgementsTracker.Presentation {
         protected global::System.Web.UI.WebControls.Literal ltrMonth;
         
         /// <summary>
-        /// UpdatePanel1 control.
+        /// tmrAcknowledgementsByTag control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
+        protected global::System.Web.UI.Timer tmrAcknowledgementsByTag;
         
         /// <summary>
-        /// progress1 control.
+        /// pnlAcknowledgementsByTag control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdateProgress progress1;
+        protected global::System.Web.UI.WebControls.Panel pnlAcknowledgementsByTag;
         
         /// <summary>
         /// gvAcknowledgementsByTag control.
