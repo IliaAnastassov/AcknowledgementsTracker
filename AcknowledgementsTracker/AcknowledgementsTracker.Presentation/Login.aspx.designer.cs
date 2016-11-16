@@ -40,31 +40,31 @@ namespace AcknowledgementsTracker.Presentation {
         protected global::System.Web.UI.HtmlControls.HtmlInputPassword txtbPassword;
         
         /// <summary>
-        /// LoginBtn control.
+        /// UpdateProgress1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton LoginBtn;
+        protected global::System.Web.UI.UpdateProgress UpdateProgress1;
         
         /// <summary>
-        /// ResetBtn control.
+        /// btnLogin control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton ResetBtn;
+        protected global::System.Web.UI.WebControls.Button btnLogin;
         
         /// <summary>
-        /// progress1 control.
+        /// btnReset control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdateProgress progress1;
+        protected global::System.Web.UI.HtmlControls.HtmlButton btnReset;
         
         /// <summary>
         /// lblError control.
