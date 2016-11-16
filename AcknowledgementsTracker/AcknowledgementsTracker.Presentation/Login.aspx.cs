@@ -16,8 +16,10 @@
             txtbUsername.Focus();
         }
 
-        protected void Login_Click(object sender, EventArgs e)
+        protected void btnLogin_Click(object sender, EventArgs e)
         {
+            Thread.Sleep(2000);
+
             if (!string.IsNullOrWhiteSpace(txtbUsername.Value)
                 && !string.IsNullOrWhiteSpace(txtbPassword.Value))
             {
@@ -66,11 +68,11 @@
             }
         }
 
-        protected void ResetBtn_ServerClick(object sender, EventArgs e)
+        protected void btnReset_ServerClick(object sender, EventArgs e)
         {
+            lblError.Visible = false;
             txtbUsername.Value = string.Empty;
             txtbPassword.Value = string.Empty;
-            lblError.Visible = false;
         }
     }
 }

@@ -5,11 +5,16 @@
 <html lang="en-us">
 <head runat="server">
     <title>Acknowledgements Tracker</title>
+
+    <%--Styles--%>
     <link href="Content/bootstrap.min.css" rel="stylesheet" />
     <link href="Content/bootstrap-theme.min.css" rel="stylesheet" />
     <link href="Styles/Master.css" rel="stylesheet" />
     <link href="Styles/app.css" rel="stylesheet" />
     <asp:ContentPlaceHolder ID="head" runat="server" />
+
+    <%--Scripts--%>
+    <script type="text/javascript" src="Scripts/app.js" async></script>
 </head>
 <body>
     <%--Header--%>

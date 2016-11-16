@@ -31,10 +31,9 @@
                             <asp:Panel ID="pnlEmployees" runat="server">
                                 <table class="table table-bordered table-condensed table-hover table-striped mb-0 bb-none">
                                     <tr>
-                                        <th scope="col">Tags</th>
-                                        <th scope="col">Text</th>
-                                        <th scope="col">From</th>
-                                        <th scope="col">Date Created</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Team</th>
                                     </tr>
                                 </table>
                                 <asp:Panel CssClass="table table-bordered progress-parent" Height="350px" runat="server">
