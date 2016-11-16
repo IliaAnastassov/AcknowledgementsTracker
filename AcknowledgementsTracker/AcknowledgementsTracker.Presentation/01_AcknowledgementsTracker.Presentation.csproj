@@ -101,6 +101,7 @@
     <Content Include="Resources\ProxiadBulgariaLogo_big.png" />
     <Content Include="Resources\ProxiadBulgariaLogo_White.png" />
     <Content Include="Resources\Proxiad_Logo_big.png" />
+    <Content Include="Scripts\app.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />

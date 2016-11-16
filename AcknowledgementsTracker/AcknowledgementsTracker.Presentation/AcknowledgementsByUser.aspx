@@ -97,8 +97,8 @@
                                 <table class="table table-bordered table-condensed table-hover table-striped mb-0 bb-none">
                                     <tr>
                                         <th scope="col">Tags</th>
+                                        <th scope="col">To</th>
                                         <th scope="col">Text</th>
-                                        <th scope="col">From</th>
                                         <th scope="col">Date Created</th>
                                     </tr>
                                 </table>
