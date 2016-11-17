@@ -83,7 +83,11 @@
     <Content Include="Dashboard.aspx" />
     <Content Include="EmployeeIndex.aspx" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Images\default.gif" />
     <Content Include="Images\progress.gif" />
+    <Content Include="Images\ProxiadBulgariaLogo_big.png" />
+    <Content Include="Images\ProxiadBulgariaLogo_White.png" />
+    <Content Include="Images\Proxiad_Logo_big.png" />
     <Content Include="Login.aspx" />
     <Content Include="packages.config" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -98,9 +102,6 @@
     <Content Include="LoggedIn.Master" />
     <Content Include="LoggedOut.Master" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
-    <Content Include="Resources\ProxiadBulgariaLogo_big.png" />
-    <Content Include="Resources\ProxiadBulgariaLogo_White.png" />
-    <Content Include="Resources\Proxiad_Logo_big.png" />
     <Content Include="Scripts\app.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

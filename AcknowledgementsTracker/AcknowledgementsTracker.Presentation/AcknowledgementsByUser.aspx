@@ -11,7 +11,7 @@
                     <asp:Label CssClass="text-primary" ID="ltrUser" runat="server" />'s Acknowledgements
                     <asp:Literal ID="ltrMonth" runat="server" />
                 </h2>
-                <button type="submit" class="btn btn-primary btn-sm ml-10" onserverclick="btnCreateNew_ServerClick" id="btnCreateNew" runat="server"><i class="glyphicon glyphicon-plus"></i>&nbsp Acknowledge</button>
+                <button type="submit" class="btn btn-info ml-10" onserverclick="btnCreateNew_ServerClick" id="btnCreateNew" runat="server"><i class="glyphicon glyphicon-plus"></i>&nbsp Acknowledge</button>
             </div>
         </div>
     </div>
