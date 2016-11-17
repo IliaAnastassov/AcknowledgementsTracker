@@ -35,9 +35,9 @@
                                 <%--Buttons--%>
                                 <div class="form-group">
                                     <div class="col-lg-10 col-lg-offset-2">
-                                        <asp:LinkButton CssClass="btn btn-info mt-10" ID="btnSearch" runat="server" OnClick="btnSearch_Click" TabIndex="200"><span aria-hidden="true" class="glyphicon glyphicon-search"></span></asp:LinkButton>
-                                        <button type="reset" class="btn btn-default mt-10" id="btnReset" runat="server" onserverclick="btnReset_ServerClick" tabindex="300"><i class="glyphicon glyphicon-repeat"></i></button>
-                                        <a href="Dashboard.aspx" class="btn btn-default mt-10" tabindex="400"><i class="glyphicon glyphicon-remove"></i></a>
+                                        <asp:Button CssClass="btn btn-info mt-10" ID="btnSearch" runat="server" OnClick="btnSearch_Click" TabIndex="200" Text="Search" />
+                                        <button type="reset" class="btn btn-default mt-10" id="btnReset" runat="server" onserverclick="btnReset_ServerClick" tabindex="300">Reset</button>
+                                        <a href="Dashboard.aspx" class="btn btn-default mt-10" tabindex="400">Cancel</a>
                                     </div>
                                 </div>
                             </asp:Panel>

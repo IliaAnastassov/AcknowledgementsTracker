@@ -31,49 +31,49 @@ namespace AcknowledgementsTracker.Presentation {
         protected global::System.Web.UI.UpdateProgress progress1;
         
         /// <summary>
-        /// BeneficiaryTextBox control.
+        /// txtbBeneficiary control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText BeneficiaryTextBox;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtbBeneficiary;
         
         /// <summary>
-        /// ContentTextBox control.
+        /// txtbContent control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTextArea ContentTextBox;
+        protected global::System.Web.UI.HtmlControls.HtmlTextArea txtbContent;
         
         /// <summary>
-        /// TagsTextBox control.
+        /// txtbTags control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText TagsTextBox;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtbTags;
         
         /// <summary>
-        /// CreateNewAcknowledgementBtn control.
+        /// btnCreateNewAcknowledgement control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton CreateNewAcknowledgementBtn;
+        protected global::System.Web.UI.WebControls.Button btnCreateNewAcknowledgement;
         
         /// <summary>
-        /// ResetBtn control.
+        /// btnReset control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton ResetBtn;
+        protected global::System.Web.UI.HtmlControls.HtmlButton btnReset;
         
         /// <summary>
         /// lblError control.
