@@ -20,34 +20,41 @@
         {
             if (Request.QueryString["beneficiary"] != null)
             {
-                BeneficiaryTextBox.Value = helper.GetUserFullName(Request.QueryString["beneficiary"]);
-                ContentTextBox.Focus();
+                txtbBeneficiary.Value = helper.GetUserFullName(Request.QueryString["beneficiary"]);
+                txtbContent.Focus();
             }
             else
             {
-                BeneficiaryTextBox.Focus();
+                txtbBeneficiary.Focus();
             }
         }
 
-        protected void CreateNewAcknowledgementBtn_Click(object sender, EventArgs e)
+        protected void btnCreateNewAcknowledgement_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrWhiteSpace(BeneficiaryTextBox.Value)
-                && !string.IsNullOrWhiteSpace(ContentTextBox.Value)
-                && !string.IsNullOrWhiteSpace(TagsTextBox.Value))
+            if (!string.IsNullOrWhiteSpace(txtbBeneficiary.Value)
+                && !string.IsNullOrWhiteSpace(txtbContent.Value)
+                && !string.IsNullOrWhiteSpace(txtbTags.Value))
             {
                 INormalizable textNormalizer = new TextNormalizationService();
                 var acknowledgementDto = new AcknowledgementDTO();
                 acknowledgementDto.AuthorUsername = HttpContext.Current.User.Identity.Name;
 
-                // Transform full name to username
-                acknowledgementDto.BeneficiaryUsername = ldapAccountService.ReadUserUsername(BeneficiaryTextBox.Value);
+                if (Request.QueryString["beneficiary"] != null)
+                {
+                    acknowledgementDto.BeneficiaryUsername = Request.QueryString["beneficiary"];
+                }
+                else
+                {
+                    // Transform full name to username
+                    acknowledgementDto.BeneficiaryUsername = ldapAccountService.ReadUserUsername(txtbBeneficiary.Value);
+                }
 
                 // Store the text and normalize it
-                acknowledgementDto.Text = textNormalizer.RemoveMultiSpaces(ContentTextBox.Value);
+                acknowledgementDto.Text = textNormalizer.RemoveMultiSpaces(txtbContent.Value);
                 acknowledgementDto.NormalizedText = textNormalizer.NormalizeText(acknowledgementDto.Text);
 
                 // NOTE: All tags are stored in lowercase
-                var tags = TagsTextBox.Value.ToLower().Split(new char[] { ' ', ',' }, StringSplitOptions.RemoveEmptyEntries);
+                var tags = txtbTags.Value.ToLower().Split(new char[] { ' ', ',' }, StringSplitOptions.RemoveEmptyEntries);
 
                 // Add acknowledgement to database
                 acknowledgementDtoService.Create(acknowledgementDto, tags);
@@ -55,10 +62,10 @@
                 // Clear all entries if necessary
                 if (Request.QueryString["beneficiary"] == null)
                 {
-                    BeneficiaryTextBox.Value = string.Empty;
+                    txtbBeneficiary.Value = string.Empty;
                 }
-                ContentTextBox.Value = string.Empty;
-                TagsTextBox.Value = string.Empty;
+                txtbContent.Value = string.Empty;
+                txtbTags.Value = string.Empty;
 
                 lblError.Visible = false;
                 lblSuccess.Visible = true;
@@ -70,11 +77,20 @@
             }
         }
 
-        protected void ResetBtn_ServerClick(object sender, EventArgs e)
+        protected void btnReset_ServerClick(object sender, EventArgs e)
         {
-            BeneficiaryTextBox.Value = string.Empty;
-            ContentTextBox.Value = string.Empty;
-            TagsTextBox.Value = string.Empty;
+            txtbContent.Value = string.Empty;
+            txtbTags.Value = string.Empty;
+
+            if (Request.QueryString["beneficiary"] == null)
+            {
+                txtbBeneficiary.Value = string.Empty;
+                txtbBeneficiary.Focus();
+            }
+            else
+            {
+                txtbContent.Focus();
+            }
 
             lblError.Visible = false;
             lblSuccess.Visible = false;

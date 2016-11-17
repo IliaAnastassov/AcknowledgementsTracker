@@ -30,19 +30,19 @@
                                 </div>
                             </div>
 
+                            <%--Progress--%>
+                            <asp:UpdateProgress ID="UpdateProgress1" runat="server" DisplayAfter="10" DynamicLayout="true">
+                                <ProgressTemplate>
+                                    <img class="login-progress" src="Images/progress.gif" />
+                                </ProgressTemplate>
+                            </asp:UpdateProgress>
+
                             <div class="form-group">
                                 <label for="txtbPassword" class="col-lg-2 control-label text-right">Password</label>
                                 <div class="col-lg-10">
                                     <input type="password" class="form-control" placeholder="LDAP password" required id="txtbPassword" runat="server" />
                                 </div>
                             </div>
-
-                            <%--Progress--%>
-                            <asp:UpdateProgress ID="UpdateProgress1" runat="server" DisplayAfter="10" DynamicLayout="true">
-                                <ProgressTemplate>
-                                    <img class="col-lg-1" src="Images/progress.gif" />
-                                </ProgressTemplate>
-                            </asp:UpdateProgress>
 
                             <%--Buttons--%>
                             <div class="form-group">
@@ -66,11 +66,6 @@
     </div>
     <script type="text/javascript">
         function HideInputDelegate() {
-            ////var username = document.getElementById('txtbUsername').value;
-            ////var password = document.getElementById('txtbPassword').value;
-
-            ////if (username !== null && password !== null) {
-            ////}
             loginFunctions.HideInput('<%= lblError.ClientID %>', '<%= txtbUsername.ClientID %>', '<%= txtbPassword.ClientID %>');
         }
     </script>

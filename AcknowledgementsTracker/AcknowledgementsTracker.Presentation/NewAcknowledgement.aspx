@@ -30,32 +30,32 @@
 
                             <%--Input--%>
                             <div class="form-group">
-                                <label for="BeneficiaryTextBox" class="col-lg-2 control-label text-right">To</label>
+                                <label for="txtbBeneficiary" class="col-lg-2 control-label text-right">To</label>
                                 <div class="col-lg-10">
-                                    <input type="text" class="form-control" placeholder="Firstname Lastname" required runat="server" id="BeneficiaryTextBox">
+                                    <input type="text" class="form-control" placeholder="Firstname Lastname" required runat="server" id="txtbBeneficiary">
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="ContentTextBox" class="col-lg-2 control-label text-right">Content</label>
+                                <label for="txtbContent" class="col-lg-2 control-label text-right">Content</label>
                                 <div class="col-lg-10">
-                                    <textarea class="form-control" rows="6" placeholder="Thank you for..." required runat="server" id="ContentTextBox"></textarea>
+                                    <textarea class="form-control" rows="6" placeholder="Thank you for..." required runat="server" id="txtbContent"></textarea>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="TagsTextBox" class="col-lg-2 control-label text-right">Tags</label>
+                                <label for="txtbTags" class="col-lg-2 control-label text-right">Tags</label>
                                 <div class="col-lg-10">
-                                    <input type="text" class="form-control" placeholder="tag" required runat="server" id="TagsTextBox">
+                                    <input type="text" class="form-control" placeholder="tag" required runat="server" id="txtbTags">
                                 </div>
                             </div>
 
                             <%--Buttons--%>
                             <div class="form-group">
                                 <div class="col-lg-10 col-lg-offset-2">
-                                    <button class="btn btn-info mt-10" id="CreateNewAcknowledgementBtn" runat="server" onserverclick="CreateNewAcknowledgementBtn_Click"><i class="glyphicon glyphicon-ok"></i></button>
-                                    <button type="reset" class="btn btn-default mt-10" id="ResetBtn" runat="server" onserverclick="ResetBtn_ServerClick"><i class="glyphicon glyphicon-repeat"></i></button>
-                                    <a href="Dashboard.aspx" class="btn btn-default mt-10"><i class="glyphicon glyphicon-remove"></i></a>
+                                    <asp:Button CssClass="btn btn-info mt-10" ID="btnCreateNewAcknowledgement" runat="server" OnClick="btnCreateNewAcknowledgement_Click" Text="Acknowledge" />
+                                    <button type="reset" class="btn btn-default mt-10" id="btnReset" runat="server" onserverclick="btnReset_ServerClick">Reset</button>
+                                    <a href="Dashboard.aspx" class="btn btn-default mt-10">Cancel</a>
                                 </div>
                             </div>
                         </fieldset>
