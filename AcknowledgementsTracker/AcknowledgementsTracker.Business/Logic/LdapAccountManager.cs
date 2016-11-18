@@ -98,7 +98,14 @@
         {
             string username = string.Empty;
             var searcher = new DirectorySearcher(ldapConnection.SearchRoot);
-            searcher.Filter = $"(&(givenName={fullName.Split()[0]})(sn={fullName.Split()[1]}))";
+            try
+            {
+                searcher.Filter = $"(&(givenName={fullName.Split()[0]})(sn={fullName.Split()[1]}))";
+            }
+            catch (IndexOutOfRangeException)
+            {
+                throw new ArgumentException("Please use the provided form: Firstname Lastname");
+            }
 
             var searchedProperty = "uid";
             searcher.PropertiesToLoad.Add(searchedProperty);
@@ -110,7 +117,7 @@
             }
             catch (ArgumentException)
             {
-                throw new Exception("User not found");
+                throw new ArgumentException("User not found");
             }
 
             if (result != null)
@@ -119,6 +126,10 @@
                 {
                     username = resultCollection.ToString();
                 }
+            }
+            else
+            {
+                throw new ArgumentException("User not found");
             }
 
             return username;
@@ -140,7 +151,7 @@
             }
             catch (ArgumentException)
             {
-                throw new Exception("User not found");
+                throw new ArgumentException("User not found");
             }
 
             if (result != null)
