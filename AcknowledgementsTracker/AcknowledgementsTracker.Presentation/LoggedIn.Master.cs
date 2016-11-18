@@ -17,7 +17,16 @@
         protected void Page_Load(object sender, EventArgs e)
         {
             var username = HttpContext.Current.User.Identity.Name;
-            parUserName.InnerText = LdapAccountManager.Instance.GetUserFullName(username);
+
+            try
+            {
+                parUserName.InnerText = LdapAccountManager.Instance.GetUserFullName(username);
+            }
+            catch (NullReferenceException)
+            {
+                FormsAuthentication.SignOut();
+                FormsAuthentication.RedirectToLoginPage();
+            }
         }
 
         protected void BtnLogout_Click(object sender, EventArgs e)

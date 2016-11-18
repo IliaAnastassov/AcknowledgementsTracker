@@ -14,13 +14,32 @@
 
     <div class="container-fluid">
         <div class="row">
-            <aside class="col-sm-2"></aside>
+            <aside class="col-sm-2">
+
+                <%--Page Navigation--%>
+                <nav class="navbar navbar-responsive navbar-left affix">
+                    <ul class="nav nav-stacked">
+                        <li class="nav-header">Acknowledgements</li>
+                        <li><a href="#Mine">Mine</a></li>
+                        <li><a href="#Last">Last</a></li>
+                        <li><a href="#Todays">Today's</a></li>
+                        <li><a href="#ThisWeeks">This Week's</a></li>
+                        <li><a href="#ThisMonths">This Month's</a></li>
+                        <li class="nav-header">Champions</li>
+                        <li><a href="#AllTimeChampions">All Time</a></li>
+                        <li><a href="#ThisMonthChampions">This Month</a></li>
+                        <li class="nav-header">Frequent Tags</li>
+                        <li><a href="#MostFrequentTagsAllTime">All Time</a></li>
+                        <li><a href="#MostFrequentTagsThisMonth">This Month</a></li>
+                    </ul>
+                </nav>
+            </aside>
 
             <main class="col-sm-8">
 
                 <%--User Acknowledgements--%>
-                <fieldset>
-                    <legend>Your acknowledgements</legend>
+                <fieldset id="Mine">
+                    <legend>My acknowledgements</legend>
 
                     <asp:UpdatePanel runat="server">
                         <ContentTemplate>
@@ -79,7 +98,7 @@
                 </fieldset>
 
                 <%--Last 10 acknowledgements grid view--%>
-                <fieldset>
+                <fieldset id="Last">
                     <legend>Last acknowledgements</legend>
 
                     <asp:UpdatePanel runat="server">
@@ -150,7 +169,7 @@
                 </fieldset>
 
                 <%--Today's Acknowledgements--%>
-                <fieldset>
+                <fieldset id="Todays">
                     <legend>Today's acknowledgements</legend>
 
                     <asp:UpdatePanel runat="server">
@@ -221,7 +240,7 @@
                 </fieldset>
 
                 <%--This Week's Acknowledgements--%>
-                <fieldset>
+                <fieldset id="ThisWeeks">
                     <legend>This week's acknowledgements</legend>
 
                     <asp:UpdatePanel runat="server">
@@ -292,7 +311,7 @@
                 </fieldset>
 
                 <%--This Month's Acknowledgements--%>
-                <fieldset>
+                <fieldset id="ThisMonths">
                     <legend>This month's acknowledgements</legend>
 
                     <asp:UpdatePanel runat="server">
@@ -363,7 +382,7 @@
                 </fieldset>
 
                 <%--Top 10 Most Acknowledged persons all time--%>
-                <fieldset>
+                <fieldset id="AllTimeChampions">
                     <legend>Most acknowledged persons all time</legend>
 
                     <asp:UpdatePanel runat="server">
@@ -415,7 +434,7 @@
                 </fieldset>
 
                 <%--Top 10 Most Acknowledged persons this month--%>
-                <fieldset>
+                <fieldset id="ThisMonthChampions">
                     <legend>Most acknowledged persons this month</legend>
 
                     <asp:UpdatePanel runat="server">
@@ -467,7 +486,7 @@
                 </fieldset>
 
                 <%--Top 10 Most Frequent Tags All Time--%>
-                <fieldset>
+                <fieldset id="MostFrequentTagsAllTime">
                     <legend>Most frequently used tags all time</legend>
 
                     <asp:UpdatePanel runat="server">
@@ -521,7 +540,7 @@
                 </fieldset>
 
                 <%--Top 10 Most Frequent Tags This Month--%>
-                <fieldset>
+                <fieldset id="MostFrequentTagsThisMonth">
                     <legend>Most frequently used tags this month</legend>
 
                     <asp:UpdatePanel runat="server">
