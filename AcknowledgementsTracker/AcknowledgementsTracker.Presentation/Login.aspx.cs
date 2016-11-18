@@ -18,8 +18,6 @@
 
         protected void btnLogin_Click(object sender, EventArgs e)
         {
-            Thread.Sleep(2000);
-
             if (!string.IsNullOrWhiteSpace(txtbUsername.Value)
                 && !string.IsNullOrWhiteSpace(txtbPassword.Value))
             {

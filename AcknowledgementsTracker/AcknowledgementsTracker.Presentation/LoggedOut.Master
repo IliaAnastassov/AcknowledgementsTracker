@@ -14,7 +14,7 @@
     <asp:ContentPlaceHolder ID="head" runat="server" />
 
     <%--Scripts--%>
-    <script type="text/javascript" src="Scripts/app.js" async></script>
+    <script type="text/javascript" src="Scripts/login.js" defer></script>
 </head>
 <body>
     <%--Header--%>
