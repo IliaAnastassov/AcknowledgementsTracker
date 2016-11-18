@@ -1,13 +1,13 @@
 ﻿namespace AcknowledgementsTracker.Presentation
 {
     using System;
+    using System.Threading;
+    using System.Web;
     using System.Web.UI;
     using Business.Interfaces;
     using Business.Logic;
     using DTO;
     using DTO.Interfaces;
-    using System.Web;
-    using System.Threading;
 
     public partial class NewAcknowledgement : Page
     {
@@ -39,41 +39,39 @@
                 var acknowledgementDto = new AcknowledgementDTO();
                 acknowledgementDto.AuthorUsername = HttpContext.Current.User.Identity.Name;
 
-                if (Request.QueryString["beneficiary"] != null)
+                try
                 {
-                    acknowledgementDto.BeneficiaryUsername = Request.QueryString["beneficiary"];
+                    if (Request.QueryString["beneficiary"] != null)
+                    {
+                        acknowledgementDto.BeneficiaryUsername = Request.QueryString["beneficiary"];
+                    }
+                    else
+                    {
+                        // Transform full name to username
+                        acknowledgementDto.BeneficiaryUsername = ldapAccountService.ReadUserUsername(txtbBeneficiary.Value.Trim());
+                        txtbBeneficiary.Value = string.Empty;
+                    }
+
+                    // Store the text and normalize it
+                    acknowledgementDto.Text = txtbContent.Value;
+                    acknowledgementDto.NormalizedText = textNormalizer.NormalizeText(acknowledgementDto.Text);
+
+                    // NOTE: All tags are stored in lowercase
+                    var tags = txtbTags.Value.ToLower().Split(new char[] { ' ', ',' }, StringSplitOptions.RemoveEmptyEntries);
+
+                    // Add acknowledgement to database
+                    acknowledgementDtoService.Create(acknowledgementDto, tags);
+
+                    txtbContent.Value = string.Empty;
+                    txtbTags.Value = string.Empty;
+
+                    Response.Redirect(Global.DashboardPage);
                 }
-                else
+                catch (Exception ex)
                 {
-                    // Transform full name to username
-                    acknowledgementDto.BeneficiaryUsername = ldapAccountService.ReadUserUsername(txtbBeneficiary.Value);
+                    lblError.Visible = true;
+                    lblError.InnerText = ex.Message;
                 }
-
-                // Store the text and normalize it
-                acknowledgementDto.Text = textNormalizer.RemoveMultiSpaces(txtbContent.Value);
-                acknowledgementDto.NormalizedText = textNormalizer.NormalizeText(acknowledgementDto.Text);
-
-                // NOTE: All tags are stored in lowercase
-                var tags = txtbTags.Value.ToLower().Split(new char[] { ' ', ',' }, StringSplitOptions.RemoveEmptyEntries);
-
-                // Add acknowledgement to database
-                acknowledgementDtoService.Create(acknowledgementDto, tags);
-
-                // Clear all entries if necessary
-                if (Request.QueryString["beneficiary"] == null)
-                {
-                    txtbBeneficiary.Value = string.Empty;
-                }
-                txtbContent.Value = string.Empty;
-                txtbTags.Value = string.Empty;
-
-                lblError.Visible = false;
-                lblSuccess.Visible = true;
-            }
-            else
-            {
-                lblError.Visible = true;
-                lblSuccess.Visible = false;
             }
         }
 
@@ -93,7 +91,6 @@
             }
 
             lblError.Visible = false;
-            lblSuccess.Visible = false;
         }
     }
 }

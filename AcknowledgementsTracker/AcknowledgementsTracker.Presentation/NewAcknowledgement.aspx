@@ -62,13 +62,9 @@
 
                         <%--Error label--%>
                         <div>
-                            <label class="alert-warning" id="lblError" runat="server" visible="false">Please fill all the boxes</label>
+                            <label class="alert-warning" id="lblError" runat="server" visible="false"></label>
                         </div>
 
-                        <%--Success label--%>
-                        <div>
-                            <label class="alert-success" id="lblSuccess" runat="server" visible="false">New acknowledgement created</label>
-                        </div>
                     </ContentTemplate>
                 </asp:UpdatePanel>
             </main>
