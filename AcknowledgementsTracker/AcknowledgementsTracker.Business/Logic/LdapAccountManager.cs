@@ -141,8 +141,8 @@
             var searcher = new DirectorySearcher(ldapConnection.SearchRoot);
             searcher.Filter = $"(uid={ldapConnection.Username})";
 
-            var searchedProperty = "mail";
-            searcher.PropertiesToLoad.Add(searchedProperty);
+            var mailProperty = "mail";
+            searcher.PropertiesToLoad.Add(mailProperty);
 
             SearchResult result;
             try
@@ -156,7 +156,7 @@
 
             if (result != null)
             {
-                foreach (var resultCollection in result.Properties[searchedProperty])
+                foreach (var resultCollection in result.Properties[mailProperty])
                 {
                     email = resultCollection.ToString();
                 }
@@ -171,8 +171,8 @@
             var searcher = new DirectorySearcher(ldapConnection.RootEntry);
             searcher.Filter = $"(|(uid=*{search}*)(givenName=*{search}*)(sn=*{search}*)(displayName=*{search}*)(cn=*{search}*))";
 
-            var searchedProperty = "uid";
-            searcher.PropertiesToLoad.Add(searchedProperty);
+            var usernameProperty = "uid";
+            searcher.PropertiesToLoad.Add(usernameProperty);
 
             SearchResultCollection results;
             try
@@ -188,7 +188,7 @@
             {
                 foreach (SearchResult result in results)
                 {
-                    foreach (var resultCollection in result.Properties[searchedProperty])
+                    foreach (var resultCollection in result.Properties[usernameProperty])
                     {
                         usernames.Add(resultCollection.ToString());
                     }
@@ -251,17 +251,24 @@
                         email = resultCollection.ToString();
                     }
 
+                    // Check explicitly for first name AND last name AND proxiad email
+                    if (email == null || !email.Contains("proxiad") || firstname == null || lastname == null)
+                    {
+                        continue;
+                    }
+
                     foreach (var resultColleciton in result.Properties[teamProperty])
                     {
                         team = resultColleciton.ToString();
                     }
 
-                    // Check explicitly for first name AND last name AND proxiad email
-                    if (email != null && email.Contains("proxiad") && firstname != null && lastname != null)
+                    if (string.IsNullOrWhiteSpace(team))
                     {
-                        var user = new User(username, $"{firstname} {lastname}", email, team);
-                        users.Add(user);
+                        team = "Unassigned";
                     }
+
+                    var user = new User(username, $"{firstname} {lastname}", email, team);
+                    users.Add(user);
                 }
             }
 
@@ -315,6 +322,11 @@
                 foreach (var resultCollection in result.Properties[teamProperty])
                 {
                     team = resultCollection.ToString();
+                }
+
+                if (string.IsNullOrWhiteSpace(team))
+                {
+                    team = "Unassigned";
                 }
             }
 
@@ -374,17 +386,24 @@
                         email = resultCollection.ToString();
                     }
 
+                    // Check explicitly for first name AND last name AND proxiad email
+                    if (email == null || !email.Contains("proxiad") || firstname == null || lastname == null)
+                    {
+                        continue;
+                    }
+
                     foreach (var resultCollection in result.Properties[teamProperty])
                     {
                         team = resultCollection.ToString();
                     }
 
-                    // Check explicitly for first name AND last name AND proxiad email
-                    if (email != null && email.Contains("proxiad") && firstname != null && lastname != null)
+                    if (string.IsNullOrWhiteSpace(team))
                     {
-                        var user = new User(username, $"{firstname} {lastname}", email, team);
-                        users.Add(user);
+                        team = "Unassigned";
                     }
+
+                    var user = new User(username, $"{firstname} {lastname}", email, team);
+                    users.Add(user);
                 }
             }
 
