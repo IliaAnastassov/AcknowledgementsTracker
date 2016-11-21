@@ -1,13 +1,11 @@
 ﻿namespace AcknowledgementsTracker.Presentation
 {
     using System;
-    using System.Threading;
     using System.Web;
     using System.Web.UI;
     using Business.Interfaces;
     using Business.Logic;
     using DTO;
-    using DTO.Interfaces;
 
     public partial class NewAcknowledgement : Page
     {
@@ -44,6 +42,16 @@
                     if (Request.QueryString["beneficiary"] != null)
                     {
                         acknowledgementDto.BeneficiaryUsername = Request.QueryString["beneficiary"];
+
+                        // If the user changes the beneficiary to a new value
+                        if (hfUserUsername != null)
+                        {
+                            acknowledgementDto.BeneficiaryUsername = hfUserUsername.Value;
+                        }
+                    }
+                    else if (hfUserUsername != null)
+                    {
+                        acknowledgementDto.BeneficiaryUsername = hfUserUsername.Value;
                     }
                     else
                     {
