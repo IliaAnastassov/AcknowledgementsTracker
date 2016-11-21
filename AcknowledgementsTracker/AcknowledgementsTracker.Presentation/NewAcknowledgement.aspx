@@ -33,6 +33,7 @@
                                 <label for="txtbBeneficiary" class="col-lg-2 control-label text-right">To</label>
                                 <div class="col-lg-10">
                                     <input type="text" class="form-control" placeholder="Firstname Lastname" required runat="server" id="txtbBeneficiary">
+                                    <asp:HiddenField ID="hfUserUsername" runat="server" />
                                 </div>
                             </div>
 
