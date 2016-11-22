@@ -30,7 +30,7 @@
             foreach (var user in users)
             {
                 // TODO: Review storing and display
-                result.Add($"{user.Name} - {user.Team} - {user.Username}");
+                result.Add($"{user.Name} - {user.Team} : {user.Username}");
             }
 
             context.Response.Write(JsonConvert.SerializeObject(result));
