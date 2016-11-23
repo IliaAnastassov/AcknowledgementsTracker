@@ -4,12 +4,12 @@
 
     public interface ILdapServerConnection
     {
-        string Username { get; set; }
+        string Username { get; }
 
-        DirectoryEntry SearchRoot { get; set; }
+        DirectoryEntry SearchRoot { get; }
 
         DirectoryEntry RootEntry { get; }
 
-        bool IsAuthenticated();
+        bool IsAuthenticated { get; }
     }
 }

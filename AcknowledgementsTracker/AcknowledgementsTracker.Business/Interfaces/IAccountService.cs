@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
 
-    public interface ILdapAccountService
+    public interface IAccountService
     {
         string ReadUserFullName(string username);
 

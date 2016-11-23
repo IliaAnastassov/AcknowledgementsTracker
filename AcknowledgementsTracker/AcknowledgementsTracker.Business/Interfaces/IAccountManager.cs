@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
 
-    public interface ILdapAccountManager
+    public interface IAccountManager
     {
         void Setup(ILdapServerConnection ldapConnection);
 
