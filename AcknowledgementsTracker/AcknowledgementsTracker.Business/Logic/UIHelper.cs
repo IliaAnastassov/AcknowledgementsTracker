@@ -7,7 +7,7 @@
 
     public class UIHelper : IUIHelper
     {
-        private ILdapAccountService ldapAccountService = new LdapAccountService();
+        private IAccountService ldapAccountService = new LdapAccountService();
 
         public string GetUserFullName(string username)
         {

@@ -9,7 +9,7 @@
     using Interfaces;
     using System.Text;
 
-    public class LdapAccountManager : ILdapAccountManager
+    public class LdapAccountManager : IAccountManager
     {
         private static LdapAccountManager instance;
         private ILdapServerConnection ldapConnection;
@@ -75,7 +75,7 @@
             }
             catch (ArgumentException)
             {
-                throw new Exception("User not found");
+                throw new ArgumentException("User not found");
             }
 
             if (result != null)
@@ -181,7 +181,7 @@
             }
             catch (ArgumentException)
             {
-                throw new Exception("User not found");
+                throw new ArgumentException("User not found");
             }
 
             if (results != null)
@@ -218,7 +218,7 @@
             }
             catch (ArgumentException)
             {
-                throw new Exception("User not found");
+                throw new ArgumentException("User not found");
             }
 
             if (results != null)
@@ -299,7 +299,7 @@
             }
             catch (ArgumentException)
             {
-                throw new Exception("User not found");
+                throw new ArgumentException("User not found");
             }
 
             if (result != null)
@@ -353,7 +353,7 @@
             }
             catch (ArgumentException)
             {
-                throw new Exception("User not found");
+                throw new ArgumentException("User not found");
             }
 
             if (results != null)

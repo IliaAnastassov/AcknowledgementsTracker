@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using Interfaces;
 
-    public class LdapAccountService : ILdapAccountService
+    public class LdapAccountService : IAccountService
     {
         public string ReadUserFullName(string username)
         {

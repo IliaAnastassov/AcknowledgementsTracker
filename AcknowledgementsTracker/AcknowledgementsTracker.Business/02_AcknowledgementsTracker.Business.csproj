@@ -48,8 +48,8 @@
     <Compile Include="Interfaces\IAcknowledgementDtoService.cs" />
     <Compile Include="Interfaces\IDtoFactory.cs" />
     <Compile Include="Interfaces\IDtoService.cs" />
-    <Compile Include="Interfaces\ILdapAccountManager.cs" />
-    <Compile Include="Interfaces\ILdapAccountService.cs" />
+    <Compile Include="Interfaces\IAccountManager.cs" />
+    <Compile Include="Interfaces\IAccountService.cs" />
     <Compile Include="Interfaces\ILdapServerConnection.cs" />
     <Compile Include="Interfaces\ILdapSettingsService.cs" />
     <Compile Include="Interfaces\INormalizable.cs" />

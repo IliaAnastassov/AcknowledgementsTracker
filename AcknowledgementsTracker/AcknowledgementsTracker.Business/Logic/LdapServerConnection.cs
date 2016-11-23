@@ -6,22 +6,30 @@
 
     public class LdapServerConnection : ILdapServerConnection
     {
-        public string Username { get; set; }
-
-        public DirectoryEntry SearchRoot { get; set; }
-
-        public DirectoryEntry RootEntry { get; }
-
         public LdapServerConnection(ILdapSettingsService settings)
         {
-            Username = settings.Username;
-            var ldapUsername = $"uid={Username},ou=People,dc=proxiad,dc=bg";
-            RootEntry = new DirectoryEntry(settings.ServerPath, ldapUsername, settings.UserPassword, AuthenticationTypes.None);
-            SearchRoot = new DirectoryEntry(settings.SearchRoot, ldapUsername, settings.UserPassword, AuthenticationTypes.None);
+            IsAuthenticated = VerifyConnection(settings, "uid");
+
+            if (!IsAuthenticated)
+            {
+                IsAuthenticated = VerifyConnection(settings, "cn");
+            }
         }
 
-        public bool IsAuthenticated()
+        public string Username { get; private set; }
+
+        public DirectoryEntry SearchRoot { get; private set; }
+
+        public DirectoryEntry RootEntry { get; private set; }
+
+        public bool IsAuthenticated { get; private set; }
+
+        private bool VerifyConnection(ILdapSettingsService settings, string prefix)
         {
+            Username = $"{prefix}={settings.Username},ou=People,dc=proxiad,dc=bg";
+            RootEntry = new DirectoryEntry(settings.ServerPath, Username, settings.UserPassword, AuthenticationTypes.None);
+            SearchRoot = new DirectoryEntry(settings.SearchRoot, Username, settings.UserPassword, AuthenticationTypes.None);
+
             try
             {
                 var schema = RootEntry.SchemaEntry;

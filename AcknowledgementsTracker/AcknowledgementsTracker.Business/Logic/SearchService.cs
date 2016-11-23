@@ -9,7 +9,7 @@
     public class SearchService : ISearchService
     {
         private AcknowledgementsRepository repository = new AcknowledgementsRepository();
-        private ILdapAccountService accountService = new LdapAccountService();
+        private IAccountService accountService = new LdapAccountService();
         private INormalizable textNormalizer = new TextNormalizationService();
 
         public IEnumerable<AcknowledgementDTO> FindAcknowledgements(string search)
