@@ -11,7 +11,7 @@
 
     public partial class EmployeeIndex : System.Web.UI.Page
     {
-        private ILdapAccountService ldapService = new LdapAccountService();
+        private IAccountService ldapService = new LdapAccountService();
 
         protected void Page_Load(object sender, EventArgs e)
         {

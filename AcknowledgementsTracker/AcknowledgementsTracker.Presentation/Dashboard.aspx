@@ -1,6 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/LoggedIn.Master" AutoEventWireup="true" CodeBehind="Dashboard.aspx.cs" Inherits="AcknowledgementsTracker.Presentation.Dashboard" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <script src="Scripts/jquery.easing.1.3.js" defer></script>
+    <script src="Scripts/scrolling.js" defer></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="cphMain" runat="server">
 

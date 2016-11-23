@@ -31,9 +31,9 @@
                 {
                     ILdapServerConnection ldapConnection = new LdapServerConnection(settings);
 
-                    if (ldapConnection.IsAuthenticated())
+                    if (ldapConnection.IsAuthenticated)
                     {
-                        ILdapAccountManager ldapManager = LdapAccountManager.Instance;
+                        IAccountManager ldapManager = LdapAccountManager.Instance;
                         ldapManager.Setup(ldapConnection);
 
                         var authenticationTicket = new FormsAuthenticationTicket(1, txtbUsername.Value, DateTime.Now, DateTime.Now.AddMinutes(30), true, string.Empty);

@@ -11,7 +11,7 @@
     {
         private IAcknowledgementDtoService acknowledgementDtoService = new AcknowledgementDtoService();
         private ITagDtoService tagDtoService = new TagDtoService();
-        private ILdapAccountService ldapAccountService = new LdapAccountService();
+        private IAccountService ldapAccountService = new LdapAccountService();
         private UIHelper helper = new UIHelper();
 
         protected void Page_Load(object sender, EventArgs e)
@@ -44,12 +44,12 @@
                         acknowledgementDto.BeneficiaryUsername = Request.QueryString["beneficiary"];
 
                         // If the user changes the beneficiary to a new value
-                        if (hfUserUsername != null)
+                        if (!string.IsNullOrWhiteSpace(hfUserUsername.Value))
                         {
                             acknowledgementDto.BeneficiaryUsername = hfUserUsername.Value;
                         }
                     }
-                    else if (hfUserUsername != null)
+                    else if (!string.IsNullOrWhiteSpace(hfUserUsername.Value))
                     {
                         acknowledgementDto.BeneficiaryUsername = hfUserUsername.Value;
                     }
@@ -75,7 +75,7 @@
 
                     Response.Redirect(Global.DashboardPage);
                 }
-                catch (Exception ex)
+                catch (ArgumentException ex)
                 {
                     lblError.Visible = true;
                     lblError.InnerText = ex.Message;

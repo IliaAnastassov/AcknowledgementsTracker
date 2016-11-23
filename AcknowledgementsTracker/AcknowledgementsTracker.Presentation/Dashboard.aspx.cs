@@ -15,6 +15,7 @@
     public partial class Dashboard : Page
     {
         private string username;
+        private IAccountService accountService = new LdapAccountService();
         private IAcknowledgementDtoService acknowledgementDtoService = new AcknowledgementDtoService();
         private ITagDtoService tagDtoService = new TagDtoService();
 
@@ -25,6 +26,16 @@
         protected void gvUserAcknowledgements_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             username = HttpContext.Current.User.Identity.Name;
+
+            try
+            {
+                accountService.ReadUserFullName(username);
+            }
+            catch (Exception)
+            {
+                username = accountService.ReadUserUsername(username);
+            }
+
             gvUserAcknowledgements.DataSource = acknowledgementDtoService.ReadReceived(username);
             gvUserAcknowledgements.PageIndex = e.NewPageIndex;
             gvUserAcknowledgements.DataBind();
@@ -54,6 +65,16 @@
         protected void tmrUserAcknowledgements_Tick(object sender, EventArgs e)
         {
             username = HttpContext.Current.User.Identity.Name;
+
+            try
+            {
+                accountService.ReadUserFullName(username);
+            }
+            catch (Exception)
+            {
+                username = accountService.ReadUserUsername(username);
+            }
+
             gvUserAcknowledgements.DataSource = acknowledgementDtoService.ReadReceived(username);
             gvUserAcknowledgements.DataBind();
 

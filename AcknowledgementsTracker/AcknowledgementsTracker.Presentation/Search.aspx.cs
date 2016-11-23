@@ -11,7 +11,7 @@
 
     public partial class Search : System.Web.UI.Page
     {
-        private ILdapAccountService ldapAccountService = new LdapAccountService();
+        private IAccountService ldapAccountService = new LdapAccountService();
         private ISearchService searcher = new SearchService();
 
         public string SearchQuery

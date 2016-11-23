@@ -24,13 +24,12 @@
                 return;
             }
 
-            List<string> result = new List<string>();
+            List<IUser> result = new List<IUser>();
             var users = searcher.FindUsers(prefix);
 
             foreach (var user in users)
             {
-                // TODO: Review storing and display
-                result.Add($"{user.Name} - {user.Team} : {user.Username}");
+                result.Add(user);
             }
 
             context.Response.Write(JsonConvert.SerializeObject(result));

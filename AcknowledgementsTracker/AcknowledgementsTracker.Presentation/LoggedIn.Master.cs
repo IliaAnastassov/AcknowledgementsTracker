@@ -21,6 +21,11 @@
             try
             {
                 parUserName.InnerText = LdapAccountManager.Instance.GetUserFullName(username);
+
+                if (string.IsNullOrWhiteSpace(parUserName.InnerText))
+                {
+                    parUserName.InnerText = username;
+                }
             }
             catch (NullReferenceException)
             {
