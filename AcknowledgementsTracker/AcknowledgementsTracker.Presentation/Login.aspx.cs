@@ -22,10 +22,7 @@
                 && !string.IsNullOrWhiteSpace(txtbPassword.Value))
             {
                 ILdapSettingsService settings = new LdapSettingsService();
-                settings.ServerPath = WebConfigurationManager.AppSettings["LDAPServerPath"];
-                settings.SearchRoot = WebConfigurationManager.AppSettings["LDAPSearchRoot"];
-                settings.Username = txtbUsername.Value;
-                settings.UserPassword = txtbPassword.Value;
+                SetLdapSettings(settings);
 
                 try
                 {
@@ -33,16 +30,7 @@
 
                     if (ldapConnection.IsAuthenticated)
                     {
-                        IAccountManager ldapManager = LdapAccountManager.Instance;
-                        ldapManager.Setup(ldapConnection);
-
-                        var authenticationTicket = new FormsAuthenticationTicket(1, txtbUsername.Value, DateTime.Now, DateTime.Now.AddMinutes(30), true, string.Empty);
-                        var encryptedTicket = FormsAuthentication.Encrypt(authenticationTicket);
-
-                        var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
-                        cookie.Expires = authenticationTicket.Expiration;
-                        Response.Cookies.Add(cookie);
-
+                        AddAuthentication(ldapConnection);
                         Response.Redirect(Global.DashboardPage);
                     }
                     else
@@ -71,6 +59,27 @@
             lblError.Visible = false;
             txtbUsername.Value = string.Empty;
             txtbPassword.Value = string.Empty;
+        }
+
+        private void SetLdapSettings(ILdapSettingsService settings)
+        {
+            settings.ServerPath = WebConfigurationManager.AppSettings["LDAPServerPath"];
+            settings.SearchRoot = WebConfigurationManager.AppSettings["LDAPSearchRoot"];
+            settings.Username = txtbUsername.Value;
+            settings.UserPassword = txtbPassword.Value;
+        }
+
+        private void AddAuthentication(ILdapServerConnection ldapConnection)
+        {
+            IAccountManager ldapManager = LdapAccountManager.Instance;
+            ldapManager.Setup(ldapConnection);
+
+            var authenticationTicket = new FormsAuthenticationTicket(1, txtbUsername.Value, DateTime.Now, DateTime.Now.AddMinutes(30), true, string.Empty);
+            var encryptedTicket = FormsAuthentication.Encrypt(authenticationTicket);
+
+            var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
+            cookie.Expires = authenticationTicket.Expiration;
+            Response.Cookies.Add(cookie);
         }
     }
 }

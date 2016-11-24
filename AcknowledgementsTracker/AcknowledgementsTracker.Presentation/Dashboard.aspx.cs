@@ -64,94 +64,91 @@
 
         protected void tmrUserAcknowledgements_Tick(object sender, EventArgs e)
         {
+            tmrUserAcknowledgements.Enabled = false;
+            pnlUserAcknowledgementsLoader.Visible = false;
+
             username = HttpContext.Current.User.Identity.Name;
 
-            try
+            // TODO: Refactor
+            if (string.IsNullOrWhiteSpace(accountService.ReadUserFullName(username)))
             {
-                accountService.ReadUserFullName(username);
-            }
-            catch (Exception)
-            {
-                username = accountService.ReadUserUsername(username);
+                username = accountService.ReadUserFullName(username);
             }
 
             gvUserAcknowledgements.DataSource = acknowledgementDtoService.ReadReceived(username);
             gvUserAcknowledgements.DataBind();
-
-            tmrUserAcknowledgements.Enabled = false;
-            pnlUserAcknowledgementsLoader.Visible = false;
         }
 
         protected void tmrLastAcknowledgements_Tick(object sender, EventArgs e)
         {
-            gvLastAcknowledgemets.DataSource = acknowledgementDtoService.ReadLast();
-            gvLastAcknowledgemets.DataBind();
-
             tmrLastAcknowledgements.Enabled = false;
             pnlLastAcknowledgements.Visible = false;
+
+            gvLastAcknowledgemets.DataSource = acknowledgementDtoService.ReadLast();
+            gvLastAcknowledgemets.DataBind();
         }
 
         protected void tmrTodaysAcknowledgements_Tick(object sender, EventArgs e)
         {
-            gvTodaysAcknowledgements.DataSource = acknowledgementDtoService.ReadTodays();
-            gvTodaysAcknowledgements.DataBind();
-
             tmrTodaysAcknowledgements.Enabled = false;
             pnlTodaysAcknowledgements.Visible = false;
+
+            gvTodaysAcknowledgements.DataSource = acknowledgementDtoService.ReadTodays();
+            gvTodaysAcknowledgements.DataBind();
         }
 
         protected void tmrThisWeeksAcnowledgements_Tick(object sender, EventArgs e)
         {
-            gvThisWeeksAcknowledgements.DataSource = acknowledgementDtoService.ReadThisWeek();
-            gvThisWeeksAcknowledgements.DataBind();
-
             tmrThisWeeksAcnowledgements.Enabled = false;
             pnlThisWeeksAcnowledgements.Visible = false;
+
+            gvThisWeeksAcknowledgements.DataSource = acknowledgementDtoService.ReadThisWeek();
+            gvThisWeeksAcknowledgements.DataBind();
         }
 
         protected void tmrThisMonthAcknowledgements_Tick(object sender, EventArgs e)
         {
-            gvThisMonthsAcknowledgements.DataSource = acknowledgementDtoService.ReadThisMonth();
-            gvThisMonthsAcknowledgements.DataBind();
-
             tmrThisMonthAcknowledgements.Enabled = false;
             pnlThisMonthAcknowledgements.Visible = false;
+
+            gvThisMonthsAcknowledgements.DataSource = acknowledgementDtoService.ReadThisMonth();
+            gvThisMonthsAcknowledgements.DataBind();
         }
 
         protected void tmrAllTimeTopTen_Tick(object sender, EventArgs e)
         {
-            gvAllTimeTopTen.DataSource = acknowledgementDtoService.ReadAllTimeTopTen();
-            gvAllTimeTopTen.DataBind();
-
             tmrAllTimeTopTen.Enabled = false;
             pnlAllTimeTopTen.Visible = false;
+
+            gvAllTimeTopTen.DataSource = acknowledgementDtoService.ReadAllTimeTopTen();
+            gvAllTimeTopTen.DataBind();
         }
 
         protected void tmrThisMonthTopTen_Tick(object sender, EventArgs e)
         {
-            gvThisMonthTopTen.DataSource = acknowledgementDtoService.ReadThisMonthTopTen();
-            gvThisMonthTopTen.DataBind();
-
             tmrThisMonthTopTen.Enabled = false;
             pnlThisMonthTopTen.Visible = false;
+
+            gvThisMonthTopTen.DataSource = acknowledgementDtoService.ReadThisMonthTopTen();
+            gvThisMonthTopTen.DataBind();
         }
 
         protected void tmrMostFrequentTagsAllTime_Tick(object sender, EventArgs e)
         {
-            gvMostFrequentTagsAllTime.DataSource = tagDtoService.ReadMostFrequentTagsAllTime();
-            gvMostFrequentTagsAllTime.DataBind();
-
             tmrMostFrequentTagsAllTime.Enabled = false;
             pnlMostFrequentTagsAllTime.Visible = false;
+
+            gvMostFrequentTagsAllTime.DataSource = tagDtoService.ReadMostFrequentTagsAllTime();
+            gvMostFrequentTagsAllTime.DataBind();
         }
 
         protected void tmrMostFrequentTagsThisMonth_Tick(object sender, EventArgs e)
         {
-            gvMostFrequentTagsThisMonth.DataSource = tagDtoService.ReadMostFrequentTagsThisMonth();
-            gvMostFrequentTagsThisMonth.DataBind();
-
             tmrMostFrequentTagsThisMonth.Enabled = false;
             pnlMostFrequentTagsThisMonth.Visible = false;
+
+            gvMostFrequentTagsThisMonth.DataSource = tagDtoService.ReadMostFrequentTagsThisMonth();
+            gvMostFrequentTagsThisMonth.DataBind();
         }
     }
 }
