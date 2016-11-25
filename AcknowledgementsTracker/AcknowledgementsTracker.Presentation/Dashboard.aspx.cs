@@ -27,15 +27,6 @@
         {
             username = HttpContext.Current.User.Identity.Name;
 
-            try
-            {
-                accountService.ReadUserFullName(username);
-            }
-            catch (Exception)
-            {
-                username = accountService.ReadUserUsername(username);
-            }
-
             gvUserAcknowledgements.DataSource = acknowledgementDtoService.ReadReceived(username);
             gvUserAcknowledgements.PageIndex = e.NewPageIndex;
             gvUserAcknowledgements.DataBind();
@@ -68,12 +59,6 @@
             pnlUserAcknowledgementsLoader.Visible = false;
 
             username = HttpContext.Current.User.Identity.Name;
-
-            // TODO: Refactor
-            if (string.IsNullOrWhiteSpace(accountService.ReadUserFullName(username)))
-            {
-                username = accountService.ReadUserFullName(username);
-            }
 
             gvUserAcknowledgements.DataSource = acknowledgementDtoService.ReadReceived(username);
             gvUserAcknowledgements.DataBind();
