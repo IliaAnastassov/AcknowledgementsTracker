@@ -11,5 +11,7 @@
         DirectoryEntry RootEntry { get; }
 
         bool IsAuthenticated { get; }
+
+        void Connect();
     }
 }
