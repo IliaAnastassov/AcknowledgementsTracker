@@ -20,7 +20,6 @@
 
             try
             {
-                // TODO: Get user data
                 parUserName.InnerText = LdapAccountManager.Instance.GetUserFullName(username);
             }
             catch (NullReferenceException)

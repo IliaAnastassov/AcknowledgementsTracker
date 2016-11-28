@@ -32,13 +32,10 @@
                 if (ldapConnection.IsAuthenticated)
                 {
                     CreateAccountManager(ldapConnection);
-                    IUser user;
 
-                    try
-                    {
-                        user = ldapAccountService.ReadUserData(txtbUsername.Value);
-                    }
-                    catch (ArgumentException)
+                    IUser user = ldapAccountService.ReadUserData(txtbUsername.Value);
+
+                    if (user == null)
                     {
                         var username = ldapAccountService.ReadUserUsername(txtbUsername.Value);
                         user = ldapAccountService.ReadUserData(username);

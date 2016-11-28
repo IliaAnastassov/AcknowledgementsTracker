@@ -80,7 +80,9 @@
 
         protected void gvAcknowledgementsResults_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
-            gvAcknowledgementsResults.DataSource = searcher.FindAcknowledgements(SearchQuery);
+            var users = searcher.FindUsers(SearchQuery);
+
+            gvAcknowledgementsResults.DataSource = searcher.FindAcknowledgements(users, SearchQuery);
             gvAcknowledgementsResults.PageIndex = e.NewPageIndex;
             gvAcknowledgementsResults.DataBind();
 
@@ -105,7 +107,9 @@
         {
             if (!string.IsNullOrWhiteSpace(SearchQuery) && fldsAcknowledgementsResults.Visible)
             {
-                gvAcknowledgementsResults.DataSource = searcher.FindAcknowledgements(SearchQuery);
+                var users = searcher.FindUsers(SearchQuery);
+
+                gvAcknowledgementsResults.DataSource = searcher.FindAcknowledgements(users, SearchQuery);
                 gvAcknowledgementsResults.DataBind();
                 fldsAcknowledgementsResults.Visible = true;
 
@@ -116,11 +120,20 @@
 
         private void BindGridViews(string search)
         {
-            gvEmployeesResults.DataSource = searcher.FindUsers(search);
+            // TODO:
+            // -> Normalize
+            // -> Split
+            // -> Search by keyword
+            // -> Intersect results
+            // -> Return final result
+
+            var users = searcher.FindUsers(search);
+
+            gvEmployeesResults.DataSource = users;
             gvEmployeesResults.DataBind();
             fldsEmployeesResults.Visible = true;
 
-            gvAcknowledgementsResults.DataSource = searcher.FindAcknowledgements(search);
+            gvAcknowledgementsResults.DataSource = searcher.FindAcknowledgements(users, search);
             gvAcknowledgementsResults.DataBind();
             fldsAcknowledgementsResults.Visible = true;
 
