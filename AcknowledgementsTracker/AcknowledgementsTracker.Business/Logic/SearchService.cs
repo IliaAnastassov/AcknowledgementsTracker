@@ -12,24 +12,24 @@
         private IAccountService accountService = new LdapAccountService();
         private INormalizable textNormalizer = new TextNormalizationService();
 
-        public IEnumerable<AcknowledgementDTO> FindAcknowledgements(string search)
+        public IEnumerable<AcknowledgementDTO> FindAcknowledgements(IEnumerable<IUser> users, string search)
         {
             search = textNormalizer.NormalizeText(search);
-
-            var keywords = search.Split(new char[] { ' ', ',' }, StringSplitOptions.RemoveEmptyEntries);
             List<string> usernames = new List<string>();
 
-            foreach (var keyword in keywords)
+            foreach (var user in users)
             {
-                usernames.AddRange(accountService.ReadAllUsernames(keyword));
+                usernames.Add(user.Username);
             }
 
-            return repository.GetByContent(usernames, search);
+            var acknowledgements = repository.GetByContent(usernames, search);
+            return acknowledgements;
         }
 
         public IEnumerable<IUser> FindUsers(string search)
         {
-            return LdapAccountManager.Instance.GetUsers(search);
+            var users = LdapAccountManager.Instance.GetUsers(search);
+            return users;
         }
     }
 }

@@ -89,9 +89,13 @@
                 {
                     lastname = resultCollection.ToString();
                 }
+
+                var fullname = $"{firstname} {lastname}";
+
+                return fullname;
             }
 
-            return $"{firstname} {lastname}";
+            return null;
         }
 
         public string GetUserUsername(string fullName)
@@ -160,9 +164,11 @@
                 {
                     email = resultCollection.ToString();
                 }
+
+                return email;
             }
 
-            return email;
+            return null;
         }
 
         public IEnumerable<string> GetAllUsernames(string search)
@@ -193,9 +199,11 @@
                         usernames.Add(resultCollection.ToString());
                     }
                 }
+
+                return usernames;
             }
 
-            return usernames;
+            return null;
         }
 
         public IEnumerable<IUser> GetUsers(string search)
@@ -270,10 +278,12 @@
                     var user = new User(username, $"{firstname} {lastname}", email, team);
                     users.Add(user);
                 }
+
+                // Return list ordered alphabetically
+                return users.OrderBy(u => u.Name).ToList();
             }
 
-            // Return list ordered alphabetically
-            return users.OrderBy(u => u.Name).ToList();
+            return null;
         }
 
         public IUser GetUserData(string username)
@@ -319,6 +329,12 @@
                     email = resultCollection.ToString();
                 }
 
+                // Check explicitly for first name AND last name AND proxiad email
+                if (email == null || !email.Contains("proxiad") || firstname == null || lastname == null)
+                {
+                    return null;
+                }
+
                 foreach (var resultCollection in result.Properties[teamProperty])
                 {
                     team = resultCollection.ToString();
@@ -328,9 +344,11 @@
                 {
                     team = "Unassigned";
                 }
+
+                return new User(username, $"{firstname} {lastname}", email, team);
             }
 
-            return new User(username, $"{firstname} {lastname}", email, team);
+            return null;
         }
 
         public IEnumerable<IUser> GetAllUsersData()
