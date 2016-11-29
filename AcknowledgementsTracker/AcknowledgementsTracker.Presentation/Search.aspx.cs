@@ -47,7 +47,8 @@
             if (!string.IsNullOrWhiteSpace(SearchQuery))
             {
                 ErrorLabel.Visible = false;
-                BindGridViews(SearchQuery);
+                BindGvEmployeesResults(SearchQuery);
+                BindGvAcknowledgementsResults(SearchQuery);
             }
             else
             {
@@ -70,23 +71,25 @@
 
         protected void gvEmployeesResults_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
+            tmrEmployeesResults.Enabled = false;
+
             gvEmployeesResults.DataSource = searcher.FindUsers(SearchQuery);
             gvEmployeesResults.PageIndex = e.NewPageIndex;
             gvEmployeesResults.DataBind();
 
-            tmrEmployeesResults.Enabled = false;
+            fldsEmployeesResults.Visible = true;
             pnlEmployeesResults.Visible = false;
         }
 
         protected void gvAcknowledgementsResults_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
-            var users = searcher.FindUsers(SearchQuery);
+            tmrAcknowledgementsResults.Enabled = false;
 
-            gvAcknowledgementsResults.DataSource = searcher.FindAcknowledgements(users, SearchQuery);
+            gvAcknowledgementsResults.DataSource = searcher.FindByKeywords(SearchQuery);
             gvAcknowledgementsResults.PageIndex = e.NewPageIndex;
             gvAcknowledgementsResults.DataBind();
 
-            tmrAcknowledgementsResults.Enabled = false;
+            fldsAcknowledgementsResults.Visible = true;
             pnlAcknowledgementsResults.Visible = false;
         }
 
@@ -94,12 +97,8 @@
         {
             if (!string.IsNullOrWhiteSpace(SearchQuery) && fldsEmployeesResults.Visible)
             {
-                gvEmployeesResults.DataSource = searcher.FindUsers(SearchQuery);
-                gvEmployeesResults.DataBind();
-                fldsEmployeesResults.Visible = true;
-
                 tmrEmployeesResults.Enabled = false;
-                pnlEmployeesResults.Visible = false;
+                BindGvEmployeesResults(SearchQuery);
             }
         }
 
@@ -107,38 +106,27 @@
         {
             if (!string.IsNullOrWhiteSpace(SearchQuery) && fldsAcknowledgementsResults.Visible)
             {
-                var users = searcher.FindUsers(SearchQuery);
-
-                gvAcknowledgementsResults.DataSource = searcher.FindAcknowledgements(users, SearchQuery);
-                gvAcknowledgementsResults.DataBind();
-                fldsAcknowledgementsResults.Visible = true;
-
                 tmrAcknowledgementsResults.Enabled = false;
-                pnlAcknowledgementsResults.Visible = false;
+                BindGvAcknowledgementsResults(SearchQuery);
             }
         }
 
-        private void BindGridViews(string search)
+        private void BindGvEmployeesResults(string searchQuery)
         {
-            // TODO:
-            // -> Normalize
-            // -> Split
-            // -> Search by keyword
-            // -> Intersect results
-            // -> Return final result
-
-            var users = searcher.FindUsers(search);
-
-            gvEmployeesResults.DataSource = users;
+            gvEmployeesResults.DataSource = searcher.FindUsers(searchQuery);
             gvEmployeesResults.DataBind();
+
             fldsEmployeesResults.Visible = true;
-
-            gvAcknowledgementsResults.DataSource = searcher.FindAcknowledgements(users, search);
-            gvAcknowledgementsResults.DataBind();
-            fldsAcknowledgementsResults.Visible = true;
-
-            pnlAcknowledgementsResults.Visible = false;
             pnlEmployeesResults.Visible = false;
+        }
+
+        private void BindGvAcknowledgementsResults(string searchQuery)
+        {
+            gvAcknowledgementsResults.DataSource = searcher.FindByKeywords(searchQuery);
+            gvAcknowledgementsResults.DataBind();
+
+            fldsAcknowledgementsResults.Visible = true;
+            pnlAcknowledgementsResults.Visible = false;
         }
     }
 }
