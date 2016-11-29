@@ -40,7 +40,8 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
                 context.Database.Log = message => Debug.WriteLine(message);
                 var acknowledgements = context.Acknowledgements.ToList();
 
-                return acknowledgementsAssembler.AssembleCollection(acknowledgements);
+                return acknowledgementsAssembler.AssembleCollection(acknowledgements)
+                                                .ToList();
             }
         }
 
@@ -55,7 +56,8 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
                                               .OrderByDescending(a => a.DateCreated)
                                               .ToList();
 
-                return acknowledgementsAssembler.AssembleCollection(acknowledgements);
+                return acknowledgementsAssembler.AssembleCollection(acknowledgements)
+                                                .ToList();
             }
         }
 
@@ -70,7 +72,8 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
                                               .OrderByDescending(a => a.DateCreated)
                                               .ToList();
 
-                return acknowledgementsAssembler.AssembleCollection(acknowledgements);
+                return acknowledgementsAssembler.AssembleCollection(acknowledgements)
+                                                .ToList();
             }
         }
 
@@ -87,7 +90,8 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
                                               .OrderByDescending(a => a.DateCreated)
                                               .ToList();
 
-                return acknowledgementsAssembler.AssembleCollection(acknowledgements);
+                return acknowledgementsAssembler.AssembleCollection(acknowledgements)
+                                                .ToList();
             }
         }
 
@@ -105,7 +109,8 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
                                               .OrderByDescending(a => a.DateCreated)
                                               .ToList();
 
-                return acknowledgementsAssembler.AssembleCollection(acknowledgements);
+                return acknowledgementsAssembler.AssembleCollection(acknowledgements)
+                                                .ToList();
             }
         }
 
@@ -121,7 +126,8 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
                                               .OrderByDescending(a => a.DateCreated)
                                               .ToList();
 
-                return acknowledgementsAssembler.AssembleCollection(acknowledgements);
+                return acknowledgementsAssembler.AssembleCollection(acknowledgements)
+                                                .ToList();
             }
         }
 
@@ -136,7 +142,8 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
                                               .Take(10)
                                               .ToList();
 
-                return acknowledgementsAssembler.AssembleCollection(acknowledgements);
+                return acknowledgementsAssembler.AssembleCollection(acknowledgements)
+                                                .ToList();
             }
         }
 
@@ -205,7 +212,8 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
                                               .OrderByDescending(a => a.DateCreated)
                                               .ToList();
 
-                return acknowledgementsAssembler.AssembleCollection(acknowledgements).ToList();
+                return acknowledgementsAssembler.AssembleCollection(acknowledgements)
+                                                .ToList();
             }
         }
 
@@ -238,7 +246,8 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
                                  .Where(t => t.Title == tagTitle)
                                  .FirstOrDefault();
 
-                return acknowledgementsAssembler.AssembleCollection(tag.Acknowledgements).ToList();
+                return acknowledgementsAssembler.AssembleCollection(tag.Acknowledgements)
+                                                .ToList();
             }
         }
 
@@ -257,87 +266,38 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
                                           .OrderByDescending(a => a.DateCreated)
                                           .ToList();
 
-                return acknowledgementsAssembler.AssembleCollection(acknowledgements).ToList();
+                return acknowledgementsAssembler.AssembleCollection(acknowledgements)
+                                                .ToList();
             }
         }
 
-        public IEnumerable<AcknowledgementDTO> GetByContent(IEnumerable<string> usernames, string search)
+        public IEnumerable<AcknowledgementDTO> GetByUsername(string username)
         {
-            List<Acknowledgement> acknowledgements = new List<Acknowledgement>();
-            List<string> tags = new List<string>();
-            var keywords = search.Split(new char[] { ' ', ',' }, StringSplitOptions.RemoveEmptyEntries).ToList();
+            using (var context = new AcknowledgementsTrackerContext())
+            {
+                context.Database.Log = message => Debug.WriteLine(message);
+                var acknowledgements = context.Acknowledgements
+                                              .Where(a => a.BeneficiaryUsername == username
+                                                       || a.AuthorUsername == username)
+                                              .ToList();
 
+                return acknowledgementsAssembler.AssembleCollection(acknowledgements)
+                                                .ToList();
+            }
+        }
+
+        public IEnumerable<AcknowledgementDTO> GetByContent(string keyword)
+        {
             using (var context = new AcknowledgementsTrackerContext())
             {
                 context.Database.Log = message => Debug.WriteLine(message);
 
-                if (keywords.Count() == 1)
-                {
-                    if (usernames.Count() > 0)
-                    {
-                        acknowledgements = GetByUsername(usernames, search, context);
-                    }
-                    else
-                    {
-                        acknowledgements = GetByTagsOrContent(search, context);
-                    }
-                }
-                else
-                {
-                    // Find all tags in search query
-                    foreach (var keyword in keywords)
-                    {
-                        tags.AddRange(context.Tags
-                                             .Where(t => t.Title.Contains(keyword))
-                                             .Select(t => t.Title)
-                                             .ToList());
-                    }
+                var acknowledgements = context.Acknowledgements
+                                              .Where(a => a.NormalizedText.Contains(keyword))
+                                              .ToList();
 
-                    if (usernames.Count() > 0 && tags.Count() > 0)
-                    {
-                        foreach (var username in usernames)
-                        {
-                            acknowledgements
-                                .AddRange(context.Acknowledgements
-                                                 .Where(a => (a.AuthorUsername == username || a.BeneficiaryUsername == username)
-                                                             && tags.All(t => a.Tags.Any(tag => tag.Title.Contains(t))))
-                                                 .OrderByDescending(a => a.DateCreated)
-                                                 .ToList());
-                        }
-                    }
-                    else if (usernames.Count() > 0 && tags.Count() == 0)
-                    {
-                        foreach (var username in usernames)
-                        {
-                            acknowledgements
-                                .AddRange(context.Acknowledgements
-                                                 .Where(a => (a.AuthorUsername == username || a.BeneficiaryUsername == username)
-                                                          || keywords.Any(k => a.NormalizedText.Contains(k)))
-                                                 .OrderByDescending(a => a.DateCreated)
-                                                 .ToList());
-                        }
-                    }
-                    else if (usernames.Count() == 0 && tags.Count() > 0)
-                    {
-                        acknowledgements
-                                .AddRange(context.Acknowledgements
-                                                 .Where(a => tags.All(t => a.Tags.Any(tag => tag.Title.Contains(t)))
-                                                          || keywords.Any(k => a.NormalizedText.Contains(k)))
-                                                 .OrderByDescending(a => a.DateCreated)
-                                                 .ToList());
-                    }
-                    else
-                    {
-                        acknowledgements
-                                .AddRange(context.Acknowledgements
-                                                 .Where(a => a.NormalizedText.Contains(search))
-                                                 .OrderByDescending(a => a.DateCreated)
-                                                 .ToList());
-                    }
-                }
-
-                var acknowledgementDTOs = acknowledgementsAssembler.AssembleCollection(acknowledgements).ToList();
-                return acknowledgementDTOs;
+                return acknowledgementsAssembler.AssembleCollection(acknowledgements)
+                                                .ToList();
             }
         }
 
