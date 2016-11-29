@@ -5,8 +5,8 @@
 
     public interface ISearchService
     {
-        IEnumerable<AcknowledgementDTO> FindAcknowledgements(IEnumerable<IUser> users, string search);
-
         IEnumerable<IUser> FindUsers(string search);
+
+        IEnumerable<AcknowledgementDTO> FindByKeywords(string search);
     }
 }

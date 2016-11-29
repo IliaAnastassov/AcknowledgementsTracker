@@ -58,6 +58,7 @@
     <Compile Include="Interfaces\IUIHelper.cs" />
     <Compile Include="Interfaces\IUser.cs" />
     <Compile Include="Logic\AcknowledgementDtoService.cs" />
+    <Compile Include="Logic\AcknowledgementsDtoComparer.cs" />
     <Compile Include="Logic\LdapAccountService.cs" />
     <Compile Include="Logic\LdapServerConnection.cs" />
     <Compile Include="Logic\LdapAccountManager.cs">
