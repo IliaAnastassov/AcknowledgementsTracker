@@ -52,6 +52,8 @@
     <Compile Include="Interfaces\IAccountService.cs" />
     <Compile Include="Interfaces\ILdapServerConnection.cs" />
     <Compile Include="Interfaces\ILdapSettingsService.cs" />
+    <Compile Include="Interfaces\ILoginResponse.cs" />
+    <Compile Include="Interfaces\ILoginService.cs" />
     <Compile Include="Interfaces\INormalizable.cs" />
     <Compile Include="Interfaces\ISearchService.cs" />
     <Compile Include="Interfaces\ITagDtoService.cs" />
@@ -65,6 +67,8 @@
       <ExcludeFromStyleCop>False</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Logic\LdapSettingsService.cs" />
+    <Compile Include="Logic\LoginResponse.cs" />
+    <Compile Include="Logic\LoginService.cs" />
     <Compile Include="Logic\SearchService.cs" />
     <Compile Include="Logic\TagDtoService.cs" />
     <Compile Include="Logic\TextNormalizationService.cs" />
