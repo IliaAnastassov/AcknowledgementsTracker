@@ -246,8 +246,15 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
                                  .Where(t => t.Title == tagTitle)
                                  .FirstOrDefault();
 
-                return acknowledgementsAssembler.AssembleCollection(tag.Acknowledgements)
-                                                .ToList();
+                if (tag != null)
+                {
+                    return acknowledgementsAssembler.AssembleCollection(tag.Acknowledgements)
+                                                    .ToList();
+                }
+                else
+                {
+                    return new List<AcknowledgementDTO>();
+                }
             }
         }
 
