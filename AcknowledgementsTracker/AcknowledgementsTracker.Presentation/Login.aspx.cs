@@ -20,40 +20,25 @@
 
         protected void btnLogin_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrWhiteSpace(txtbUsername.Value)
-                && !string.IsNullOrWhiteSpace(txtbPassword.Value))
+            ILdapSettingsService ldapSettings = new LdapSettingsService();
+            SetLdapSettings(ldapSettings);
+
+            ILdapServerConnection ldapServerConnection = new LdapServerConnection();
+            IAccountService accountService = new LdapAccountService();
+
+            ILoginService loginService = new LoginService(ldapServerConnection, accountService);
+
+            var response = loginService.Login(ldapSettings);
+
+            if (response.User == null)
             {
-                ILdapSettingsService settings = new LdapSettingsService();
-                SetLdapSettings(settings);
-
-                ILdapServerConnection ldapConnection = new LdapServerConnection(settings);
-                ldapConnection.Connect();
-
-                if (ldapConnection.IsAuthenticated)
-                {
-                    CreateAccountManager(ldapConnection);
-
-                    IUser user = ldapAccountService.ReadUserData(txtbUsername.Value);
-
-                    if (user == null)
-                    {
-                        var username = ldapAccountService.ReadUserUsername(txtbUsername.Value);
-                        user = ldapAccountService.ReadUserData(username);
-                    }
-
-                    SignIn(user);
-                    Response.Redirect(Global.DashboardPage);
-                }
-                else
-                {
-                    lblError.Visible = true;
-                    lblError.InnerText = "Failed to authenticate. Please verify username and password";
-                }
+                lblError.Visible = true;
+                lblError.InnerText = response.ErrorMessage;
             }
             else
             {
-                lblError.Visible = true;
-                lblError.InnerText = "Please fill all textboxes";
+                SignIn(response.User);
+                Response.Redirect(Global.DashboardPage);
             }
         }
 
@@ -69,7 +54,7 @@
             settings.ServerPath = WebConfigurationManager.AppSettings["LDAPServerPath"];
             settings.SearchRoot = WebConfigurationManager.AppSettings["LDAPSearchRoot"];
             settings.Username = txtbUsername.Value;
-            settings.UserPassword = txtbPassword.Value;
+            settings.Password = txtbPassword.Value;
         }
 
         private void SignIn(IUser user)
