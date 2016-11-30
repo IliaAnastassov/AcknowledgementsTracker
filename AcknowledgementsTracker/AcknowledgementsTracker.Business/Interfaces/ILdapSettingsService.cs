@@ -8,6 +8,6 @@
 
         string Username { get; set; }
 
-        string UserPassword { get; set; }
+        string Password { get; set; }
     }
 }

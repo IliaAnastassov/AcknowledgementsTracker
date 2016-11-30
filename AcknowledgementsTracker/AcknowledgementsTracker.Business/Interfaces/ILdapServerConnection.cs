@@ -12,6 +12,6 @@
 
         bool IsAuthenticated { get; }
 
-        void Connect();
+        void Connect(ILdapSettingsService settings);
     }
 }

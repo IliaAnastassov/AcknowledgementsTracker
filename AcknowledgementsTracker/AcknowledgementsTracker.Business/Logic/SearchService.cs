@@ -27,9 +27,51 @@
 
             if (keywords.Count() == 1)
             {
+                acknowledgementDTOs = FindBySingleKeyword(search);
+            }
+            else
+            {
+                acknowledgementDTOs = FindByMultipleKeywords(keywords);
+            }
+
+            return acknowledgementDTOs.OrderByDescending(a => a.DateCreated).ToList();
+        }
+
+        private List<AcknowledgementDTO> FindBySingleKeyword(string search)
+        {
+            var results = new List<AcknowledgementDTO>();
+            var acknowledgementsByUser = new List<AcknowledgementDTO>();
+            var comparer = new AcknowledgementsDtoComparer();
+            var usernames = LdapAccountManager.Instance.GetUsers(search)
+                                                       .Select(u => u.Username)
+                                                       .ToList();
+
+            foreach (var username in usernames)
+            {
+                acknowledgementsByUser.AddRange(repository.GetByUsername(username));
+            }
+
+            var acknowledgementsByContent = repository.GetByContent(search);
+            var acknowledgementsByTag = repository.GetByTag(search);
+
+            // Add all the results
+            results.AddRange(acknowledgementsByUser);
+            results.AddRange(acknowledgementsByContent);
+            results.AddRange(acknowledgementsByTag);
+
+            return results.Distinct(comparer).ToList();
+        }
+
+        private List<AcknowledgementDTO> FindByMultipleKeywords(string[] keywords)
+        {
+            var results = new List<AcknowledgementDTO>();
+            var comparer = new AcknowledgementsDtoComparer();
+
+            foreach (var keyword in keywords)
+            {
                 List<AcknowledgementDTO> acknowledgementsByUser = new List<AcknowledgementDTO>();
 
-                var usernames = LdapAccountManager.Instance.GetUsers(search)
+                var usernames = LdapAccountManager.Instance.GetUsers(keyword)
                                                            .Select(u => u.Username)
                                                            .ToList();
 
@@ -38,54 +80,29 @@
                     acknowledgementsByUser.AddRange(repository.GetByUsername(username));
                 }
 
-                var acknowledgementsByContent = repository.GetByContent(search);
-                var acknowledgementsByTag = repository.GetByTag(search);
+                var acknowledgementsByContent = repository.GetByContent(keyword);
+                var acknowledgementsByTag = repository.GetByTag(keyword);
 
-                // Add all the results
-                acknowledgementDTOs.AddRange(acknowledgementsByUser);
-                acknowledgementDTOs.AddRange(acknowledgementsByContent);
-                acknowledgementDTOs.AddRange(acknowledgementsByTag);
+                // Union the three into results by keyword
+                var acknowledgementsByKeyword = acknowledgementsByUser.Union(
+                                                                       acknowledgementsByContent.Union(acknowledgementsByTag, comparer),
+                                                                       comparer)
+                                                                      .ToList();
 
-                acknowledgementDTOs = acknowledgementDTOs.Distinct(comparer).ToList();
-            }
-            else
-            {
-                foreach (var keyword in keywords)
+                // On the first word or if no results are found so far, add the intersected result
+                if (results.Count == 0)
                 {
-                    List<AcknowledgementDTO> acknowledgementsByUser = new List<AcknowledgementDTO>();
-
-                    var usernames = LdapAccountManager.Instance.GetUsers(keyword)
-                                                               .Select(u => u.Username)
-                                                               .ToList();
-
-                    foreach (var username in usernames)
-                    {
-                        acknowledgementsByUser.AddRange(repository.GetByUsername(username));
-                    }
-
-                    var acknowledgementsByContent = repository.GetByContent(keyword);
-                    var acknowledgementsByTag = repository.GetByTag(keyword);
-
-                    // Intersect the three into an intersection by keyword
-                    var acknowledgementsByKeyword = acknowledgementsByUser.Intersect(
-                                                                           acknowledgementsByContent.Intersect(acknowledgementsByTag, comparer),
-                                                                           comparer);
-
-                    // On the first word or if no results are found so far, add the intersected result
-                    if (acknowledgementDTOs.Count == 0)
-                    {
-                        acknowledgementDTOs.AddRange(acknowledgementsByKeyword);
-                    }
-                    // Intersect the previous result with the new intersected result and store it as current
-                    else
-                    {
-                        acknowledgementDTOs = acknowledgementDTOs.Intersect(acknowledgementsByKeyword, comparer)
-                                                           .ToList();
-                    }
+                    results.AddRange(acknowledgementsByKeyword);
+                }
+                // Intersect the previous result with the new intersected result and store it as current
+                else
+                {
+                    results = results.Intersect(acknowledgementsByKeyword, comparer)
+                                     .ToList();
                 }
             }
 
-            return acknowledgementDTOs;
+            return results;
         }
     }
 }

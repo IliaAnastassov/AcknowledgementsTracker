@@ -9,12 +9,6 @@
     {
         private const string UniqueIdProperty = "uid";
         private const string CommonNameProperty = "cn";
-        private ILdapSettingsService settings;
-
-        public LdapServerConnection(ILdapSettingsService settings)
-        {
-            this.settings = settings;
-        }
 
         public string Username { get; private set; }
 
@@ -24,7 +18,7 @@
 
         public bool IsAuthenticated { get; private set; }
 
-        public void Connect()
+        public void Connect(ILdapSettingsService settings)
         {
             IsAuthenticated = VerifyConnection(settings, UniqueIdProperty);
 
@@ -37,8 +31,8 @@
         private bool VerifyConnection(ILdapSettingsService settings, string identificationProperty)
         {
             Username = $"{identificationProperty}={settings.Username},ou=People,dc=proxiad,dc=bg";
-            RootEntry = new DirectoryEntry(settings.ServerPath, Username, settings.UserPassword, AuthenticationTypes.None);
-            SearchRoot = new DirectoryEntry(settings.SearchRoot, Username, settings.UserPassword, AuthenticationTypes.None);
+            RootEntry = new DirectoryEntry(settings.ServerPath, Username, settings.Password, AuthenticationTypes.None);
+            SearchRoot = new DirectoryEntry(settings.SearchRoot, Username, settings.Password, AuthenticationTypes.None);
 
             try
             {
