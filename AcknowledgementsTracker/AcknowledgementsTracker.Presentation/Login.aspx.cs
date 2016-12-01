@@ -33,7 +33,7 @@
             if (response.User == null)
             {
                 lblError.Visible = true;
-                lblError.InnerText = response.ErrorMessage;
+                lblError.InnerText = response.ResponseMessage;
             }
             else
             {
