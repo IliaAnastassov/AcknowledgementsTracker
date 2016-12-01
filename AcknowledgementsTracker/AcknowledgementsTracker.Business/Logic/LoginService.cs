@@ -2,6 +2,7 @@
 {
     using System;
     using Interfaces;
+    using Ressources;
 
     public class LoginService : ILoginService
     {
@@ -25,7 +26,7 @@
                 || string.IsNullOrWhiteSpace(settings.Password))
             {
                 response.User = null;
-                response.ErrorMessage = "Please fill all textboxes";
+                response.ResponseMessage = BusinessResources.InvalidInput;
 
                 return response;
             }
@@ -48,12 +49,12 @@
             if (user != null)
             {
                 response.User = user;
-                response.ErrorMessage = string.Empty;
+                response.ResponseMessage = BusinessResources.AuthenticationSucceded;
             }
             else
             {
                 response.User = null;
-                response.ErrorMessage = "Failed to authenticate. Please verify username and password";
+                response.ResponseMessage = BusinessResources.AuthenticationFailed;
             }
 
             return response;

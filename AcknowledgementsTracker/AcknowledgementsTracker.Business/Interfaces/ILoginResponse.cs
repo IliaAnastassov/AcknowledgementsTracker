@@ -3,6 +3,6 @@
     public interface ILoginResponse
     {
         IUser User { get; set; }
-        string ErrorMessage { get; set; }
+        string ResponseMessage { get; set; }
     }
 }

@@ -5,7 +5,7 @@
 
     public class LoginResponse : ILoginResponse
     {
-        public string ErrorMessage { get; set; }
+        public string ResponseMessage { get; set; }
 
         public IUser User { get; set; }
     }
