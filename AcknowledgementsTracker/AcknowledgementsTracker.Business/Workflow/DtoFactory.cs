@@ -16,13 +16,13 @@
             { typeof(TagDTO), new TagsRepository() }
         };
 
-        public IRepository<T> GetRepository<T>() where T : IDto
+        public IReadOnlyRepository<T> GetRepository<T>() where T : IDto
         {
             Type keyType = typeof(T);
 
             try
             {
-                return (IRepository<T>)repositories[keyType];
+                return (IReadOnlyRepository<T>)repositories[keyType];
             }
             catch
             {

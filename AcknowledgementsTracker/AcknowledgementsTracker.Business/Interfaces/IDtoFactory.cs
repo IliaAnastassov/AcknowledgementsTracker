@@ -6,7 +6,7 @@
 
     public interface IDtoFactory
     {
-        IRepository<T> GetRepository<T>() where T : IDto;
+        IReadOnlyRepository<T> GetRepository<T>() where T : IDto;
         object GetRepository(Type t);
     }
 }

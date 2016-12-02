@@ -5,10 +5,21 @@
     using DataAccess.Repositories;
     using DTO;
     using Interfaces;
+    using DataAccess.Interfaces;
 
     public class AcknowledgementDtoService : IAcknowledgementDtoService
     {
-        private AcknowledgementsRepository repository = new AcknowledgementsRepository();
+        private IAcknowledgementsRepository repository;
+
+        public AcknowledgementDtoService()
+        {
+            repository = new AcknowledgementsRepository();
+        }
+
+        public AcknowledgementDtoService(IAcknowledgementsRepository repository)
+        {
+            this.repository = repository;
+        }
 
         public void Create(AcknowledgementDTO dto, IEnumerable<string> tags)
         {
@@ -17,32 +28,32 @@
 
         public IEnumerable<AcknowledgementDTO> ReadReceived(string username)
         {
-            return repository.GetReceived(username).ToList();
+            return repository.GetReceived(username);
         }
 
         public IEnumerable<AcknowledgementDTO> ReadGiven(string username)
         {
-            return repository.GetGiven(username).ToList();
+            return repository.GetGiven(username);
         }
 
         public IEnumerable<AcknowledgementDTO> ReadLast()
         {
-            return repository.GetLastAcknowledgements().ToList();
+            return repository.GetLastAcknowledgements();
         }
 
         public IEnumerable<AcknowledgementDTO> ReadTodays()
         {
-            return repository.GetTodaysAcknowledgements().ToList();
+            return repository.GetTodaysAcknowledgements();
         }
 
         public IEnumerable<AcknowledgementDTO> ReadThisWeek()
         {
-            return repository.GetThisWeekAcknowledgements().ToList();
+            return repository.GetThisWeekAcknowledgements();
         }
 
         public IEnumerable<AcknowledgementDTO> ReadThisMonth()
         {
-            return repository.GetThisMonthAcknowledgements().ToList();
+            return repository.GetThisMonthAcknowledgements();
         }
 
         public string ReadAllTimeChampion()

@@ -6,9 +6,6 @@
 
     public class LoginService : ILoginService
     {
-        //var loginService = xxx;
-        //loginService.Login(settings, ldapServerConnection, ldapAccountService);
-
         private ILdapServerConnection ldapConnection;
         private IAccountService ldapAccountService;
         private ILoginResponse response;
