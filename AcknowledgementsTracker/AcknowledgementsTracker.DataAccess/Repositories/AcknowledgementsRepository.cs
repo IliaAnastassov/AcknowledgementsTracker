@@ -17,7 +17,7 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
     using Interfaces;
     using Model;
 
-    public class AcknowledgementsRepository : IRepository<AcknowledgementDTO>
+    public class AcknowledgementsRepository : IAcknowledgementsRepository, IReadOnlyRepository<AcknowledgementDTO>, IWriteOnlyRepository<AcknowledgementDTO>
     {
         private IAssembler<Acknowledgement, AcknowledgementDTO> acknowledgementsAssembler = new AcknowledgementDtoAssembler();
         private TagsRepository tagsRepo = new TagsRepository();

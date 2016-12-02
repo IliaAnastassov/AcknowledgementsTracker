@@ -49,7 +49,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Interfaces\IRepository.cs" />
+    <Compile Include="Interfaces\IReadOnlyRepository.cs" />
+    <Compile Include="Interfaces\IWriteOnlyRepository.cs" />
     <Compile Include="Migrations\201609211254578_FixRelations.cs" />
     <Compile Include="Migrations\201609211254578_FixRelations.Designer.cs">
       <DependentUpon>201609211254578_FixRelations.cs</DependentUpon>
@@ -82,6 +83,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Interfaces\IAcknowledgementsRepository.cs" />
     <Compile Include="Repositories\TagsRepository.cs" />
   </ItemGroup>
   <ItemGroup>

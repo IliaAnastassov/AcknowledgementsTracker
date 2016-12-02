@@ -17,7 +17,7 @@ namespace AcknowledgementsTracker.DataAccess.Repositories
     using Interfaces;
     using Model;
 
-    public class TagsRepository : IRepository<TagDTO>
+    public class TagsRepository : IReadOnlyRepository<TagDTO>
     {
         private IAssembler<Tag, TagDTO> assembler = new TagDtoAssembler();
 
