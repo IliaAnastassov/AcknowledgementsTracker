@@ -8,7 +8,7 @@ namespace AcknowledgementsTracker.Business.Tests
     using Rhino.Mocks;
 
     [TestClass]
-    public class LoginTests
+    public class LoginServiceTests
     {
         // System Under Test: LoginService
         [TestMethod]
