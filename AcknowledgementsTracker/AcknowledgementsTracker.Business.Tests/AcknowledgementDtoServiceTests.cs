@@ -1,4 +1,5 @@
-﻿namespace AcknowledgementsTracker.Business.Tests
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+namespace AcknowledgementsTracker.Business.Tests
 {
     using System;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -13,7 +14,7 @@
     {
         // // System Under Test: AcknowledgementDtoServiceTests
         [TestMethod]
-        public void VerifyAddIsCalledOnAcknowledgementCreation()
+        public void Verify_Add_IsCalledOn_AcknowledgementCreation()
         {
             // ARRANGE
             var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
@@ -29,7 +30,7 @@
         }
 
         [TestMethod]
-        public void VerifyGetReceivedIsCalledOnReadReceived()
+        public void Verify_GetReceived_IsCalledOn_ReadReceived()
         {
             // ARRANGE
             var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
@@ -44,7 +45,7 @@
         }
 
         [TestMethod]
-        public void VerifyGetGivenIsCalledOnReadGiven()
+        public void Verify_GetGiven_IsCalledOn_ReadGiven()
         {
             // ARRANGE
             var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
@@ -59,7 +60,7 @@
         }
 
         [TestMethod]
-        public void VerifyGetLastIsCalledOnReadLast()
+        public void Verify_GetLast_IsCalledOn_ReadLast()
         {
             // ARRANGE
             var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
@@ -73,7 +74,7 @@
         }
 
         [TestMethod]
-        public void VerifyGetTodaysIsCalledOnReadTodays()
+        public void Verify_GetTodays_IsCalledOn_ReadTodays()
         {
             // ARRANGE
             var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
@@ -87,7 +88,7 @@
         }
 
         [TestMethod]
-        public void VerifyGetThisWeekIsCalledOnReadThisWeek()
+        public void Verify_GetThisWeek_IsCalledOn_ReadThisWeek()
         {
             // ARRANGE
             var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
@@ -101,7 +102,7 @@
         }
 
         [TestMethod]
-        public void VerifyGetThisMonthIsCalledOnReadThisMonth()
+        public void Verify_GetThisMonth_IsCalledOn_ReadThisMonth()
         {
             // ARRANGE
             var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
@@ -115,7 +116,7 @@
         }
 
         [TestMethod]
-        public void VerifyGetAllTimeChampionIsCalledOnReadAllTimeChampion()
+        public void Verify_GetAllTimeChampion_IsCalledOn_ReadAllTimeChampion()
         {
             // ARRANGE
             var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
@@ -169,6 +170,66 @@
 
             // ASSERT
             mockAcknowledgementRepository.AssertWasCalled(repo => repo.GetThisMonthsByUser(username));
+        }
+
+        [TestMethod]
+        public void Verify_GetByTag_IsCalledOn_ReadByTag()
+        {
+            // ARRANGE
+            var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
+
+            // ACT
+            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
+            var tagTitle = "tag";
+            acknowledgementDtoService.ReadByTag(tagTitle);
+
+            // ASSERT
+            mockAcknowledgementRepository.AssertWasCalled(repo => repo.GetByTag(tagTitle));
+        }
+
+        [TestMethod]
+        public void Verify_GetByTagThisMonth_IsCalledOn_ReadByTagThisMonth()
+        {
+            // ARRANGE
+            var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
+
+            // ACT
+            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
+            var tagTitle = "tag";
+            acknowledgementDtoService.ReadByTagThisMonth(tagTitle);
+
+            // ASSERT
+            mockAcknowledgementRepository.AssertWasCalled(repo => repo.GetByTagThisMonth(tagTitle));
+        }
+
+        [TestMethod]
+        public void Verify_Edit_IsCalledOn_Update()
+        {
+            // ARRANGE
+            var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
+
+            // ACT
+            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
+            var acknowledgementDto = new AcknowledgementDTO();
+            acknowledgementDtoService.Update(acknowledgementDto);
+
+            // ASSERT
+            mockAcknowledgementRepository.AssertWasCalled(repo => repo.Edit(acknowledgementDto));
+        }
+
+        [TestMethod]
+        public void Verify_Remove_IsCalledOn_Delete()
+        {
+            // ARRANGE
+            var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
+
+            // ACT
+            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
+            var id = 47;
+            acknowledgementDtoService.Delete(id);
+
+            // ASSERT
+            mockAcknowledgementRepository.AssertWasCalled(repo => repo.Remove(id));
         }
     }
 }

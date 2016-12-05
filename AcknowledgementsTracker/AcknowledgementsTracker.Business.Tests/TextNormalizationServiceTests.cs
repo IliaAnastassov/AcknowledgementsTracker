@@ -10,7 +10,7 @@ namespace AcknowledgementsTracker.Business.Tests
     public class TextNormalizationServiceTests
     {
         [TestMethod]
-        public void VerifyTextNormalization()
+        public void Verify_TextNormalization()
         {
             INormalizable normalizer = new TextNormalizationService();
 
@@ -22,7 +22,7 @@ namespace AcknowledgementsTracker.Business.Tests
         }
 
         [TestMethod]
-        public void VerifyMultiBlankSpaceRemoval()
+        public void Verify_MultiBlankSpaceRemoval()
         {
             INormalizable normalizer = new TextNormalizationService();
 

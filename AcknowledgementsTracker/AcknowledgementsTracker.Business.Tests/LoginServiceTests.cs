@@ -12,7 +12,7 @@ namespace AcknowledgementsTracker.Business.Tests
     {
         // System Under Test: LoginService
         [TestMethod]
-        public void ShouldReturnErrorMsgWhenPasswordIsNull()
+        public void ShouldReturn_ErrorMsg_WhenPassword_IsNull()
         {
             // ARRANGE
             var mockLdapConnection = MockRepository.GenerateMock<ILdapServerConnection>();
@@ -32,7 +32,7 @@ namespace AcknowledgementsTracker.Business.Tests
         }
 
         [TestMethod]
-        public void ShouldReturnErrorMsgWhenPasswordIsEmplty()
+        public void ShouldReturn_ErrorMsg_WhenPassword_IsEmplty()
         {
             // ARRANGE
             var mockLdapConnection = MockRepository.GenerateMock<ILdapServerConnection>();
@@ -52,7 +52,7 @@ namespace AcknowledgementsTracker.Business.Tests
         }
 
         [TestMethod]
-        public void ShouldReturnErrorMsgWhenPasswordIsWhiteSpace()
+        public void ShouldReturn_ErrorMsg_WhenPassword_IsWhiteSpace()
         {
             // ARRANGE
             var mockLdapConnection = MockRepository.GenerateMock<ILdapServerConnection>();
@@ -72,7 +72,7 @@ namespace AcknowledgementsTracker.Business.Tests
         }
 
         [TestMethod]
-        public void ShouldReturnErrorMsgWhenUsernameIsNull()
+        public void ShouldReturn_ErrorMsg_WhenUsername_IsNull()
         {
             // ARRANGE
             var mockLdapConnection = MockRepository.GenerateMock<ILdapServerConnection>();
@@ -92,7 +92,7 @@ namespace AcknowledgementsTracker.Business.Tests
         }
 
         [TestMethod]
-        public void ShouldReturnErrorMsgWhenUsernameIsEmpty()
+        public void ShouldReturn_ErrorMsg_WhenUsername_IsEmpty()
         {
             // ARRANGE
             var mockLdapConnection = MockRepository.GenerateMock<ILdapServerConnection>();
@@ -112,7 +112,7 @@ namespace AcknowledgementsTracker.Business.Tests
         }
 
         [TestMethod]
-        public void ShouldReturnErrorMsgWhenUsernameIsWhiteSpace()
+        public void ShouldReturn_ErrorMsg_WhenUsername_IsWhiteSpace()
         {
             // ARRANGE
             var mockLdapConnection = MockRepository.GenerateMock<ILdapServerConnection>();
@@ -132,7 +132,7 @@ namespace AcknowledgementsTracker.Business.Tests
         }
 
         [TestMethod]
-        public void ShouldReturnErrorMsgWhenUsernameNotFound()
+        public void ShouldReturn_ErrorMsg_WhenUsername_NotFound()
         {
             // ARRANGE
             var mockLdapConnection = MockRepository.GenerateMock<ILdapServerConnection>();
@@ -152,7 +152,7 @@ namespace AcknowledgementsTracker.Business.Tests
         }
 
         [TestMethod]
-        public void ShouldReturnErrorMsgWhenPasswordIsWrong()
+        public void ShouldReturn_ErrorMsg_WhenPassword_IsWrong()
         {
             // ARRANGE
             var mockLdapConnection = MockRepository.GenerateMock<ILdapServerConnection>();
@@ -172,7 +172,7 @@ namespace AcknowledgementsTracker.Business.Tests
         }
 
         [TestMethod]
-        public void LoginSetUserToNullWhenUsernameIsNull()
+        public void Login_SetUserToNull_WhenUsername_IsNull()
         {
             // ARRANGE
             var mockLdapConnection = MockRepository.GenerateMock<ILdapServerConnection>();
@@ -190,7 +190,7 @@ namespace AcknowledgementsTracker.Business.Tests
         }
 
         [TestMethod]
-        public void LoginSetUserToNullWhenUsernameIsEmpty()
+        public void Login_SetUserToNull_WhenUsername_IsEmpty()
         {
             // ARRANGE
             var mockLdapConnection = MockRepository.GenerateMock<ILdapServerConnection>();
@@ -208,7 +208,7 @@ namespace AcknowledgementsTracker.Business.Tests
         }
 
         [TestMethod]
-        public void LoginSetUserToNullWhenUsernameIsWhiteSpace()
+        public void Login_SetUserToNull_WhenUsername_IsWhiteSpace()
         {
             // ARRANGE
             var mockLdapConnection = MockRepository.GenerateMock<ILdapServerConnection>();
@@ -226,7 +226,7 @@ namespace AcknowledgementsTracker.Business.Tests
         }
 
         [TestMethod]
-        public void LoginSetUserToNullWhenPasswordIsNull()
+        public void Login_SetUserToNull_WhenPassword_IsNull()
         {
             // ARRANGE
             var mockLdapConnection = MockRepository.GenerateMock<ILdapServerConnection>();
@@ -244,7 +244,7 @@ namespace AcknowledgementsTracker.Business.Tests
         }
 
         [TestMethod]
-        public void LoginSetUserToNullWhenPasswordIsEmpty()
+        public void Login_SetUserToNull_WhenPassword_IsEmpty()
         {
             // ARRANGE
             var mockLdapConnection = MockRepository.GenerateMock<ILdapServerConnection>();
@@ -262,7 +262,7 @@ namespace AcknowledgementsTracker.Business.Tests
         }
 
         [TestMethod]
-        public void LoginSetUserToNullWhenPasswordIsWhiteSpace()
+        public void Login_SetUserToNull_WhenPassword_IsWhiteSpace()
         {
             // ARRANGE
             var mockLdapConnection = MockRepository.GenerateMock<ILdapServerConnection>();
@@ -280,7 +280,7 @@ namespace AcknowledgementsTracker.Business.Tests
         }
 
         [TestMethod]
-        public void ConnectIsCalledOnLoginWhenPassedValidInput()
+        public void Connect_IsCalledOn_Login_WhenPassedValidInput()
         {
             // ARRANGE
             var stubLdapConnection = MockRepository.GenerateStub<ILdapServerConnection>();
@@ -300,7 +300,7 @@ namespace AcknowledgementsTracker.Business.Tests
         }
 
         [TestMethod]
-        public void ReadUserDataIsCalledOnLoginWhenPassedValidInput()
+        public void ReadUserData_IsCalledOn_Login_WhenPassedValidInput()
         {
             // ARRANGE
             var stubLdapConnection = MockRepository.GenerateStub<ILdapServerConnection>();
