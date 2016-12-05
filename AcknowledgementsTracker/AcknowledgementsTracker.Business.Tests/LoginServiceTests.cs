@@ -283,40 +283,60 @@ namespace AcknowledgementsTracker.Business.Tests
         public void Connect_IsCalledOn_Login_WhenPassedValidInput()
         {
             // ARRANGE
-            var stubLdapConnection = MockRepository.GenerateStub<ILdapServerConnection>();
-            var stubAccountService = MockRepository.GenerateStub<IAccountService>();
+            var mockLdapConnection = MockRepository.GenerateMock<ILdapServerConnection>();
+            var mockAccountService = MockRepository.GenerateMock<IAccountService>();
             var settings = new LdapSettingsService();
             settings.Username = "user";
             settings.Password = "password";
 
-            stubLdapConnection.Stub(connection => connection.Connect(Arg<ILdapSettingsService>.Is.TypeOf));
+            mockLdapConnection.Stub(connection => connection.Connect(Arg<ILdapSettingsService>.Is.TypeOf));
 
             // ACT
-            var loginService = new LoginService(stubLdapConnection, stubAccountService);
+            var loginService = new LoginService(mockLdapConnection, mockAccountService);
             loginService.Login(settings);
 
             // ASSERT
-            stubLdapConnection.AssertWasCalled(connection => connection.Connect(Arg<ILdapSettingsService>.Is.TypeOf));
+            mockLdapConnection.AssertWasCalled(connection => connection.Connect(Arg<ILdapSettingsService>.Is.TypeOf));
+        }
+
+        [TestMethod]
+        public void IsAuthenticated_IsSetToTrueIf_ConnectionIsAuthenticated()
+        {
+            // ARRANGE
+            var mockLdapConnection = MockRepository.GenerateMock<ILdapServerConnection>();
+            var mockLdapAccountService = MockRepository.GenerateMock<IAccountService>();
+            var settings = new LdapSettingsService();
+            settings.Username = "user";
+            settings.Password = "password";
+
+            mockLdapConnection.Stub(c => c.IsAuthenticated).Return(true);
+
+            // ACT
+            var loginService = new LoginService(mockLdapConnection, mockLdapAccountService);
+            loginService.Login(settings);
+
+            // ASSERT
+            mockLdapConnection.AssertWasCalled(c => c.IsAuthenticated);
         }
 
         [TestMethod]
         public void ReadUserData_IsCalledOn_Login_WhenPassedValidInput()
         {
             // ARRANGE
-            var stubLdapConnection = MockRepository.GenerateStub<ILdapServerConnection>();
-            var stubAccountService = MockRepository.GenerateStub<IAccountService>();
+            var mockLdapConnection = MockRepository.GenerateMock<ILdapServerConnection>();
+            var mockAccountService = MockRepository.GenerateMock<IAccountService>();
             var settings = new LdapSettingsService();
             settings.Username = "user";
             settings.Password = "password";
 
-            stubAccountService.Stub(a => a.ReadUserData(Arg<string>.Is.TypeOf));
+            mockAccountService.Stub(a => a.ReadUserData(Arg<string>.Is.TypeOf));
 
             // ACT
-            var loginService = new LoginService(stubLdapConnection, stubAccountService);
+            var loginService = new LoginService(mockLdapConnection, mockAccountService);
             loginService.Login(settings);
 
             // ASSERT
-            stubAccountService.AssertWasCalled(a => a.ReadUserData(Arg<string>.Is.TypeOf));
+            mockAccountService.AssertWasCalled(a => a.ReadUserData(Arg<string>.Is.TypeOf));
         }
     }
 }

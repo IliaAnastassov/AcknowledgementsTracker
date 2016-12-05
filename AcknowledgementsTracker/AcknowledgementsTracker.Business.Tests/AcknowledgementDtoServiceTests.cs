@@ -1,5 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-namespace AcknowledgementsTracker.Business.Tests
+﻿namespace AcknowledgementsTracker.Business.Tests
 {
     using System;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -12,7 +11,7 @@ namespace AcknowledgementsTracker.Business.Tests
     [TestClass]
     public class AcknowledgementDtoServiceTests
     {
-        // // System Under Test: AcknowledgementDtoServiceTests
+        // System Under Test: AcknowledgementDtoServiceTests
         [TestMethod]
         public void Verify_Add_IsCalledOn_AcknowledgementCreation()
         {
@@ -22,11 +21,53 @@ namespace AcknowledgementsTracker.Business.Tests
 
             // ACT
             var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
-            var tags = new List<string>();
+            var tags = new List<string> { "someTag", "otherTag" };
             acknowledgementDtoService.Create(acknowledgementDto, tags);
 
             // ASSERT
             mockAcknowledgementRepository.AssertWasCalled(repo => repo.Add(acknowledgementDto, tags));
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void Verify_ExceptionIsThrownOn_AcknowledgementCreationWhen_AcknowledgementDtoIsNull()
+        {
+            // ARRANGE
+            var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
+            AcknowledgementDTO acknowledgementDto = null;
+            var tags = new List<string> { "someTag", "otherTag" };
+
+            // ACT
+            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
+            acknowledgementDtoService.Create(acknowledgementDto, tags);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void Verify_ExceptionIsThrownOn_AcknowledgementCreationWhen_TagsIsNull()
+        {
+            // ARRANGE
+            var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
+            var acknowledgementDto = new AcknowledgementDTO();
+            List<string> tags = null;
+
+            // ACT
+            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
+            acknowledgementDtoService.Create(acknowledgementDto, tags);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void Verify_ExceptionIsThrownOn_AcknowledgementCreationWhen_TagsIsEmpty()
+        {
+            // ARRANGE
+            var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
+            var acknowledgementDto = new AcknowledgementDTO();
+            List<string> tags = new List<string>();
+
+            // ACT
+            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
+            acknowledgementDtoService.Create(acknowledgementDto, tags);
         }
 
         [TestMethod]
@@ -45,6 +86,45 @@ namespace AcknowledgementsTracker.Business.Tests
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void Verify_ExceptionIsThrownOn_ReadReceivedWhen_UsernameIsNull()
+        {
+            // ARRANGE
+            var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
+            string username = null;
+
+            // ACT
+            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
+            acknowledgementDtoService.ReadReceived(username);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void Verify_ExceptionIsThrownOn_ReadReceivedWhen_UsernameIsEmpty()
+        {
+            // ARRANGE
+            var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
+            string username = string.Empty;
+
+            // ACT
+            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
+            acknowledgementDtoService.ReadReceived(username);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void Verify_ExceptionIsThrownOn_ReadReceivedWhen_UsernameIsWhitespace()
+        {
+            // ARRANGE
+            var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
+            string username = " ";
+
+            // ACT
+            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
+            acknowledgementDtoService.ReadReceived(username);
+        }
+
+        [TestMethod]
         public void Verify_GetGiven_IsCalledOn_ReadGiven()
         {
             // ARRANGE
@@ -57,6 +137,45 @@ namespace AcknowledgementsTracker.Business.Tests
 
             // ASSERT
             mockAcknowledgementRepository.AssertWasCalled(repo => repo.GetGiven(username));
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void Verify_ExceptionIsThrownOn_ReadGivenWhen_UsernameIsNull()
+        {
+            // ARRANGE
+            var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
+            string username = null;
+
+            // ACT
+            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
+            acknowledgementDtoService.ReadGiven(username);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void Verify_ExceptionIsThrownOn_ReadGivenWhen_UsernameIsEmpty()
+        {
+            // ARRANGE
+            var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
+            string username = string.Empty;
+
+            // ACT
+            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
+            acknowledgementDtoService.ReadGiven(username);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void Verify_ExceptionIsThrownOn_ReadGivenWhen_UsernameIsWhitespace()
+        {
+            // ARRANGE
+            var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
+            string username = " ";
+
+            // ACT
+            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
+            acknowledgementDtoService.ReadGiven(username);
         }
 
         [TestMethod]
@@ -173,6 +292,45 @@ namespace AcknowledgementsTracker.Business.Tests
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void Verify_ExceptionIsThrownOn_ReadReceivedThisMonthWhen_UsernameIsNull()
+        {
+            // ARRANGE
+            var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
+            string username = null;
+
+            // ACT
+            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
+            acknowledgementDtoService.ReadReceivedThisMonth(username);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void Verify_ExceptionIsThrownOn_ReadReceivedThisMonthWhen_UsernameIsEmpty()
+        {
+            // ARRANGE
+            var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
+            string username = string.Empty;
+
+            // ACT
+            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
+            acknowledgementDtoService.ReadReceivedThisMonth(username);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void Verify_ExceptionIsThrownOn_ReadReceivedThisMonthWhen_UsernameIsWhitespace()
+        {
+            // ARRANGE
+            var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
+            string username = " ";
+
+            // ACT
+            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
+            acknowledgementDtoService.ReadReceivedThisMonth(username);
+        }
+
+        [TestMethod]
         public void Verify_GetByTag_IsCalledOn_ReadByTag()
         {
             // ARRANGE
@@ -185,6 +343,45 @@ namespace AcknowledgementsTracker.Business.Tests
 
             // ASSERT
             mockAcknowledgementRepository.AssertWasCalled(repo => repo.GetByTag(tagTitle));
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void Verify_ExceptionIsThrownOn_ReadByTagWhen_TagisNull()
+        {
+            // ARRANGE
+            var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
+            string tagTitle = null;
+
+            // ACT
+            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
+            acknowledgementDtoService.ReadByTag(tagTitle);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void Verify_ExceptionIsThrownOn_ReadByTagWhen_TagisEmpty()
+        {
+            // ARRANGE
+            var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
+            string tagTitle = string.Empty;
+
+            // ACT
+            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
+            acknowledgementDtoService.ReadByTag(tagTitle);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void Verify_ExceptionIsThrownOn_ReadByTagWhen_TagisWhitespace()
+        {
+            // ARRANGE
+            var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
+            string tagTitle = " ";
+
+            // ACT
+            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
+            acknowledgementDtoService.ReadByTag(tagTitle);
         }
 
         [TestMethod]
@@ -203,6 +400,45 @@ namespace AcknowledgementsTracker.Business.Tests
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void Verify_ExceptionIsThrownOn_ReadByTagThisMonthWhen_TagisNull()
+        {
+            // ARRANGE
+            var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
+            string tagTitle = null;
+
+            // ACT
+            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
+            acknowledgementDtoService.ReadByTagThisMonth(tagTitle);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void Verify_ExceptionIsThrownOn_ReadByTagThisMonthWhen_TagisEmpty()
+        {
+            // ARRANGE
+            var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
+            string tagTitle = string.Empty;
+
+            // ACT
+            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
+            acknowledgementDtoService.ReadByTagThisMonth(tagTitle);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void Verify_ExceptionIsThrownOn_ReadByTagThisMonthWhen_TagisWhitespace()
+        {
+            // ARRANGE
+            var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
+            string tagTitle = " ";
+
+            // ACT
+            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
+            acknowledgementDtoService.ReadByTagThisMonth(tagTitle);
+        }
+
+        [TestMethod]
         public void Verify_Edit_IsCalledOn_Update()
         {
             // ARRANGE
@@ -215,6 +451,19 @@ namespace AcknowledgementsTracker.Business.Tests
 
             // ASSERT
             mockAcknowledgementRepository.AssertWasCalled(repo => repo.Edit(acknowledgementDto));
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void Verify_ExceptionIsThrownOn_UpdateWhen_AcknowledgementDtoIsNull()
+        {
+            // ARRANGE
+            var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
+            AcknowledgementDTO acknowledgementDto = null;
+
+            // ACT
+            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
+            acknowledgementDtoService.Update(acknowledgementDto);
         }
 
         [TestMethod]

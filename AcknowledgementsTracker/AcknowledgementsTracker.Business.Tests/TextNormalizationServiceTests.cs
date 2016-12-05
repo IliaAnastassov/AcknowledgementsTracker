@@ -1,10 +1,9 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-namespace AcknowledgementsTracker.Business.Tests
+﻿namespace AcknowledgementsTracker.Business.Tests
 {
     using System;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using Business.Interfaces;
-    using Business.Logic;
+    using Interfaces;
+    using Logic;
 
     [TestClass]
     public class TextNormalizationServiceTests
