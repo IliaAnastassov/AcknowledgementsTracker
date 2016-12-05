@@ -17,11 +17,11 @@
         {
             // ARRANGE
             var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
+            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
             var acknowledgementDto = new AcknowledgementDTO();
+            var tags = new List<string> { "someTag", "otherTag" };
 
             // ACT
-            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
-            var tags = new List<string> { "someTag", "otherTag" };
             acknowledgementDtoService.Create(acknowledgementDto, tags);
 
             // ASSERT
@@ -34,11 +34,11 @@
         {
             // ARRANGE
             var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
+            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
             AcknowledgementDTO acknowledgementDto = null;
             var tags = new List<string> { "someTag", "otherTag" };
 
             // ACT
-            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
             acknowledgementDtoService.Create(acknowledgementDto, tags);
         }
 
@@ -48,11 +48,11 @@
         {
             // ARRANGE
             var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
+            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
             var acknowledgementDto = new AcknowledgementDTO();
             List<string> tags = null;
 
             // ACT
-            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
             acknowledgementDtoService.Create(acknowledgementDto, tags);
         }
 
@@ -62,11 +62,11 @@
         {
             // ARRANGE
             var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
+            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
             var acknowledgementDto = new AcknowledgementDTO();
             List<string> tags = new List<string>();
 
             // ACT
-            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
             acknowledgementDtoService.Create(acknowledgementDto, tags);
         }
 
@@ -75,10 +75,10 @@
         {
             // ARRANGE
             var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
-
-            // ACT
             var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
             var username = "user";
+
+            // ACT
             acknowledgementDtoService.ReadReceived(username);
 
             // ASSERT
@@ -91,10 +91,10 @@
         {
             // ARRANGE
             var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
+            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
             string username = null;
 
             // ACT
-            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
             acknowledgementDtoService.ReadReceived(username);
         }
 
@@ -104,10 +104,10 @@
         {
             // ARRANGE
             var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
+            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
             string username = string.Empty;
 
             // ACT
-            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
             acknowledgementDtoService.ReadReceived(username);
         }
 
@@ -117,10 +117,10 @@
         {
             // ARRANGE
             var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
+            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
             string username = " ";
 
             // ACT
-            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
             acknowledgementDtoService.ReadReceived(username);
         }
 
@@ -129,10 +129,10 @@
         {
             // ARRANGE
             var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
-
-            // ACT
             var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
             var username = "user";
+
+            // ACT
             acknowledgementDtoService.ReadGiven(username);
 
             // ASSERT
@@ -145,10 +145,10 @@
         {
             // ARRANGE
             var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
+            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
             string username = null;
 
             // ACT
-            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
             acknowledgementDtoService.ReadGiven(username);
         }
 
@@ -158,10 +158,10 @@
         {
             // ARRANGE
             var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
+            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
             string username = string.Empty;
 
             // ACT
-            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
             acknowledgementDtoService.ReadGiven(username);
         }
 
@@ -171,10 +171,10 @@
         {
             // ARRANGE
             var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
+            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
             string username = " ";
 
             // ACT
-            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
             acknowledgementDtoService.ReadGiven(username);
         }
 
@@ -183,9 +183,9 @@
         {
             // ARRANGE
             var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
+            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
 
             // ACT
-            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
             acknowledgementDtoService.ReadLast();
 
             // ASSERT
@@ -197,9 +197,9 @@
         {
             // ARRANGE
             var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
+            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
 
             // ACT
-            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
             acknowledgementDtoService.ReadTodays();
 
             // ASSERT
@@ -211,9 +211,9 @@
         {
             // ARRANGE
             var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
+            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
 
             // ACT
-            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
             acknowledgementDtoService.ReadThisWeek();
 
             // ASSERT
@@ -225,9 +225,9 @@
         {
             // ARRANGE
             var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
+            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
 
             // ACT
-            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
             acknowledgementDtoService.ReadThisMonth();
 
             // ASSERT
@@ -239,9 +239,9 @@
         {
             // ARRANGE
             var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
+            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
 
             // ACT
-            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
             acknowledgementDtoService.ReadAllTimeChampion();
 
             // ASSERT
@@ -253,9 +253,9 @@
         {
             // ARRANGE
             var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
+            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
 
             // ACT
-            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
             acknowledgementDtoService.ReadAllTimeTopTen();
 
             // ASSERT
@@ -267,9 +267,9 @@
         {
             // ARRANGE
             var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
+            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
 
             // ACT
-            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
             acknowledgementDtoService.ReadThisMonthTopTen();
 
             // ASSERT
@@ -281,10 +281,10 @@
         {
             // ARRANGE
             var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
-
-            // ACT
             var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
             var username = "user";
+
+            // ACT
             acknowledgementDtoService.ReadReceivedThisMonth(username);
 
             // ASSERT
@@ -297,10 +297,10 @@
         {
             // ARRANGE
             var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
+            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
             string username = null;
 
             // ACT
-            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
             acknowledgementDtoService.ReadReceivedThisMonth(username);
         }
 
@@ -310,10 +310,10 @@
         {
             // ARRANGE
             var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
+            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
             string username = string.Empty;
 
             // ACT
-            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
             acknowledgementDtoService.ReadReceivedThisMonth(username);
         }
 
@@ -323,10 +323,10 @@
         {
             // ARRANGE
             var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
+            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
             string username = " ";
 
             // ACT
-            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
             acknowledgementDtoService.ReadReceivedThisMonth(username);
         }
 
@@ -335,10 +335,10 @@
         {
             // ARRANGE
             var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
-
-            // ACT
             var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
             var tagTitle = "tag";
+
+            // ACT
             acknowledgementDtoService.ReadByTag(tagTitle);
 
             // ASSERT
@@ -351,10 +351,10 @@
         {
             // ARRANGE
             var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
+            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
             string tagTitle = null;
 
             // ACT
-            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
             acknowledgementDtoService.ReadByTag(tagTitle);
         }
 
@@ -364,10 +364,10 @@
         {
             // ARRANGE
             var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
+            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
             string tagTitle = string.Empty;
 
             // ACT
-            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
             acknowledgementDtoService.ReadByTag(tagTitle);
         }
 
@@ -377,10 +377,10 @@
         {
             // ARRANGE
             var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
+            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
             string tagTitle = " ";
 
             // ACT
-            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
             acknowledgementDtoService.ReadByTag(tagTitle);
         }
 
@@ -389,10 +389,10 @@
         {
             // ARRANGE
             var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
-
-            // ACT
             var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
             var tagTitle = "tag";
+
+            // ACT
             acknowledgementDtoService.ReadByTagThisMonth(tagTitle);
 
             // ASSERT
@@ -405,10 +405,10 @@
         {
             // ARRANGE
             var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
+            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
             string tagTitle = null;
 
             // ACT
-            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
             acknowledgementDtoService.ReadByTagThisMonth(tagTitle);
         }
 
@@ -418,10 +418,10 @@
         {
             // ARRANGE
             var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
+            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
             string tagTitle = string.Empty;
 
             // ACT
-            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
             acknowledgementDtoService.ReadByTagThisMonth(tagTitle);
         }
 
@@ -431,10 +431,10 @@
         {
             // ARRANGE
             var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
+            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
             string tagTitle = " ";
 
             // ACT
-            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
             acknowledgementDtoService.ReadByTagThisMonth(tagTitle);
         }
 
@@ -443,10 +443,10 @@
         {
             // ARRANGE
             var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
-
-            // ACT
             var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
             var acknowledgementDto = new AcknowledgementDTO();
+
+            // ACT
             acknowledgementDtoService.Update(acknowledgementDto);
 
             // ASSERT
@@ -471,10 +471,10 @@
         {
             // ARRANGE
             var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
-
-            // ACT
             var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
             var id = 47;
+
+            // ACT
             acknowledgementDtoService.Delete(id);
 
             // ASSERT

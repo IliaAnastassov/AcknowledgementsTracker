@@ -17,13 +17,13 @@ namespace AcknowledgementsTracker.Business.Tests
             // ARRANGE
             var mockLdapConnection = MockRepository.GenerateMock<ILdapServerConnection>();
             var mockLdapAccountService = MockRepository.GenerateMock<IAccountService>();
+            var loginService = new LoginService(mockLdapConnection, mockLdapAccountService);
 
             var settings = new LdapSettingsService();
             settings.Username = "username";
             settings.Password = null;
 
             // ACT
-            var loginService = new LoginService(mockLdapConnection, mockLdapAccountService);
             var response = loginService.Login(settings);
 
             // ASSERT
@@ -37,13 +37,13 @@ namespace AcknowledgementsTracker.Business.Tests
             // ARRANGE
             var mockLdapConnection = MockRepository.GenerateMock<ILdapServerConnection>();
             var mockLdapAccountService = MockRepository.GenerateMock<IAccountService>();
+            var loginService = new LoginService(mockLdapConnection, mockLdapAccountService);
 
             var settings = new LdapSettingsService();
             settings.Username = "username";
             settings.Password = string.Empty;
 
             // ACT
-            var loginService = new LoginService(mockLdapConnection, mockLdapAccountService);
             var response = loginService.Login(settings);
 
             // ASSERT
@@ -57,13 +57,13 @@ namespace AcknowledgementsTracker.Business.Tests
             // ARRANGE
             var mockLdapConnection = MockRepository.GenerateMock<ILdapServerConnection>();
             var mockLdapAccountService = MockRepository.GenerateMock<IAccountService>();
+            var loginService = new LoginService(mockLdapConnection, mockLdapAccountService);
 
             var settings = new LdapSettingsService();
             settings.Username = "username";
             settings.Password = " ";
 
             // ACT
-            var loginService = new LoginService(mockLdapConnection, mockLdapAccountService);
             var response = loginService.Login(settings);
 
             // ASSERT
@@ -77,13 +77,13 @@ namespace AcknowledgementsTracker.Business.Tests
             // ARRANGE
             var mockLdapConnection = MockRepository.GenerateMock<ILdapServerConnection>();
             var mockLdapAccountService = MockRepository.GenerateMock<IAccountService>();
+            var loginService = new LoginService(mockLdapConnection, mockLdapAccountService);
 
             var settings = new LdapSettingsService();
             settings.Username = null;
             settings.Password = "password";
 
             // ACT
-            var loginService = new LoginService(mockLdapConnection, mockLdapAccountService);
             var response = loginService.Login(settings);
 
             // ASSERT
@@ -97,13 +97,13 @@ namespace AcknowledgementsTracker.Business.Tests
             // ARRANGE
             var mockLdapConnection = MockRepository.GenerateMock<ILdapServerConnection>();
             var mockLdapAccountService = MockRepository.GenerateMock<IAccountService>();
+            var loginService = new LoginService(mockLdapConnection, mockLdapAccountService);
 
             var settings = new LdapSettingsService();
             settings.Username = string.Empty;
             settings.Password = "password";
 
             // ACT
-            var loginService = new LoginService(mockLdapConnection, mockLdapAccountService);
             var response = loginService.Login(settings);
 
             // ASSERT
@@ -117,13 +117,13 @@ namespace AcknowledgementsTracker.Business.Tests
             // ARRANGE
             var mockLdapConnection = MockRepository.GenerateMock<ILdapServerConnection>();
             var mockLdapAccountService = MockRepository.GenerateMock<IAccountService>();
+            var loginService = new LoginService(mockLdapConnection, mockLdapAccountService);
 
             var settings = new LdapSettingsService();
             settings.Username = " ";
             settings.Password = "password";
 
             // ACT
-            var loginService = new LoginService(mockLdapConnection, mockLdapAccountService);
             var response = loginService.Login(settings);
 
             // ASSERT
@@ -137,13 +137,13 @@ namespace AcknowledgementsTracker.Business.Tests
             // ARRANGE
             var mockLdapConnection = MockRepository.GenerateMock<ILdapServerConnection>();
             var mockLdapAccountService = MockRepository.GenerateMock<IAccountService>();
+            var loginService = new LoginService(mockLdapConnection, mockLdapAccountService);
 
             var settings = new LdapSettingsService();
             settings.Username = "bad user";
             settings.Password = "password";
 
             // ACT
-            var loginService = new LoginService(mockLdapConnection, mockLdapAccountService);
             var response = loginService.Login(settings);
 
             // ASSERT
@@ -157,13 +157,13 @@ namespace AcknowledgementsTracker.Business.Tests
             // ARRANGE
             var mockLdapConnection = MockRepository.GenerateMock<ILdapServerConnection>();
             var mockLdapAccountService = MockRepository.GenerateMock<IAccountService>();
+            var loginService = new LoginService(mockLdapConnection, mockLdapAccountService);
 
             var settings = new LdapSettingsService();
             settings.Username = "ianastassov";
             settings.Password = "password";
 
             // ACT
-            var loginService = new LoginService(mockLdapConnection, mockLdapAccountService);
             var response = loginService.Login(settings);
 
             // ASSERT
@@ -177,12 +177,13 @@ namespace AcknowledgementsTracker.Business.Tests
             // ARRANGE
             var mockLdapConnection = MockRepository.GenerateMock<ILdapServerConnection>();
             var mockAccountService = MockRepository.GenerateMock<IAccountService>();
+            var loginService = new LoginService(mockLdapConnection, mockAccountService);
+
             var settings = new LdapSettingsService();
             settings.Username = null;
             settings.Password = "password";
 
             // ACT
-            var loginService = new LoginService(mockLdapConnection, mockAccountService);
             var response = loginService.Login(settings);
 
             // ASSERT
@@ -195,12 +196,13 @@ namespace AcknowledgementsTracker.Business.Tests
             // ARRANGE
             var mockLdapConnection = MockRepository.GenerateMock<ILdapServerConnection>();
             var mockAccountService = MockRepository.GenerateMock<IAccountService>();
+            var loginService = new LoginService(mockLdapConnection, mockAccountService);
+
             var settings = new LdapSettingsService();
             settings.Username = string.Empty;
             settings.Password = "password";
 
             // ACT
-            var loginService = new LoginService(mockLdapConnection, mockAccountService);
             var response = loginService.Login(settings);
 
             // ASSERT
@@ -213,12 +215,13 @@ namespace AcknowledgementsTracker.Business.Tests
             // ARRANGE
             var mockLdapConnection = MockRepository.GenerateMock<ILdapServerConnection>();
             var mockAccountService = MockRepository.GenerateMock<IAccountService>();
+            var loginService = new LoginService(mockLdapConnection, mockAccountService);
+
             var settings = new LdapSettingsService();
             settings.Username = " ";
             settings.Password = "password";
 
             // ACT
-            var loginService = new LoginService(mockLdapConnection, mockAccountService);
             var response = loginService.Login(settings);
 
             // ASSERT
@@ -231,12 +234,13 @@ namespace AcknowledgementsTracker.Business.Tests
             // ARRANGE
             var mockLdapConnection = MockRepository.GenerateMock<ILdapServerConnection>();
             var mockAccountService = MockRepository.GenerateMock<IAccountService>();
+            var loginService = new LoginService(mockLdapConnection, mockAccountService);
+
             var settings = new LdapSettingsService();
             settings.Username = "username";
             settings.Password = null;
 
             // ACT
-            var loginService = new LoginService(mockLdapConnection, mockAccountService);
             var response = loginService.Login(settings);
 
             // ASSERT
@@ -249,12 +253,13 @@ namespace AcknowledgementsTracker.Business.Tests
             // ARRANGE
             var mockLdapConnection = MockRepository.GenerateMock<ILdapServerConnection>();
             var mockAccountService = MockRepository.GenerateMock<IAccountService>();
+            var loginService = new LoginService(mockLdapConnection, mockAccountService);
+
             var settings = new LdapSettingsService();
             settings.Username = "username";
             settings.Password = string.Empty;
 
             // ACT
-            var loginService = new LoginService(mockLdapConnection, mockAccountService);
             var response = loginService.Login(settings);
 
             // ASSERT
@@ -267,12 +272,13 @@ namespace AcknowledgementsTracker.Business.Tests
             // ARRANGE
             var mockLdapConnection = MockRepository.GenerateMock<ILdapServerConnection>();
             var mockAccountService = MockRepository.GenerateMock<IAccountService>();
+            var loginService = new LoginService(mockLdapConnection, mockAccountService);
+
             var settings = new LdapSettingsService();
             settings.Username = "username";
             settings.Password = " ";
 
             // ACT
-            var loginService = new LoginService(mockLdapConnection, mockAccountService);
             var response = loginService.Login(settings);
 
             // ASSERT
@@ -285,6 +291,8 @@ namespace AcknowledgementsTracker.Business.Tests
             // ARRANGE
             var mockLdapConnection = MockRepository.GenerateMock<ILdapServerConnection>();
             var mockAccountService = MockRepository.GenerateMock<IAccountService>();
+            var loginService = new LoginService(mockLdapConnection, mockAccountService);
+
             var settings = new LdapSettingsService();
             settings.Username = "user";
             settings.Password = "password";
@@ -292,7 +300,6 @@ namespace AcknowledgementsTracker.Business.Tests
             mockLdapConnection.Stub(connection => connection.Connect(Arg<ILdapSettingsService>.Is.TypeOf));
 
             // ACT
-            var loginService = new LoginService(mockLdapConnection, mockAccountService);
             loginService.Login(settings);
 
             // ASSERT
@@ -305,6 +312,8 @@ namespace AcknowledgementsTracker.Business.Tests
             // ARRANGE
             var mockLdapConnection = MockRepository.GenerateMock<ILdapServerConnection>();
             var mockLdapAccountService = MockRepository.GenerateMock<IAccountService>();
+            var loginService = new LoginService(mockLdapConnection, mockLdapAccountService);
+
             var settings = new LdapSettingsService();
             settings.Username = "user";
             settings.Password = "password";
@@ -312,7 +321,6 @@ namespace AcknowledgementsTracker.Business.Tests
             mockLdapConnection.Stub(c => c.IsAuthenticated).Return(true);
 
             // ACT
-            var loginService = new LoginService(mockLdapConnection, mockLdapAccountService);
             loginService.Login(settings);
 
             // ASSERT
@@ -325,6 +333,8 @@ namespace AcknowledgementsTracker.Business.Tests
             // ARRANGE
             var mockLdapConnection = MockRepository.GenerateMock<ILdapServerConnection>();
             var mockAccountService = MockRepository.GenerateMock<IAccountService>();
+            var loginService = new LoginService(mockLdapConnection, mockAccountService);
+
             var settings = new LdapSettingsService();
             settings.Username = "user";
             settings.Password = "password";
@@ -332,7 +342,6 @@ namespace AcknowledgementsTracker.Business.Tests
             mockAccountService.Stub(a => a.ReadUserData(Arg<string>.Is.TypeOf));
 
             // ACT
-            var loginService = new LoginService(mockLdapConnection, mockAccountService);
             loginService.Login(settings);
 
             // ASSERT
