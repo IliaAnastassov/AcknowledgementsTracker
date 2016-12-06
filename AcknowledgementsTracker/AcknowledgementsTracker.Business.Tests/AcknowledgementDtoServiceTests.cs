@@ -1,12 +1,14 @@
-﻿namespace AcknowledgementsTracker.Business.Tests
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+namespace AcknowledgementsTracker.Business.Tests
 {
     using System;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using Rhino.Mocks;
+    using System.Collections.Generic;
     using DataAccess.Interfaces;
     using DTO;
     using Logic;
-    using System.Collections.Generic;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Rhino.Mocks;
+    using StructureMap.AutoMocking;
 
     [TestClass]
     public class AcknowledgementDtoServiceTests
@@ -16,16 +18,15 @@
         public void Verify_Add_IsCalledOn_AcknowledgementCreation()
         {
             // ARRANGE
-            var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
-            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
+            var autoMocker = new RhinoAutoMocker<AcknowledgementDtoService>();
             var acknowledgementDto = new AcknowledgementDTO();
             var tags = new List<string> { "someTag", "otherTag" };
 
             // ACT
-            acknowledgementDtoService.Create(acknowledgementDto, tags);
+            autoMocker.ClassUnderTest.Create(acknowledgementDto, tags);
 
             // ASSERT
-            mockAcknowledgementRepository.AssertWasCalled(repo => repo.Add(acknowledgementDto, tags));
+            autoMocker.Get<IAcknowledgementsRepository>().AssertWasCalled(repo => repo.Add(acknowledgementDto, tags));
         }
 
         [TestMethod]
@@ -33,13 +34,12 @@
         public void Verify_ExceptionIsThrownOn_AcknowledgementCreationWhen_AcknowledgementDtoIsNull()
         {
             // ARRANGE
-            var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
-            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
+            var autoMocker = new RhinoAutoMocker<AcknowledgementDtoService>();
             AcknowledgementDTO acknowledgementDto = null;
             var tags = new List<string> { "someTag", "otherTag" };
 
             // ACT
-            acknowledgementDtoService.Create(acknowledgementDto, tags);
+            autoMocker.ClassUnderTest.Create(acknowledgementDto, tags);
         }
 
         [TestMethod]
@@ -47,13 +47,12 @@
         public void Verify_ExceptionIsThrownOn_AcknowledgementCreationWhen_TagsIsNull()
         {
             // ARRANGE
-            var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
-            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
+            var automocker = new RhinoAutoMocker<AcknowledgementDtoService>();
             var acknowledgementDto = new AcknowledgementDTO();
             List<string> tags = null;
 
             // ACT
-            acknowledgementDtoService.Create(acknowledgementDto, tags);
+            automocker.ClassUnderTest.Create(acknowledgementDto, tags);
         }
 
         [TestMethod]
@@ -61,28 +60,32 @@
         public void Verify_ExceptionIsThrownOn_AcknowledgementCreationWhen_TagsIsEmpty()
         {
             // ARRANGE
-            var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
-            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
+            var autoMocker = new RhinoAutoMocker<AcknowledgementDtoService>();
             var acknowledgementDto = new AcknowledgementDTO();
             List<string> tags = new List<string>();
 
             // ACT
-            acknowledgementDtoService.Create(acknowledgementDto, tags);
+            autoMocker.ClassUnderTest.Create(acknowledgementDto, tags);
         }
 
         [TestMethod]
         public void Verify_GetReceived_IsCalledOn_ReadReceived()
         {
             // ARRANGE
-            var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
-            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
+            var autoMocker = new RhinoAutoMocker<AcknowledgementDtoService>();
             var username = "user";
 
             // ACT
-            acknowledgementDtoService.ReadReceived(username);
+            autoMocker.ClassUnderTest.ReadReceived(username);
 
             // ASSERT
-            mockAcknowledgementRepository.AssertWasCalled(repo => repo.GetReceived(username));
+            autoMocker.Get<IAcknowledgementsRepository>().AssertWasCalled(repo => repo.GetReceived(username));
+        }
+
+        [TestMethod]
+        public void Verify_ReadReceived_Returns_ExpectedAcknowledgements()
+        {
+            // TODO:
         }
 
         [TestMethod]
@@ -90,12 +93,11 @@
         public void Verify_ExceptionIsThrownOn_ReadReceivedWhen_UsernameIsNull()
         {
             // ARRANGE
-            var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
-            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
+            var autoMocker = new RhinoAutoMocker<AcknowledgementDtoService>();
             string username = null;
 
             // ACT
-            acknowledgementDtoService.ReadReceived(username);
+            autoMocker.ClassUnderTest.ReadReceived(username);
         }
 
         [TestMethod]
@@ -103,12 +105,11 @@
         public void Verify_ExceptionIsThrownOn_ReadReceivedWhen_UsernameIsEmpty()
         {
             // ARRANGE
-            var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
-            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
+            var autoMocker = new RhinoAutoMocker<AcknowledgementDtoService>();
             string username = string.Empty;
 
             // ACT
-            acknowledgementDtoService.ReadReceived(username);
+            autoMocker.ClassUnderTest.ReadReceived(username);
         }
 
         [TestMethod]
@@ -116,27 +117,25 @@
         public void Verify_ExceptionIsThrownOn_ReadReceivedWhen_UsernameIsWhitespace()
         {
             // ARRANGE
-            var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
-            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
+            var autoMocker = new RhinoAutoMocker<AcknowledgementDtoService>();
             string username = " ";
 
             // ACT
-            acknowledgementDtoService.ReadReceived(username);
+            autoMocker.ClassUnderTest.ReadReceived(username);
         }
 
         [TestMethod]
         public void Verify_GetGiven_IsCalledOn_ReadGiven()
         {
             // ARRANGE
-            var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
-            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
+            var autoMocker = new RhinoAutoMocker<AcknowledgementDtoService>();
             var username = "user";
 
             // ACT
-            acknowledgementDtoService.ReadGiven(username);
+            autoMocker.ClassUnderTest.ReadGiven(username);
 
             // ASSERT
-            mockAcknowledgementRepository.AssertWasCalled(repo => repo.GetGiven(username));
+            autoMocker.Get<IAcknowledgementsRepository>().AssertWasCalled(repo => repo.GetGiven(username));
         }
 
         [TestMethod]
@@ -144,12 +143,11 @@
         public void Verify_ExceptionIsThrownOn_ReadGivenWhen_UsernameIsNull()
         {
             // ARRANGE
-            var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
-            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
+            var autoMocker = new RhinoAutoMocker<AcknowledgementDtoService>();
             string username = null;
 
             // ACT
-            acknowledgementDtoService.ReadGiven(username);
+            autoMocker.ClassUnderTest.ReadGiven(username);
         }
 
         [TestMethod]
@@ -157,12 +155,11 @@
         public void Verify_ExceptionIsThrownOn_ReadGivenWhen_UsernameIsEmpty()
         {
             // ARRANGE
-            var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
-            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
+            var autoMocker = new RhinoAutoMocker<AcknowledgementDtoService>();
             string username = string.Empty;
 
             // ACT
-            acknowledgementDtoService.ReadGiven(username);
+            autoMocker.ClassUnderTest.ReadGiven(username);
         }
 
         [TestMethod]
@@ -170,125 +167,116 @@
         public void Verify_ExceptionIsThrownOn_ReadGivenWhen_UsernameIsWhitespace()
         {
             // ARRANGE
-            var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
-            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
+            var autoMocker = new RhinoAutoMocker<AcknowledgementDtoService>();
             string username = " ";
 
             // ACT
-            acknowledgementDtoService.ReadGiven(username);
+            autoMocker.ClassUnderTest.ReadGiven(username);
         }
 
         [TestMethod]
         public void Verify_GetLast_IsCalledOn_ReadLast()
         {
             // ARRANGE
-            var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
-            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
+            var autoMocker = new RhinoAutoMocker<AcknowledgementDtoService>();
 
             // ACT
-            acknowledgementDtoService.ReadLast();
+            autoMocker.ClassUnderTest.ReadLast();
 
             // ASSERT
-            mockAcknowledgementRepository.AssertWasCalled(repo => repo.GetLastAcknowledgements());
+            autoMocker.Get<IAcknowledgementsRepository>().AssertWasCalled(repo => repo.GetLastAcknowledgements());
         }
 
         [TestMethod]
         public void Verify_GetTodays_IsCalledOn_ReadTodays()
         {
             // ARRANGE
-            var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
-            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
+            var autoMocker = new RhinoAutoMocker<AcknowledgementDtoService>();
 
             // ACT
-            acknowledgementDtoService.ReadTodays();
+            autoMocker.ClassUnderTest.ReadTodays();
 
             // ASSERT
-            mockAcknowledgementRepository.AssertWasCalled(repo => repo.GetTodaysAcknowledgements());
+            autoMocker.Get<IAcknowledgementsRepository>().AssertWasCalled(repo => repo.GetTodaysAcknowledgements());
         }
 
         [TestMethod]
         public void Verify_GetThisWeek_IsCalledOn_ReadThisWeek()
         {
             // ARRANGE
-            var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
-            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
+            var autoMocker = new RhinoAutoMocker<AcknowledgementDtoService>();
 
             // ACT
-            acknowledgementDtoService.ReadThisWeek();
+            autoMocker.ClassUnderTest.ReadThisWeek();
 
             // ASSERT
-            mockAcknowledgementRepository.AssertWasCalled(repo => repo.GetThisWeekAcknowledgements());
+            autoMocker.Get<IAcknowledgementsRepository>().AssertWasCalled(repo => repo.GetThisWeekAcknowledgements());
         }
 
         [TestMethod]
         public void Verify_GetThisMonth_IsCalledOn_ReadThisMonth()
         {
             // ARRANGE
-            var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
-            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
+            var autoMocker = new RhinoAutoMocker<AcknowledgementDtoService>();
 
             // ACT
-            acknowledgementDtoService.ReadThisMonth();
+            autoMocker.ClassUnderTest.ReadThisMonth();
 
             // ASSERT
-            mockAcknowledgementRepository.AssertWasCalled(repo => repo.GetThisMonthAcknowledgements());
+            autoMocker.Get<IAcknowledgementsRepository>().AssertWasCalled(repo => repo.GetThisMonthAcknowledgements());
         }
 
         [TestMethod]
         public void Verify_GetAllTimeChampion_IsCalledOn_ReadAllTimeChampion()
         {
             // ARRANGE
-            var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
-            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
+            var autoMocker = new RhinoAutoMocker<AcknowledgementDtoService>();
 
             // ACT
-            acknowledgementDtoService.ReadAllTimeChampion();
+            autoMocker.ClassUnderTest.ReadAllTimeChampion();
 
             // ASSERT
-            mockAcknowledgementRepository.AssertWasCalled(repo => repo.GetAllTimeChampion());
+            autoMocker.Get<IAcknowledgementsRepository>().AssertWasCalled(repo => repo.GetAllTimeChampion());
         }
 
         [TestMethod]
         public void Verify_GetAllTimeTopTen_IsCalledOn_ReadAllTimeTopTen()
         {
             // ARRANGE
-            var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
-            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
+            var autoMocker = new RhinoAutoMocker<AcknowledgementDtoService>();
 
             // ACT
-            acknowledgementDtoService.ReadAllTimeTopTen();
+            autoMocker.ClassUnderTest.ReadAllTimeTopTen();
 
             // ASSERT
-            mockAcknowledgementRepository.AssertWasCalled(repo => repo.GetAllTimeTopTen());
+            autoMocker.Get<IAcknowledgementsRepository>().AssertWasCalled(repo => repo.GetAllTimeTopTen());
         }
 
         [TestMethod]
         public void Verify_GetThisMonthTopTen_IsCalledOn_ReadThisMonthTopTen()
         {
             // ARRANGE
-            var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
-            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
+            var autoMocker = new RhinoAutoMocker<AcknowledgementDtoService>();
 
             // ACT
-            acknowledgementDtoService.ReadThisMonthTopTen();
+            autoMocker.ClassUnderTest.ReadThisMonthTopTen();
 
             // ASSERT
-            mockAcknowledgementRepository.AssertWasCalled(repo => repo.GetThisMonthTopTen());
+            autoMocker.Get<IAcknowledgementsRepository>().AssertWasCalled(repo => repo.GetThisMonthTopTen());
         }
 
         [TestMethod]
         public void Verify_GetThisMonthsByUser_IsCalledOn_ReadReceivedThisMonth()
         {
             // ARRANGE
-            var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
-            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
+            var autoMocker = new RhinoAutoMocker<AcknowledgementDtoService>();
             var username = "user";
 
             // ACT
-            acknowledgementDtoService.ReadReceivedThisMonth(username);
+            autoMocker.ClassUnderTest.ReadReceivedThisMonth(username);
 
             // ASSERT
-            mockAcknowledgementRepository.AssertWasCalled(repo => repo.GetThisMonthsByUser(username));
+            autoMocker.Get<IAcknowledgementsRepository>().AssertWasCalled(repo => repo.GetThisMonthsByUser(username));
         }
 
         [TestMethod]
@@ -296,12 +284,11 @@
         public void Verify_ExceptionIsThrownOn_ReadReceivedThisMonthWhen_UsernameIsNull()
         {
             // ARRANGE
-            var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
-            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
+            var autoMocker = new RhinoAutoMocker<AcknowledgementDtoService>();
             string username = null;
 
             // ACT
-            acknowledgementDtoService.ReadReceivedThisMonth(username);
+            autoMocker.ClassUnderTest.ReadReceivedThisMonth(username);
         }
 
         [TestMethod]
@@ -309,12 +296,11 @@
         public void Verify_ExceptionIsThrownOn_ReadReceivedThisMonthWhen_UsernameIsEmpty()
         {
             // ARRANGE
-            var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
-            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
+            var autoMocker = new RhinoAutoMocker<AcknowledgementDtoService>();
             string username = string.Empty;
 
             // ACT
-            acknowledgementDtoService.ReadReceivedThisMonth(username);
+            autoMocker.ClassUnderTest.ReadReceivedThisMonth(username);
         }
 
         [TestMethod]
@@ -322,27 +308,25 @@
         public void Verify_ExceptionIsThrownOn_ReadReceivedThisMonthWhen_UsernameIsWhitespace()
         {
             // ARRANGE
-            var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
-            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
+            var autoMocker = new RhinoAutoMocker<AcknowledgementDtoService>();
             string username = " ";
 
             // ACT
-            acknowledgementDtoService.ReadReceivedThisMonth(username);
+            autoMocker.ClassUnderTest.ReadReceivedThisMonth(username);
         }
 
         [TestMethod]
         public void Verify_GetByTag_IsCalledOn_ReadByTag()
         {
             // ARRANGE
-            var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
-            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
+            var autoMocker = new RhinoAutoMocker<AcknowledgementDtoService>();
             var tagTitle = "tag";
 
             // ACT
-            acknowledgementDtoService.ReadByTag(tagTitle);
+            autoMocker.ClassUnderTest.ReadByTag(tagTitle);
 
             // ASSERT
-            mockAcknowledgementRepository.AssertWasCalled(repo => repo.GetByTag(tagTitle));
+            autoMocker.Get<IAcknowledgementsRepository>().AssertWasCalled(repo => repo.GetByTag(tagTitle));
         }
 
         [TestMethod]
@@ -350,12 +334,11 @@
         public void Verify_ExceptionIsThrownOn_ReadByTagWhen_TagisNull()
         {
             // ARRANGE
-            var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
-            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
+            var autoMocker = new RhinoAutoMocker<AcknowledgementDtoService>();
             string tagTitle = null;
 
             // ACT
-            acknowledgementDtoService.ReadByTag(tagTitle);
+            autoMocker.ClassUnderTest.ReadByTag(tagTitle);
         }
 
         [TestMethod]
@@ -363,12 +346,11 @@
         public void Verify_ExceptionIsThrownOn_ReadByTagWhen_TagisEmpty()
         {
             // ARRANGE
-            var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
-            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
+            var autoMocker = new RhinoAutoMocker<AcknowledgementDtoService>();
             string tagTitle = string.Empty;
 
             // ACT
-            acknowledgementDtoService.ReadByTag(tagTitle);
+            autoMocker.ClassUnderTest.ReadByTag(tagTitle);
         }
 
         [TestMethod]
@@ -376,27 +358,25 @@
         public void Verify_ExceptionIsThrownOn_ReadByTagWhen_TagisWhitespace()
         {
             // ARRANGE
-            var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
-            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
+            var autoMocker = new RhinoAutoMocker<AcknowledgementDtoService>();
             string tagTitle = " ";
 
             // ACT
-            acknowledgementDtoService.ReadByTag(tagTitle);
+            autoMocker.ClassUnderTest.ReadByTag(tagTitle);
         }
 
         [TestMethod]
         public void Verify_GetByTagThisMonth_IsCalledOn_ReadByTagThisMonth()
         {
             // ARRANGE
-            var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
-            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
+            var autoMocker = new RhinoAutoMocker<AcknowledgementDtoService>();
             var tagTitle = "tag";
 
             // ACT
-            acknowledgementDtoService.ReadByTagThisMonth(tagTitle);
+            autoMocker.ClassUnderTest.ReadByTagThisMonth(tagTitle);
 
             // ASSERT
-            mockAcknowledgementRepository.AssertWasCalled(repo => repo.GetByTagThisMonth(tagTitle));
+            autoMocker.Get<IAcknowledgementsRepository>().AssertWasCalled(repo => repo.GetByTagThisMonth(tagTitle));
         }
 
         [TestMethod]
@@ -404,12 +384,11 @@
         public void Verify_ExceptionIsThrownOn_ReadByTagThisMonthWhen_TagisNull()
         {
             // ARRANGE
-            var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
-            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
+            var autoMocker = new RhinoAutoMocker<AcknowledgementDtoService>();
             string tagTitle = null;
 
             // ACT
-            acknowledgementDtoService.ReadByTagThisMonth(tagTitle);
+            autoMocker.ClassUnderTest.ReadByTagThisMonth(tagTitle);
         }
 
         [TestMethod]
@@ -417,12 +396,11 @@
         public void Verify_ExceptionIsThrownOn_ReadByTagThisMonthWhen_TagisEmpty()
         {
             // ARRANGE
-            var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
-            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
+            var autoMocker = new RhinoAutoMocker<AcknowledgementDtoService>();
             string tagTitle = string.Empty;
 
             // ACT
-            acknowledgementDtoService.ReadByTagThisMonth(tagTitle);
+            autoMocker.ClassUnderTest.ReadByTagThisMonth(tagTitle);
         }
 
         [TestMethod]
@@ -430,27 +408,25 @@
         public void Verify_ExceptionIsThrownOn_ReadByTagThisMonthWhen_TagisWhitespace()
         {
             // ARRANGE
-            var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
-            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
+            var autoMocker = new RhinoAutoMocker<AcknowledgementDtoService>();
             string tagTitle = " ";
 
             // ACT
-            acknowledgementDtoService.ReadByTagThisMonth(tagTitle);
+            autoMocker.ClassUnderTest.ReadByTagThisMonth(tagTitle);
         }
 
         [TestMethod]
         public void Verify_Edit_IsCalledOn_Update()
         {
             // ARRANGE
-            var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
-            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
+            var autoMocker = new RhinoAutoMocker<AcknowledgementDtoService>();
             var acknowledgementDto = new AcknowledgementDTO();
 
             // ACT
-            acknowledgementDtoService.Update(acknowledgementDto);
+            autoMocker.ClassUnderTest.Update(acknowledgementDto);
 
             // ASSERT
-            mockAcknowledgementRepository.AssertWasCalled(repo => repo.Edit(acknowledgementDto));
+            autoMocker.Get<IAcknowledgementsRepository>().AssertWasCalled(repo => repo.Edit(acknowledgementDto));
         }
 
         [TestMethod]
@@ -458,27 +434,25 @@
         public void Verify_ExceptionIsThrownOn_UpdateWhen_AcknowledgementDtoIsNull()
         {
             // ARRANGE
-            var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
+            var autoMocker = new RhinoAutoMocker<AcknowledgementDtoService>();
             AcknowledgementDTO acknowledgementDto = null;
 
             // ACT
-            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
-            acknowledgementDtoService.Update(acknowledgementDto);
+            autoMocker.ClassUnderTest.Update(acknowledgementDto);
         }
 
         [TestMethod]
         public void Verify_Remove_IsCalledOn_Delete()
         {
             // ARRANGE
-            var mockAcknowledgementRepository = MockRepository.GenerateMock<IAcknowledgementsRepository>();
-            var acknowledgementDtoService = new AcknowledgementDtoService(mockAcknowledgementRepository);
+            var autoMocker = new RhinoAutoMocker<AcknowledgementDtoService>();
             var id = 47;
 
             // ACT
-            acknowledgementDtoService.Delete(id);
+            autoMocker.ClassUnderTest.Delete(id);
 
             // ASSERT
-            mockAcknowledgementRepository.AssertWasCalled(repo => repo.Remove(id));
+            autoMocker.Get<IAcknowledgementsRepository>().AssertWasCalled(repo => repo.Remove(id));
         }
     }
 }
