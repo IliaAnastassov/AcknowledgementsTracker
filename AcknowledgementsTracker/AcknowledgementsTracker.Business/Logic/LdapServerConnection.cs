@@ -7,8 +7,8 @@
 
     public class LdapServerConnection : ILdapServerConnection
     {
-        private const string UniqueIdProperty = "uid";
-        private const string CommonNameProperty = "cn";
+        private const string UIDProperty = "uid";
+        private const string CNProperty = "cn";
 
         public string Username { get; private set; }
 
@@ -18,13 +18,19 @@
 
         public bool IsAuthenticated { get; private set; }
 
+        public bool IsUIDPropertyUsed { get; private set; }
+
         public void Connect(ILdapSettingsService settings)
         {
-            IsAuthenticated = VerifyConnection(settings, UniqueIdProperty);
+            IsAuthenticated = VerifyConnection(settings, UIDProperty);
 
-            if (!IsAuthenticated)
+            if (IsAuthenticated)
             {
-                IsAuthenticated = VerifyConnection(settings, CommonNameProperty);
+                IsUIDPropertyUsed = true;
+            }
+            else
+            {
+                IsAuthenticated = VerifyConnection(settings, CNProperty);
             }
         }
 

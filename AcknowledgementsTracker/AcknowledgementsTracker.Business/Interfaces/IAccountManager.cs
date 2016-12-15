@@ -4,8 +4,6 @@
 
     public interface IAccountManager
     {
-        void Setup(ILdapServerConnection ldapConnection);
-
         void Destroy();
 
         string GetUserFullName(string username);
@@ -15,6 +13,8 @@
         IEnumerable<string> GetAllUsernames(string name);
 
         string GetUserEmail();
+
+        IUser GetUserData(string username);
 
         IEnumerable<IUser> GetAllUsersData();
     }

@@ -306,13 +306,34 @@ namespace AcknowledgementsTracker.Business.Tests
             settings.Username = "user";
             settings.Password = "password";
 
-            autoMocker.Get<IAccountService>().Stub(a => a.ReadUserData(Arg<string>.Is.TypeOf));
+            autoMocker.Get<ILdapServerConnection>().Stub(c => c.IsAuthenticated).Return(true);
+            autoMocker.Get<ILdapServerConnection>().Stub(c => c.IsUIDPropertyUsed).Return(true);
 
             // ACT
             autoMocker.ClassUnderTest.Login(settings);
 
             // ASSERT
-            autoMocker.Get<IAccountService>().AssertWasCalled(a => a.ReadUserData(Arg<string>.Is.TypeOf));
+            autoMocker.Get<IAccountService>().AssertWasCalled(a => a.ReadUserData(settings.Username));
+        }
+
+        [TestMethod]
+        public void ReadUserUsername_IsCalledOn_Login_WhenPassedValidInput()
+        {
+            // ARRANGE
+            var autoMocker = new RhinoAutoMocker<LoginService>();
+
+            var settings = new LdapSettingsService();
+            settings.Username = "user";
+            settings.Password = "password";
+
+            autoMocker.Get<ILdapServerConnection>().Stub(c => c.IsAuthenticated).Return(true);
+            autoMocker.Get<ILdapServerConnection>().Stub(c => c.IsUIDPropertyUsed).Return(false);
+
+            // ACT
+            autoMocker.ClassUnderTest.Login(settings);
+
+            // ASSERT
+            autoMocker.Get<IAccountService>().AssertWasCalled(a => a.ReadUserUsername(settings.Username));
         }
     }
 }

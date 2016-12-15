@@ -15,5 +15,7 @@
         IUser ReadUserData(string username);
 
         IEnumerable<IUser> ReadAllUsersData();
+
+        void SetAccountManager(ILdapServerConnection ldapConnection);
     }
 }

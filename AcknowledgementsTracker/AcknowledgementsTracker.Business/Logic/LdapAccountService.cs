@@ -6,34 +6,50 @@
 
     public class LdapAccountService : IAccountService
     {
+        private IAccountManager ldapAccountManager;
+
+        public LdapAccountService()
+        {
+        }
+
+        public LdapAccountService(IAccountManager ldapAccountManager)
+        {
+            this.ldapAccountManager = ldapAccountManager;
+        }
+
+        public void SetAccountManager(ILdapServerConnection ldapConnection)
+        {
+            ldapAccountManager = new LdapAccountManager(ldapConnection);
+        }
+
         public string ReadUserFullName(string username)
         {
-            return LdapAccountManager.Instance.GetUserFullName(username);
+            return ldapAccountManager.GetUserFullName(username);
         }
 
         public string ReadUserUsername(string fullname)
         {
-            return LdapAccountManager.Instance.GetUserUsername(fullname);
+            return ldapAccountManager.GetUserUsername(fullname);
         }
 
         public IEnumerable<string> ReadAllUsernames(string name)
         {
-            return LdapAccountManager.Instance.GetAllUsernames(name);
+            return ldapAccountManager.GetAllUsernames(name);
         }
 
         public string ReadUserEmail()
         {
-            return LdapAccountManager.Instance.GetUserEmail();
+            return ldapAccountManager.GetUserEmail();
         }
 
         public IUser ReadUserData(string username)
         {
-            return LdapAccountManager.Instance.GetUserData(username);
+            return ldapAccountManager.GetUserData(username);
         }
 
         public IEnumerable<IUser> ReadAllUsersData()
         {
-            return LdapAccountManager.Instance.GetAllUsersData();
+            return ldapAccountManager.GetAllUsersData();
         }
     }
 }

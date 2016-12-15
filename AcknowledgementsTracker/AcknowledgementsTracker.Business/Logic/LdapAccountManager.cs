@@ -14,8 +14,13 @@
         private static LdapAccountManager instance;
         private ILdapServerConnection ldapConnection;
 
-        protected LdapAccountManager()
+        private LdapAccountManager()
         {
+        }
+
+        public LdapAccountManager(ILdapServerConnection ldapConnection)
+        {
+            this.ldapConnection = ldapConnection;
         }
 
         public static LdapAccountManager Instance

@@ -12,6 +12,8 @@
 
         bool IsAuthenticated { get; }
 
+        bool IsUIDPropertyUsed { get; }
+
         void Connect(ILdapSettingsService settings);
     }
 }

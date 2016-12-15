@@ -32,19 +32,20 @@
 
             if (ldapConnection.IsAuthenticated)
             {
-                CreateAccountManager(ldapConnection);
-            }
+                ldapAccountService.SetAccountManager(ldapConnection);
 
-            IUser user = ldapAccountService.ReadUserData(settings.Username);
+                IUser user;
 
-            if (user == null)
-            {
-                var username = ldapAccountService.ReadUserUsername(settings.Username);
-                user = ldapAccountService.ReadUserData(username);
-            }
+                if (ldapConnection.IsUIDPropertyUsed)
+                {
+                    user = ldapAccountService.ReadUserData(settings.Username);
+                }
+                else
+                {
+                    var username = ldapAccountService.ReadUserUsername(settings.Username);
+                    user = ldapAccountService.ReadUserData(username);
+                }
 
-            if (user != null)
-            {
                 response.User = user;
                 response.ResponseMessage = BusinessResources.AuthenticationSucceded;
             }
@@ -55,12 +56,6 @@
             }
 
             return response;
-        }
-
-        private void CreateAccountManager(ILdapServerConnection connection)
-        {
-            IAccountManager ldapManager = LdapAccountManager.Instance;
-            ldapManager.Setup(connection);
         }
     }
 }
