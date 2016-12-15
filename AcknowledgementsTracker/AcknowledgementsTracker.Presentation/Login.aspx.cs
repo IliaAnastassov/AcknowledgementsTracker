@@ -11,8 +11,6 @@
 
     public partial class Login : Page
     {
-        private IAccountService ldapAccountService = new LdapAccountService();
-
         protected void Page_Load(object sender, EventArgs e)
         {
             txtbUsername.Focus();
@@ -27,7 +25,6 @@
             IAccountService accountService = new LdapAccountService();
 
             ILoginService loginService = new LoginService(ldapServerConnection, accountService);
-
             var response = loginService.Login(ldapSettings);
 
             if (response.User == null)
@@ -38,6 +35,7 @@
             else
             {
                 SignIn(response.User);
+                SaveLdapConnection(ldapServerConnection);
                 Response.Redirect(Global.DashboardPage);
             }
         }
@@ -75,10 +73,9 @@
             Response.Cookies.Add(cookie);
         }
 
-        private void CreateAccountManager(ILdapServerConnection ldapConnection)
+        private void SaveLdapConnection(ILdapServerConnection ldapServerConnection)
         {
-            IAccountManager ldapManager = LdapAccountManager.Instance;
-            ldapManager.Setup(ldapConnection);
+            Session["connection"] = ldapServerConnection;
         }
     }
 }

@@ -18,9 +18,12 @@
         private IAccountService accountService = new LdapAccountService();
         private IAcknowledgementDtoService acknowledgementDtoService = new AcknowledgementDtoService();
         private ITagDtoService tagDtoService = new TagDtoService();
+        private ILdapServerConnection ldapConnection;
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            ldapConnection = (ILdapServerConnection)Session["connection"];
+            accountService.SetAccountManager(ldapConnection);
         }
 
         protected void gvUserAcknowledgements_PageIndexChanging(object sender, GridViewPageEventArgs e)

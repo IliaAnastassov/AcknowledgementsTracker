@@ -9,7 +9,7 @@
     using Business.Logic;
     using DTO;
 
-    public partial class Search : System.Web.UI.Page
+    public partial class Search : Page
     {
         private IAccountService ldapAccountService = new LdapAccountService();
         private ISearchService searcher = new SearchService();

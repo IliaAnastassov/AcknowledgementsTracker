@@ -9,18 +9,22 @@
     using System.Web.UI.WebControls;
     using Business.Logic;
     using System.Web.Security;
+    using Business.Interfaces;
 
     public partial class LoggedIn : MasterPage
     {
-        private LdapAccountService accountService = new LdapAccountService();
 
         protected void Page_Load(object sender, EventArgs e)
         {
             var username = HttpContext.Current.User.Identity.Name;
+            var ldapConnection = (LdapServerConnection)Session["connection"];
+
+            IAccountService accountService = new LdapAccountService();
+            accountService.SetAccountManager(ldapConnection);
 
             try
             {
-                parUserName.InnerText = LdapAccountManager.Instance.GetUserFullName(username);
+                parUserName.InnerText = accountService.ReadUserFullName(username);
             }
             catch (NullReferenceException)
             {
