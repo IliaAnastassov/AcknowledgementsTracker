@@ -15,15 +15,19 @@
     public partial class Dashboard : Page
     {
         private string username;
-        private IAccountService accountService = new LdapAccountService();
-        private IAcknowledgementDtoService acknowledgementDtoService = new AcknowledgementDtoService();
-        private ITagDtoService tagDtoService = new TagDtoService();
         private ILdapServerConnection ldapConnection;
+        private IAccountService accountService;
+        private IAcknowledgementDtoService acknowledgementDtoService;
+        private ITagDtoService tagDtoService;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             ldapConnection = (ILdapServerConnection)Session["connection"];
+            accountService = new LdapAccountService();
             accountService.SetAccountManager(ldapConnection);
+
+            acknowledgementDtoService = new AcknowledgementDtoService();
+            tagDtoService = new TagDtoService();
         }
 
         protected void gvUserAcknowledgements_PageIndexChanging(object sender, GridViewPageEventArgs e)

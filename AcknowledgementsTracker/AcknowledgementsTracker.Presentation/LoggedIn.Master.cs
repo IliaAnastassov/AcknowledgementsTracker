@@ -13,11 +13,10 @@
 
     public partial class LoggedIn : MasterPage
     {
-
         protected void Page_Load(object sender, EventArgs e)
         {
             var username = HttpContext.Current.User.Identity.Name;
-            var ldapConnection = (LdapServerConnection)Session["connection"];
+            var ldapConnection = (ILdapServerConnection)Session["connection"];
 
             IAccountService accountService = new LdapAccountService();
             accountService.SetAccountManager(ldapConnection);
