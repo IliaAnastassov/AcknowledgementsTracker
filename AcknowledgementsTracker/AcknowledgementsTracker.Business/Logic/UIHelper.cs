@@ -9,6 +9,17 @@
     {
         private IAccountService ldapAccountService = new LdapAccountService();
 
+        // TODO: Remove the default constructor, or make
+        // sure ldapAccountService.SetAccountManager is always called!
+        public UIHelper()
+        {
+        }
+
+        public UIHelper(ILdapServerConnection connection)
+        {
+            ldapAccountService.SetAccountManager(connection);
+        }
+
         public string GetUserFullName(string username)
         {
             return ldapAccountService.ReadUserFullName(username);
