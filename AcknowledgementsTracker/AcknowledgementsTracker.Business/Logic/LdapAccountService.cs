@@ -8,15 +8,6 @@
     {
         private IAccountManager ldapAccountManager;
 
-        public LdapAccountService()
-        {
-        }
-
-        public LdapAccountService(IAccountManager ldapAccountManager)
-        {
-            this.ldapAccountManager = ldapAccountManager;
-        }
-
         public void SetAccountManager(ILdapServerConnection ldapConnection)
         {
             ldapAccountManager = new LdapAccountManager(ldapConnection);

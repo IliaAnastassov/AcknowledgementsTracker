@@ -11,10 +11,16 @@
     {
         private AcknowledgementsRepository repository = new AcknowledgementsRepository();
         private INormalizable textNormalizer = new TextNormalizationService();
+        private IAccountManager manager;
+
+        public SearchService(ILdapServerConnection connection)
+        {
+            manager = new LdapAccountManager(connection);
+        }
 
         public IEnumerable<IUser> FindUsers(string search)
         {
-            return LdapAccountManager.Instance.GetUsers(search);
+            return manager.GetUsers(search);
         }
 
         public IEnumerable<AcknowledgementDTO> FindByKeywords(string search)
@@ -42,9 +48,9 @@
             var results = new List<AcknowledgementDTO>();
             var acknowledgementsByUser = new List<AcknowledgementDTO>();
             var comparer = new AcknowledgementsDtoComparer();
-            var usernames = LdapAccountManager.Instance.GetUsers(search)
-                                                       .Select(u => u.Username)
-                                                       .ToList();
+            var usernames = manager.GetUsers(search)
+                                   .Select(u => u.Username)
+                                   .ToList();
 
             foreach (var username in usernames)
             {
@@ -71,9 +77,9 @@
             {
                 List<AcknowledgementDTO> acknowledgementsByUser = new List<AcknowledgementDTO>();
 
-                var usernames = LdapAccountManager.Instance.GetUsers(keyword)
-                                                           .Select(u => u.Username)
-                                                           .ToList();
+                var usernames = manager.GetUsers(keyword)
+                                       .Select(u => u.Username)
+                                       .ToList();
 
                 foreach (var username in usernames)
                 {

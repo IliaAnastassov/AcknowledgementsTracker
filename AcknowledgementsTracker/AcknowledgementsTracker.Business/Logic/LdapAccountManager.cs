@@ -11,54 +11,11 @@
 
     public class LdapAccountManager : IAccountManager
     {
-        private static LdapAccountManager instance;
         private ILdapServerConnection ldapConnection;
-
-        private LdapAccountManager()
-        {
-        }
 
         public LdapAccountManager(ILdapServerConnection ldapConnection)
         {
             this.ldapConnection = ldapConnection;
-        }
-
-        public static LdapAccountManager Instance
-        {
-            get
-            {
-                if (instance == null)
-                {
-                    instance = new LdapAccountManager();
-                }
-
-                return instance;
-            }
-        }
-
-        public static bool HasInstance()
-        {
-            if (instance != null)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        public void Setup(ILdapServerConnection ldapConnection)
-        {
-            this.ldapConnection = ldapConnection;
-        }
-
-        public void Destroy()
-        {
-            if (instance != null)
-            {
-                instance = null;
-            }
         }
 
         public string GetUserFullName(string username)
