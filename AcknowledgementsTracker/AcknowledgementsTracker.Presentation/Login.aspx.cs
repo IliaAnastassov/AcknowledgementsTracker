@@ -75,7 +75,7 @@
 
         private void SaveLdapConnection(ILdapServerConnection ldapServerConnection)
         {
-            Session["connection"] = ldapServerConnection;
+            Session[Global.LdapConnection] = ldapServerConnection;
         }
     }
 }

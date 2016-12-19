@@ -8,15 +8,17 @@
     using Business.Interfaces;
     using Business.Logic;
     using Newtonsoft.Json;
+    using System.Web.SessionState;
 
     /// <summary>
     /// Handles auto-complete functionality
     /// </summary>
-    public class UserHandler : IHttpHandler
+    public class UserHandler : IHttpHandler, IReadOnlySessionState
     {
         public void ProcessRequest(HttpContext context)
         {
-            var searcher = new SearchService();
+            var connection = (ILdapServerConnection)context.Session["connection"];
+            var searcher = new SearchService(connection);
             var prefix = context.Request["term"] ?? "";
 
             if (prefix.Trim().Length < 3)

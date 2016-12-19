@@ -9,17 +9,20 @@
     using Business.Interfaces;
     using Business.Logic;
 
-    public partial class EmployeeIndex : System.Web.UI.Page
+    public partial class EmployeeIndex : Page
     {
-        private IAccountService ldapService = new LdapAccountService();
+        private IAccountService ldapAccountService;
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            var connection = (ILdapServerConnection)Session[Global.LdapConnection];
+            ldapAccountService = new LdapAccountService();
+            ldapAccountService.SetAccountManager(connection);
         }
 
         protected void gvEmployees_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
-            gvEmployees.DataSource = ldapService.ReadAllUsersData();
+            gvEmployees.DataSource = ldapAccountService.ReadAllUsersData();
             gvEmployees.PageIndex = e.NewPageIndex;
             gvEmployees.DataBind();
 
@@ -29,7 +32,7 @@
 
         protected void tmrEmployees_Tick(object sender, EventArgs e)
         {
-            gvEmployees.DataSource = ldapService.ReadAllUsersData();
+            gvEmployees.DataSource = ldapAccountService.ReadAllUsersData();
             gvEmployees.DataBind();
 
             tmrEmployees.Enabled = false;

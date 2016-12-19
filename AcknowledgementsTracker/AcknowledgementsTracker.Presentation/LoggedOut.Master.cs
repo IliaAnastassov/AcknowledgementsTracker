@@ -6,6 +6,8 @@
     using System.Web;
     using System.Web.UI;
     using System.Web.UI.WebControls;
+    using Business.Interfaces;
+    using System.Web.Security;
 
     public partial class LoggedOut : MasterPage
     {

@@ -13,18 +13,21 @@
     public partial class AcknowledgementsByUser : Page
     {
         private string username;
-        private UIHelper helper = new UIHelper();
+        private UIHelper helper;
+        private ILdapServerConnection connection;
         private IAcknowledgementDtoService acknowledgementDtoService = new AcknowledgementDtoService();
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            connection = (ILdapServerConnection)Session[Global.LdapConnection];
+            helper = new UIHelper(connection);
             username = Request.QueryString["user"];
             ltrUser.Text = helper.GetUserFullName(username);
         }
 
         protected void btnCreateNew_ServerClick(object sender, EventArgs e)
         {
-            Response.Redirect(string.Format("~/NewAcknowledgement.aspx?beneficiary={0}", username));
+            Response.Redirect($"{Global.NewAcknowledgementPage}?beneficiary={username}");
         }
 
         protected void tmrAcknowledgementsReceived_Tick(object sender, EventArgs e)
@@ -71,7 +74,7 @@
 
         private void BindGrid(string mode)
         {
-            if (mode == "allTime")
+            if (mode == Global.ModeAllTime)
             {
                 gvAcknowledgementsReceived.DataSource = acknowledgementDtoService.ReadReceived(username);
                 gvAcknowledgementsReceived.DataBind();
@@ -79,14 +82,14 @@
                 gvAcknowledgementsGiven.DataSource = acknowledgementDtoService.ReadGiven(username);
                 gvAcknowledgementsGiven.DataBind();
             }
-            else if (mode == "allTime_Rec")
+            else if (mode == Global.ModeAllTimeRec)
             {
                 gvAcknowledgementsReceived.DataSource = acknowledgementDtoService.ReadReceived(username);
                 gvAcknowledgementsReceived.DataBind();
 
                 fldsAcknowledgementsGiven.Visible = false;
             }
-            else if (mode == "thisMonth")
+            else if (mode == Global.ModeThisMonth)
             {
                 ltrMonth.Text = $" for {DateTime.Today.ToString("MMMM yyyy", CultureInfo.InvariantCulture)}";
 

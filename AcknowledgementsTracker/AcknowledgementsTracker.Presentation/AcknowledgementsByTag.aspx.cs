@@ -13,12 +13,14 @@
 
     public partial class AcknowledgementsByTag : Page
     {
-        private ISearchService searcher = new SearchService();
+        private ISearchService searcher;
         private IAcknowledgementDtoService acknowledgementDtoService = new AcknowledgementDtoService();
         private string tag;
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            var connection = (ILdapServerConnection)Session[Global.LdapConnection];
+            searcher = new SearchService(connection);
             tag = Request.QueryString["tag"];
             ltrTag.Text = $" {tag}";
         }
@@ -46,12 +48,12 @@
 
         private void BindGrid(string mode)
         {
-            if (mode == "allTime")
+            if (mode == Global.ModeAllTime)
             {
                 gvAcknowledgementsByTag.DataSource = acknowledgementDtoService.ReadByTag(tag);
                 gvAcknowledgementsByTag.DataBind();
             }
-            else if (mode == "thisMonth")
+            else if (mode == Global.ModeThisMonth)
             {
                 ltrMonth.Text = $" for {DateTime.Today.ToString("MMMM yyyy", CultureInfo.InvariantCulture)}";
 

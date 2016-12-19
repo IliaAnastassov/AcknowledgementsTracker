@@ -22,7 +22,7 @@
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            ldapConnection = (ILdapServerConnection)Session["connection"];
+            ldapConnection = (ILdapServerConnection)Session[Global.LdapConnection];
             accountService = new LdapAccountService();
             accountService.SetAccountManager(ldapConnection);
 

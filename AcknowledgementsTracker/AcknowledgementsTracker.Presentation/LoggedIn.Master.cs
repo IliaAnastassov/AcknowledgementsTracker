@@ -13,28 +13,46 @@
 
     public partial class LoggedIn : MasterPage
     {
+        ILdapServerConnection connection;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             var username = HttpContext.Current.User.Identity.Name;
-            var ldapConnection = (ILdapServerConnection)Session["connection"];
+            connection = (ILdapServerConnection)Session[Global.LdapConnection];
 
-            IAccountService accountService = new LdapAccountService();
-            accountService.SetAccountManager(ldapConnection);
+            if (connection == null)
+            {
+                SignOut();
+            }
+            else
+            {
+                IAccountService accountService = new LdapAccountService();
+                accountService.SetAccountManager(connection);
+            }
+        }
 
-            try
+        public string GetFullName(string username)
+        {
+            string fullName = string.Empty;
+
+            if (connection != null)
             {
-                parUserName.InnerText = accountService.ReadUserFullName(username);
+                IAccountService accountService = new LdapAccountService();
+                accountService.SetAccountManager(connection);
+
+                fullName = accountService.ReadUserFullName(username);
             }
-            catch (NullReferenceException)
-            {
-                FormsAuthentication.SignOut();
-                FormsAuthentication.RedirectToLoginPage();
-            }
+
+            return fullName;
         }
 
         protected void BtnLogout_Click(object sender, EventArgs e)
         {
-            LdapAccountManager.Instance.Destroy();
+            SignOut();
+        }
+
+        private void SignOut()
+        {
             FormsAuthentication.SignOut();
             FormsAuthentication.RedirectToLoginPage();
         }

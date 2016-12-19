@@ -54,7 +54,8 @@
                                 <Columns>
                                     <asp:TemplateField HeaderText="Tags">
                                         <ItemTemplate>
-                                            <asp:Repeater ID="rptrTags" runat="server" DataSource='<%# new AcknowledgementsTracker.Presentation.UIHelperService()
+                                            <asp:Repeater ID="rptrTags" runat="server" DataSource='<%# new AcknowledgementsTracker.Presentation.UIHelperService(
+                                            (AcknowledgementsTracker.Business.Interfaces.ILdapServerConnection)Session[AcknowledgementsTracker.Presentation.Global.LdapConnection])
                                             .ReadTags((IEnumerable<AcknowledgementsTracker.DTO.TagDTO>)(Eval("Tags"))) %>'>
                                                 <ItemTemplate>
                                                     <asp:HyperLink CssClass="label label-info label-margin" ID="lnkTag" runat="server" Text="<%# Container.DataItem %>"
@@ -69,7 +70,8 @@
                                             <asp:Literal Text="To" runat="server" />
                                         </HeaderTemplate>
                                         <ItemTemplate>
-                                            <asp:HyperLink ID="lnkBeneficiaryName" runat="server" Text='<%# new AcknowledgementsTracker.Presentation.UIHelperService()
+                                            <asp:HyperLink ID="lnkBeneficiaryName" runat="server" Text='<%# new AcknowledgementsTracker.Presentation.UIHelperService(
+                                            (AcknowledgementsTracker.Business.Interfaces.ILdapServerConnection)Session[AcknowledgementsTracker.Presentation.Global.LdapConnection])
                                             .ReadUserFullName(Convert.ToString(Eval("BeneficiaryUsername"))) %>'
                                                 NavigateUrl='<%# string.Format("~/AcknowledgementsByUser.aspx?user={0}&mode=allTime", Convert.ToString(Eval("BeneficiaryUsername"))) %>' />
                                         </ItemTemplate>
@@ -80,7 +82,8 @@
                                             <asp:Literal Text="From" runat="server" />
                                         </HeaderTemplate>
                                         <ItemTemplate>
-                                            <asp:HyperLink ID="lnkAuthorName" runat="server" Text='<%# new AcknowledgementsTracker.Presentation.UIHelperService()
+                                            <asp:HyperLink ID="lnkAuthorName" runat="server" Text='<%# new AcknowledgementsTracker.Presentation.UIHelperService(
+                                            (AcknowledgementsTracker.Business.Interfaces.ILdapServerConnection)Session[AcknowledgementsTracker.Presentation.Global.LdapConnection])
                                             .ReadUserFullName(Convert.ToString(Eval("AuthorUsername"))) %>'
                                                 NavigateUrl='<%# string.Format("~/AcknowledgementsByUser.aspx?user={0}&mode=allTime", Convert.ToString(Eval("AuthorUsername"))) %>' />
                                         </ItemTemplate>

@@ -8,7 +8,12 @@
 
     public class UIHelperService
     {
-        private IUIHelper helper = new UIHelper();
+        private IUIHelper helper;
+
+        public UIHelperService(ILdapServerConnection connection)
+        {
+            helper = new UIHelper(connection);
+        }
 
         public string ReadUserFullName(string username)
         {

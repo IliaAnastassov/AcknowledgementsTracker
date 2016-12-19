@@ -12,7 +12,7 @@
     public partial class Search : Page
     {
         private IAccountService ldapAccountService = new LdapAccountService();
-        private ISearchService searcher = new SearchService();
+        private ISearchService searcher;
 
         public string SearchQuery
         {
@@ -34,6 +34,9 @@
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            var connection = (ILdapServerConnection)Session[Global.LdapConnection];
+            searcher = new SearchService(connection);
+
             if (!fldsAcknowledgementsResults.Visible && !fldsEmployeesResults.Visible)
             {
                 txtbSearch.Focus();
@@ -53,7 +56,7 @@
             else
             {
                 ErrorLabel.Visible = true;
-                ErrorLabel.InnerText = "Please fill the search textbox";
+                ErrorLabel.InnerText = Global.SearchEmptyQuery;
             }
         }
 

@@ -46,7 +46,8 @@
                 <li><a href="Search.aspx"><span aria-hidden="true" class="glyphicon glyphicon-search"></span>&nbsp Search</a></li>
                 <li class="pull-right"><a id="btnLogout" runat="server" onserverclick="BtnLogout_Click"><span aria-hidden="true" class="glyphicon glyphicon-off"></span></a></li>
                 <li class="pull-right">
-                    <p class="navbar-text" id="parUserName" runat="server">First name Last name</p>
+                    <a href="<%= $"/AcknowledgementsByUser.aspx?user={Context.User.Identity.Name}&mode=allTime" %>">
+                        <%= GetFullName(Context.User.Identity.Name) %></a>
                 </li>
             </ul>
         </nav>
