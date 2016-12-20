@@ -6,12 +6,12 @@
     using Business.Interfaces;
     using Business.Logic;
     using DTO;
-    using System.Net.Mail;
 
     public partial class NewAcknowledgement : Page
     {
         private IAcknowledgementDtoService acknowledgementDtoService = new AcknowledgementDtoService();
         private ITagDtoService tagDtoService = new TagDtoService();
+        private IEmailSendingService emailSender = new EmailSendingService();
         private IAccountService ldapAccountService;
         private UIHelper helper;
 
@@ -45,19 +45,13 @@
 
                 try
                 {
-                    if (Request.QueryString[Global.Beneficiary] != null)
-                    {
-                        acknowledgementDto.BeneficiaryUsername = Request.QueryString[Global.Beneficiary];
-
-                        // If the user changes the beneficiary to a new value
-                        if (!string.IsNullOrWhiteSpace(hfUserUsername.Value))
-                        {
-                            acknowledgementDto.BeneficiaryUsername = hfUserUsername.Value;
-                        }
-                    }
-                    else if (!string.IsNullOrWhiteSpace(hfUserUsername.Value))
+                    if (!string.IsNullOrWhiteSpace(hfUserUsername.Value))
                     {
                         acknowledgementDto.BeneficiaryUsername = hfUserUsername.Value;
+                    }
+                    else if (Request.QueryString[Global.Beneficiary] != null)
+                    {
+                        acknowledgementDto.BeneficiaryUsername = Request.QueryString[Global.Beneficiary];
                     }
                     else
                     {
@@ -66,26 +60,19 @@
                         txtbBeneficiary.Value = string.Empty;
                     }
 
-                    // Store the text and normalize it
-                    acknowledgementDto.Text = txtbContent.Value;
-                    acknowledgementDto.NormalizedText = textNormalizer.NormalizeText(acknowledgementDto.Text);
+                    CreateAcknowledgement(textNormalizer, acknowledgementDto);
 
-                    // NOTE: All tags are stored in lowercase
-                    var tags = txtbTags.Value.ToLower().Split(new char[] { ' ', ',' }, StringSplitOptions.RemoveEmptyEntries);
+                    SendBeneficiaryEmail(acknowledgementDto.AuthorUsername, acknowledgementDto.BeneficiaryUsername);
 
-                    // Add acknowledgement to database
-                    acknowledgementDtoService.Create(acknowledgementDto, tags);
-
-                    // Send an email to beneficiary
-                    SendBeneficiaryEmail(acknowledgementDto.BeneficiaryUsername);
-
-                    txtbContent.Value = string.Empty;
-                    txtbTags.Value = string.Empty;
-
-
-                    Response.Redirect(Global.DashboardPage);
+                    ClearAndRedirect();
                 }
                 catch (ArgumentException ex)
+                {
+                    lblError.Visible = true;
+                    lblError.InnerText = ex.Message;
+                }
+                // TODO: Remove
+                catch (Exception ex)
                 {
                     lblError.Visible = true;
                     lblError.InnerText = ex.Message;
@@ -93,23 +80,31 @@
             }
         }
 
-        private void SendBeneficiaryEmail(string beneficiaryUsername)
+        private void ClearAndRedirect()
         {
-            // TODO:
-            SmtpClient smtpClient = new SmtpClient("mail.MyWebsiteDomainName.com", 25);
+            txtbContent.Value = string.Empty;
+            txtbTags.Value = string.Empty;
 
-            smtpClient.Credentials = new System.Net.NetworkCredential("info@MyWebsiteDomainName.com", "myIDPassword");
-            smtpClient.UseDefaultCredentials = true;
-            smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
-            smtpClient.EnableSsl = true;
-            MailMessage mail = new MailMessage();
+            Response.Redirect(Global.DashboardPage);
+        }
 
-            //Setting From , To and CC
-            mail.From = new MailAddress("info@MyWebsiteDomainName", "MyWeb Site");
-            mail.To.Add(new MailAddress("info@MyWebsiteDomainName"));
-            mail.CC.Add(new MailAddress("MyEmailID@gmail.com"));
+        private void CreateAcknowledgement(INormalizable textNormalizer, AcknowledgementDTO acknowledgementDto)
+        {
+            acknowledgementDto.Text = txtbContent.Value;
+            acknowledgementDto.NormalizedText = textNormalizer.NormalizeText(acknowledgementDto.Text);
 
-            smtpClient.Send(mail);
+            // NOTE: All tags are stored in lowercase
+            var tags = txtbTags.Value.ToLower().Split(new char[] { ' ', ',' }, StringSplitOptions.RemoveEmptyEntries);
+
+            acknowledgementDtoService.Create(acknowledgementDto, tags);
+        }
+
+        private void SendBeneficiaryEmail(string authorUsername, string beneficiaryUsername)
+        {
+            var author = ldapAccountService.ReadUserData(authorUsername);
+            var beneficiary = ldapAccountService.ReadUserData(beneficiaryUsername);
+
+            emailSender.SendEmail(author, beneficiary);
         }
 
         protected void btnReset_ServerClick(object sender, EventArgs e)
