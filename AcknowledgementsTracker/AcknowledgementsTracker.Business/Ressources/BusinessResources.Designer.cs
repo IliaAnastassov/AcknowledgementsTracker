@@ -86,5 +86,32 @@ namespace AcknowledgementsTracker.Business.Ressources {
                 return ResourceManager.GetString("InvalidInput", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to i.anastassov@proxiad.com.
+        /// </summary>
+        internal static string SMTPEmailAddress {
+            get {
+                return ResourceManager.GetString("SMTPEmailAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 465.
+        /// </summary>
+        internal static string SMTPPort {
+            get {
+                return ResourceManager.GetString("SMTPPort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to smtps.proxiad.com.
+        /// </summary>
+        internal static string SMTPServer {
+            get {
+                return ResourceManager.GetString("SMTPServer", resourceCulture);
+            }
+        }
     }
 }

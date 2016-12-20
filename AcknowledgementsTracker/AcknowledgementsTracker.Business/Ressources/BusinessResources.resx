@@ -128,4 +128,15 @@
     <value>Please fill all textboxes</value>
     <comment>Occurs when user enters null, empty or whitespace for username or password</comment>
   </data>
+  <data name="SMTPEmailAddress" xml:space="preserve">
+    <value>i.anastassov@proxiad.com</value>
+    <comment>The email address used for sending emails</comment>
+  </data>
+  <data name="SMTPPort" xml:space="preserve">
+    <value>465</value>
+  </data>
+  <data name="SMTPServer" xml:space="preserve">
+    <value>smtps.proxiad.com</value>
+    <comment>The SMTP server</comment>
+  </data>
 </root>
