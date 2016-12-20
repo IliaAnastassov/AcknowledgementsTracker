@@ -1,0 +1,26 @@
+﻿@* Generator: Template *@
+@using AcknowledgementsTracker.Business.Interfaces
+
+@functions{
+    public string BeneficiaryName { get; set; }
+    public string AuthorName { get; set; }
+}
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <article>
+        <header>
+            <h2>Congratulations, @BeneficiaryName.Split()[0]</h2>
+        </header>
+        <section>
+            <p>
+                You have been acknowledged by @AuthorName on Proxiad Bulgaria's Acknowledgements Tracker!<br />
+                Go check it out on <a href="#">Acknowledgements Tracker</a>
+            </p>
+        </section>
+    </article>
+</body>
+</html>

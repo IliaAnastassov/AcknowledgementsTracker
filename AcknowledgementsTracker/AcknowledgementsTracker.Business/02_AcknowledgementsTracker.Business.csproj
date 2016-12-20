@@ -30,6 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="RazorGenerator.Templating, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <HintPath>..\packages\RazorGenerator.Templating.2.4.7\lib\portable-Profile328\RazorGenerator.Templating.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.DirectoryServices" />
@@ -50,6 +54,7 @@
     <Compile Include="Interfaces\IDtoService.cs" />
     <Compile Include="Interfaces\IAccountManager.cs" />
     <Compile Include="Interfaces\IAccountService.cs" />
+    <Compile Include="Interfaces\IEmailSendingService.cs" />
     <Compile Include="Interfaces\ILdapServerConnection.cs" />
     <Compile Include="Interfaces\ILdapSettingsService.cs" />
     <Compile Include="Interfaces\ILoginResponse.cs" />
@@ -61,6 +66,7 @@
     <Compile Include="Interfaces\IUser.cs" />
     <Compile Include="Logic\AcknowledgementDtoService.cs" />
     <Compile Include="Logic\AcknowledgementsDtoComparer.cs" />
+    <Compile Include="Logic\EmailSendingService.cs" />
     <Compile Include="Logic\LdapAccountService.cs" />
     <Compile Include="Logic\LdapServerConnection.cs" />
     <Compile Include="Logic\LdapAccountManager.cs">
@@ -74,6 +80,11 @@
     <Compile Include="Logic\TextNormalizationService.cs" />
     <Compile Include="Logic\UIHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RazorTemplates\EmailTemplate.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EmailTemplate.cshtml</DependentUpon>
+    </Compile>
     <Compile Include="Ressources\BusinessResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -95,13 +106,20 @@
       <Name>06_AcknowledgementsTracker.Model</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="RazorTemplates\EmailTemplate.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>EmailTemplate.generated.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Ressources\BusinessResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>BusinessResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
